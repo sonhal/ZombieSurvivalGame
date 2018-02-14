@@ -1,29 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="view.MenuController" >
-    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
-    <top>
-        <VBox alignment="CENTER" >
-            <Label fx:id="menuTitle" text="Welcome to Zombie Survival"/>
-        </VBox>
-    </top>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="593.0" prefWidth="847.0" style="-fx-background-color: #2E3138;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MenuController">
+    <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
 
     <center>
-        <VBox alignment="CENTER" >
-            <Button  fx:id="play" text="Play" />
-        </VBox>
+      <Pane prefHeight="414.0" prefWidth="400.0" style="-fx-background-color: #2E3138;">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+              <VBox alignment="CENTER" layoutX="234.0" layoutY="55.0" prefHeight="363.0" prefWidth="330.0" spacing="40.0" style="-fx-background-color: #454954;">
+                  <Button fx:id="play" prefHeight="37.0" prefWidth="108.0" style="-fx-background-color: #222328;" text="Play" textFill="#5aae74">
+                  <VBox.margin>
+                     <Insets />
+                  </VBox.margin>
+                  <font>
+                     <Font name="Stencil" size="18.0" />
+                  </font>
+               </Button>
+               <Button mnemonicParsing="false" style="-fx-background-color: #222328;" text="New Game" textFill="#72757e">
+                  <font>
+                     <Font name="Stencil" size="18.0" />
+                  </font>
+               </Button>
+               <Button mnemonicParsing="false" style="-fx-background-color: #222328;" text="Load Save" textFill="#72757e">
+                  <font>
+                     <Font name="Stencil" size="18.0" />
+                  </font>
+               </Button>
+               <Button mnemonicParsing="false" style="-fx-background-color: #222328;" text="Settings" textFill="#72757e">
+                  <font>
+                     <Font name="Stencil" size="18.0" />
+                  </font>
+               </Button>
+              </VBox>
+         </children>
+      </Pane>
     </center>
     <bottom>
-        <VBox alignment="CENTER" >
-            <Label  fx:id="infoText"/>
+        <VBox alignment="CENTER">
+            <Label fx:id="infoText" />
         </VBox>
     </bottom>
+   <right>
+        <VBox alignment="CENTER" BorderPane.alignment="CENTER" />
+   </right>
+   <top>
+         <Label fx:id="menuTitle" text="Zombie Survival" textFill="WHITE" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Tempus Sans ITC" size="63.0" />
+         </font>
+      </Label>
+   </top>
 
 </BorderPane>
