@@ -1,11 +1,15 @@
 package engine;
 
-public class GameHandler implements GameHandlerInterface{
+import view2D.GameViewController2D;
+
+public class GameHandler{
 
     World world;
+    GameViewController2D gameViewController2D;
 
-
-    @Override
+public GameHandler(GameViewController2D gameViewController2D){
+    this.gameViewController2D = gameViewController2D;
+}
     public void createWorld() {
         this.world = new World(10);
     }
@@ -15,5 +19,8 @@ public class GameHandler implements GameHandlerInterface{
 
     DrawableMatrix getDrawableMatrix(Tile baseTile, int diameter){
         return new DrawableMatrix(world, baseTile, diameter);
+    }
+    public void sendEvent(ActionEvent event){
+
     }
 }

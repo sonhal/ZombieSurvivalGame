@@ -1,6 +1,5 @@
-package view;
+package view2D;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -38,9 +37,12 @@ public class MenuController implements Initializable{
     }
 
     private void startGame() throws IOException{
+        System.out.println("Game started!");
         Stage stage = (Stage)play.getScene().getWindow();
+        Scene scene = (Scene)play.getScene();
         Parent newRoot = FXMLLoader.load(getClass().getResource("gameview.fxml"));
-        stage.setScene(new Scene(newRoot, 1062, 752));
+   //     stage.setScene(new Scene(newRoot, 1062, 752));
+        scene.setRoot(newRoot);
     }
 
     private void showInfo(String info){

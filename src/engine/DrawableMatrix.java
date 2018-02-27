@@ -2,7 +2,7 @@ package engine;
 
 public class DrawableMatrix {
     public Tile[][] drawableMatrix;
-    Tile currentTile;
+
     int direction = 1;
 
     DrawableMatrix(World world, Tile baseTile, int diameter) {
@@ -10,9 +10,10 @@ public class DrawableMatrix {
     }
 
     public Tile[][] generateDrawable(World world, Tile baseTile, int diameterDistance) {
+        Tile currentTile;
         int size = diameterDistance * 2;
         drawableMatrix = new Tile[diameterDistance * 2 +10][diameterDistance * 2 + 10];
-        this.currentTile = baseTile;
+        currentTile = baseTile;
         int x, y, dx, dy;
         x = y = dx = 0;
         dy = -1;
@@ -24,18 +25,19 @@ public class DrawableMatrix {
                 drawableMatrix[x + diameterDistance][y + diameterDistance] = currentTile;
 
                 if (direction == 0) {
-                    this.currentTile = currentTile.right;
+                    currentTile = currentTile.right;
                 } else if (direction == 1) {
-                    this.currentTile = currentTile.up;
+                    currentTile = currentTile.up;
                 } else if (direction == 2) {
-                    this.currentTile = currentTile.left;
+                    currentTile = currentTile.left;
                 } else if (direction == 3) {
-                    this.currentTile = currentTile.down;
+                    currentTile = currentTile.down;
                 }
 
                 System.out.println(currentTile.getPos());
 
             }
+            //Rotating direction
             if ((x == y) || ((x < 0) && (x == -y)) || ((x > 0) && (x == 1 - y))) {
                 t = dx;
                 dx = -dy;
@@ -49,8 +51,5 @@ public class DrawableMatrix {
         return drawableMatrix;
     }
 
-    DrawableTile convertTile(Tile t) {
-        return new DrawableTile(t.getGameObject(), t.getItem());
-    }
 
 }

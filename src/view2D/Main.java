@@ -1,4 +1,4 @@
-package view;
+package view2D;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
