@@ -2,6 +2,7 @@ package engine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import view2D.GameViewController2D;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +12,7 @@ class GameHandlerTest {
 
     @BeforeEach
     void setUp() {
-        gameHandler = new GameHandler();
+        gameHandler = new GameHandler(new GameViewController2D());
     }
 
     @Test

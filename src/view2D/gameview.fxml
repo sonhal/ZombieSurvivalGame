@@ -57,4 +57,5 @@
          </children>
       </Pane>
    </children>
+    <Canvas fx:id="gameCanvas" width="200" height="200" />
 </Pane>
