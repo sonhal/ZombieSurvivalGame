@@ -11,14 +11,14 @@ public GameHandler(GameViewController2D gameViewController2D){
     this.gameViewController2D = gameViewController2D;
 }
     public void createWorld() {
-        this.world = new World(10);
+        this.world = new World(50);
     }
     public void createWorld(int n) {
         this.world = new World(n);
     }
 
-    DrawableMatrix getDrawableMatrix(Tile baseTile, int diameter){
-        return new DrawableMatrix(world, baseTile, diameter);
+    DrawableMatrix getDrawableMatrix(Tile baseTile, int widthX, int heightY){
+        return new DrawableMatrix(world, baseTile, widthX, heightY);
     }
     public void sendEvent(ActionEvent event){
 

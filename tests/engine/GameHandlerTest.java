@@ -2,16 +2,20 @@ package engine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import view2D.GameViewController2D;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameHandlerTest {
 
     private GameHandler gameHandler;
+    private GameViewController2D gameViewController2D;
 
     @BeforeEach
     void setUp() {
-        gameHandler = new GameHandler();
+        gameViewController2D = new GameViewController2D();
+        gameHandler = new GameHandler(gameViewController2D);
+
     }
 
     @Test
