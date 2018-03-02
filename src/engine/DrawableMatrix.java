@@ -1,7 +1,7 @@
 package engine;
 
 public class DrawableMatrix {
-    public Tile[][] matrix;
+    public DrawableTile[][] matrix;
 
     int direction = 0;
 
@@ -9,9 +9,9 @@ public class DrawableMatrix {
         matrix = generateDrawable(world, baseTile, widthRadiX, heightRadiY);
     }
 
-    public Tile[][] generateDrawable(World world, Tile baseTile, int radiX, int radiY){
+    public DrawableTile[][] generateDrawable(World world, Tile baseTile, int radiX, int radiY){
         Tile currentTile = baseTile;
-        Tile[][] drawableWorld = new Tile[radiX*2][radiY*2];
+        DrawableTile[][] drawableWorld = new DrawableTile[radiX*2][radiY*2];
         for (int i = 0; i < radiX; i++){
             currentTile = currentTile.left;
         }
@@ -22,7 +22,7 @@ public class DrawableMatrix {
         for (int y = 0; y < radiY * 2; y++){
 
             for (int x = 0; x < radiX * 2; x++){
-                drawableWorld[x][y] = currentTile;
+                drawableWorld[x][y] = new DrawableTile(currentTile.getGameObject(), currentTile.getItem());
                 currentTile = currentTile.right;
             }
             rowBeggining = rowBeggining.down;

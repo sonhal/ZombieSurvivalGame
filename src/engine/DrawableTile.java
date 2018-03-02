@@ -12,6 +12,11 @@ public class DrawableTile {
 
     }
 
+    public void setGameAndItem(GameObject gameObject, Item item){
+        this.gameObject = gameObject;
+        this.item = item;
+    }
+
     public GameObject getGameObject() {
         return gameObject;
     }
