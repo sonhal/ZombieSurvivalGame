@@ -39,10 +39,8 @@ public class MenuController implements Initializable{
     private void startGame() throws IOException{
         System.out.println("Game started!");
         Stage stage = (Stage)play.getScene().getWindow();
-        Scene scene = (Scene)play.getScene();
         Parent newRoot = FXMLLoader.load(getClass().getResource("gameview.fxml"));
-   //     stage.setScene(new Scene(newRoot, 1062, 752));
-        scene.setRoot(newRoot);
+        stage.setScene(new Scene(newRoot, 1062, 752));
     }
 
     private void showInfo(String info){

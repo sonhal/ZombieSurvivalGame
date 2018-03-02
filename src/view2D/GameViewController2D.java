@@ -35,6 +35,7 @@ public class GameViewController2D implements GameViewController, Initializable{
 
     @Override
     public void startGame() {
+        System.out.println("Game controller active");
         gameHandler = new GameHandler(this);
         settings.setVisible(false);
         shaderSetting.setVisible(false);
@@ -46,6 +47,7 @@ public class GameViewController2D implements GameViewController, Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         startGame();
     }
 

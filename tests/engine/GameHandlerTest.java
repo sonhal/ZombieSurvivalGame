@@ -13,9 +13,7 @@ class GameHandlerTest {
 
     @BeforeEach
     void setUp() {
-        gameViewController2D = new GameViewController2D();
-        gameHandler = new GameHandler(gameViewController2D);
-
+        gameHandler = new GameHandler(new GameViewController2D());
     }
 
     @Test
