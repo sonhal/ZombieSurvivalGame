@@ -11,7 +11,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.GameViewController2D">
    <children>
-      <Canvas height="726.0" layoutX="-1.0" layoutY="25.0" width="1062.0" />
+      <Canvas height="726.0" layoutX="-1.0" layoutY="25.0" width="1062.0" fx:id="gameCanvas" />
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1062.0">
         <menus>
           <Menu mnemonicParsing="false" text="Menu">
@@ -57,5 +57,5 @@
          </children>
       </Pane>
    </children>
-    <Canvas fx:id="gameCanvas" width="200" height="200" />
+
 </Pane>
