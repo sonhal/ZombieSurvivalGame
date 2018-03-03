@@ -7,6 +7,10 @@ public class Sprite {
 
     private int spriteIndex;
 
+    public Sprite(int spriteIndex) {
+        this.spriteIndex = spriteIndex;
+    }
+
     /**
      * Returns a index number the view2D uses to identify the sprite to render.
      * @return int

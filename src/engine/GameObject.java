@@ -13,6 +13,11 @@ public abstract class GameObject {
     public Sprite sprite;
     public int health;
 
+    public GameObject(Sprite sprite, int health){
+        this.sprite = sprite;
+        this.health = health;
+    }
+
     public Skin getSkin() {
         return skin;
     }
