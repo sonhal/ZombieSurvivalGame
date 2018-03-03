@@ -35,8 +35,8 @@ public class GameViewController2D implements GameViewController, Initializable{
     public void initializeGameEnv() {
 
         System.out.println("Game controller active");
-        gameCanvas.setHeight(StaticFields.CANVAS_HEIGHT - 200);
-        gameCanvas.setWidth(StaticFields.CANVAS_WIDTH);
+        gameCanvas.setHeight(StaticFields.CANVAS_SIZE);
+        gameCanvas.setWidth(StaticFields.CANVAS_SIZE);
 
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
@@ -76,16 +76,16 @@ public class GameViewController2D implements GameViewController, Initializable{
 
     private void updateView(){
 
-        gc.clearRect(3,3,StaticFields.CANVAS_WIDTH - 3,StaticFields.CANVAS_HEIGHT - 3);
+        gc.clearRect(3,3,StaticFields.CANVAS_SIZE - 3,StaticFields.CANVAS_SIZE - 3);
         int yAxisOffset = 0;
         for (DrawableTile[] tileRow: this.drawableMatrix) {
             int xAxisOffset = 0;
             for (DrawableTile tile: tileRow) {
 
                 drawTile(tile, xAxisOffset, yAxisOffset);
-                xAxisOffset += StaticFields.DRAW_ENTITY_SIZE;
+                xAxisOffset += getEntitySize();
             }
-            yAxisOffset += StaticFields.DRAW_ENTITY_SIZE;
+            yAxisOffset += getEntitySize();
 
 
 
@@ -105,11 +105,11 @@ public class GameViewController2D implements GameViewController, Initializable{
         }
         if(gameObject == null ){
             gc.setFill(Color.SANDYBROWN);
-            gc.fillRect(xPos,yPos, StaticFields.DRAW_ENTITY_SIZE,StaticFields.DRAW_ENTITY_SIZE);
+            gc.fillRect(xPos,yPos, getEntitySize(),getEntitySize());
         }
         else{
             gc.drawImage(spriteTranslator.getImage(gameObject.sprite),
-                    xPos, yPos, StaticFields.DRAW_ENTITY_SIZE, StaticFields.DRAW_ENTITY_SIZE);
+                    xPos, yPos, getEntitySize(), getEntitySize());
 
         }
     }
@@ -144,6 +144,12 @@ public class GameViewController2D implements GameViewController, Initializable{
         }
         return drawableMatrix;
 
+    }
+
+    public int getEntitySize(){
+
+        if (drawableMatrix != null) return StaticFields.CANVAS_SIZE / drawableMatrix.length;
+        else return 0;
     }
 
 }
