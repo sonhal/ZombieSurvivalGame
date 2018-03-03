@@ -23,6 +23,7 @@ class GameViewController2DTest {
 
     @Test
     void runGameView2D(){
+
         StartGameViewStub main = new StartGameViewStub();
         main.go(new String[] {""});
 
@@ -60,12 +61,12 @@ class GameViewController2DTest {
     }
 
 
-    public Tile[][] setStubDrawableMatrix(GameHandler gh){
-        Tile[][] drawableMatrix = gh.getDrawableMatrix(10).drawableMatrix;
+    public DrawableTile[][] setStubDrawableMatrix(GameHandler gh){
+        DrawableTile[][] drawableMatrix = gh.getDrawableMatrix(10).matrix;
         try {
-            for (Tile[] tiles: drawableMatrix
+            for (DrawableTile[] tiles: drawableMatrix
                     ) {
-                for (Tile tile: tiles
+                for (DrawableTile tile: tiles
                         ) {
                     try{
                         tile.setGameObject(new Item(new Sprite(1), 10));

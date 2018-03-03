@@ -19,10 +19,11 @@ import java.net.URL;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+
 public class GameViewController2D implements GameViewController, Initializable{
 
     GameHandler gameHandler;
-    Tile[][] drawableMatrix;
+    DrawableTile[][] drawableMatrix;
     GraphicsContext gc;
     SpriteTranslationHandler spriteTranslator;
 
@@ -31,7 +32,7 @@ public class GameViewController2D implements GameViewController, Initializable{
     Canvas gameCanvas;
 
     @Override
-    public void updateDrawableState(Tile[][] drawableMatrix) {
+    public void updateDrawableState(DrawableTile[][] drawableMatrix) {
         this.drawableMatrix = drawableMatrix;
     }
 
@@ -55,6 +56,10 @@ public class GameViewController2D implements GameViewController, Initializable{
         gc = gameCanvas.getGraphicsContext2D();
         gameHandler = new GameHandler(this);
         startGame();
+        updateDrawableState(setStubDrawableMatrix(gameHandler));
+        startGameloop();
+
+
     }
 
     public void runViewTick(){
@@ -75,9 +80,9 @@ public class GameViewController2D implements GameViewController, Initializable{
 
         gc.clearRect(0,0,512,512);
         int yAxisOffset = 0;
-        for (Tile[] tileRow: this.drawableMatrix) {
+        for (DrawableTile[] tileRow: this.drawableMatrix) {
             int xAxisOffset = 0;
-            for (Tile tile: tileRow) {
+            for (DrawableTile tile: tileRow) {
 
                 drawTile(tile, xAxisOffset, yAxisOffset);
                 xAxisOffset += StaticFields.DRAW_ENTITY_SIZE;
@@ -91,7 +96,7 @@ public class GameViewController2D implements GameViewController, Initializable{
 
 
 
-    public void drawTile(Tile tile, int xPos, int yPos){
+    public void drawTile(DrawableTile tile, int xPos, int yPos){
 
 
         GameObject gameObject;
@@ -113,6 +118,34 @@ public class GameViewController2D implements GameViewController, Initializable{
 
     public GameHandler getGameHandler(){
         return gameHandler;
+    }
+
+    public DrawableTile[][] setStubDrawableMatrix(GameHandler gh){
+        DrawableTile[][] drawableMatrix = gh.getDrawableMatrix(10).matrix;
+        try {
+            for (DrawableTile[] tiles: drawableMatrix
+                    ) {
+                for (DrawableTile tile: tiles
+                        ) {
+                    try{
+                        tile.setGameObject(new Item(new Sprite(1), 10));
+                    }
+                    catch (NullPointerException er){
+                        System.out.println("There was a null Tile here");
+                    }
+                }
+
+            }
+            drawableMatrix[1][1].setGameObject(new Item(new Sprite(2), 10));
+            drawableMatrix[5][5].setGameObject(new Item(new Sprite(2), 10));
+            drawableMatrix[10][10].setGameObject(new Item(new Sprite(2), 10));
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return drawableMatrix;
+
     }
 
 }

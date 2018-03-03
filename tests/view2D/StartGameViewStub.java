@@ -16,15 +16,25 @@ public class StartGameViewStub extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("view2D/gameview.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view2D/gameview.fxml"));
+        Parent root = fxmlLoader.load();
+
+
+        gameView = fxmlLoader.getController();
+        if(gameView == null){
+            System.out.println("Null controller");
+        }
+        else {
+            System.out.println("Good controller");
+        }
+        gameHandler = gameView.getGameHandler();
+
         primaryStage.setTitle("Zombie Game");
         primaryStage.setScene(new Scene(root, 847, 593));
         primaryStage.show();
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        Pane p = fxmlLoader.load(getClass().getResource("view2D/gameview.fxml").openStream());
-        gameView = (GameViewController2D) fxmlLoader.getController();
-        gameHandler = gameView.getGameHandler();
+
+
 
     }
 

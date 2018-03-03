@@ -1,6 +1,7 @@
 package view;
 
 import engine.DrawableMatrix;
+import engine.DrawableTile;
 import engine.Tile;
 import javafx.fxml.Initializable;
 
@@ -22,6 +23,6 @@ public interface GameViewController  {
      *
      * @param drawableMatrix a Tile 2D array containing tile objects to be drawn.
      */
-    public void updateDrawableState(Tile[][] drawableMatrix);
+    public void updateDrawableState(DrawableTile[][] drawableMatrix);
 
 }

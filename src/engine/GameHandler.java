@@ -21,7 +21,7 @@ public class GameHandler{
 
     public DrawableMatrix getDrawableMatrix( int diameter){
         createWorld(50);
-        return new DrawableMatrix(world, world.seed, diameter);
+        return new DrawableMatrix(world, world.getSeed(), diameter, diameter);
     }
 
     public void sendEvent(ActionEvent event){
