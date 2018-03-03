@@ -11,7 +11,7 @@ public class DrawableMatrix {
 
     public Tile[][] generateDrawable(World world, Tile baseTile, int diameterDistance) {
         Tile currentTile;
-        int size = diameterDistance * 2;
+        int drawableSize = diameterDistance * 2;
         drawableMatrix = new Tile[diameterDistance * 2 +10][diameterDistance * 2 + 10];
         currentTile = baseTile;
         int x, y, dx, dy;
@@ -21,7 +21,7 @@ public class DrawableMatrix {
         int maxI = t * t;
         for (int i = 0; i < maxI; i++) {
 
-            if ((-size / 2 <= x) && (x <= size / 2) && (-size / 2 <= y) && (y <= size / 2)) {
+            if ((-drawableSize / 2 <= x) && (x <= drawableSize / 2) && (-drawableSize / 2 <= y) && (y <= drawableSize / 2)) {
                 drawableMatrix[x + diameterDistance][y + diameterDistance] = currentTile;
 
                 if (direction == 0) {
@@ -34,7 +34,7 @@ public class DrawableMatrix {
                     currentTile = currentTile.down;
                 }
 
-                System.out.println(currentTile.getPos());
+                //System.out.println(currentTile.getPos());
 
             }
             //Rotating direction

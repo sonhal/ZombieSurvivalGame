@@ -9,9 +9,13 @@ import javafx.scene.control.Skin;
  */
 public abstract class GameObject {
 
-    public Skin skin;
     public Sprite sprite;
     public int health;
+
+    public GameObject(Sprite sprite, int health){
+        this.sprite = sprite;
+        this.health = health;
+    }
 
 
 

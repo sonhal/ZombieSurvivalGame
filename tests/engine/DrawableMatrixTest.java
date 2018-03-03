@@ -24,7 +24,7 @@ class DrawableMatrixTest {
 
     @Test
     void generateDrawable() {
-        testWorld.findTile(2,3).right.setGameObject(new Weapon(100));
+        testWorld.findTile(2,3).right.setGameObject(new Weapon(new Sprite(1), 10,10));
         matrix = new DrawableMatrix(testWorld, testWorld.seed,10);
         System.out.println("--------------------------------------------------------------");
         for(int y = 0; y< 10;y++){

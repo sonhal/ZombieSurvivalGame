@@ -13,8 +13,10 @@ public class Weapon extends Item{
      * Sets the damage for the weapon
      * @param damage the damage the weapon deals
      */
-    public Weapon(int damage){
+    public Weapon(Sprite sprite, int health, int damage){
+        super(sprite, health);
         this.damage = damage;
+
     }
 
 

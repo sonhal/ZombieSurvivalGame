@@ -5,6 +5,10 @@ package engine;
  */
 public class Item extends GameObject{
 
+    public Item(Sprite sprite, int health){
+        super(sprite, health);
+    }
+
     public void pickup(){
 
     }
