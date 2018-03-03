@@ -11,12 +11,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.GameViewController2D">
    <children>
-      <Canvas height="726.0" layoutX="-1.0" layoutY="25.0" width="1062.0" fx:id="gameCanvas" />
+      <Canvas fx:id="gameCanvas" height="726.0" layoutX="-1.0" layoutY="25.0" width="1062.0" onKeyPressed="#keyHandler" />
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1062.0">
         <menus>
           <Menu mnemonicParsing="false" text="Menu">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="settingsMenu" mnemonicParsing="false" onAction="#openMenu" text="Settings" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -44,7 +44,7 @@
                   <Font name="Tempus Sans ITC" size="38.0" />
                </font>
             </Label>
-            <Button layoutX="119.0" layoutY="109.0" prefHeight="37.0" prefWidth="119.0" style="-fx-background-color: #222328;" text="Continue" textFill="#5aae74">
+            <Button fx:id="continueBtn" layoutX="119.0" layoutY="109.0" onAction="#closeMenu" prefHeight="37.0" prefWidth="119.0" style="-fx-background-color: #222328;" text="Continue" textFill="#5aae74">
                <font>
                   <Font name="Stencil" size="18.0" />
                </font>
