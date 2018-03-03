@@ -8,32 +8,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DrawableTileTest {
 
-
+    DrawableTile testTile;
 
     @BeforeEach
     void setUp() {
-        DrawableTile testTile = new DrawableTile();
+         testTile = new DrawableTile();
     }
 
     @AfterEach
     void tearDown() {
 
     }
-
     @Test
-    void getGameObject() {
+    void setGameAndItem() {
+        testTile.setGameAndItem(null, new Weapon(100));
+            assertNull(testTile.getGameObject());
+            assertNotNull(testTile.getItem());
     }
-
-    @Test
-    void setGameObject() {
-    }
-
-    @Test
-    void getItem() {
-    }
-
-    @Test
-    void setItem() {
-    }
-
 }

@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class World {
-    List<Tile> world;
+    private List<Tile> world;
+
     //Placeholder for avatar
-    Tile seed;
+    private Tile seed;
 
     public World(int n){
         world = generate(n);
@@ -38,6 +39,10 @@ public class World {
 
     public Tile findTile(int x, int y){
         return world.stream().filter(tile -> tile.cordX == x && tile.cordY == y).findFirst().orElse(null);
+    }
+
+    public Tile getSeed() {
+        return seed;
     }
 
 

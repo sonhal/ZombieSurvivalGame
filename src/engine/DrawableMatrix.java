@@ -30,39 +30,4 @@ public class DrawableMatrix {
         }
         return drawableWorld;
     }
-
-    public Tile[][] generateDrawableBySpiral(World world, Tile baseTile, int widthX, int heightY) {
-        Tile[][] drawableMatrix = new Tile[widthX +100][heightY+100];
-        Tile currentTile = baseTile;
-        int x=0, y=0, dx = 0, dy = -1;
-        int longest = Math.max(widthX,heightY);
-        int maxNumberOfTiles = longest*longest;
-
-        for (int i = 0; i < maxNumberOfTiles; i++){
-            if((-widthX <= x) && (x <= widthX/2) && (-heightY <= y) && (y <= heightY/2)) {
-                drawableMatrix[x + widthX /2][y + heightY/2] = currentTile;
-
-                if (direction == 1) {
-                    currentTile = currentTile.right;
-                } else if (direction == 2) {
-                    currentTile = currentTile.up;
-                } else if (direction == 3) {
-                    currentTile = currentTile.left;
-                } else if (direction == 4) {
-                    currentTile = currentTile.down;
-                }
-
-                System.out.println(currentTile.getPos());
-                System.out.println(x+","+y);
-            }
-
-        if ((x == y) || ((x < 0) && (x == -y)) || ((x > 0) && (x == 1-y))) {
-            longest=dx; dx=-dy; dy=longest;
-            direction++;
-            if (direction > 4) direction = 1;
-        }
-        x += dx; y += dy;
-        }
-        return drawableMatrix;
-    }
 }
