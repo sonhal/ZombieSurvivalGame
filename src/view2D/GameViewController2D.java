@@ -108,7 +108,7 @@ public class GameViewController2D implements GameViewController, Initializable{
             gc.fillRect(xPos,yPos, getEntitySize(),getEntitySize());
         }
         else{
-            gc.drawImage(spriteTranslator.getImage(gameObject.sprite),
+            gc.drawImage(spriteTranslator.getSpriteImage(gameObject.sprite),
                     xPos, yPos, getEntitySize(), getEntitySize());
 
         }
