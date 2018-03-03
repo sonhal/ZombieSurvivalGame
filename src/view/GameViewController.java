@@ -15,7 +15,7 @@ public interface GameViewController  {
      * Method responsible for starting the gameloop after
      * necessary dependencies has been instantiated.
      */
-    public void startGame();
+    public void initializeGameEnv();
 
 
     /**

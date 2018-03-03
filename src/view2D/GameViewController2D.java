@@ -2,21 +2,16 @@ package view2D;
 
 import engine.*;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import view.GameViewController;
 
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 
@@ -37,13 +32,16 @@ public class GameViewController2D implements GameViewController, Initializable{
     }
 
     @Override
-    public void startGame() {
+    public void initializeGameEnv() {
 
         System.out.println("Game controller active");
+        gameCanvas.setHeight(StaticFields.CANVAS_HEIGHT - 200);
+        gameCanvas.setWidth(StaticFields.CANVAS_WIDTH);
 
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight());
+        updateDrawableState(setStubDrawableMatrix(gameHandler));
     }
 
     public void startGameloop(){
@@ -55,8 +53,8 @@ public class GameViewController2D implements GameViewController, Initializable{
         spriteTranslator = new SpriteTranslationHandler();
         gc = gameCanvas.getGraphicsContext2D();
         gameHandler = new GameHandler(this);
-        startGame();
-        updateDrawableState(setStubDrawableMatrix(gameHandler));
+        initializeGameEnv();
+
         startGameloop();
 
 
@@ -78,7 +76,7 @@ public class GameViewController2D implements GameViewController, Initializable{
 
     private void updateView(){
 
-        gc.clearRect(0,0,512,512);
+        gc.clearRect(3,3,StaticFields.CANVAS_WIDTH - 3,StaticFields.CANVAS_HEIGHT - 3);
         int yAxisOffset = 0;
         for (DrawableTile[] tileRow: this.drawableMatrix) {
             int xAxisOffset = 0;
