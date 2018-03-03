@@ -39,15 +39,13 @@ public class GameViewController2D implements GameViewController, Initializable{
     public void startGame() {
 
         System.out.println("Game controller active");
-        gameHandler = new GameHandler(this);
-        setStubDrawableMatrix();
-
-
 
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight());
+    }
 
+    public void startGameloop(){
         runViewTick();
     }
 
@@ -55,6 +53,7 @@ public class GameViewController2D implements GameViewController, Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         spriteTranslator = new SpriteTranslationHandler();
         gc = gameCanvas.getGraphicsContext2D();
+        gameHandler = new GameHandler(this);
         startGame();
     }
 
@@ -90,32 +89,7 @@ public class GameViewController2D implements GameViewController, Initializable{
         }
     }
 
-    public void setStubDrawableMatrix(){
-        this.drawableMatrix = gameHandler.getDrawableMatrix(10).drawableMatrix;
-        try {
-            for (Tile[] tiles: this.drawableMatrix
-                 ) {
-                for (Tile tile: tiles
-                     ) {
-                    try{
-                        tile.setGameObject(new Item(new Sprite(1), 10));
-                    }
-                    catch (NullPointerException er){
-                        System.out.println("There was a null Tile here");
-                    }
-                }
 
-            }
-            drawableMatrix[1][1].setGameObject(new Item(new Sprite(2), 10));
-            drawableMatrix[5][5].setGameObject(new Item(new Sprite(2), 10));
-            drawableMatrix[10][10].setGameObject(new Item(new Sprite(2), 10));
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
 
     public void drawTile(Tile tile, int xPos, int yPos){
 
@@ -135,6 +109,10 @@ public class GameViewController2D implements GameViewController, Initializable{
                     xPos, yPos, StaticFields.DRAW_ENTITY_SIZE, StaticFields.DRAW_ENTITY_SIZE);
 
         }
+    }
+
+    public GameHandler getGameHandler(){
+        return gameHandler;
     }
 
 }
