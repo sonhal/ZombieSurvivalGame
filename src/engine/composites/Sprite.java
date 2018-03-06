@@ -1,4 +1,4 @@
-package engine;
+package engine.composites;
 
 /**
  * Represents the Sprite the view2D is to use to render a engine.GameObject

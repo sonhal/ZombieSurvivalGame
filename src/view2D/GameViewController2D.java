@@ -1,6 +1,7 @@
 package view2D;
 
 import engine.*;
+import engine.composites.Sprite;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;

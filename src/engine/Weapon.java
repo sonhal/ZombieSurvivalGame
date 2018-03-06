@@ -1,6 +1,7 @@
 package engine;
 
 
+import engine.composites.Sprite;
 
 /**
 * Represents a weapon a player can pickup and use in the game.

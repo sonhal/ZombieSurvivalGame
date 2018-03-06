@@ -1,13 +1,9 @@
 package view2D;
 
-import engine.Sprite;
+import engine.composites.Sprite;
 import javafx.scene.image.Image;
 
 
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class SpriteTranslationHandler {

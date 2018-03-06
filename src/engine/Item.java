@@ -1,5 +1,7 @@
 package engine;
 
+import engine.composites.Sprite;
+
 /**
  * Represents a item that a player Avatar can pick up and/or use.
  */

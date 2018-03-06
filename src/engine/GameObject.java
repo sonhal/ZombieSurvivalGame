@@ -1,5 +1,6 @@
 package engine;
 
+import engine.composites.Sprite;
 import javafx.scene.control.Skin;
 
 

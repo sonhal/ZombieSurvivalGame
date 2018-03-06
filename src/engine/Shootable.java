@@ -1,5 +1,7 @@
 package engine;
 
+import engine.composites.Sprite;
+
 public abstract class Shootable extends GameObject{
 
     private Direction direction;

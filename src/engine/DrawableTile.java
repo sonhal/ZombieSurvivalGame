@@ -1,5 +1,7 @@
 package engine;
 
+import engine.composites.Sprite;
+
 public class DrawableTile {
     private GameObject gameObject;
     private Item item;

@@ -1,14 +1,9 @@
 import engine.*;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import engine.composites.Sprite;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import view2D.GameViewController2D;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class GameViewController2DTest {
 
