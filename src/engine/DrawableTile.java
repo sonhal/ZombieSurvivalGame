@@ -3,6 +3,7 @@ package engine;
 public class DrawableTile {
     private GameObject gameObject;
     private Item item;
+    private Sprite sprite;
 
     DrawableTile(GameObject gameObject, Item item){
         this.gameObject = gameObject;
@@ -15,6 +16,10 @@ public class DrawableTile {
     public void setGameAndItem(GameObject gameObject, Item item){
         this.gameObject = gameObject;
         this.item = item;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 
     public GameObject getGameObject() {
