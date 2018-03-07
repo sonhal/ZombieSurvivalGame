@@ -8,7 +8,7 @@ public class GameObjectFactory {
 
 
     public static GameObject create(Tile tile, Sprite sprite){
-        TransformComponent tc = new TransformComponent(tile);
+        TransformComponent tc = new TransformComponent();
         GraphicsComponent gc = new GraphicsComponent(sprite);
         return  new GameObject(tc,gc);
     }

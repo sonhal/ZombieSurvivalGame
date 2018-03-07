@@ -41,10 +41,14 @@ public class GameViewController2D implements GameViewController, Initializable{
         gameCanvas.setHeight(StaticFields.CANVAS_SIZE);
         gameCanvas.setWidth(StaticFields.CANVAS_SIZE);
 
+
+
         renderer = new Renderer(gameCanvas);
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
         gameCanvas.getGraphicsContext2D().fillRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight());
         updateDrawableState(setStubDrawableMatrix(gameHandler));
+        setEventHandlers();
+        System.out.println("EventHandler connected");
     }
 
     public void startGameloop(){
@@ -92,9 +96,12 @@ public class GameViewController2D implements GameViewController, Initializable{
     }
 
     public void setEventHandlers(){
-        gameCanvas.getScene().addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+
+        gameCanvas.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
+                System.out.println(event.getCode());
+                System.out.println("Player pressed key");
                 gameHandler.sendEvent(ActionEvent.MOVE_UP);
             }
         });
