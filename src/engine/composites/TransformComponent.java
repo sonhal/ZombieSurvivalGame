@@ -8,10 +8,6 @@ public class TransformComponent implements Component{
 
     private Tile currentTile;
 
-    public TransformComponent(Tile currentTile){
-        this.currentTile = currentTile;
-    }
-
     public Tile getCurrentTile() {
         return currentTile;
     }

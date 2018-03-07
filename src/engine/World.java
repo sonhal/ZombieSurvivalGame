@@ -9,10 +9,10 @@ public class World {
     //Placeholder for avatar
     private Tile seed;
 
-    public World(int n, Avatar player){
+    public World(int n){
         world = generate(n);
         seed = findTile(0,0);
-        seed.setGameObject(player);
+
         connectTiles(world);
     }
 
@@ -44,6 +44,10 @@ public class World {
 
     public Tile getSeed() {
         return seed;
+    }
+
+    public void setPlayer(Avatar player){
+        seed.setGameObject(player);
     }
 
 
