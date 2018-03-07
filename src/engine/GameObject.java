@@ -10,7 +10,7 @@ import javafx.scene.control.Skin;
  * Represents the abstract GameObject.
  * A GameObject subtype object can be on a Tile object.
  */
-public abstract class GameObject {
+public class GameObject {
     private TransformComponent transformComponent;
     private GraphicsComponent graphicsComponent;
 

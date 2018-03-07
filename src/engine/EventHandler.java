@@ -19,13 +19,13 @@ public class EventHandler {
                 break;
             case MOVE_RIGHT: player.move(Direction.RIGHT);
                 break;
-            case SHOOT_UP: player.shoot(Direction.UP);
+            case ATTACK_UP: player.attack(Direction.UP);
                 break;
-            case SHOOT_DOWN: player.shoot(Direction.DOWN);
+            case ATTACK_DOWN: player.attack(Direction.DOWN);
                 break;
-            case SHOOT_LEFT: player.shoot(Direction.LEFT);
+            case ATTACK_LEFT: player.attack(Direction.LEFT);
                 break;
-            case SHOOT_RIGHT: player.shoot(Direction.RIGHT);
+            case ATTACK_RIGHT: player.attack(Direction.RIGHT);
                 break;
         }
     }

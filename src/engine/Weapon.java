@@ -62,7 +62,10 @@ public class Weapon extends Item{
      */
     private void attackTile(Tile tile){
         if ( tile != null && tile.getGameObject() != null){
-            tile.getGameObject().damage(damage);
+            if(tile.getGameObject() instanceof LivingObject){
+               LivingObject living = (LivingObject)tile.getGameObject();
+               living.damage(damage);
+            }
         }
     }
 

@@ -10,6 +10,7 @@ public class DrawableTile {
     DrawableTile(GameObject gameObject, Item item){
         this.gameObject = gameObject;
         this.item = item;
+        this.sprite = new Sprite(1);
     }
     DrawableTile(){
 
@@ -18,6 +19,7 @@ public class DrawableTile {
     public void setGameAndItem(GameObject gameObject, Item item){
         this.gameObject = gameObject;
         this.item = item;
+        this.sprite = new Sprite(1);
     }
 
     public Sprite getSprite() {

@@ -9,9 +9,10 @@ public class World {
     //Placeholder for avatar
     private Tile seed;
 
-    public World(int n){
+    public World(int n, Avatar player){
         world = generate(n);
         seed = findTile(0,0);
+        seed.setGameObject(player);
         connectTiles(world);
     }
 

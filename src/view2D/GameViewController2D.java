@@ -4,10 +4,12 @@ import engine.*;
 import engine.composites.Sprite;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import view.GameViewController;
@@ -71,6 +73,31 @@ public class GameViewController2D implements GameViewController, Initializable{
 
         gameLoop.getKeyFrames().add( kf );
         gameLoop.play();
+    }
+
+    public DrawableTile[][] setStubDrawableMatrix(GameHandler gh){
+        DrawableTile[][] drawableMatrix = gh.getDrawableMatrix(10).matrix;
+        /*try {
+
+            drawableMatrix[1][1].setGameObject(GameObjectFactory.create());
+            drawableMatrix[5][5].setGameObject(new Item(new Sprite(2), 10));
+            drawableMatrix[10][10].setGameObject(new Item(new Sprite(2), 10));
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+        return drawableMatrix;
+
+    }
+
+    public void setEventHandlers(){
+        gameCanvas.getScene().addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                gameHandler.sendEvent(ActionEvent.MOVE_UP);
+            }
+        });
     }
 
 

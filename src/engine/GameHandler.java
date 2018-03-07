@@ -7,11 +7,14 @@ public class GameHandler{
     World world;
     GameViewController2D gameViewController2D;
     EventHandler eventHandler;
+    Avatar player;
 
     public GameHandler(GameViewController2D gameViewController2D){
     this.gameViewController2D = gameViewController2D;
+
+
     createWorld(50);
-    this.eventHandler = new EventHandler();
+    this.eventHandler = null;
     }
 
     public void createWorld() {
