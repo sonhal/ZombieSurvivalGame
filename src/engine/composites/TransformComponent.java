@@ -17,15 +17,24 @@ public class TransformComponent implements Component{
     }
 
     public void move(Direction direction) {
+        Tile lastTile = currentTile;
         switch (direction) {
             case UP:
-                currentTile = currentTile.getUp();
+                currentTile.getUp().setGameObject(currentTile.getGameObject());
+                lastTile.clearTile();
+                break;
             case DOWN:
-                currentTile = currentTile.getDown();
+                currentTile.getDown().setGameObject(currentTile.getGameObject());
+                lastTile.clearTile();
+                break;
             case LEFT:
-                currentTile = currentTile.getLeft();
+                currentTile.getLeft().setGameObject(currentTile.getGameObject());
+                lastTile.clearTile();
+                break;
             case RIGHT:
-                currentTile = currentTile.getRight();
+                currentTile.getRight().setGameObject(currentTile.getGameObject());
+                lastTile.clearTile();
+                break;
         }
 
     }

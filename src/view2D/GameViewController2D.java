@@ -4,11 +4,14 @@ import engine.*;
 import engine.composites.Sprite;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
@@ -23,12 +26,14 @@ public class GameViewController2D implements GameViewController, Initializable{
     GameHandler gameHandler;
     DrawableTile[][] drawableMatrix;
     Renderer renderer;
+    Scene scene;
 
 
 
     @FXML
     private
     Canvas gameCanvas;
+
 
     @Override
     public void updateDrawableState(DrawableTile[][] drawableMatrix) {
@@ -47,8 +52,8 @@ public class GameViewController2D implements GameViewController, Initializable{
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
         gameCanvas.getGraphicsContext2D().fillRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight());
         updateDrawableState(setStubDrawableMatrix(gameHandler));
-        setEventHandlers();
-        System.out.println("EventHandler connected");
+
+        gameHandler.setObjectInWorld();
     }
 
     public void startGameloop(){
@@ -61,6 +66,7 @@ public class GameViewController2D implements GameViewController, Initializable{
         initializeGameEnv();
 
         startGameloop();
+        setEventHandlers();
 
 
     }
@@ -73,7 +79,7 @@ public class GameViewController2D implements GameViewController, Initializable{
 
         KeyFrame kf = new KeyFrame(
                 Duration.seconds(0.017),                // 60 FPS
-                ae -> renderer.render(drawableMatrix));
+                ae -> update());
 
         gameLoop.getKeyFrames().add( kf );
         gameLoop.play();
@@ -95,18 +101,42 @@ public class GameViewController2D implements GameViewController, Initializable{
 
     }
 
-    public void setEventHandlers(){
 
-        gameCanvas.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                System.out.println(event.getCode());
-                System.out.println("Player pressed key");
-                gameHandler.sendEvent(ActionEvent.MOVE_UP);
+    public GameHandler getGameHandler() {
+        return gameHandler;
+    }
+
+
+    private void setEventHandlers(){
+
+        Platform.runLater(new Runnable() {
+            public void run() {
+                gameCanvas.getScene().setOnKeyPressed(e -> {
+                    if (e.getCode() == KeyCode.UP) {
+                        System.out.println("Up key was pressed");
+                        gameHandler.sendEvent(ActionEvent.MOVE_UP);
+                    }
+                    if (e.getCode() == KeyCode.DOWN) {
+                        System.out.println("Down key was pressed");
+                        gameHandler.sendEvent(ActionEvent.MOVE_DOWN);
+                    }
+                    if (e.getCode() == KeyCode.LEFT) {
+                        System.out.println("Left key was pressed");
+                        gameHandler.sendEvent(ActionEvent.MOVE_LEFT);
+                    }
+                    if (e.getCode() == KeyCode.RIGHT) {
+                        System.out.println("Right key was pressed");
+                        gameHandler.sendEvent(ActionEvent.MOVE_RIGHT);
+                    }
+                });
             }
         });
     }
 
+    private void update(){
+        drawableMatrix = gameHandler.getDrableWorld();
+        renderer.render(drawableMatrix);
+    }
 
 
 }

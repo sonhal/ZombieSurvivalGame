@@ -18,6 +18,7 @@ public class SpriteTranslationHandler {
 
         spriteImageFiles.put(1, "view2D/static/grass_sprite.png");
         spriteImageFiles.put(2, "view2D/static/sword.png");
+        spriteImageFiles.put(3, "view2D/static/water_bucket.png");
 
         for (Integer key: spriteImageFiles.keySet()
              ) {

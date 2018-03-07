@@ -11,13 +11,13 @@ public class EventHandler {
     public void handle(ActionEvent event){
 
         switch (event){
-            case MOVE_UP: player.move(Direction.UP);
+            case MOVE_UP: player.move(Direction.LEFT);
                 break;
-            case MOVE_DOWN: player.move(Direction.DOWN);
+            case MOVE_DOWN: player.move(Direction.RIGHT);
                 break;
-            case MOVE_LEFT: player.move(Direction.LEFT);
+            case MOVE_LEFT: player.move(Direction.UP);
                 break;
-            case MOVE_RIGHT: player.move(Direction.RIGHT);
+            case MOVE_RIGHT: player.move(Direction.DOWN);
                 break;
             case ATTACK_UP: player.attack(Direction.UP);
                 break;

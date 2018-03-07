@@ -24,8 +24,8 @@ class DrawableMatrixTest {
     @Test
     void generateDrawable() {
         int diameterSize = 30;
-        testWorld.findTile(0,0).setItem(new Item(new Sprite(1), 10));
-        testWorld.findTile(5,5).setItem(new Item(new Sprite(1), 10));
+        testWorld.findTile(0,0).setItem(new Item(new Sprite(1)));
+        testWorld.findTile(5,5).setItem(new Item(new Sprite(1)));
         matrix = new DrawableMatrix(testWorld, testWorld.getSeed(), diameterSize,diameterSize);
 
         assertNotNull(matrix.matrix[diameterSize][diameterSize].getItem());
