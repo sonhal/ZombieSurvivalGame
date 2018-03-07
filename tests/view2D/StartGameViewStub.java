@@ -1,3 +1,5 @@
+package view2D;
+
 import engine.GameHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
