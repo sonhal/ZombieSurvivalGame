@@ -1,4 +1,4 @@
 package engine.composites;
 
-public class HealthObject {
+public interface Component {
 }

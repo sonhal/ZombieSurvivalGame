@@ -13,6 +13,10 @@ public class Item{
         this.sprite = sprite;
     }
 
+    public Sprite getSprite() {
+        return sprite;
+    }
+
     public void pickup(){
 
     }

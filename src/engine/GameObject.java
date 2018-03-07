@@ -1,6 +1,8 @@
 package engine;
 
+import engine.composites.GraphicsComponent;
 import engine.composites.Sprite;
+import engine.composites.TransformComponent;
 import javafx.scene.control.Skin;
 
 
@@ -9,41 +11,25 @@ import javafx.scene.control.Skin;
  * A GameObject subtype object can be on a Tile object.
  */
 public abstract class GameObject {
+    private TransformComponent transformComponent;
+    private GraphicsComponent graphicsComponent;
 
-    public Skin skin;
-    public Sprite sprite;
-    public int health;
-
-    public GameObject(Sprite sprite, int health){
-        this.sprite = sprite;
-        this.health = health;
+    public GameObject(TransformComponent tc, GraphicsComponent gc){
+        this.transformComponent = tc;
+        this.graphicsComponent = gc;
     }
 
-    public Skin getSkin() {
-        return skin;
+    public GraphicsComponent getGraphicsComponent(){return graphicsComponent;}
+
+
+    public TransformComponent getTransformComponent(){return transformComponent;}
+
+
+    public void move(Direction direction){
+        transformComponent.move(direction);
     }
 
-    public void setSkin(Skin skin) {
-        this.skin = skin;
-    }
-
-    public Sprite getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(Sprite sprite) {
-        this.sprite = sprite;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void move(Tile tile){
-
+    public Sprite getSprite(){
+        return graphicsComponent.getSprite();
     }
 }
