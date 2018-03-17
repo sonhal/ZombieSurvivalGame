@@ -12,6 +12,13 @@ public class Avatar extends LivingObject{
     }
 
     /**
+     * Tells players Avatar object to shoot in the direction parameter specifies.
+     */
+    public void shoot(Direction shootDirection){
+
+    }
+
+    /**
      * Handles the use of health packs that the player might pickup.
      * @param healthpack reference to the healthpack to be consumed.
      */

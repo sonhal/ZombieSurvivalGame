@@ -6,10 +6,13 @@ public class GameHandler{
 
     World world;
     GameViewController2D gameViewController2D;
+    EventHandler eventHandler;
 
     public GameHandler(GameViewController2D gameViewController2D){
     this.gameViewController2D = gameViewController2D;
-}
+    createWorld(50);
+    this.eventHandler = new EventHandler();
+    }
 
     public void createWorld() {
         this.world = new World(10);
@@ -20,11 +23,11 @@ public class GameHandler{
     }
 
     public DrawableMatrix getDrawableMatrix( int diameter){
-        createWorld(50);
         return new DrawableMatrix(world, world.getSeed(), diameter, diameter);
     }
 
     public void sendEvent(ActionEvent event){
+        eventHandler.handle(event);
 
     }
 }

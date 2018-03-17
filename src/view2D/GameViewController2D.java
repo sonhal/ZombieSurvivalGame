@@ -33,7 +33,6 @@ public class GameViewController2D implements GameViewController, Initializable{
 
     @Override
     public void initializeGameEnv() {
-
         System.out.println("Game controller active");
         gameCanvas.setHeight(StaticFields.CANVAS_SIZE);
         gameCanvas.setWidth(StaticFields.CANVAS_SIZE);
@@ -76,7 +75,7 @@ public class GameViewController2D implements GameViewController, Initializable{
 
     private void updateView(){
 
-        gc.clearRect(3,3,StaticFields.CANVAS_SIZE - 3,StaticFields.CANVAS_SIZE - 3);
+        gc.clearRect(3,3,StaticFields.CANVAS_SIZE,StaticFields.CANVAS_SIZE );
         int yAxisOffset = 0;
         for (DrawableTile[] tileRow: this.drawableMatrix) {
             int xAxisOffset = 0;
@@ -94,24 +93,22 @@ public class GameViewController2D implements GameViewController, Initializable{
 
 
 
-    public void drawTile(DrawableTile tile, int xPos, int yPos){
+    private void drawTile(DrawableTile tile, int xPos, int yPos){
 
+        drawOnCanvas(tile.getSprite(), xPos, yPos);
 
-        GameObject gameObject;
-        try {
-            gameObject = tile.getGameObject();
-        }catch (NullPointerException er){
-            gameObject = null;
+        if(tile.getItem() != null){
+            drawOnCanvas(tile.getItem().getSprite(), xPos, yPos);
         }
-        if(gameObject == null ){
-            gc.setFill(Color.SANDYBROWN);
-            gc.fillRect(xPos,yPos, getEntitySize(),getEntitySize());
+        if(tile.getGameObject() != null){
+            drawOnCanvas(tile.getGameObject().sprite, xPos, yPos);
         }
-        else{
-            gc.drawImage(spriteTranslator.getSpriteImage(gameObject.sprite),
-                    xPos, yPos, getEntitySize(), getEntitySize());
 
-        }
+    }
+
+    private void drawOnCanvas(Sprite sprite, int xPos, int yPos){
+        gc.drawImage(spriteTranslator.getSpriteImage(sprite),
+                xPos, yPos, getEntitySize(), getEntitySize());
     }
 
     public GameHandler getGameHandler(){

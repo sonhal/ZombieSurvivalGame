@@ -3,10 +3,12 @@ package engine;
 /**
  * Represents a item that a player Avatar can pick up and/or use.
  */
-public class Item extends GameObject{
+public class Item{
 
-    public Item(Sprite sprite, int health){
-        super(sprite, health);
+    Sprite sprite;
+
+    public Item(Sprite sprite){
+        this.sprite = sprite;
     }
 
     public void pickup(){

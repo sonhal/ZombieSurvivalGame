@@ -41,4 +41,8 @@ public abstract class GameObject {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public void move(Tile tile){
+
+    }
 }
