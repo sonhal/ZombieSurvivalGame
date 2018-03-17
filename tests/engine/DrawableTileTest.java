@@ -25,4 +25,10 @@ class DrawableTileTest {
             assertNull(testTile.getGameObject());
             assertNotNull(testTile.getItem());
     }
+
+    @Test
+    void getItem(){
+        testTile.setItem(new Weapon(100));
+        assertNotNull(testTile.getItem());
+    }
 }
