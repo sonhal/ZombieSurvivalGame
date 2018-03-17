@@ -7,6 +7,7 @@ public class GameHandler{
 
     World world;
     GameViewController2D gameViewController2D;
+    NpcController npcController = new NpcController();
     EventHandler eventHandler;
     Avatar player;
     DrawableMatrix matrix;
@@ -31,6 +32,8 @@ public class GameHandler{
     }
 
     public void updateWordState(){
+        System.out.println("World state updating");
+        npcController.update(1, world);
         System.out.println("updating");
     }
 
@@ -40,6 +43,7 @@ public class GameHandler{
     }
 
     public DrawableTile[][] getDrableWorld(){
+        updateWordState();
         return matrix.generateDrawable(world,player.getTransformComponent().getCurrentTile(),10,10);
     }
 
