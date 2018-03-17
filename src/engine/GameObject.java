@@ -32,4 +32,8 @@ public class GameObject {
     public Sprite getSprite(){
         return graphicsComponent.getSprite();
     }
+
+    public void hit(int hitAmount){
+        System.out.println("Object was hit with :" + hitAmount);
+    }
 }

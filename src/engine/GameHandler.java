@@ -1,7 +1,10 @@
 package engine;
 
 import engine.composites.Sprite;
+import sun.security.x509.AVA;
 import view2D.GameViewController2D;
+
+import java.util.ArrayList;
 
 public class GameHandler{
 
@@ -14,7 +17,8 @@ public class GameHandler{
 
     public GameHandler(GameViewController2D gameViewController2D){
     this.gameViewController2D = gameViewController2D;
-    this.player = AvatarFactory.create(new Sprite(2));
+
+    this.player = createPlayer();
 
     createWorld(50);
     world.setPlayer(player);
@@ -52,5 +56,20 @@ public class GameHandler{
         int y = player.getTransformComponent().getCurrentTile().cordY;
         Tile tile = world.findTile(x + 3,y + 3);
         tile.setGameObject(GameObjectFactory.create(new Sprite(3)));
+    }
+
+    /**
+     * Creates new player with correct Sprites for animation added.
+     * @return Avatar
+     */
+    private Avatar createPlayer(){
+        ArrayList<Sprite> playerSprites = new ArrayList<>();
+        for (int i = 4; i <= 7; i++){
+            playerSprites.add(new Sprite(i));
+        }
+
+        Avatar player = AvatarFactory.create(playerSprites);
+        player.pickupWeapon(new Weapon(3,1));
+        return player;
     }
 }

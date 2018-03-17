@@ -128,6 +128,10 @@ public class GameViewController2D implements GameViewController, Initializable{
                         System.out.println("Right key was pressed");
                         gameHandler.sendEvent(ActionEvent.MOVE_RIGHT);
                     }
+                    if (e.getCode() == KeyCode.SPACE) {
+                        System.out.println("Right key was pressed");
+                        gameHandler.sendEvent(ActionEvent.ATTACK_UP);
+                    }
                 });
             }
         });

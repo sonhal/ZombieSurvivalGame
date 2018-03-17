@@ -2,19 +2,22 @@ package engine;
 
 
 import engine.composites.*;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Reperesent the Avatar in the game that the player controls.
  */
 public class Avatar extends LivingObject{
 
-    private InputComponent inputComponent;
-    private AttackComponent attackComponent;
 
-    public Avatar(TransformComponent tc, GraphicsComponent gc, HealthComponent hc, InputComponent ic, AttackComponent ac) {
+    private AttackComponent attackComponent;
+    private CollisionComponent collisionComponent;
+
+    public Avatar(TransformComponent tc, GraphicsComponent gc, HealthComponent hc,
+                  AttackComponent ac, CollisionComponent cc) {
         super(tc, gc, hc);
-        this.inputComponent = ic;
         this.attackComponent = ac;
+        this.collisionComponent = cc;
     }
 
 
@@ -33,4 +36,34 @@ public class Avatar extends LivingObject{
     public void pickupWeapon(Weapon weapon){
         attackComponent.setWeapon(weapon);
     }
+
+    @Override
+    public void move(Direction direction){
+        if(!this.collisionComponent.collisionDetect(this.getTransformComponent().getCurrentTile(), direction)){
+            this.getTransformComponent().move(direction);
+        }
+        this.getGraphicsComponent().setActiveSpriteByID(getSpriteIDByDirection(direction));
+    }
+
+
+    private int getSpriteIDByDirection(Direction direction){
+        int spriteId = 0;
+        switch (direction){
+            case DOWN:
+                spriteId = 4;
+                break;
+            case UP:
+                spriteId = 3;
+                break;
+            case LEFT:
+                spriteId = 2;
+                break;
+            case RIGHT:
+                spriteId = 1;
+                break;
+        }
+        return spriteId;
+    }
+
+
 }

@@ -22,14 +22,14 @@ class DrawableTileTest {
     }
     @Test
     void setGameAndItem() {
-        testTile.setGameAndItem(null, new Weapon(new Sprite(2), 10,10));
+        testTile.setGameAndItem(null, new Item(new Sprite(2)));
             assertNull(testTile.getGameObject());
             assertNotNull(testTile.getItem());
     }
 
     @Test
     void getItem(){
-        testTile.setItem(new Weapon(new Sprite(1),1,10));
+        testTile.setItem(new Item(new Sprite(2)));
         assertNotNull(testTile.getItem());
     }
 }

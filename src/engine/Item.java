@@ -17,7 +17,7 @@ public class Item{
         return sprite;
     }
 
-    public void pickup(){
-
+    public Usable pickup(){
+        return null;
     }
 }
