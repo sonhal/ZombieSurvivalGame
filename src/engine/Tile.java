@@ -79,4 +79,20 @@ public class Tile {
     public void setItem(Item item) {
         this.item = item;
     }
+
+
+    public Tile getTileInDirection(Direction direction){
+        switch (direction){
+            case UP:
+                return getUp();
+            case DOWN:
+                return getDown();
+            case LEFT:
+                return getLeft();
+            case RIGHT:
+                return getRight();
+            default:
+                return this;
+        }
+    }
 }

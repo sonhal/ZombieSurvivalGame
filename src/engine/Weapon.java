@@ -6,7 +6,7 @@ import engine.composites.Sprite;
 /**
 * Represents a weapon a player can pickup and use in the game.
  */
-public class Weapon extends Item{
+public class Weapon{
 
     private int damage;
     private int range;
@@ -15,8 +15,7 @@ public class Weapon extends Item{
      * Sets the damage for the weapon
      * @param damage the damage the weapon deals
      */
-    public Weapon(Sprite sprite, int range, int damage){
-        super(sprite);
+    public Weapon( int range, int damage){
         this.damage = damage;
         this.range = range;
 

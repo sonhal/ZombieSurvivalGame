@@ -51,4 +51,8 @@ public class GameObject {
     }
 
     public Tile getTile(){ return transformComponent.getCurrentTile();}
+
+    public void hit(int hitAmount){
+        System.out.println("Object was hit with :" + hitAmount);
+    }
 }
