@@ -29,7 +29,7 @@ class DrawableTileTest {
 
     @Test
     void getItem(){
-        testTile.setItem(new Weapon(100));
+        testTile.setItem(new Weapon(new Sprite(1),1,10));
         assertNotNull(testTile.getItem());
     }
 }

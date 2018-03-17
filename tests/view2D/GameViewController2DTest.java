@@ -3,7 +3,7 @@ package view2D;
 import engine.DrawableTile;
 import engine.GameHandler;
 import engine.Item;
-import engine.Sprite;
+import engine.composites.Sprite;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
