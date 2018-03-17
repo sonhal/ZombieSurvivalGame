@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameHandlerTest {
 
     private GameHandler gameHandler;
+    private GameViewController2D gameViewController2D;
 
     @BeforeEach
     void setUp() {

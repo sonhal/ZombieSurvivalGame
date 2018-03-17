@@ -21,7 +21,10 @@ public class Tile {
     }
 
     public Tile getUp() {
-        return up;
+        if (up != null){
+            return up;
+        }
+        else return this;
     }
 
     public void setUp(Tile up) {
@@ -61,7 +64,12 @@ public class Tile {
     }
 
     public void setGameObject(GameObject gameObject) {
+        gameObject.getTransformComponent().setCurrentTile(this);
         this.gameObject = gameObject;
+    }
+
+    public void clearTile(){
+        gameObject = null;
     }
 
     public Item getItem() {

@@ -1,20 +1,36 @@
 package engine;
 
 
+import engine.composites.GraphicsComponent;
+import engine.composites.HealthComponent;
+import engine.composites.TransformComponent;
+
 /**
  * Represents a Object in the game that can move and interact with the game environment.
  */
-public abstract class LivingObject {
+public abstract class LivingObject extends GameObject{
 
-    public int size;
+    private HealthComponent healthComponent;
 
-
-    /**
-     * Method to handle the movment of a Living object in the game environment.
-     *
-     * @param direction passes the direction for the LivingObject to move.
-     */
-    public void move(Direction direction){
-
+    public LivingObject(TransformComponent tc, GraphicsComponent gc, HealthComponent hc) {
+        super(tc, gc);
+        this.healthComponent = hc;
     }
+
+    public void damage(int damageToInflict){
+        healthComponent.damage(damageToInflict);
+    }
+
+    public void heal(int healAmount){
+        healthComponent.heal(healAmount);
+    }
+
+    public boolean isAlive(){
+        return healthComponent.isAlive();
+    }
+
+
+
+
+
 }

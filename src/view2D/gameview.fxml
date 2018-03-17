@@ -58,4 +58,9 @@
       </Pane>
    </children>
 
-</Pane>
+
+    <center>
+        <HBox alignment="CENTER" style="-fx-border-color: black; -fx-background-color: grey;"><Canvas height="512" width="512" fx:id="gameCanvas" /></HBox>
+    </center>
+
+</BorderPane>
