@@ -45,6 +45,10 @@ public class GameViewController2D implements GameViewController, Initializable{
     public
     MenuItem settingsMenu;
 
+    @FXML
+    public
+    Pane settings, shaderSetting;
+
 
     @Override
     public void updateDrawableState(DrawableTile[][] drawableMatrix) {
