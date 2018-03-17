@@ -44,10 +44,8 @@ public class GameObject {
                 if (Math.random() < 0.5) { this.move(Direction.DOWN);} else{this.move(Direction.LEFT);}
             }
         }
-
     }
-
-
+    
     public Sprite getSprite(){
         return graphicsComponent.getSprite();
     }
