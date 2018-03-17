@@ -19,7 +19,7 @@ public class GameHandler{
     createWorld(50);
     world.setPlayer(player);
     this.eventHandler = new EventHandler(player);
-    this.matrix = getDrawableMatrix(10);
+    this.matrix = getDrawableMatrix(10, 10);
     }
 
     public void createWorld() {
@@ -34,9 +34,9 @@ public class GameHandler{
         System.out.println("updating");
     }
 
-    public DrawableMatrix getDrawableMatrix( int diameter){
+    public DrawableMatrix getDrawableMatrix( int diameterX, int diameterY){
         updateWordState();
-        return new DrawableMatrix(world, world.getSeed(), diameter, diameter);
+        return new DrawableMatrix(world, world.getSeed(), diameterX, diameterY);
     }
 
     public DrawableTile[][] getDrableWorld(){

@@ -11,6 +11,7 @@ public class HealthComponent {
 
     public void damage(int damageToInflict){
         healthAmount =- damageToInflict;
+
     }
 
     public void heal(int healAmount){
@@ -24,4 +25,5 @@ public class HealthComponent {
         if (healthAmount < 1) return false;
         else return true;
     }
+
 }

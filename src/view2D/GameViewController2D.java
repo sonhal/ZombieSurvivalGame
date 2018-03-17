@@ -5,15 +5,18 @@ import engine.composites.Sprite;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -22,9 +25,15 @@ import javafx.util.Duration;
 import view.GameViewController;
 import javafx.scene.input.KeyEvent;
 import javafx.event.EventHandler;
+
+import java.awt.*;
+import java.awt.event.ComponentListener;
 import java.net.URL;
 import java.util.EventListener;
 import java.util.ResourceBundle;
+import java.util.TimerTask;
+
+import static javafx.scene.paint.Color.*;
 
 
 public class GameViewController2D implements GameViewController, Initializable{
@@ -33,8 +42,6 @@ public class GameViewController2D implements GameViewController, Initializable{
     DrawableTile[][] drawableMatrix;
     Renderer renderer;
     Scene scene;
-
-
 
     @FXML
     private
@@ -47,9 +54,12 @@ public class GameViewController2D implements GameViewController, Initializable{
 
     @FXML
     public
-    Pane settings, shaderSetting;
+    Pane settings, shaderSetting, motherPane;
 
-
+    @FXML
+    public
+    Rectangle greenBar;
+    
     @Override
     public void updateDrawableState(DrawableTile[][] drawableMatrix) {
         this.drawableMatrix = drawableMatrix;
@@ -58,7 +68,7 @@ public class GameViewController2D implements GameViewController, Initializable{
     public void openMenu () {
         settings.setVisible(true);
         settings.setManaged(true);
-        shaderSetting.setVisible(true);
+        shaderSetting.setVisible(false);
     }
 
     public void closeMenu () {
@@ -82,16 +92,22 @@ public class GameViewController2D implements GameViewController, Initializable{
         settings.setVisible(false);
         shaderSetting.setVisible(false);
         settings.setManaged(false);
-        gameCanvas.setHeight(StaticFields.CANVAS_SIZE);
-        gameCanvas.setWidth(StaticFields.CANVAS_SIZE);
+        gameCanvas.isResizable();
+        gameCanvas.heightProperty().bind(motherPane.heightProperty());
+        gameCanvas.widthProperty().bind(motherPane.widthProperty());
+        gameCanvas.widthProperty().addListener(((observable, oldValue, newValue) -> {
+            System.out.println("width resize");
+           // setStubDrawableMatrix(gameHandler, (int)gameCanvas.getWidth(),(int)gameCanvas.getHeight()/2);
+        }));
+        gameCanvas.heightProperty().addListener(((observable, oldValue, newValue) -> {
+            System.out.println("height resize");
+            //setStubDrawableMatrix(gameHandler, (int)gameCanvas.getWidth()%2,(int)gameCanvas.getHeight()%2);
 
-
-
+        }));
         renderer = new Renderer(gameCanvas);
-        gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
+        gameCanvas.getGraphicsContext2D().setFill(BLACK);
         gameCanvas.getGraphicsContext2D().fillRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight());
-        updateDrawableState(setStubDrawableMatrix(gameHandler));
-
+        updateDrawableState(setStubDrawableMatrix(gameHandler, 10, 10));
         gameHandler.setObjectInWorld();
     }
 
@@ -124,8 +140,8 @@ public class GameViewController2D implements GameViewController, Initializable{
         gameLoop.play();
     }
 
-    public DrawableTile[][] setStubDrawableMatrix(GameHandler gh){
-        DrawableTile[][] drawableMatrix = gh.getDrawableMatrix(10).matrix;
+    public DrawableTile[][] setStubDrawableMatrix(GameHandler gh, int diameterX, int diameterY){
+        DrawableTile[][] drawableMatrix = gh.getDrawableMatrix(diameterX, diameterY).matrix;
         /*try {
 
             drawableMatrix[1][1].setGameObject(GameObjectFactory.create());
@@ -175,6 +191,18 @@ public class GameViewController2D implements GameViewController, Initializable{
     private void update(){
         drawableMatrix = gameHandler.getDrableWorld();
         renderer.render(drawableMatrix);
+    }
+    //work in progress
+    private void changeCanvasSize(){
+        double canvasWidth = 0;
+        double canvasHeight = 0;
+        canvasWidth = gameCanvas.getWidth();
+        canvasHeight = gameCanvas.getHeight();
+    }
+    @FXML
+    public void HealthBar () {
+        greenBar.setWidth(200.0);
+
     }
 
 

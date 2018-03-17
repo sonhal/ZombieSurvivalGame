@@ -33,4 +33,8 @@ public class Avatar extends LivingObject{
     public void pickupWeapon(Weapon weapon){
         attackComponent.setWeapon(weapon);
     }
+
+
 }
+
+
