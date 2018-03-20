@@ -64,8 +64,13 @@ public class Tile {
     }
 
     public void setGameObject(GameObject gameObject) {
-        gameObject.getTransformComponent().setCurrentTile(this);
-        this.gameObject = gameObject;
+        if (gameObject != null){
+            gameObject.getTransformComponent().setCurrentTile(this);
+            this.gameObject = gameObject;
+        }
+        else{
+            System.out.println("ERROR: You tried to pass null object to a Tile");
+        }
     }
 
     public void clearTile(){

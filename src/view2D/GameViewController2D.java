@@ -1,18 +1,14 @@
 package view2D;
 
 import engine.*;
-import engine.composites.Sprite;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import view.GameViewController;
@@ -129,7 +125,7 @@ public class GameViewController2D implements GameViewController, Initializable{
                         gameHandler.sendEvent(ActionEvent.MOVE_RIGHT);
                     }
                     if (e.getCode() == KeyCode.SPACE) {
-                        System.out.println("Right key was pressed");
+                        System.out.println("Space key was pressed");
                         gameHandler.sendEvent(ActionEvent.ATTACK_UP);
                     }
                 });
@@ -138,7 +134,7 @@ public class GameViewController2D implements GameViewController, Initializable{
     }
 
     private void update(){
-        drawableMatrix = gameHandler.getDrableWorld();
+        drawableMatrix = gameHandler.getDrawableWorld();
         renderer.render(drawableMatrix);
     }
 

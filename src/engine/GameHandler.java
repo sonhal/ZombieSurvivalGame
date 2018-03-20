@@ -1,7 +1,6 @@
 package engine;
 
 import engine.composites.Sprite;
-import sun.security.x509.AVA;
 import view2D.GameViewController2D;
 
 import java.util.ArrayList;
@@ -13,10 +12,14 @@ public class GameHandler{
     EventHandler eventHandler;
     Avatar player;
     DrawableMatrix matrix;
+    ArrayList<ScriptableObject> scriptableObjects;
+    ArrayList<ScriptableObject> scriptableToBeDeleted;
 
 
     public GameHandler(GameViewController2D gameViewController2D){
     this.gameViewController2D = gameViewController2D;
+    this.scriptableObjects = new ArrayList<>();
+    this.scriptableToBeDeleted = new ArrayList<>();
 
     this.player = createPlayer();
 
@@ -35,15 +38,17 @@ public class GameHandler{
     }
 
     public void updateWordState(){
+        updateScritableObjects();
         System.out.println("updating");
     }
 
     public DrawableMatrix getDrawableMatrix( int diameter){
-        updateWordState();
+        //updateWordState();
         return new DrawableMatrix(world, world.getSeed(), diameter, diameter);
     }
 
-    public DrawableTile[][] getDrableWorld(){
+    public DrawableTile[][] getDrawableWorld(){
+        updateWordState();
         return matrix.generateDrawable(world,player.getTransformComponent().getCurrentTile(),10,10);
     }
 
@@ -69,7 +74,24 @@ public class GameHandler{
         }
 
         Avatar player = AvatarFactory.create(playerSprites);
-        player.pickupWeapon(new Weapon(3,1));
+        player.pickupWeapon(new Gun(this,3,1));
         return player;
+    }
+
+    private void updateScritableObjects(){
+        scriptableObjects.removeAll(scriptableToBeDeleted);
+
+        for (ScriptableObject scriptableObject:
+             scriptableObjects) {
+            scriptableObject.update();
+        }
+    }
+
+    public void addToUpdateList(ScriptableObject scriptableObject){
+        this.scriptableObjects.add(scriptableObject);
+    }
+
+    public void addToBeDeletedList(ScriptableObject scriptableObject){
+        scriptableToBeDeleted.add(scriptableObject);
     }
 }

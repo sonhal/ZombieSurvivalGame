@@ -13,7 +13,7 @@ public class WeaponPickup extends Item {
 
 
     @Override
-    public Usable pickup() {
+    public Weapon pickup() {
         return this.weapon;
     }
 }

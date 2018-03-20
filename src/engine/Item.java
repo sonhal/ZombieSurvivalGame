@@ -17,7 +17,7 @@ public class Item{
         return sprite;
     }
 
-    public Usable pickup(){
+    public Weapon pickup(){
         return null;
     }
 }
