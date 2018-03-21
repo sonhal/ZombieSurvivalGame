@@ -24,7 +24,7 @@ public abstract class LivingObject extends GameObject{
         return healthComponent.getHealthAmount();
     }
 
-    public void damage(int damageToInflict){
+    private void damage(int damageToInflict){
         healthComponent.damage(damageToInflict);
     }
 

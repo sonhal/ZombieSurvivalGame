@@ -59,11 +59,11 @@ public class Weapon{
      * Try to damage GameObject on the parameter tile.
      * @param tile
      */
-    private void attackTile(Tile tile){
+    protected void attackTile(Tile tile){
         if ( tile != null && tile.getGameObject() != null){
             if(tile.getGameObject() instanceof LivingObject){
                LivingObject living = (LivingObject)tile.getGameObject();
-               living.damage(damage);
+               living.hit(damage);
             }
         }
     }

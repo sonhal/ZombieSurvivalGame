@@ -20,7 +20,6 @@ public class Enemy extends ScriptableObject {
         avatar = createAvatar();
         this.player = player;
         avatar.setMoveDelay(MOVE_DELAY);
-        avatar.heal(100000);
     }
 
     @Override
@@ -36,6 +35,7 @@ public class Enemy extends ScriptableObject {
     @Override
     public void update() {
         if(checkIfAlive()){
+            tryAttack();
             avatar.handleMoving(getDirectionAgainstPlayer());
             if(avatar.isHit()){avatar.updateHitStatus();}
             avatar.updateHitStatus();
@@ -49,19 +49,30 @@ public class Enemy extends ScriptableObject {
      */
     private Avatar createAvatar(){
         ArrayList<Sprite> playerSprites = new ArrayList<>();
-        for (int i = 4; i <= 7; i++){
-            playerSprites.add(new Sprite(i));
-        }
-        for (int i = 12; i <= 15; i++){
-            playerSprites.add(new Sprite(i));
-        }
+
+        /*'
+        Setting the sprites for a enemy, the numbering is not intuitive
+        */
+        playerSprites.add(new Sprite(18)); //down
+        playerSprites.add(new Sprite(19)); //up
+        playerSprites.add(new Sprite(20)); //left
+        playerSprites.add(new Sprite(21)); //right
+
+
+
+        playerSprites.add(new Sprite(23)); //up
+        playerSprites.add(new Sprite(22)); //down
+        playerSprites.add(new Sprite(24)); //right
+        playerSprites.add(new Sprite(25)); //left
+
+
+
+
 
         Avatar player = AvatarFactory.create(playerSprites);
-        player.pickupWeapon(new Gun(this.controller,3,10, 500));
+        player.pickupWeapon(new MeeleWeapon(1,5,1000));
         return player;
     }
-
-
 
 
     private void handleAttacking(Direction direction){
@@ -106,10 +117,20 @@ public class Enemy extends ScriptableObject {
             return false;
         }
         else {
-            System.out.println(avatar.getHealth());
             return true;}
-
         }
+
+    private boolean isPlayerInRange(Tile tile){
+        return  (tile.getGameObject() == player);
+    }
+
+    public void tryAttack(){
+        if(avatar.getCollisionComponent().collided() != null){
+           if(avatar.getTile().getTileInDirection(avatar.getCollisionComponent().collided()).getGameObject() == player){
+               avatar.attack(avatar.getCollisionComponent().collided());
+           }
+        }
+    }
 }
 
 

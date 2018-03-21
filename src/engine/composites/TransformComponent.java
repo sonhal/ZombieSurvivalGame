@@ -22,6 +22,10 @@ public class TransformComponent implements Component{
         return facingDirection;
     }
 
+    public void setFacingDirection(Direction facingDirection) {
+        this.facingDirection = facingDirection;
+    }
+
     public void move(Direction direction) {
         Tile lastTile = currentTile;
         switch (direction) {

@@ -2,7 +2,6 @@ package engine;
 
 
 import engine.composites.*;
-import javafx.scene.canvas.GraphicsContext;
 
 /**
  * Reperesent the Avatar in the game that the player controls.
@@ -48,6 +47,7 @@ public class Avatar extends LivingObject{
         if(!this.collisionComponent.collisionDetect(this.getTransformComponent().getCurrentTile(), direction)){
             this.getTransformComponent().move(direction);
         }
+        this.getTransformComponent().setFacingDirection(direction);
         this.getGraphicsComponent().setActiveSpriteByID(getSpriteIDByDirection(direction));
     }
 
@@ -71,13 +71,13 @@ public class Avatar extends LivingObject{
         return spriteId;
     }
 
-    public int getSpirteMovingIDByDirection(Direction direction){
+    public int getSpriteMovingIDByDirection(Direction direction){
         switch (direction){
             case UP: return  7;
             case DOWN: return 8;
             case LEFT: return 5;
             case RIGHT: return 6;
-            default: return 4;
+            default: return 0;
         }
     }
 
@@ -111,11 +111,12 @@ public class Avatar extends LivingObject{
                 isMoving = null;
             }
             else {
-                getGraphicsComponent().setActiveSpriteByID(getSpirteMovingIDByDirection(isMoving));
+                getGraphicsComponent().setActiveSpriteByID(getSpriteMovingIDByDirection(isMoving));
             }
         }
     }
 
-
-
+    public CollisionComponent getCollisionComponent() {
+        return collisionComponent;
+    }
 }

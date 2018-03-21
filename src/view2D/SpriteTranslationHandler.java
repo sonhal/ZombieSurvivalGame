@@ -33,6 +33,15 @@ public class SpriteTranslationHandler {
         spriteImageFiles.put(15, "view2D/static/red_walking_half_right.png");
         spriteImageFiles.put(16, "view2D/static/red_walking_half_right.png");
         spriteImageFiles.put(17, "view2D/static/hit_sprite.png");
+        spriteImageFiles.put(18, "view2D/static/zombie_still_down.png");
+        spriteImageFiles.put(19, "view2D/static/zombie_still_up.png");
+        spriteImageFiles.put(20, "view2D/static/zombie_still_left.png");
+        spriteImageFiles.put(21, "view2D/static/zombie_still_right.png");
+        spriteImageFiles.put(22, "view2D/static/zombie_walking_half_down.png");
+        spriteImageFiles.put(23, "view2D/static/zombie_walking_half_up.png");
+        spriteImageFiles.put(24, "view2D/static/zombie_walking_half_left.png");
+        spriteImageFiles.put(25, "view2D/static/zombie_walking_half_right.png");
+
 
         for (Integer key: spriteImageFiles.keySet()
              ) {
