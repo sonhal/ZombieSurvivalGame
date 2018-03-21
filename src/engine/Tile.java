@@ -85,6 +85,10 @@ public class Tile {
         this.item = item;
     }
 
+    public void deleteGameObject(){
+        this.gameObject = null;
+    }
+
 
     public Tile getTileInDirection(Direction direction){
         switch (direction){

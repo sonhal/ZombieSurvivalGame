@@ -16,7 +16,7 @@ public class Bullet extends ScriptableObject {
 
     public Bullet(GameHandler gameHandler, int damage, Tile startTile, Direction direction) {
         super(gameHandler);
-        this.gameObject = GameObjectFactory.create(new Sprite(3));
+        this.gameObject = GameObjectFactory.create(setSpriteByDirection(direction));
         this.gameObject.getTransformComponent().setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
         this.damage = damage;
@@ -42,6 +42,7 @@ public class Bullet extends ScriptableObject {
 
             if (this.damage < 1){
                 this.gameHandler.addToBeDeletedList(this);
+                this.gameObject.getTransformComponent().getCurrentTile().deleteGameObject();
             }
             else if(!this.collisionComponent.collisionDetect(this.gameObject.getTransformComponent().getCurrentTile(), direction)){
                 gameObject.getTransformComponent().move(direction);
@@ -54,6 +55,21 @@ public class Bullet extends ScriptableObject {
                 this.damage--;
             }
             this.sysTime = System.currentTimeMillis();
+        }
+    }
+
+    protected Sprite setSpriteByDirection(Direction direction){
+        switch (direction){
+            case UP:
+                return new Sprite(10);
+            case DOWN:
+                return new Sprite(11);
+            case LEFT:
+                return new Sprite(8);
+            case RIGHT:
+                return new Sprite(9);
+            default:
+                return new Sprite(8);
         }
     }
 

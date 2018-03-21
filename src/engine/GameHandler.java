@@ -39,7 +39,6 @@ public class GameHandler{
 
     public void updateWordState(){
         updateScritableObjects();
-        System.out.println("updating");
     }
 
     public DrawableMatrix getDrawableMatrix( int diameter){
