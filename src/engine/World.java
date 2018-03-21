@@ -8,6 +8,7 @@ public class World {
 
     //Placeholder for avatar
     private Tile seed;
+    private Avatar player;
 
     public World(int n){
         world = generate(n);
@@ -47,7 +48,11 @@ public class World {
     }
 
     public void setPlayer(Avatar player){
+        this.player = player;
         seed.setGameObject(player);
+    }
+    public Avatar getPlayer(){
+        return player;
     }
 
 
