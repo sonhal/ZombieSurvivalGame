@@ -17,6 +17,6 @@ public class Gun extends Weapon {
     public void activate( Tile fromTile, Direction direction) {
         System.out.println("Weapon activated!");
         Tile startTile = fromTile.getTileInDirection(direction);
-        gameHandler.addToUpdateList(new Bullet(gameHandler,5, startTile, direction));
+        gameHandler.addToUpdateList(new Bullet(gameHandler,damage, startTile, direction));
     }
 }

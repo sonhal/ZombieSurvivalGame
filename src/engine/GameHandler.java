@@ -1,7 +1,6 @@
 package engine;
 
 import engine.composites.Sprite;
-import sun.security.x509.AVA;
 import view2D.GameViewController2D;
 
 import java.util.ArrayList;
@@ -43,7 +42,7 @@ public class GameHandler{
         System.out.println("World state updating");
         npcController.update(1, world);
         System.out.println("updating");
-        updateScritableObjects();
+        updateScriptableObjects();
     }
 
     public DrawableMatrix getDrawableMatrix( int diameter){
@@ -51,7 +50,7 @@ public class GameHandler{
         return new DrawableMatrix(world, world.getSeed(), diameter, diameter);
     }
 
-    public DrawableTile[][] getDrableWorld(){
+    public DrawableTile[][] getDrawableWorld(){
         updateWordState();
         return matrix.generateDrawable(world,player.getTransformComponent().getCurrentTile(),10,10);
     }
@@ -78,11 +77,11 @@ public class GameHandler{
         }
 
         Avatar player = AvatarFactory.create(playerSprites);
-        player.pickupWeapon(new Gun(this,3,1));
+        player.pickupWeapon(new Gun(this,3,10));
         return player;
     }
 
-    private void updateScritableObjects(){
+    private void updateScriptableObjects(){
         scriptableObjects.removeAll(scriptableToBeDeleted);
 
         for (ScriptableObject scriptableObject:

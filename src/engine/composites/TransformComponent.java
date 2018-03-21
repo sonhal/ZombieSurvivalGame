@@ -26,24 +26,28 @@ public class TransformComponent implements Component{
         Tile lastTile = currentTile;
         switch (direction) {
             case UP:
+                if(currentTile.getUp() != null){
                 currentTile.getUp().setGameObject(currentTile.getGameObject());
                 lastTile.clearTile();
-                this.facingDirection = Direction.UP;
+                this.facingDirection = Direction.UP;}
                 break;
             case DOWN:
+                if(currentTile.getDown() != null){
                 currentTile.getDown().setGameObject(currentTile.getGameObject());
                 lastTile.clearTile();
-                this.facingDirection = Direction.DOWN;
+                this.facingDirection = Direction.DOWN;}
                 break;
             case LEFT:
+                if(currentTile.getLeft() != null){
                 currentTile.getLeft().setGameObject(currentTile.getGameObject());
                 lastTile.clearTile();
-                this.facingDirection = Direction.LEFT;
+                this.facingDirection = Direction.LEFT;}
                 break;
             case RIGHT:
-                currentTile.getRight().setGameObject(currentTile.getGameObject());
-                lastTile.clearTile();
-                this.facingDirection = Direction.RIGHT;
+                if(currentTile.getRight() != null){
+                    currentTile.getRight().setGameObject(currentTile.getGameObject());
+                    lastTile.clearTile();
+                    this.facingDirection = Direction.RIGHT;}
                 break;
         }
 

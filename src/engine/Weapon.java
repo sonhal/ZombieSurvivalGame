@@ -8,8 +8,8 @@ import engine.composites.Sprite;
  */
 public class Weapon{
 
-    private int damage;
-    private int range;
+    protected int damage;
+    protected int range;
 
     /**
      * Sets the damage for the weapon
