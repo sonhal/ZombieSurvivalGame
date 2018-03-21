@@ -48,6 +48,7 @@ public class Renderer {
         }
         if(tile.getGameObject() != null){
             drawOnCanvas(tile.getGameObject().getSprite(), xPos, yPos);
+            if (tile.getGameObject().isHit()){ drawOnCanvas(new Sprite(17),xPos, yPos);}
         }
 
     }

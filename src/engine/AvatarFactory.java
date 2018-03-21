@@ -19,7 +19,7 @@ public class AvatarFactory {
         AttackComponent ac = new AttackComponent(tc);
         InputComponent ic = new InputComponent(tc,ac);
         CollisionComponent cc = new CollisionComponent();
-        HealthComponent hc = new HealthComponent(10);
+        HealthComponent hc = new HealthComponent(20);
         return new Avatar(tc,gc, hc, ac, cc);
     }
 }

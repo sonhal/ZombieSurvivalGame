@@ -10,15 +10,18 @@ public class HealthComponent {
 
 
     public void damage(int damageToInflict){
-        healthAmount =- damageToInflict;
+        healthAmount -= damageToInflict;
     }
 
     public void heal(int healAmount){
         if(healthAmount > 0 && healAmount > 0){
-            healAmount += healthAmount;
+            healthAmount += healthAmount;
         }
     }
 
+    public int getHealthAmount() {
+        return healthAmount;
+    }
 
     public boolean isAlive(){
         if (healthAmount < 1) return false;

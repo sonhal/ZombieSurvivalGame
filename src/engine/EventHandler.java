@@ -1,32 +1,27 @@
 package engine;
 
-public class EventHandler {
-    Avatar player;
+import java.util.ArrayList;
 
-    public EventHandler(Avatar player){
-        this.player = player;
+public class EventHandler {
+    private ArrayList<EventListener> listeners;
+
+    public EventHandler(){
+        this.listeners = new ArrayList<>();
     }
 
 
     public void handle(ActionEvent event){
 
-        switch (event){
-            case MOVE_UP: player.move(Direction.LEFT);
-                break;
-            case MOVE_DOWN: player.move(Direction.RIGHT);
-                break;
-            case MOVE_LEFT: player.move(Direction.UP);
-                break;
-            case MOVE_RIGHT: player.move(Direction.DOWN);
-                break;
-            case ATTACK_UP: player.attack(Direction.UP);
-                break;
-            case ATTACK_DOWN: player.attack(Direction.DOWN);
-                break;
-            case ATTACK_LEFT: player.attack(Direction.LEFT);
-                break;
-            case ATTACK_RIGHT: player.attack(Direction.RIGHT);
-                break;
+        for (EventListener listener:
+             listeners) {
+            listener.handleEvent(event);
         }
+    }
+
+    public void setNewListener(EventListener listener){
+        this.listeners.add(listener);
+    }
+    public void removeListener(EventListener listener){
+        this.listeners.remove(listener);
     }
 }

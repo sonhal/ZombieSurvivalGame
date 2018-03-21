@@ -2,11 +2,11 @@ package engine;
 
 public abstract class ScriptableObject {
 
-    protected GameHandler gameHandler;
+    protected ScriptableObjectController controller;
 
 
-    public ScriptableObject(GameHandler gameHandler){
-        this.gameHandler = gameHandler;
+    public ScriptableObject(ScriptableObjectController controller){
+        this.controller = controller;
     }
 
     public abstract void start();

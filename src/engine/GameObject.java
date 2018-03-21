@@ -13,6 +13,7 @@ import javafx.scene.control.Skin;
 public class GameObject {
     private TransformComponent transformComponent;
     private GraphicsComponent graphicsComponent;
+    private boolean isHit = false;
 
     public GameObject(TransformComponent tc, GraphicsComponent gc){
         this.transformComponent = tc;
@@ -53,6 +54,15 @@ public class GameObject {
     public Tile getTile(){ return transformComponent.getCurrentTile();}
 
     public void hit(int hitAmount){
+        setIsHit(true);
         System.out.println("Object was hit with :" + hitAmount);
+    }
+
+    public boolean isHit(){
+        return isHit;
+    }
+
+    public void setIsHit(boolean isHit){
+        this.isHit = isHit;
     }
 }

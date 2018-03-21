@@ -4,39 +4,42 @@ import engine.composites.GraphicsComponent;
 import engine.composites.Sprite;
 import engine.composites.TransformComponent;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class NpcController {
+public class NpcController extends ScriptableObjectController{
 
-    List<GameObject> enemies;
     int spawnInterval = 0;
+    GameHandler gameHandler;
+    Avatar player;
 
 
-    public NpcController(){
+    public NpcController(GameHandler gameHandler, Avatar player){
         System.out.println("Npc controller created");
-        enemies = new LinkedList<>();
+        this.player = player;
+        this.gameHandler = gameHandler;
     }
 
     public void update(int stage, World world){
-        System.out.println("NPC updating state");
-        if (enemies.size() < 1){
+        ArrayList enemies = getScriptableObjects();
+        System.out.println(enemies.size());
+        if (enemies.size() < 10){
             spawner(world, stage);
         }
-        int playerPosX = world.getPlayer().getTile().cordX;
-        int playerPosY = world.getPlayer().getTile().cordY;
-        enemies.stream().forEach((e)->{e.moveTowards(playerPosX, playerPosY);});
+        updateScriptableObjects();
+        //enemies.stream().forEach((e)->{e.update();});
     }
 
     protected void spawner(World world, int stage){
         Tile spawnTile = locateSpawnTile(world);
         if (spawnTile != null){
             System.out.println("Spawning new monster at: X " + spawnTile.cordX + " Y " + spawnTile.cordY);
-           GameObject enemy = spawnEnemy(spawnTile, stage);
-           spawnTile.setGameObject(enemy);
-           enemies.add(enemy);
+           Enemy enemy = new Enemy(this, gameHandler, player);
+           spawnTile.setGameObject(enemy.getAvatar());
+           addToUpdateList(enemy);
            spawnInterval= 10;
         }
 

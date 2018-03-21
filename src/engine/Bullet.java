@@ -14,8 +14,8 @@ public class Bullet extends ScriptableObject {
     private GameObject gameObject;
     private double sysTime;
 
-    public Bullet(GameHandler gameHandler, int damage, Tile startTile, Direction direction) {
-        super(gameHandler);
+    public Bullet(ScriptableObjectController controller, int damage, Tile startTile, Direction direction) {
+        super(controller);
         this.gameObject = GameObjectFactory.create(setSpriteByDirection(direction));
         this.gameObject.getTransformComponent().setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
@@ -41,7 +41,7 @@ public class Bullet extends ScriptableObject {
         if (!(this.sysTime + 50 > System.currentTimeMillis())){
 
             if (this.damage < 1){
-                this.gameHandler.addToBeDeletedList(this);
+                this.controller.addToBeDeletedList(this);
                 this.gameObject.getTransformComponent().getCurrentTile().deleteGameObject();
             }
             else if(!this.collisionComponent.collisionDetect(this.gameObject.getTransformComponent().getCurrentTile(), direction)){
@@ -50,7 +50,8 @@ public class Bullet extends ScriptableObject {
             }
             else {
                 gameObject.getTransformComponent().getCurrentTile().getTileInDirection(direction).getGameObject().hit(damage);
-                gameObject.getTransformComponent().getCurrentTile().setGameObject(null);
+                gameObject.getTransformComponent().getCurrentTile().deleteGameObject();
+                controller.addToBeDeletedList(this);
                 this.hasImpacted = true;
                 this.damage--;
             }

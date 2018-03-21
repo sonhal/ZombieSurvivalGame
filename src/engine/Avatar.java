@@ -12,6 +12,11 @@ public class Avatar extends LivingObject{
 
     private AttackComponent attackComponent;
     private CollisionComponent collisionComponent;
+    private double moveTime;
+    private double moveDelay;
+    private Direction isMoving;
+    private double movingTimeCounter;
+
 
     public Avatar(TransformComponent tc, GraphicsComponent gc, HealthComponent hc,
                   AttackComponent ac, CollisionComponent cc) {
@@ -47,7 +52,7 @@ public class Avatar extends LivingObject{
     }
 
 
-    private int getSpriteIDByDirection(Direction direction){
+    public int getSpriteIDByDirection(Direction direction){
         int spriteId = 0;
         switch (direction){
             case DOWN:
@@ -65,6 +70,52 @@ public class Avatar extends LivingObject{
         }
         return spriteId;
     }
+
+    public int getSpirteMovingIDByDirection(Direction direction){
+        switch (direction){
+            case UP: return  7;
+            case DOWN: return 8;
+            case LEFT: return 5;
+            case RIGHT: return 6;
+            default: return 4;
+        }
+    }
+
+    public void handleMoving(Direction direction){
+        if(canMove()){
+            this.move(direction);
+            this.moveTime = System.currentTimeMillis();
+            if(isMoving == null) {
+                movingTimeCounter = System.currentTimeMillis();
+            }
+            this.isMoving = direction;
+        }
+    }
+
+
+    private boolean canMove(){
+        return System.currentTimeMillis() > this.moveTime + moveDelay;
+    }
+
+    public void setMoveDelay(double moveDelay) {
+        if (moveDelay > 0){
+            this.moveDelay = moveDelay;
+        }
+        else {System.out.println("Cant set move delay less than 0");}
+    }
+
+    public void updateIsMoving(){
+        if(this.isMoving != null){
+            if(movingTimeCounter + 100 < System.currentTimeMillis()){
+                this.getGraphicsComponent().setActiveSpriteByID(getSpriteIDByDirection(isMoving));
+                isMoving = null;
+            }
+            else {
+                getGraphicsComponent().setActiveSpriteByID(getSpirteMovingIDByDirection(isMoving));
+            }
+        }
+    }
+
 
 
 }
