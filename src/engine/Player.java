@@ -7,18 +7,13 @@ import java.util.ArrayList;
 public class Player extends ScriptableObject implements EventListener {
 
     private Avatar avatar;
-    private double moveTime;
-    private double attackTime;
-    private double movingTimeCounter;
-    private double ATTACK_DELAY = 1000; //millis
-    private double MOVE_DELAY = 100; //millis
-    private Direction isMoving;
+    private GameHandler gameHandler;
 
 
     public Player(GameHandler gameHandler) {
         super(gameHandler);
         avatar = createAvatar();
-
+        this.gameHandler = gameHandler;
     }
 
     @Override
@@ -33,6 +28,7 @@ public class Player extends ScriptableObject implements EventListener {
 
     @Override
     public void update() {
+        checkIfAlive();
         avatar.updateIsMoving();
         avatar.updateHitStatus();
     }
@@ -50,7 +46,7 @@ public class Player extends ScriptableObject implements EventListener {
             playerSprites.add(new Sprite(i));
         }
 
-        Avatar player = AvatarFactory.create(playerSprites);
+        Avatar player = AvatarFactory.create(playerSprites,30);
         player.pickupWeapon(new Gun(this.controller,3,10, 50));
         return player;
     }
@@ -84,12 +80,14 @@ public class Player extends ScriptableObject implements EventListener {
         avatar.attack(direction);
     }
 
-
-    private boolean canMove(){
-        return System.currentTimeMillis() > this.moveTime + MOVE_DELAY;
-    }
-
     public Avatar getAvatar() {
         return avatar;
+    }
+
+    private void checkIfAlive(){
+        System.out.println(avatar.getHealth());
+        if(!avatar.isAlive()){
+            gameHandler.playerDied();
+        }
     }
 }

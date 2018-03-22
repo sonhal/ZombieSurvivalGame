@@ -69,7 +69,7 @@ public class Enemy extends ScriptableObject {
 
 
 
-        Avatar player = AvatarFactory.create(playerSprites);
+        Avatar player = AvatarFactory.create(playerSprites, 10);
         player.pickupWeapon(new MeeleWeapon(1,5,1000));
         return player;
     }
@@ -112,6 +112,7 @@ public class Enemy extends ScriptableObject {
 
     private boolean checkIfAlive(){
         if(!avatar.isAlive()){
+            System.out.println("Enemy died!");
             avatar.getTile().deleteGameObject();
             npcController.addToBeDeletedList(this);
             return false;

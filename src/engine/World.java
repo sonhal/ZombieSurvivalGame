@@ -24,10 +24,9 @@ public class World {
                 newWorld.add(new Tile(x,y));
             }
         }
-
         return newWorld;
-
     }
+
     public void connectTiles(List<Tile> worldToConnect){
         //Good example of a O(2^n) function, should not be used on large worlds
         worldToConnect.parallelStream().forEach(e->{

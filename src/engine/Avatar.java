@@ -29,7 +29,7 @@ public class Avatar extends LivingObject{
      * Tells players Avatar object to shoot in the direction parameter specifies.
      */
     public void attack(Direction attackDirection){
-
+        //currently shoots in facing direction
         attackComponent.attack(getTransformComponent().getFacingDirection());
     }
 

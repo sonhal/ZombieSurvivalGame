@@ -5,14 +5,18 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import view.GameViewController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,6 +27,7 @@ public class GameViewController2D implements GameViewController, Initializable{
     DrawableTile[][] drawableMatrix;
     Renderer renderer;
     Scene scene;
+    Timeline gameLoop;
 
 
 
@@ -68,7 +73,7 @@ public class GameViewController2D implements GameViewController, Initializable{
     }
 
     public void runViewTick(){
-        Timeline gameLoop = new Timeline();
+        gameLoop = new Timeline();
         gameLoop.setCycleCount( Timeline.INDEFINITE );
 
         final long timeStart = System.currentTimeMillis();
@@ -136,6 +141,18 @@ public class GameViewController2D implements GameViewController, Initializable{
     private void update(){
         drawableMatrix = gameHandler.getDrawableWorld();
         renderer.render(drawableMatrix);
+    }
+
+    private void stopGameLoop(){
+        gameLoop.stop();
+    }
+
+    public void goToMenu() throws IOException {
+        stopGameLoop();
+        System.out.println("Game ended!");
+        Stage stage = (Stage)gameCanvas.getScene().getWindow();
+        Parent newRoot = FXMLLoader.load(getClass().getResource("gamemenu.fxml"));
+        stage.setScene(new Scene(newRoot, 847, 593));
     }
 
 

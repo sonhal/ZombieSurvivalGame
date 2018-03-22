@@ -42,7 +42,6 @@ public class NpcController extends ScriptableObjectController{
            addToUpdateList(enemy);
            spawnInterval= 10;
         }
-
     }
 
     protected Tile locateSpawnTile(World world){

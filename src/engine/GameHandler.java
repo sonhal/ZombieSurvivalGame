@@ -1,10 +1,9 @@
 package engine;
 
 import engine.composites.Sprite;
-import javafx.application.Platform;
 import view2D.GameViewController2D;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
 public class GameHandler extends ScriptableObjectController{
 
@@ -14,8 +13,6 @@ public class GameHandler extends ScriptableObjectController{
     EventHandler eventHandler;
     Player player;
     DrawableMatrix matrix;
-    ArrayList<ScriptableObject> scriptableObjects;
-    ArrayList<ScriptableObject> scriptableToBeDeleted;
 
 
     public GameHandler(GameViewController2D gameViewController2D){
@@ -30,14 +27,8 @@ public class GameHandler extends ScriptableObjectController{
     createWorld(50);
     world.setPlayer(player.getAvatar());
 
-    //Enemy Test
-    Tile testTile = world.getPlayer().getTile().getDown().getDown().getDown().getDown();
-
-    System.out.println("Goo");
     this.npcController  = new NpcController(this, player.getAvatar());
-    //Enemy enemy = new Enemy(npcController, this, player.getAvatar());
-    //testTile.setGameObject(enemy.getAvatar());
-
+    Enemy enemy = new Enemy(npcController, this, player.getAvatar());
 
     this.matrix = getDrawableMatrix(10);
     }
@@ -56,7 +47,6 @@ public class GameHandler extends ScriptableObjectController{
     }
 
     public DrawableMatrix getDrawableMatrix( int diameter){
-        updateWordState();
         return new DrawableMatrix(world, world.getSeed(), diameter, diameter);
     }
 
@@ -74,6 +64,15 @@ public class GameHandler extends ScriptableObjectController{
         int y = player.getAvatar().getTransformComponent().getCurrentTile().cordY;
         Tile tile = world.findTile(x + 3,y + 3);
         tile.setGameObject(GameObjectFactory.create(new Sprite(3)));
+    }
+
+    public void playerDied(){
+        try {
+            gameViewController2D.goToMenu();
+        }catch (IOException err){
+            System.out.println("Could not end game");
+            err.printStackTrace();
+        }
     }
 
 
