@@ -1,6 +1,8 @@
 package engine;
 
-import engine.composites.Sprite;
+import engine.entities.composites.Sprite;
+import engine.entities.items.Item;
+import engine.view.DrawableTile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

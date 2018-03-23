@@ -1,0 +1,5 @@
+package engine.controllers;
+
+public enum ActionEvent {
+    ATTACK_UP, ATTACK_DOWN, ATTACK_LEFT, ATTACK_RIGHT,MOVE_LEFT,MOVE_RIGHT,MOVE_UP,MOVE_DOWN,PAUSE,START,STOP
+}

@@ -1,12 +1,6 @@
 package view;
 
-import engine.DrawableMatrix;
-import engine.DrawableTile;
-import engine.Tile;
-import javafx.fxml.Initializable;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+import engine.view.DrawableTile;
 
 public interface GameViewController  {
 

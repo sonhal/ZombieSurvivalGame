@@ -1,6 +1,8 @@
 package view2D;
 
-import engine.*;
+import engine.controllers.ActionEvent;
+import engine.controllers.GameHandler;
+import engine.view.DrawableTile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -47,14 +49,13 @@ public class GameViewController2D implements GameViewController, Initializable{
         gameCanvas.setHeight(StaticFields.CANVAS_SIZE);
         gameCanvas.setWidth(StaticFields.CANVAS_SIZE);
 
-
+        System.out.println("Game controller active 2");
 
         renderer = new Renderer(gameCanvas);
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
         gameCanvas.getGraphicsContext2D().fillRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight());
-        updateDrawableState(setStubDrawableMatrix(gameHandler));
-
-        gameHandler.setObjectInWorld();
+        System.out.println("Game controller active 3");
+        //gameHandler.setObjectInWorld();
     }
 
     public void startGameloop(){
@@ -68,8 +69,6 @@ public class GameViewController2D implements GameViewController, Initializable{
 
         startGameloop();
         setEventHandlers();
-
-
     }
 
     public void runViewTick(){
@@ -84,22 +83,6 @@ public class GameViewController2D implements GameViewController, Initializable{
 
         gameLoop.getKeyFrames().add( kf );
         gameLoop.play();
-    }
-
-    public DrawableTile[][] setStubDrawableMatrix(GameHandler gh){
-        DrawableTile[][] drawableMatrix = gh.getDrawableMatrix(10).matrix;
-        /*try {
-
-            drawableMatrix[1][1].setGameObject(GameObjectFactory.create());
-            drawableMatrix[5][5].setGameObject(new Item(new Sprite(2), 10));
-            drawableMatrix[10][10].setGameObject(new Item(new Sprite(2), 10));
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-        return drawableMatrix;
-
     }
 
 

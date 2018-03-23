@@ -1,15 +1,11 @@
 package view2D;
 
-import engine.GameHandler;
+import engine.controllers.GameHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view2D.GameViewController2D;
-
-import java.nio.file.Paths;
 
 public class StartGameViewStub extends Application{
 

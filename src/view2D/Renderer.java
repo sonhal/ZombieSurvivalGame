@@ -1,7 +1,7 @@
 package view2D;
 
-import engine.DrawableTile;
-import engine.composites.Sprite;
+import engine.view.DrawableTile;
+import engine.entities.composites.Sprite;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
