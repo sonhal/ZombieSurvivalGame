@@ -4,15 +4,18 @@ import engine.entities.GameObject;
 import engine.entities.composites.Sprite;
 import engine.entities.items.Item;
 
+import java.util.Random;
+
 public class DrawableTile {
     private GameObject gameObject;
     private Item item;
     private Sprite sprite;
 
-    public DrawableTile(GameObject gameObject, Item item){
+    public DrawableTile(GameObject gameObject, Item item, Sprite sprite){
         this.gameObject = gameObject;
         this.item = item;
-        this.sprite = new Sprite(1);
+        this.sprite = sprite;
+
     }
     public DrawableTile(){};
 

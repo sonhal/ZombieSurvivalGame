@@ -2,6 +2,7 @@ package engine.entities.world;
 
 import engine.controllers.Direction;
 import engine.entities.GameObject;
+import engine.entities.composites.Sprite;
 import engine.entities.items.Item;
 
 public class Tile {
@@ -16,12 +17,18 @@ public class Tile {
 
     GameObject gameObject;
     Item item;
+    Sprite sprite;
 
 
 
-    public Tile(int x, int y){
+    public Tile(int x, int y, Sprite sprite){
         cordX = x;
         cordY = y;
+        this.sprite = sprite;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 
     public Tile getUp() {
@@ -36,7 +43,10 @@ public class Tile {
     }
 
     public Tile getDown() {
-        return down;
+        if (down != null){
+            return down;
+        }
+        else return this;
     }
 
     public void setDown(Tile down) {
@@ -44,7 +54,10 @@ public class Tile {
     }
 
     public Tile getLeft() {
-        return left;
+        if (left != null){
+            return left;
+        }
+        else return this;
     }
 
     public void setLeft(Tile left) {
@@ -52,7 +65,10 @@ public class Tile {
     }
 
     public Tile getRight() {
-        return right;
+        if (right != null){
+            return right;
+        }
+        else return this;
     }
 
     public void setRight(Tile right) {

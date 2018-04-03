@@ -17,7 +17,7 @@ class TransformComponentTest {
     void setUp() {
         GameObject gameObject = new GameObject();
         transformComponent = gameObject.getTransformComponent();
-        tile = new Tile(1,1);
+        tile = new Tile(1,1,new Sprite(1));
         this.transformComponent.setCurrentTile(tile);
     }
 
@@ -28,7 +28,7 @@ class TransformComponentTest {
 
     @Test
     void setCurrentTile() {
-        Tile newTile = new Tile(1,2);
+        Tile newTile = new Tile(1,2, new Sprite(1));
         transformComponent.setCurrentTile(newTile);
 
         assertEquals(transformComponent.getCurrentTile(), newTile);
@@ -48,7 +48,7 @@ class TransformComponentTest {
 
     @Test
     void move() {
-        Tile upTile = new Tile(2,1);
+        Tile upTile = new Tile(2,1, new Sprite(1));
         tile.setUp(upTile);
         transformComponent.move(Direction.UP);
         assertEquals(upTile, transformComponent.getCurrentTile());

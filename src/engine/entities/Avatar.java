@@ -59,6 +59,7 @@ public class Avatar extends LivingObject {
     @Override
     public void move(Direction direction){
         if(!this.collisionComponent.collisionDetect(this.getTransformComponent().getCurrentTile(), direction)){
+            this.collisionComponent.clearCollided();
             this.getTransformComponent().move(direction);
         }
         this.getTransformComponent().setFacingDirection(direction);

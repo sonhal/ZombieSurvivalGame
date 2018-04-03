@@ -25,7 +25,8 @@ public class DrawableMatrix {
         for (int y = 0; y < radiY * 2; y++){
 
             for (int x = 0; x < radiX * 2; x++){
-                drawableWorld[x][y] = new DrawableTile(currentTile.getGameObject(), currentTile.getItem());
+                drawableWorld[x][y] = new DrawableTile(currentTile.getGameObject(),
+                        currentTile.getItem(), currentTile.getSprite());
                 currentTile = currentTile.getRight();
             }
             rowBeggining = rowBeggining.getDown();

@@ -44,6 +44,7 @@ public class GameHandler extends ScriptableObjectController {
     }
 
     public void createWorld(int n) {
+
         this.world = new World(n);
     }
 

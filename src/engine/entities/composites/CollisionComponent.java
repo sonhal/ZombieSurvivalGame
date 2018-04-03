@@ -31,4 +31,5 @@ public class CollisionComponent {
     public Direction collided(){
         return collided;
     }
+    public void clearCollided(){ collided = null; }
 }

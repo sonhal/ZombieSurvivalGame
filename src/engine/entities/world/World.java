@@ -1,9 +1,12 @@
 package engine.entities.world;
 
 import engine.entities.Avatar;
+import engine.entities.GameObject;
+import engine.entities.composites.Sprite;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class World {
     private List<Tile> world;
@@ -11,8 +14,10 @@ public class World {
 
     private Tile seed;
     private Avatar player;
+    Random random;
 
     public World(int n){
+        random = new Random();
         world = generate(n);
         seed = findTile(0,0);
 
@@ -23,7 +28,10 @@ public class World {
         List<Tile> newWorld = new ArrayList<Tile>();
         for(int x = -initSize; x < initSize; x++){
             for (int y = -initSize; y < initSize; y++){
-                newWorld.add(new Tile(x,y));
+
+                Tile newTile = new Tile(x,y, generateRandomSprite());
+                newTile.setGameObject(generateWorldObject());
+                newWorld.add(newTile);
             }
         }
         return newWorld;
@@ -54,6 +62,27 @@ public class World {
     }
     public Avatar getPlayer(){
         return player;
+    }
+
+    private Sprite generateRandomSprite(){{
+
+        int i = random.nextInt(100);
+        if (i < 8){
+            return new Sprite(27);
+        }
+        else {
+            return new Sprite(26);
+        }}
+    }
+
+    private GameObject generateWorldObject(){
+        int i = random.nextInt(100);
+        if (i < 8){
+            return new GameObject(new Sprite(28));
+        }
+        else {
+            return null;
+        }
     }
 
 }

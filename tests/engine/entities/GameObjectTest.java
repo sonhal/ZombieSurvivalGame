@@ -41,8 +41,8 @@ class GameObjectTest {
 
     @Test
     void moveUp() {
-        Tile startTile = new Tile(1,1);
-        Tile up = new Tile(1,2);
+        Tile startTile = new Tile(1,1, new Sprite(1));
+        Tile up = new Tile(1,2, new Sprite(1));
 
         startTile.setUp(up);
 
@@ -58,8 +58,8 @@ class GameObjectTest {
 
     @Test
     void moveDown() {
-        Tile startTile = new Tile(1,1);
-        Tile down = new Tile(1,0);
+        Tile startTile = new Tile(1,2, new Sprite(1));
+        Tile down = new Tile(1,2, new Sprite(1));
         startTile.setDown(down);
 
 
@@ -74,8 +74,8 @@ class GameObjectTest {
 
     @Test
     void moveLeft() {
-        Tile startTile = new Tile(1,1);
-        Tile left = new Tile(0,1);
+        Tile startTile = new Tile(1,2, new Sprite(1));
+        Tile left = new Tile(1,2, new Sprite(1));
         startTile.setLeft(left);
 
 
@@ -89,8 +89,8 @@ class GameObjectTest {
 
     @Test
     void moveRight() {
-        Tile startTile = new Tile(1,1);
-        Tile right = new Tile(0,1);
+        Tile startTile = new Tile(1,2, new Sprite(1));
+        Tile right = new Tile(1,2, new Sprite(1));
         startTile.setRight(right);
 
 
@@ -112,7 +112,7 @@ class GameObjectTest {
 
     @Test
     void getTile() {
-        Tile startTile = new Tile(1,1);
+        Tile startTile = new Tile(1,2, new Sprite(1));
         gameObject.getTransformComponent().setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
         assertEquals(startTile, gameObject.getTile());

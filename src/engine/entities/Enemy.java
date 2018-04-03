@@ -59,16 +59,11 @@ public class Enemy extends ScriptableObject {
         playerSprites.add(new Sprite(19)); //up
         playerSprites.add(new Sprite(20)); //left
         playerSprites.add(new Sprite(21)); //right
-
-
-
+        
         playerSprites.add(new Sprite(23)); //up
         playerSprites.add(new Sprite(22)); //down
         playerSprites.add(new Sprite(24)); //right
         playerSprites.add(new Sprite(25)); //left
-
-
-
 
 
         Avatar player = AvatarFactory.create(playerSprites, 10);
@@ -87,6 +82,21 @@ public class Enemy extends ScriptableObject {
     }
 
     private Direction getDirectionAgainstPlayer(){
+
+        if (avatar.getCollisionComponent().collided() != null){
+            if(avatar.getCollisionComponent().collided() == Direction.UP){
+                return Direction.LEFT;
+            }
+            if(avatar.getCollisionComponent().collided() == Direction.DOWN){
+                return Direction.RIGHT;
+            }
+            if(avatar.getCollisionComponent().collided() == Direction.LEFT){
+                return Direction.UP;
+            }
+            if(avatar.getCollisionComponent().collided() == Direction.RIGHT){
+                return Direction.DOWN;
+            }
+        }
         int playerX = player.getTransformComponent().getCurrentTile().getCordX();
         int playerY = player.getTransformComponent().getCurrentTile().getCordY();
         int enemyX = avatar.getTransformComponent().getCurrentTile().getCordX();
