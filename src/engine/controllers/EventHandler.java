@@ -2,6 +2,9 @@ package engine.controllers;
 
 import java.util.ArrayList;
 
+/**
+ * Class responsible for the handling of view events that is sent to the engine
+ */
 public class EventHandler {
     private ArrayList<EventListener> listeners;
 
@@ -10,6 +13,10 @@ public class EventHandler {
     }
 
 
+    /**
+     * Method called when a event is sent to the handler. Sends the event to all listeners
+     * @param event ActionEvent
+     */
     public void handle(ActionEvent event){
 
         for (EventListener listener:
