@@ -2,30 +2,36 @@ package engine.entities.items.weapons;
 
 import engine.entities.GameObject;
 import engine.entities.ScriptableObject;
+import engine.entities.composites.TimeComponent;
 import engine.entities.world.Tile;
 import engine.controllers.Direction;
 import engine.entities.composites.CollisionComponent;
 import engine.entities.composites.Sprite;
-import engine.controllers.ScriptableObjectController;
 
+/**
+ * Object meant to be instantiated by a Gun object.
+ * Creates a gameObject representing a bullet fired in the game and controls the gameObjects travel and interactions.
+ * Travels across the game world to the range is meet or it hits a GameObject
+ */
 public class Bullet extends ScriptableObject {
 
     private int damage;
     private Direction direction;
-    private boolean hasImpacted;
     private CollisionComponent collisionComponent;
     private GameObject gameObject;
     private double sysTime;
+    private int range;
+    private int speed;
 
-    public Bullet(ScriptableObjectController controller, int damage, Tile startTile, Direction direction) {
-        super(controller);
+    public Bullet(int range, int damage, int speed, Tile startTile, Direction direction) {
+        this.speed = speed;
+        this.range = range;
         this.gameObject = new GameObject(setSpriteByDirection(direction));
         this.gameObject.getTransformComponent().setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
         this.damage = damage;
         this.direction = direction;
         this.collisionComponent = new CollisionComponent();
-        this.hasImpacted = false;
         this.sysTime = System.currentTimeMillis();
     }
 
@@ -41,25 +47,29 @@ public class Bullet extends ScriptableObject {
 
     @Override
     public void update(){
-        if (!(this.sysTime + 50 > System.currentTimeMillis())){
-
-            if (this.damage < 1){
-                this.controller.addToBeDeletedList(this);
-                this.gameObject.getTransformComponent().getCurrentTile().clearGameObject();
+        if (TimeComponent.canUpdate(speed, sysTime)){
+            if (this.range < 1){
+                removeSelfFromGame();
             }
             else if(!this.collisionComponent.collisionDetect(this.gameObject.getTransformComponent().getCurrentTile(), direction)){
                 gameObject.getTransformComponent().move(direction);
-                this.damage--;
+                this.range--;
             }
             else {
-                gameObject.getTransformComponent().getCurrentTile().getTileInDirection(direction).getGameObject().hit(damage);
-                gameObject.getTransformComponent().getCurrentTile().clearGameObject();
-                controller.addToBeDeletedList(this);
-                this.hasImpacted = true;
-                this.damage--;
+                hitGameObject();
+                removeSelfFromGame();
             }
             this.sysTime = System.currentTimeMillis();
         }
+    }
+
+    private void hitGameObject(){
+        gameObject.getTransformComponent().getCurrentTile().getTileInDirection(direction).getGameObject().hit(damage);
+    }
+
+    private void removeSelfFromGame(){
+        gameObject.getTransformComponent().getCurrentTile().clearGameObject();
+        die();
     }
 
     protected Sprite setSpriteByDirection(Direction direction){

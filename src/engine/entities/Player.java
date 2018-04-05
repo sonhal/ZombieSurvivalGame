@@ -16,9 +16,8 @@ public class Player extends ScriptableObject implements EventListener {
 
 
     public Player(GameHandler gameHandler) {
-        super(gameHandler);
-        avatar = createAvatar();
         this.gameHandler = gameHandler;
+        avatar = createAvatar();
     }
 
     @Override
@@ -52,7 +51,7 @@ public class Player extends ScriptableObject implements EventListener {
         }
 
         Avatar player = AvatarFactory.create(playerSprites,100);
-        player.pickupWeapon(new Gun(this.controller,3,10, 50));
+        player.pickupWeapon(new Gun(gameHandler,10,5, 50));
         return player;
     }
 
@@ -92,7 +91,7 @@ public class Player extends ScriptableObject implements EventListener {
     private void checkIfAlive(){
         System.out.println(avatar.getHealth());
         if(!avatar.isAlive()){
-            gameHandler.playerDied();
+            die();
         }
     }
 }

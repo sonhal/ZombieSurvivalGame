@@ -5,49 +5,37 @@ import engine.entities.LivingObject;
 import engine.entities.world.Tile;
 import engine.controllers.Direction;
 
+import java.security.InvalidParameterException;
+
 /**
 * Represents a weapon a player can pickup and use in the game.
  */
-public class Weapon{
+public abstract class Weapon{
 
-    protected int damage;
-    protected int range;
+    private int damage;
 
     /**
      * Sets the damage for the weapon
      * @param damage the damage the weapon deals
      */
-    public Weapon( int range, int damage){
+    public Weapon(int damage){
+        if(damage < 1){
+            throw new InvalidParameterException("A Weapons damage cannot be lower than 1");
+        }
         this.damage = damage;
-        this.range = range;
-
     }
 
     /**
-     * Activate the weapon making it try to apply damage to every GameObject on every Tile its range
-     * @param fromTile
-     * @param direction
+     * Try to damage GameObject on the parameter tile.
+     * @param tile
      */
-    public void activate(Tile fromTile, Direction direction){
-        Tile tileToBeAttacked = null;
-        for (int i = range; range > 0; i--){
-            switch (direction){
-                case UP: tileToBeAttacked = fromTile.getUp();
-                    break;
-                case DOWN: tileToBeAttacked = fromTile.getDown();
-                    break;
-                case LEFT: tileToBeAttacked = fromTile.getLeft();
-                    break;
-                case RIGHT: tileToBeAttacked = fromTile.getRight();
-                    break;
-            }
-            attackTile(tileToBeAttacked);
-
-
+    protected void attackTile(Tile tile){
+        if ( tile != null && tile.getGameObject() != null){
+            tile.getGameObject().hit(damage);
         }
     }
 
-
+    public abstract void activate(Tile fromTile, Direction direction);
 
     /**
      * Method to get the damage the weapon deals
@@ -57,13 +45,6 @@ public class Weapon{
         return damage;
     }
 
-    /**
-     * Try to damage GameObject on the parameter tile.
-     * @param tile
-     */
-    protected void attackTile(Tile tile){
-        if ( tile != null && tile.getGameObject() != null){
-               tile.getGameObject().hit(damage);
-            }
-        }
+
+
 }

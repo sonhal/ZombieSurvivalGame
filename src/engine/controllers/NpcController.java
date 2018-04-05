@@ -10,11 +10,11 @@ import engine.entities.world.World;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class NpcController extends ScriptableObjectController {
+public class NpcController extends ScriptableObjectUpdater {
 
-    int spawnInterval = 0;
-    GameHandler gameHandler;
-    Avatar player;
+    private int spawnInterval = 0;
+    private GameHandler gameHandler;
+    private Avatar player;
 
 
     public NpcController(GameHandler gameHandler, Avatar player){
@@ -37,7 +37,7 @@ public class NpcController extends ScriptableObjectController {
         Tile spawnTile = locateSpawnTile(world);
         if (spawnTile != null){
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
-           Enemy enemy = new Enemy(this, gameHandler, player);
+           Enemy enemy = new Enemy(this, player);
            enemy.getAvatar().getTransformComponent().setCurrentTile(spawnTile);
            addToUpdateList(enemy);
            spawnInterval= 10;

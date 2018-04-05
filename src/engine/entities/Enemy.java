@@ -3,7 +3,7 @@ package engine.entities;
 import engine.entities.items.weapons.MeleeWeapon;
 import engine.controllers.Direction;
 import engine.entities.composites.Sprite;
-import engine.controllers.ScriptableObjectController;
+import engine.controllers.ScriptableObjectUpdater;
 import engine.entities.world.Tile;
 
 import java.util.ArrayList;
@@ -12,12 +12,11 @@ public class Enemy extends ScriptableObject {
     private Avatar avatar;
     private double MOVE_DELAY = 1000; //millis
     private Avatar player;
-    private ScriptableObjectController npcController;
+    private ScriptableObjectUpdater npcController;
 
 
 
-    public Enemy(ScriptableObjectController npcController, ScriptableObjectController gameHandler, Avatar player) {
-        super(gameHandler);
+    public Enemy(ScriptableObjectUpdater npcController, Avatar player) {
         this.npcController = npcController;
         avatar = createAvatar();
         this.player = player;
@@ -126,7 +125,7 @@ public class Enemy extends ScriptableObject {
         if(!avatar.isAlive()){
             System.out.println("Enemy died!");
             avatar.getTile().clearGameObject();
-            npcController.addToBeDeletedList(this);
+            die();
             return false;
         }
         else {

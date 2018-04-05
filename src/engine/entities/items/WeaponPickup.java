@@ -7,9 +7,9 @@ public class WeaponPickup extends Item {
 
     private Weapon weapon;
 
-    public WeaponPickup(Sprite sprite, int damage, int range) {
+    public WeaponPickup(Sprite sprite, Weapon weapon) {
         super(sprite);
-        this.weapon = new Weapon(range, damage);
+        this.weapon = weapon;
     }
 
 

@@ -1,34 +1,46 @@
 package engine.entities.items.weapons;
 
+import engine.entities.composites.TimeComponent;
 import engine.entities.world.Tile;
 import engine.controllers.Direction;
-import engine.controllers.ScriptableObjectController;
+import engine.controllers.ScriptableObjectUpdater;
 
+/**
+ * Weapon subclass that fires Bullets.
+ * Is meant to be held and activated by a AttackComponent
+ */
 public class Gun extends Weapon {
 
-    private ScriptableObjectController controller;
+    private ScriptableObjectUpdater controller;
     private double lastActivateTime;
     private double activateDelay;
+    private int range;
 
-    public Gun(ScriptableObjectController controller, int range, int damage, double activateDelay) {
-        super(range, damage);
+    public Gun(ScriptableObjectUpdater controller, int range, int damage, double activateDelay) {
+        super(damage);
         this.controller = controller;
         this.lastActivateTime = System.currentTimeMillis();
         this.activateDelay = activateDelay;
-
+        this.range = range;
     }
 
     @Override
     public void activate(Tile fromTile, Direction direction) {
-        if(canActivate()){
+        if(TimeComponent.canUpdate(activateDelay, lastActivateTime)){
+
             System.out.println("Weapon activated!");
             Tile startTile = fromTile.getTileInDirection(direction);
-            controller.addToUpdateList(new Bullet(controller, damage, startTile, direction));
-        }
-    }
 
-    private boolean canActivate(){
-        return System.currentTimeMillis() > this.lastActivateTime + activateDelay;
+            //if adjacent Tile is occupied, hit GameObject on Tile
+            if (startTile.getGameObject() != null){
+                startTile.getGameObject().hit(this.getDamage());
+            }
+            //else instantiate Bullet and add it to the controllers update list
+            else {
+                controller.addToUpdateList(new Bullet(range, this.getDamage(), 50, startTile, direction));
+            }
+
+        }
     }
 
 
