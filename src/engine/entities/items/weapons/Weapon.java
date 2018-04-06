@@ -1,6 +1,7 @@
 package engine.entities.items.weapons;
 
 
+import engine.entities.Hittable;
 import engine.entities.LivingObject;
 import engine.entities.world.Tile;
 import engine.controllers.Direction;
@@ -25,15 +26,6 @@ public abstract class Weapon{
         this.damage = damage;
     }
 
-    /**
-     * Try to damage GameObject on the parameter tile.
-     * @param tile
-     */
-    protected void attackTile(Tile tile){
-        if ( tile != null && tile.getGameObject() != null){
-            tile.getGameObject().hit(damage);
-        }
-    }
 
     public abstract void activate(Tile fromTile, Direction direction);
 

@@ -1,27 +1,15 @@
 package engine.entities.composites;
 
-import engine.controllers.Direction;
-import engine.entities.items.weapons.Weapon;
+import engine.entities.GameObject;
+import engine.entities.Hittable;
+import engine.entities.world.Tile;
 
-public class AttackComponent implements Component{
+public class AttackComponent {
 
-    private Weapon weapon;
-
-    public AttackComponent(){
-        this.weapon = null;
-    }
-
-    public void attack(Direction direction, TransformComponent transformComponent){
-        if (weapon != null){
-            weapon.activate(transformComponent.getCurrentTile(), direction);
+    public static void tryAttack(int damage, Tile attackTile){
+        GameObject objectToBeAttacked = attackTile.getGameObject();
+        if( objectToBeAttacked instanceof Hittable){
+            ((Hittable)objectToBeAttacked).hit(damage);
         }
-    }
-
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
-
-    public Weapon getWeapon() {
-        return weapon;
     }
 }

@@ -1,6 +1,5 @@
 package engine.entities;
 
-import engine.entities.Avatar;
 import engine.entities.composites.*;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class AvatarFactory {
             gc.addSprite(sprite);
         }
 
-        AttackComponent ac = new AttackComponent();
+        WeaponComponent ac = new WeaponComponent();
         CollisionComponent cc = new CollisionComponent();
         HealthComponent hc = new HealthComponent(health);
         return new Avatar(gc, hc, ac, cc);

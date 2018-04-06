@@ -8,16 +8,17 @@ import engine.entities.world.Tile;
 
 import java.util.ArrayList;
 
+
+/**
+ * Responsible for a single enemy in the game world.
+ * Instantiates and handles the Avatar representing the Enemy in the World.
+ */
 public class Enemy extends ScriptableObject {
     private Avatar avatar;
     private double MOVE_DELAY = 1000; //millis
     private Avatar player;
-    private ScriptableObjectUpdater npcController;
 
-
-
-    public Enemy(ScriptableObjectUpdater npcController, Avatar player) {
-        this.npcController = npcController;
+    public Enemy(Avatar player) {
         avatar = createAvatar();
         this.player = player;
         avatar.setMoveDelay(MOVE_DELAY);
@@ -136,10 +137,10 @@ public class Enemy extends ScriptableObject {
         return  (tile.getGameObject() == player);
     }
 
-    public void tryAttack(){
+    private void tryAttack(){
         if(avatar.getCollisionComponent().collided() != null){
            if(avatar.getTile().getTileInDirection(avatar.getCollisionComponent().collided()).getGameObject() == player){
-               avatar.attack(avatar.getCollisionComponent().collided());
+               handleAttacking(avatar.getCollisionComponent().collided());
            }
         }
     }

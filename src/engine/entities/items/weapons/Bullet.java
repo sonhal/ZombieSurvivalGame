@@ -1,6 +1,7 @@
 package engine.entities.items.weapons;
 
 import engine.entities.GameObject;
+import engine.entities.Hittable;
 import engine.entities.ScriptableObject;
 import engine.entities.composites.TimeComponent;
 import engine.entities.world.Tile;
@@ -64,7 +65,11 @@ public class Bullet extends ScriptableObject {
     }
 
     private void hitGameObject(){
-        gameObject.getTransformComponent().getCurrentTile().getTileInDirection(direction).getGameObject().hit(damage);
+        GameObject objectToBeAttacked =
+                gameObject.getTransformComponent().getCurrentTile().getTileInDirection(direction).getGameObject();
+        if( objectToBeAttacked instanceof Hittable){
+            ((Hittable)objectToBeAttacked).hit(damage);
+        }
     }
 
     private void removeSelfFromGame(){

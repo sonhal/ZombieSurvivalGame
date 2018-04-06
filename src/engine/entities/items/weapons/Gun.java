@@ -1,5 +1,6 @@
 package engine.entities.items.weapons;
 
+import engine.entities.composites.AttackComponent;
 import engine.entities.composites.TimeComponent;
 import engine.entities.world.Tile;
 import engine.controllers.Direction;
@@ -7,7 +8,7 @@ import engine.controllers.ScriptableObjectUpdater;
 
 /**
  * Weapon subclass that fires Bullets.
- * Is meant to be held and activated by a AttackComponent
+ * Is meant to be held and activated by a WeaponComponent
  */
 public class Gun extends Weapon {
 
@@ -33,7 +34,7 @@ public class Gun extends Weapon {
 
             //if adjacent Tile is occupied, hit GameObject on Tile
             if (startTile.getGameObject() != null){
-                startTile.getGameObject().hit(this.getDamage());
+                AttackComponent.tryAttack(getDamage(), startTile);
             }
             //else instantiate Bullet and add it to the controllers update list
             else {

@@ -1,5 +1,6 @@
 package view2D;
 
+import engine.entities.Hittable;
 import engine.view.DrawableTile;
 import engine.entities.composites.Sprite;
 import javafx.scene.canvas.Canvas;
@@ -48,7 +49,8 @@ public class Renderer {
         }
         if(tile.getGameObject() != null){
             drawOnCanvas(tile.getGameObject().getSprite(), xPos, yPos);
-            if (tile.getGameObject().isHit()){ drawOnCanvas(new Sprite(17),xPos, yPos);}
+            if (tile.getGameObject() instanceof Hittable && ((Hittable)tile.getGameObject()).isHit()) {
+                drawOnCanvas(new Sprite(17),xPos, yPos);}
         }
 
     }

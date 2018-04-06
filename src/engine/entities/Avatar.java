@@ -5,15 +5,13 @@ import engine.controllers.Direction;
 import engine.entities.composites.*;
 import engine.entities.items.weapons.Weapon;
 
-import java.util.List;
-
 /**
  * Reperesent the Avatar in the game that the player controls.
  */
 public class Avatar extends LivingObject {
 
 
-    private AttackComponent attackComponent;
+    private WeaponComponent weaponComponent;
     private CollisionComponent collisionComponent;
     private double moveTime;
     private double moveDelay;
@@ -22,15 +20,15 @@ public class Avatar extends LivingObject {
 
 
     public Avatar(GraphicsComponent gc, HealthComponent hc,
-                  AttackComponent ac, CollisionComponent cc) {
+                  WeaponComponent ac, CollisionComponent cc) {
         super(gc, hc);
-        this.attackComponent = ac;
+        this.weaponComponent = ac;
         this.collisionComponent = cc;
     }
 
     public Avatar(Sprite sprite){
         super(sprite);
-        this.attackComponent = new AttackComponent();
+        this.weaponComponent = new WeaponComponent();
         this.collisionComponent = new CollisionComponent();
     }
 
@@ -44,7 +42,7 @@ public class Avatar extends LivingObject {
      */
     public void attack(Direction attackDirection){
         //currently shoots in facing direction
-        attackComponent.attack(getTransformComponent().getFacingDirection(), getTransformComponent());
+        weaponComponent.attack(getTransformComponent().getFacingDirection(), getTransformComponent());
     }
 
 
@@ -53,7 +51,7 @@ public class Avatar extends LivingObject {
      * @param weapon reference to the weapon to be picked up.
      */
     public void pickupWeapon(Weapon weapon){
-        attackComponent.setWeapon(weapon);
+        weaponComponent.setWeapon(weapon);
     }
 
     @Override

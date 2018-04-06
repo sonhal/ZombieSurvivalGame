@@ -19,7 +19,7 @@ class AvatarTest {
     private TransformComponent transformComponent;
     private GraphicsComponent graphicsComponent;
     private HealthComponent healthComponent;
-    private AttackComponent attackComponent;
+    private WeaponComponent weaponComponent;
     private Sprite sprite;
     private Weapon weapon;
     private CollisionComponent collisionComponent;
@@ -30,10 +30,10 @@ class AvatarTest {
         sprite = new Sprite(2);
         graphicsComponent = new GraphicsComponent(sprite);
         healthComponent = new HealthComponent(10);
-        attackComponent = new AttackComponent();
+        weaponComponent = new WeaponComponent();
         collisionComponent = new CollisionComponent();
 
-        avatar = new Avatar(graphicsComponent,healthComponent,attackComponent,collisionComponent);
+        avatar = new Avatar(graphicsComponent,healthComponent, weaponComponent,collisionComponent);
         world = new World(10);
         world.setPlayer(avatar);
     }
@@ -44,14 +44,14 @@ class AvatarTest {
 
     @Test
     void attack() {
-        attackComponent.setWeapon(new MeleeWeapon(1,1,1));
+        weaponComponent.setWeapon(new MeleeWeapon(1,1,1));
         GameObject testObject = new GameObject(new GraphicsComponent(new Sprite(1)));
         Tile attackTile = avatar.getTile().getUp();
         assertEquals(attackTile.getDown().getGameObject(), avatar, "Something went wrong setting the attacked Object");
         attackTile.setGameObject(testObject);
         transformComponent.setFacingDirection(Direction.UP);
         avatar.attack(Direction.UP);
-        assertTrue(testObject.isHit(), "GameObject was not hit");
+        assertTrue(((Hittable)testObject).isHit(), "GameObject was not hit");
     }
 
 

@@ -1,6 +1,7 @@
 package engine.entities.items.weapons;
 
 import engine.controllers.Direction;
+import engine.entities.composites.AttackComponent;
 import engine.entities.composites.TimeComponent;
 import engine.entities.world.Tile;
 
@@ -29,7 +30,7 @@ public class MeleeWeapon extends Weapon {
     public void activate(Tile fromTile, Direction direction) {
         if(TimeComponent.canUpdate(activateDelay, lastActivateTime)){
             System.out.println("Weapon activated!");
-            attackTile(fromTile.getTileInDirection(direction));
+            AttackComponent.tryAttack(getDamage(), fromTile.getTileInDirection(direction));
             lastActivateTime = System.currentTimeMillis();
         }
     }

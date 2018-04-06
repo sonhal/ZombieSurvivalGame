@@ -38,7 +38,7 @@ public class Player extends ScriptableObject implements EventListener {
     }
 
     /**
-     * Creates creates the sprites and sets them on a new Avatar Object
+     * Creates creates the sprites and Weapon, and sets them on a new Avatar Object
      * @return Avatar
      */
     private Avatar createAvatar(){
@@ -51,6 +51,7 @@ public class Player extends ScriptableObject implements EventListener {
         }
 
         Avatar player = AvatarFactory.create(playerSprites,100);
+        //player.setMoveDelay(100);
         player.pickupWeapon(new Gun(gameHandler,10,5, 50));
         return player;
     }

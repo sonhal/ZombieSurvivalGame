@@ -1,20 +1,18 @@
 package engine.entities;
 
 
+
 import engine.entities.GameObject;
-import engine.entities.composites.GraphicsComponent;
-import engine.entities.composites.HealthComponent;
-import engine.entities.composites.Sprite;
-import engine.entities.composites.TransformComponent;
+import engine.entities.composites.*;
 
 /**
  * Represents a Object in the game that can move and interact with the game environment.
  */
-public abstract class LivingObject extends GameObject {
+public abstract class LivingObject extends GameObject implements Hittable{
 
     private HealthComponent healthComponent;
     private double timeHitted; //millis
-    private double TIME_HIT = 500; //millis
+    private static final double TIME_HIT = 500; //millis
 
 
     public LivingObject(GraphicsComponent gc, HealthComponent hc) {
@@ -32,14 +30,8 @@ public abstract class LivingObject extends GameObject {
         this.healthComponent = new HealthComponent(1);
     }
 
-
-
     public int getHealth(){
         return healthComponent.getHealthAmount();
-    }
-
-    private void damage(int damageToInflict){
-        healthComponent.damage(damageToInflict);
     }
 
     public void heal(int healAmount){
@@ -52,13 +44,17 @@ public abstract class LivingObject extends GameObject {
 
     @Override
     public void hit(int hitAmount) {
-        damage(hitAmount);
-        setIsHit(true);
+        healthComponent.damage(hitAmount);
         timeHitted = System.currentTimeMillis();
     }
 
+    @Override
+    public boolean isHit(){
+        return healthComponent.isDamaged();
+    }
+
     public void updateHitStatus(){
-        if(timeHitted + TIME_HIT < System.currentTimeMillis()) setIsHit(false);
+        if(TimeComponent.canUpdate(TIME_HIT, timeHitted)) healthComponent.setIsDamaged(false);
     }
 
 }

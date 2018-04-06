@@ -37,10 +37,10 @@ public class NpcController extends ScriptableObjectUpdater {
         Tile spawnTile = locateSpawnTile(world);
         if (spawnTile != null){
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
-           Enemy enemy = new Enemy(this, player);
-           enemy.getAvatar().getTransformComponent().setCurrentTile(spawnTile);
-           addToUpdateList(enemy);
-           spawnInterval= 10;
+            Enemy enemy = new Enemy(player);
+            enemy.getAvatar().getTransformComponent().setCurrentTile(spawnTile);
+            addToUpdateList(enemy);
+            spawnInterval = 10;
         }
     }
 

@@ -119,24 +119,5 @@ class GameObjectTest {
 
     }
 
-    @Test
-    void hit() {
-        gameObject.hit(10);
-        assertTrue(gameObject.isHit());
-    }
-
-    @Test
-    void isHit() {
-        gameObject.hit(10);
-        assertTrue(gameObject.isHit());
-    }
-
-    @Test
-    void setIsHit() {
-        gameObject.setIsHit(true);
-        assertTrue(gameObject.isHit());
-        gameObject.setIsHit(false);
-        assertFalse(gameObject.isHit());
-    }
 
 }

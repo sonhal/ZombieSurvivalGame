@@ -3,6 +3,10 @@ package engine.entities.items;
 import engine.entities.composites.Sprite;
 import engine.entities.items.weapons.Weapon;
 
+/**
+ * Iterm in the game world that the Player can interact with.
+ * Interaction from Player results in the Player picking up the contained Weapon
+ */
 public class WeaponPickup extends Item {
 
     private Weapon weapon;

@@ -14,7 +14,7 @@ public class World {
 
     private Tile seed;
     private Avatar player;
-    Random random;
+    private Random random;
 
     public World(int n){
         random = new Random();
@@ -84,5 +84,10 @@ public class World {
             return null;
         }
     }
+
+    public List<Tile> getWorld() {
+        return world;
+    }
+
 
 }
