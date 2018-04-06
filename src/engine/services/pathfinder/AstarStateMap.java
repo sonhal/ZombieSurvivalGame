@@ -1,4 +1,4 @@
-package engine.services;
+package engine.services.pathfinder;
 
 import engine.entities.world.World;
 

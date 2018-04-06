@@ -1,4 +1,4 @@
-package engine.services;
+package engine.services.pathfinder;
 
 /**
  * The description for the data we're pathfinding over. This provides the contract

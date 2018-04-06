@@ -1,4 +1,4 @@
-package engine.services;
+package engine.services.pathfinder;
 
 public class ManhattanHeuristic implements AStarHeuristic {
 
