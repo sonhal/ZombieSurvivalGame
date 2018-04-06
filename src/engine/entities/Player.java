@@ -95,7 +95,6 @@ public class Player extends ScriptableObject implements EventListener {
     }
 
     private void checkIfAlive(){
-        System.out.println(avatar.getHealth());
         if(!avatar.isAlive()){
             die();
         }

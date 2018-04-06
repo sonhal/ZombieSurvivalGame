@@ -25,7 +25,6 @@ public class NpcController extends ScriptableObjectUpdater {
 
     public void update(int stage, World world){
         ArrayList enemies = getScriptableObjects();
-        System.out.println(enemies.size());
         if (enemies.size() < 50){
             spawner(world, stage);
         }

@@ -76,7 +76,7 @@ public class Avatar extends LivingObject {
      * @param direction Direction the Avatar is facing.
      * @return int id for the Sprite
      */
-    private int getSpriteIDByDirection(Direction direction){
+    public int getSpriteIDByDirection(Direction direction){
         int spriteId = 0;
         switch (direction){
             case DOWN:
@@ -95,7 +95,7 @@ public class Avatar extends LivingObject {
         return spriteId;
     }
 
-    private int getSpriteMovingIDByDirection(Direction direction){
+    public int getSpriteMovingIDByDirection(Direction direction){
         switch (direction){
             case UP: return  7;
             case DOWN: return 8;
