@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Enemy extends ScriptableObject {
     private Avatar avatar;
-    private double MOVE_DELAY = 1000; //millis
+    private static final double MOVE_DELAY = 800; //millis
     private Avatar player;
 
     public Enemy(Avatar player) {

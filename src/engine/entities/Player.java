@@ -9,6 +9,11 @@ import engine.entities.items.weapons.Gun;
 
 import java.util.ArrayList;
 
+/**
+ * Manages and represents the player.
+ * Creates and manages the players Avatar instance that interacts int the game World.
+ * Handles input from the player.
+ */
 public class Player extends ScriptableObject implements EventListener {
 
     private Avatar avatar;

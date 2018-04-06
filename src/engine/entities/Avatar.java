@@ -6,7 +6,7 @@ import engine.entities.composites.*;
 import engine.entities.items.weapons.Weapon;
 
 /**
- * Reperesent the Avatar in the game that the player controls.
+ * A GameObject in the world that can move, attack and take damage.
  */
 public class Avatar extends LivingObject {
 
@@ -38,7 +38,7 @@ public class Avatar extends LivingObject {
 
 
     /**
-     * Tells players Avatar object to shoot in the direction parameter specifies.
+     * Tells players Avatar object to attack in the direction parameter specifies.
      */
     public void attack(Direction attackDirection){
         //currently shoots in facing direction
@@ -54,6 +54,12 @@ public class Avatar extends LivingObject {
         weaponComponent.setWeapon(weapon);
     }
 
+    /**
+     * Makes the Avatar move in the game World.
+     * Ensures that the correct sprite associated with the movement is set.
+     * Checks CollisionComponent for possible collision
+     * @param direction reference to the enum describing the direction to be moved
+     */
     @Override
     public void move(Direction direction){
         if(!this.collisionComponent.collisionDetect(this.getTransformComponent().getCurrentTile(), direction)){
@@ -65,7 +71,12 @@ public class Avatar extends LivingObject {
     }
 
 
-    public int getSpriteIDByDirection(Direction direction){
+    /**
+     * Helper method for retrieving the correct Avatar sprite for a given facing direction
+     * @param direction Direction the Avatar is facing.
+     * @return int id for the Sprite
+     */
+    private int getSpriteIDByDirection(Direction direction){
         int spriteId = 0;
         switch (direction){
             case DOWN:
@@ -84,7 +95,7 @@ public class Avatar extends LivingObject {
         return spriteId;
     }
 
-    public int getSpriteMovingIDByDirection(Direction direction){
+    private int getSpriteMovingIDByDirection(Direction direction){
         switch (direction){
             case UP: return  7;
             case DOWN: return 8;
