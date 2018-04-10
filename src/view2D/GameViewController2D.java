@@ -137,6 +137,4 @@ public class GameViewController2D implements GameViewController, Initializable{
         Parent newRoot = FXMLLoader.load(getClass().getResource("gamemenu.fxml"));
         stage.setScene(new Scene(newRoot, 847, 593));
     }
-
-
 }

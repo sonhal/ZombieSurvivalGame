@@ -1,4 +1,4 @@
-package engine.entities;
+package engine.entities.interfaces;
 
 /**
  * Any Object that should be hittable in the game world should implement this Interface

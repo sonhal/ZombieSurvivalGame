@@ -1,23 +1,25 @@
 package engine.entities.world;
 
 import engine.controllers.Direction;
-import engine.entities.GameObject;
+import engine.entities.interfaces.IGameObject;
 import engine.entities.composites.Sprite;
 import engine.entities.items.Item;
 
-public class Tile {
+import java.io.Serializable;
 
-    Tile up;
-    Tile down;
-    Tile left;
-    Tile right;
+public class Tile implements Serializable{
 
-    int cordX;
-    int cordY;
+    private Tile up;
+    private Tile down;
+    private Tile left;
+    private Tile right;
 
-    GameObject gameObject;
-    Item item;
-    Sprite sprite;
+    private int cordX;
+    private int cordY;
+
+    private IGameObject gameObject;
+    private Item item;
+    private Sprite sprite;
 
 
 
@@ -79,16 +81,16 @@ public class Tile {
         return "x: " + cordX + " y: " + cordY;
     }
 
-    public GameObject getGameObject() {
+    public IGameObject getGameObject() {
         return gameObject;
     }
 
-    public void setGameObject(GameObject gameObject) {
+    public void setGameObject(IGameObject gameObject) {
         if (gameObject != null){
             this.gameObject = gameObject;
         }
         else{
-            System.out.println("ERROR: You tried to pass null object to a Tile");
+            System.out.println("WARNING: You tried to pass null object to a Tile");
         }
     }
 

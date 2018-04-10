@@ -1,17 +1,16 @@
 package engine.entities.items.weapons;
 
 
-import engine.entities.Hittable;
-import engine.entities.LivingObject;
 import engine.entities.world.Tile;
 import engine.controllers.Direction;
 
+import java.io.Serializable;
 import java.security.InvalidParameterException;
 
 /**
 * Represents a weapon a player can pickup and use in the game.
  */
-public abstract class Weapon{
+public abstract class Weapon implements Serializable{
 
     private int damage;
 

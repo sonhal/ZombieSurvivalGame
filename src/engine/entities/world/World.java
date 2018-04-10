@@ -9,9 +9,8 @@ import java.util.List;
 import java.util.Random;
 
 public class World {
+
     private List<Tile> world;
-
-
     private Tile seed;
     private Avatar player;
     private Random random;
@@ -20,7 +19,6 @@ public class World {
         random = new Random();
         world = generate(n);
         seed = findTile(0,0);
-
         connectTiles(world);
     }
 
@@ -87,6 +85,10 @@ public class World {
 
     public List<Tile> getWorld() {
         return world;
+    }
+
+    public void setWorld(List<Tile> tiles){
+        this.world = tiles;
     }
 
 

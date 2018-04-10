@@ -1,10 +1,9 @@
 package engine.entities.items.weapons;
 
-import engine.entities.composites.AttackComponent;
-import engine.entities.composites.TimeComponent;
+import engine.controllers.Updater;
+import engine.entities.composites.*;
 import engine.entities.world.Tile;
 import engine.controllers.Direction;
-import engine.controllers.ScriptableObjectUpdater;
 
 /**
  * Weapon subclass that fires Bullets.
@@ -12,12 +11,12 @@ import engine.controllers.ScriptableObjectUpdater;
  */
 public class Gun extends Weapon {
 
-    private ScriptableObjectUpdater controller;
+    private Updater controller;
     private double lastActivateTime;
     private double activateDelay;
     private int range;
 
-    public Gun(ScriptableObjectUpdater controller, int range, int damage, double activateDelay) {
+    public Gun(Updater controller, int range, int damage, double activateDelay) {
         super(damage);
         this.controller = controller;
         this.lastActivateTime = System.currentTimeMillis();
@@ -38,7 +37,7 @@ public class Gun extends Weapon {
             }
             //else instantiate Bullet and add it to the controllers update list
             else {
-                controller.addToUpdateList(new Bullet(range, this.getDamage(), 50, startTile, direction));
+                controller.addToUpdateList(new Bullet(new GraphicsComponent(Bullet.getSpriteByDirection(direction)), new TransformComponent(), range, this.getDamage(), 50, startTile, direction));
             }
 
         }

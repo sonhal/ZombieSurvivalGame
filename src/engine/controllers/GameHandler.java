@@ -1,6 +1,7 @@
 package engine.controllers;
 
-import engine.entities.Player;
+import engine.entities.Avatar;
+import engine.entities.PlayerFactory;
 import engine.entities.world.World;
 import engine.view.DrawableMatrix;
 import engine.view.DrawableTile;
@@ -11,13 +12,13 @@ import java.io.IOException;
 /**
  * Class controlling the state and changes in the game world.
  */
-public class GameHandler extends ScriptableObjectUpdater {
+public class GameHandler extends Updater {
 
     private World world;
     private GameViewController2D gameViewController2D;
     private NpcController npcController;
     private EventHandler eventHandler;
-    private Player player;
+    private Avatar player;
     private DrawableMatrix matrix;
 
 
@@ -29,19 +30,18 @@ public class GameHandler extends ScriptableObjectUpdater {
     }
 
     private void innitGame(){
-        //Create Player object
-        this.player = new Player(this);
+
         //Create EventHandler that controls the flow of events for the view
         this.eventHandler = new EventHandler();
-        //Add the player to listeners in the eventListener
-        this.eventHandler.setNewListener(player);
+        //Create Player object
+        this.player = PlayerFactory.create(this, eventHandler,50);
         //Add player to list of objects that the EventHandler updates each tick
         this.addToUpdateList(player);
         //Create game world
         createWorld(50);
         //Set player in world
-        world.setPlayer(player.getAvatar());
-        this.npcController  = new NpcController(this, player.getAvatar());
+        world.setPlayer(player);
+        this.npcController  = new NpcController(this, player);
         //Create the DrawableMatrix that handles the cut of the game world passed to the view
         this.matrix = getDrawableMatrix(10);
     }
@@ -68,7 +68,7 @@ public class GameHandler extends ScriptableObjectUpdater {
         if(player.isDead()){
             handlePlayerDeath();}
         npcController.update(1, world);
-        updateScriptableObjects();
+        update();
     }
 
     /**
@@ -77,7 +77,7 @@ public class GameHandler extends ScriptableObjectUpdater {
      */
     public DrawableTile[][] getDrawableWorld(){
         updateWordState();
-        return matrix.generateDrawable(world,player.getAvatar().getTransformComponent().getCurrentTile(),10,10);
+        return matrix.generateDrawable(world,player.getTransformComponent().getCurrentTile(),10,10);
     }
 
     private DrawableMatrix getDrawableMatrix( int diameter){
@@ -106,7 +106,8 @@ public class GameHandler extends ScriptableObjectUpdater {
         }
     }
 
-    public Player getPlayer() {
+    public Avatar getPlayer() {
         return player;
     }
+
 }

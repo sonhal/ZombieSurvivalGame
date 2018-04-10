@@ -1,22 +1,31 @@
 package engine.entities.composites;
 
 import engine.controllers.Direction;
-import engine.entities.GameObject;
+import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
 
-public class TransformComponent implements Component{
+import java.io.Serializable;
 
-    private GameObject gameObject;
+public class TransformComponent implements Component<IGameObject>, Serializable{
 
-    public TransformComponent(GameObject gameObject){
+    private IGameObject gameObject;
+    private Tile currentTile;
+    private Direction facingDirection;
+
+    public TransformComponent(IGameObject gameObject){
         if (gameObject == null){
             throw new IllegalStateException("GameObject is null");
         }
         this.gameObject = gameObject;
     }
 
-    private Tile currentTile;
-    private Direction facingDirection;
+    public TransformComponent(){}
+
+    @Override
+    public void update(IGameObject componentHolder) {
+        //Does nothing
+    }
+
 
     public Tile getCurrentTile() {
         return currentTile;
@@ -38,34 +47,39 @@ public class TransformComponent implements Component{
     }
 
     public void move(Direction direction) {
-        Tile lastTile = currentTile;
-        Tile newTile = currentTile.getTileInDirection(direction);
-        switch (direction) {
-            case UP:
-                if(currentTile.getUp() != null){
-                    lastTile.clearGameObject();
-                    setCurrentTile(newTile);
-                    this.facingDirection = Direction.UP;}
-                break;
-            case DOWN:
-                if(currentTile.getDown() != null){
-                    lastTile.clearGameObject();
-                    setCurrentTile(newTile);
-                    this.facingDirection = Direction.DOWN;}
-                break;
-            case LEFT:
-                if(currentTile.getLeft() != null){
-                    lastTile.clearGameObject();
-                    setCurrentTile(newTile);
-                    this.facingDirection = Direction.LEFT;}
-                break;
-            case RIGHT:
-                if(currentTile.getRight() != null){
-                    lastTile.clearTile();
-                    setCurrentTile(newTile);
-                    this.facingDirection = Direction.RIGHT;}
-                break;
+        if (currentTile != null){
+            Tile lastTile = currentTile;
+            Tile newTile = currentTile.getTileInDirection(direction);
+            switch (direction) {
+                case UP:
+                    if(currentTile.getUp() != null){
+                        lastTile.clearGameObject();
+                        setCurrentTile(newTile);
+                        this.facingDirection = Direction.UP;}
+                    break;
+                case DOWN:
+                    if(currentTile.getDown() != null){
+                        lastTile.clearGameObject();
+                        setCurrentTile(newTile);
+                        this.facingDirection = Direction.DOWN;}
+                    break;
+                case LEFT:
+                    if(currentTile.getLeft() != null){
+                        lastTile.clearGameObject();
+                        setCurrentTile(newTile);
+                        this.facingDirection = Direction.LEFT;}
+                    break;
+                case RIGHT:
+                    if(currentTile.getRight() != null){
+                        lastTile.clearTile();
+                        setCurrentTile(newTile);
+                        this.facingDirection = Direction.RIGHT;}
+                    break;
+            }
         }
+    }
 
+    public void setGameObject(IGameObject gameObject){
+        this.gameObject = gameObject;
     }
 }

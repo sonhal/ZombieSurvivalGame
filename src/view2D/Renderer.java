@@ -1,6 +1,6 @@
 package view2D;
 
-import engine.entities.Hittable;
+import engine.entities.interfaces.Hittable;
 import engine.view.DrawableTile;
 import engine.entities.composites.Sprite;
 import javafx.scene.canvas.Canvas;

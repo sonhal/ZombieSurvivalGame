@@ -1,7 +1,7 @@
 package engine.controllers;
 
 import engine.entities.Avatar;
-import engine.entities.Enemy;
+import engine.entities.EnemyFactory;
 import engine.entities.GameObject;
 import engine.entities.composites.Sprite;
 import engine.entities.world.Tile;
@@ -10,7 +10,7 @@ import engine.entities.world.World;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class NpcController extends ScriptableObjectUpdater {
+public class NpcController extends Updater {
 
     private int spawnInterval = 0;
     private GameHandler gameHandler;
@@ -24,11 +24,11 @@ public class NpcController extends ScriptableObjectUpdater {
     }
 
     public void update(int stage, World world){
-        ArrayList enemies = getScriptableObjects();
+        ArrayList enemies = getUpdateObjects();
         if (enemies.size() < 50){
             spawner(world, stage);
         }
-        updateScriptableObjects();
+        super.update();
         //enemies.stream().forEach((e)->{e.update();});
     }
 
@@ -36,8 +36,8 @@ public class NpcController extends ScriptableObjectUpdater {
         Tile spawnTile = locateSpawnTile(world);
         if (spawnTile != null){
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
-            Enemy enemy = new Enemy(player);
-            enemy.getAvatar().getTransformComponent().setCurrentTile(spawnTile);
+            Avatar enemy = EnemyFactory.createZombie(player);
+            enemy.getTransformComponent().setCurrentTile(spawnTile);
             addToUpdateList(enemy);
             spawnInterval = 10;
         }
@@ -45,6 +45,9 @@ public class NpcController extends ScriptableObjectUpdater {
 
     protected Tile locateSpawnTile(World world){
         Tile playerTile = world.getPlayer().getTile();
+        if(playerTile == null){
+            throw new RuntimeException("Player Tile is Null");
+        }
         int spawnableRangeX = 20;
         int spawnableRangeY = 20;
             System.out.println("Locating spawnTile");
@@ -59,6 +62,9 @@ public class NpcController extends ScriptableObjectUpdater {
             randomNumX = (Math.random() < 0.5) ? randomNumX * 1 : randomNumX *-1;
             randomNumY = (Math.random() < 0.5) ? randomNumY * 1 : randomNumY *-1;
             Tile spawnTile = world.findTile(playerTile.getCordX() + randomNumX, playerTile.getCordY() + randomNumY);
+            if (spawnTile == null){
+                return locateSpawnTile(world);
+            }
             if (spawnTile.getGameObject() == null){
                 return spawnTile;
             }
