@@ -36,7 +36,7 @@ public class GameHandler extends Updater {
         this.world = new World();
     }
 
-    public void innitNewGame(){
+    public void startNewGame(){
         //Create Player object
         this.player = PlayerFactory.create(this, eventHandler,100);
         //Create game world

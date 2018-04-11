@@ -72,15 +72,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gameHandler = new GameHandler(this);
-        if(true){
-            gameHandler.loadGame();
-        }
-        else {
-            gameHandler.innitNewGame();
-        }
         initializeGameEnv();
-
-        startGameloop();
         setEventHandlers();
 
         save.setOnAction((event) -> {
@@ -108,14 +100,11 @@ public class GameViewController2D implements GameViewController, Initializable, 
         gameLoop.play();
     }
 
-
     public GameHandler getGameHandler() {
         return gameHandler;
     }
 
-
     private void setEventHandlers(){
-
         Platform.runLater(new Runnable() {
             public void run() {
                 gameCanvas.getScene().setOnKeyPressed(e -> {
@@ -162,8 +151,21 @@ public class GameViewController2D implements GameViewController, Initializable, 
         stage.setScene(new Scene(newRoot, 847, 593));
     }
 
-    public void setLoadFlagGame(boolean flag){
-        loadGameFlag = flag;
+    public void startNewGame(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                gameHandler.startNewGame();
+                startGameloop();
+            }
+        });
+    }
+    public void startLoadGame(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                gameHandler.loadGame();
+                startGameloop();
+            }
+        });
     }
 
     public void saveGame(){
