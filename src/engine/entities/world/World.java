@@ -3,6 +3,7 @@ package engine.entities.world;
 import engine.entities.Avatar;
 import engine.entities.GameObject;
 import engine.entities.composites.Sprite;
+import engine.entities.items.weapons.Gun;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -90,6 +91,14 @@ public class World implements Serializable{
 
     public void setWorld(List<Tile> tiles){
         connectTiles(tiles);
+        for (Tile tile:
+             tiles) {
+            if(tile.getGameObject() instanceof Avatar){
+                Avatar avatar = (Avatar)tile.getGameObject();
+                if(avatar.getWeaponComponent().getWeapon() instanceof Gun){
+                player = avatar;}
+            }
+        }
         this.world = tiles;
     }
 

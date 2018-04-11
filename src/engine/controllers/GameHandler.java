@@ -116,13 +116,14 @@ public class GameHandler extends Updater {
 
     public void saveGame(){
         gameViewController.stopGameLoop();
+        gameViewController = null;
         SaveGameHandler.saveGame(world.getWorld());
         System.out.println("Game saved");
     }
 
     public void loadGame(){
-        gameViewController.stopGameLoop();
         world.setWorld(SaveGameHandler.loadGame());
         System.out.println("Game loaded");
+
     }
 }
