@@ -24,6 +24,10 @@ public class Gun extends Weapon {
         this.range = range;
     }
 
+    public void setController(Updater controller) {
+        this.controller = controller;
+    }
+
     @Override
     public void activate(Tile fromTile, Direction direction) {
         if(TimeComponent.canUpdate(activateDelay, lastActivateTime)){

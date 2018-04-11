@@ -75,6 +75,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
         if(true){
             gameHandler.loadGame();
         }
+        else {
+            gameHandler.innitNewGame();
+        }
         initializeGameEnv();
 
         startGameloop();
@@ -83,7 +86,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
         save.setOnAction((event) -> {
             // play game button pressed
             try {
-                gameHandler.saveGame();
+                saveGame();
             }catch (Exception err){
                 //show error to player
                 err.printStackTrace();
@@ -161,5 +164,15 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     public void setLoadFlagGame(boolean flag){
         loadGameFlag = flag;
+    }
+
+    public void saveGame(){
+        gameLoop.stop();
+        gameHandler.saveGame();
+        try {
+            goToMenu();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -17,6 +17,7 @@ public class Avatar extends UpdatableGameObject implements Hittable, Collidable 
     private CollisionComponent collisionComponent;
     private HealthComponent healthComponent;
     private InputComponent inputComponent;
+    private boolean isPlayer;
 
     public Avatar(AvatarGraphicsComponent gc, HealthComponent hc,
                   WeaponComponent ac, CollisionComponent cc, InputComponent ic, AvatarTransformComponent tc) {
@@ -86,5 +87,13 @@ public class Avatar extends UpdatableGameObject implements Hittable, Collidable 
 
     public CollisionComponent getCollisionComponent() {
         return collisionComponent;
+    }
+
+    public void setAsPlayer(boolean bool){
+        isPlayer = bool;
+    }
+
+    public boolean isPlayer(){
+        return isPlayer;
     }
 }

@@ -18,7 +18,7 @@ class DrawableMatrixTest {
 
     @BeforeEach
     void setUp() {
-        testWorld = new World(60);
+        testWorld = new World();
 
     }
 

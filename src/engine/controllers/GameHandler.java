@@ -2,6 +2,9 @@ package engine.controllers;
 
 import engine.entities.Avatar;
 import engine.entities.PlayerFactory;
+import engine.entities.composites.AvatarInputComponent;
+import engine.entities.items.weapons.Gun;
+import engine.entities.world.Tile;
 import engine.entities.world.World;
 import engine.services.save.SaveGameHandler;
 import engine.view.DrawableMatrix;
@@ -10,6 +13,7 @@ import view.GameViewController;
 import view2D.GameViewController2D;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Class controlling the state and changes in the game world.
@@ -27,21 +31,44 @@ public class GameHandler extends Updater {
     public GameHandler(GameViewController gameViewController2D){
         System.out.println("GameHandler active");
         this.gameViewController = gameViewController2D;
-        innitGame();
-    }
-
-    private void innitGame(){
         //Create EventHandler that controls the flow of events from the view
         this.eventHandler = new EventHandler();
+        this.world = new World();
+    }
+
+    public void innitNewGame(){
         //Create Player object
         this.player = PlayerFactory.create(this, eventHandler,100);
-        //Add player to list of objects that the EventHandler updates each tick
-        this.addToUpdateList(player);
         //Create game world
         createWorld(50);
         //Set player in world
         world.setPlayer(player);
+        innitGame();
+    }
+
+    public void loadGame(){
+        List<Tile> worldTiles = SaveGameHandler.loadGame();
+        System.out.println("loaded");
+        setPlayer(SaveGameHandler.getPlayerInstance(worldTiles));
+        System.out.println("added as eventlistner");
+        world.loadInGameWorld(worldTiles, player);
+        System.out.println("Game loaded");
+        innitGame();
+        for (Avatar enemy:
+             SaveGameHandler.getEnemyInstances(worldTiles)) {
+            npcController.addToUpdateList(enemy);
+        }
+        if(player.getWeaponComponent().getWeapon() instanceof Gun){
+            Gun playerGun = (Gun) player.getWeaponComponent().getWeapon();
+            playerGun.setController(this);
+        }
+    }
+
+    private void innitGame(){
+        //Object responsible for enemies in the game world
         this.npcController  = new NpcController(this, player);
+        //Add player to list of objects that the EventHandler updates each tick
+        this.addToUpdateList(player);
         //Create the DrawableMatrix that handles the cut of the game world passed to the view
         this.matrix = getDrawableMatrix(10);
     }
@@ -50,7 +77,7 @@ public class GameHandler extends Updater {
      * Creates a new instance of World.
      */
     public void createWorld() {
-        this.world = new World(10);
+        this.world.createNewGameWorld(10);
     }
 
     /**
@@ -58,7 +85,7 @@ public class GameHandler extends Updater {
      * @param size declares the size of the world to be created.
      */
     public void createWorld(int size) {
-        this.world = new World(size);
+        this.world.createNewGameWorld(size);
     }
 
     /**
@@ -110,20 +137,19 @@ public class GameHandler extends Updater {
         return player;
     }
 
+    public void setPlayer(Avatar player) {
+        AvatarInputComponent component = (AvatarInputComponent)player.getInputComponent();
+        component.setEventHandler(eventHandler);
+        this.player = player;
+    }
+
     public World getWorld() {
         return world;
     }
 
     public void saveGame(){
-        gameViewController.stopGameLoop();
         gameViewController = null;
         SaveGameHandler.saveGame(world.getWorld());
         System.out.println("Game saved");
-    }
-
-    public void loadGame(){
-        world.setWorld(SaveGameHandler.loadGame());
-        System.out.println("Game loaded");
-
     }
 }

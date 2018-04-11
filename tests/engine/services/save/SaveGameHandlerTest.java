@@ -33,7 +33,7 @@ class SaveGameHandlerTest {
 
     @Test
     void saveGame(){
-        World world = new World(10);
+        World world = new World();
         SaveGameHandler.saveGame(world.getWorld());
     }
 
@@ -48,7 +48,7 @@ class SaveGameHandlerTest {
 
     @Test
     void loadGameTest(){
-        World world = new World(10);
+        World world = new World();
         Tile testTile = world.getWorld().get(2);
         Avatar player = PlayerFactory.create(new Updater(), new EventHandler(),10);
         player.getTransformComponent().setCurrentTile(testTile);

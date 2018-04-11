@@ -3,8 +3,6 @@ package engine.entities.world;
 import engine.entities.Avatar;
 import engine.entities.GameObject;
 import engine.entities.composites.Sprite;
-import engine.entities.items.weapons.Gun;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +15,24 @@ public class World implements Serializable{
     private Avatar player;
     private Random random;
 
-    public World(int n){
+    public World(){ }
+
+    public void createNewGameWorld(int n){
         random = new Random();
         world = generate(n);
         seed = findTile(0,0);
         connectTiles(world);
+    }
+
+    public void loadInGameWorld(List<Tile> tiles, Avatar player){
+        System.out.println("Connect");
+        this.world = tiles;
+        seed = findTile(0,0);
+        System.out.println("Connected");
+        connectTiles(tiles);
+
+
+        this.player = player;
     }
 
     protected List<Tile> generate(int initSize){
@@ -40,12 +51,11 @@ public class World implements Serializable{
     public void connectTiles(List<Tile> worldToConnect){
         //Good example of a O(2^n) function, should not be used on large worlds
         worldToConnect.parallelStream().forEach(e->{
-                    e.setUp(findTile(e.getCordX(),e.getCordY()+1));
-                    e.setDown(findTile(e.getCordX(),e.getCordY()-1));
-                    e.setLeft(findTile(e.getCordX()-1,e.getCordY()));
-                    e.setRight(findTile(e.getCordX()+1,e.getCordY()));
-                }
-        );
+            e.setUp(findTile(e.getCordX(),e.getCordY()+1));
+            e.setDown(findTile(e.getCordX(),e.getCordY()-1));
+            e.setLeft(findTile(e.getCordX()-1,e.getCordY()));
+            e.setRight(findTile(e.getCordX()+1,e.getCordY()));
+        });
     }
 
     public Tile findTile(int x, int y){
@@ -87,19 +97,6 @@ public class World implements Serializable{
 
     public List<Tile> getWorld() {
         return world;
-    }
-
-    public void setWorld(List<Tile> tiles){
-        connectTiles(tiles);
-        for (Tile tile:
-             tiles) {
-            if(tile.getGameObject() instanceof Avatar){
-                Avatar avatar = (Avatar)tile.getGameObject();
-                if(avatar.getWeaponComponent().getWeapon() instanceof Gun){
-                player = avatar;}
-            }
-        }
-        this.world = tiles;
     }
 
 

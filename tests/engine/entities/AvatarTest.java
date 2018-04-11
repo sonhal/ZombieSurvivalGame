@@ -35,7 +35,7 @@ class AvatarTest {
         collisionComponent = new CollisionComponent();
 
         //avatar = new Avatar(graphicsComponent,healthComponent, weaponComponent,collisionComponent);
-        world = new World(10);
+        world = new World();
         world.setPlayer(avatar);
     }
 

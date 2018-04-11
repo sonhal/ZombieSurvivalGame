@@ -1,9 +1,10 @@
 package engine.services.save;
-
+import engine.entities.Avatar;
 import engine.entities.world.Tile;
-import engine.entities.world.World;
+
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SaveGameHandler {
@@ -43,5 +44,32 @@ public class SaveGameHandler {
             c.printStackTrace();
         }
         return loadedWorld;
+    }
+
+    public static Avatar getPlayerInstance(List<Tile> tiles){
+        for (Tile tile:
+                tiles) {
+            if(tile.getGameObject() instanceof Avatar){
+                Avatar avatar = (Avatar)tile.getGameObject();
+                if(avatar.isPlayer()){
+                    return avatar;
+                }
+            }
+        }
+        return null;
+    }
+
+    public static ArrayList<Avatar> getEnemyInstances(List<Tile> tiles){
+         ArrayList<Avatar> enemies = new ArrayList<>();
+        for (Tile tile:
+                tiles) {
+            if(tile.getGameObject() instanceof Avatar){
+                Avatar avatar = (Avatar)tile.getGameObject();
+                if(!avatar.isPlayer()){
+                    enemies.add(avatar);
+                }
+            }
+        }
+        return enemies;
     }
 }

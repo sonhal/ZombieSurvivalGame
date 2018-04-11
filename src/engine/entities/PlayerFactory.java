@@ -39,6 +39,7 @@ public class PlayerFactory {
         }
         Avatar player = new Avatar(gc, hc, wc, cc,ic, tc);
         player.pickupWeapon(new Gun(updater,10,10,200));
+        player.setAsPlayer(true);
         return player;
     }
 }
