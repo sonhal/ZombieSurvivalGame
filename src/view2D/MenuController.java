@@ -20,6 +20,7 @@ public class MenuController implements Initializable{
     @FXML
     public Label menuTitle;
     public Button play;
+    public Button load;
     public Label infoText;
 
     @Override
@@ -35,6 +36,17 @@ public class MenuController implements Initializable{
             }
 
         });
+
+        load.setOnAction((event) -> {
+            // play game button pressed
+            try {
+                loadGame();
+            }catch (IOException err){
+                //show error to player
+                showInfo(err.toString());
+            }
+
+        });
     }
 
     private void startGame() throws IOException{
@@ -42,6 +54,20 @@ public class MenuController implements Initializable{
         Stage stage = (Stage)play.getScene().getWindow();
         Parent newRoot = FXMLLoader.load(getClass().getResource("gameview.fxml"));
         stage.setScene(new Scene(newRoot, StaticFields.WINDOW_WIDTH, StaticFields.WINDOW_HEIGHT));
+    }
+
+    private void loadGame() throws IOException{
+        System.out.println("Game started!");
+        Stage stage = (Stage)play.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource(
+                        "gameview.fxml"
+                )
+        );
+        stage.setScene(new Scene(loader.load(), StaticFields.WINDOW_WIDTH, StaticFields.WINDOW_HEIGHT));
+        GameViewController2D controller =
+                loader.<GameViewController2D>getController();
+        controller.setLoadFlagGame(true);
     }
 
 

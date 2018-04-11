@@ -2,13 +2,14 @@ package engine.controllers;
 
 import engine.entities.interfaces.Updatable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Object that can hold Updatable objects.
  * Will try to update every object i its update list each game tick.
  */
-public class Updater {
+public class Updater implements Serializable{
     private ArrayList<Updatable> updateObjects;
     private ArrayList<Updatable> appendObjects;
     private ArrayList<Updatable> updateObjectsToBeDeleted;

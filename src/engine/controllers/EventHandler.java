@@ -1,5 +1,6 @@
 package engine.controllers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -7,7 +8,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * Class responsible for the handling of view events that is sent to the engine
  */
-public class EventHandler {
+public class EventHandler implements Serializable{
     private ArrayBlockingQueue<ActionEvent> eventQueue;
 
     public EventHandler(){

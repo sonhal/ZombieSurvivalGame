@@ -5,7 +5,9 @@ import engine.entities.interfaces.IGameObject;
 import engine.entities.composites.Sprite;
 import engine.entities.items.Item;
 
-public class DrawableTile {
+import java.io.Serializable;
+
+public class DrawableTile implements Serializable{
     private IGameObject gameObject;
     private Item item;
     private Sprite sprite;

@@ -1,6 +1,8 @@
 package engine.entities.composites;
 
-public interface Component<T> {
+import java.io.Serializable;
+
+public interface Component<T> extends Serializable {
 
     void update(T componentHolder);
 }

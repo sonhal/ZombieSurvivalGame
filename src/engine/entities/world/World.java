@@ -4,11 +4,12 @@ import engine.entities.Avatar;
 import engine.entities.GameObject;
 import engine.entities.composites.Sprite;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class World {
+public class World implements Serializable{
 
     private List<Tile> world;
     private Tile seed;
@@ -88,6 +89,7 @@ public class World {
     }
 
     public void setWorld(List<Tile> tiles){
+        connectTiles(tiles);
         this.world = tiles;
     }
 

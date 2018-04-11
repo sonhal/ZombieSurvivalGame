@@ -37,6 +37,8 @@ public class GameViewController2D implements GameViewController, Initializable{
     private
     Canvas gameCanvas;
 
+    private boolean loadGameFlag;
+
 
     @Override
     public void updateDrawableState(DrawableTile[][] drawableMatrix) {
@@ -65,6 +67,9 @@ public class GameViewController2D implements GameViewController, Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         gameHandler = new GameHandler(this);
+        if(loadGameFlag){
+            gameHandler.loadGame();
+        }
         initializeGameEnv();
 
         startGameloop();
@@ -126,7 +131,8 @@ public class GameViewController2D implements GameViewController, Initializable{
         renderer.render(drawableMatrix);
     }
 
-    private void stopGameLoop(){
+    @Override
+    public void stopGameLoop(){
         gameLoop.stop();
     }
 
@@ -136,5 +142,9 @@ public class GameViewController2D implements GameViewController, Initializable{
         Stage stage = (Stage)gameCanvas.getScene().getWindow();
         Parent newRoot = FXMLLoader.load(getClass().getResource("gamemenu.fxml"));
         stage.setScene(new Scene(newRoot, 847, 593));
+    }
+
+    public void setLoadFlagGame(boolean flag){
+        loadGameFlag = flag;
     }
 }

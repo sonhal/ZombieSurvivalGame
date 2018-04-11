@@ -3,8 +3,10 @@ package engine.controllers;
 import engine.entities.Avatar;
 import engine.entities.PlayerFactory;
 import engine.entities.world.World;
+import engine.services.save.SaveGameHandler;
 import engine.view.DrawableMatrix;
 import engine.view.DrawableTile;
+import view.GameViewController;
 import view2D.GameViewController2D;
 
 import java.io.IOException;
@@ -15,26 +17,24 @@ import java.io.IOException;
 public class GameHandler extends Updater {
 
     private World world;
-    private GameViewController2D gameViewController2D;
+    private GameViewController gameViewController;
     private NpcController npcController;
     private EventHandler eventHandler;
     private Avatar player;
     private DrawableMatrix matrix;
 
 
-    public GameHandler(GameViewController2D gameViewController2D){
+    public GameHandler(GameViewController gameViewController2D){
         System.out.println("GameHandler active");
-        this.gameViewController2D = gameViewController2D;
+        this.gameViewController = gameViewController2D;
         innitGame();
-
     }
 
     private void innitGame(){
-
-        //Create EventHandler that controls the flow of events for the view
+        //Create EventHandler that controls the flow of events from the view
         this.eventHandler = new EventHandler();
         //Create Player object
-        this.player = PlayerFactory.create(this, eventHandler,50);
+        this.player = PlayerFactory.create(this, eventHandler,100);
         //Add player to list of objects that the EventHandler updates each tick
         this.addToUpdateList(player);
         //Create game world
@@ -99,7 +99,7 @@ public class GameHandler extends Updater {
     public void handlePlayerDeath(){
         try {
             System.out.println("Game ended");
-            gameViewController2D.goToMenu();
+            gameViewController.goToMenu();
         }catch (IOException err){
             System.out.println("Could not end game");
             err.printStackTrace();
@@ -110,4 +110,19 @@ public class GameHandler extends Updater {
         return player;
     }
 
+    public World getWorld() {
+        return world;
+    }
+
+    public void saveGame(){
+        gameViewController.stopGameLoop();
+        SaveGameHandler.saveGame(world.getWorld());
+        System.out.println("Game saved");
+    }
+
+    public void loadGame(){
+        gameViewController.stopGameLoop();
+        world.setWorld(SaveGameHandler.loadGame());
+        System.out.println("Game loaded");
+    }
 }

@@ -10,7 +10,13 @@ public class SaveGameHandler {
 
 
     public static void saveGame(List<Tile> world){
-
+        for (Tile tile:
+                world) {
+            tile.setUp(null);
+            tile.setDown(null);
+            tile.setLeft(null);
+            tile.setRight(null);
+        }
         try {
             FileOutputStream fileOut =
                     new FileOutputStream("tmp/savefile.ser");
@@ -18,22 +24,6 @@ public class SaveGameHandler {
             out.writeObject(world);
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved");
-        } catch (IOException i) {
-            i.printStackTrace();
-        }
-    }
-
-    public static void saveTile(Tile tile){
-
-        try {
-            FileOutputStream fileOut =
-                    new FileOutputStream("tmp/savefile.ser");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(tile);
-            out.close();
-            fileOut.close();
-            System.out.printf("Serialized data is saved");
         } catch (IOException i) {
             i.printStackTrace();
         }
