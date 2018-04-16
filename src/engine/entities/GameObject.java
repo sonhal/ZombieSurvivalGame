@@ -10,8 +10,9 @@ import java.io.Serializable;
 
 
 /**
- * Represents the abstract GameObject.
- * A GameObject subtype object can be on a Tile object.
+ * Represents the games base object, GameObjects represents entities in the world.
+ * A GameObject and its subtypes behaviour is defined in the components it contains.
+ * A GameObject object can be on a Tile object.
  */
 public class GameObject implements IGameObject,Serializable{
     private TransformComponent transformComponent;
@@ -45,5 +46,4 @@ public class GameObject implements IGameObject,Serializable{
     }
 
     public Tile getTile(){ return transformComponent.getCurrentTile();}
-
 }
