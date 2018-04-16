@@ -1,15 +1,26 @@
 package engine.entities.interfaces;
 
-import engine.controllers.Direction;
+
 import engine.entities.composites.*;
 import engine.entities.world.Tile;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public interface IGameObject extends Serializable{
 
-    public Sprite getSprite();
+    Sprite getSprite();
 
-    public Tile getTile();
+    Tile getTile();
+
+    /**
+     * Access method that needs to be implemented for the Object to function
+     * properly with other Objects accepting a IUpdatableGameObject
+     **/
+    ArrayList<ScriptableComponent> getComponents();
+
+
+
+
 
 }

@@ -6,9 +6,8 @@ import engine.entities.Avatar;
 
 import java.io.Serializable;
 
-public interface InputComponent extends Serializable{
+public interface InputComponent {
 
-    void update(Avatar avatar);
     Direction getMoveEvent();
     Direction getAttackEvent();
 }

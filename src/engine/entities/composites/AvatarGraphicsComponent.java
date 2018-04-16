@@ -1,30 +1,45 @@
 package engine.entities.composites;
 
 import engine.controllers.Direction;
+import engine.entities.interfaces.IGameObject;
 import engine.entities.interfaces.IUpdatableGameObject;
 
 
 import java.util.ArrayList;
+import java.util.Optional;
 
-public class AvatarGraphicsComponent implements Component<IUpdatableGameObject>, IGraphicsComponent{
+public class AvatarGraphicsComponent extends ScriptableComponent implements IGraphicsComponent{
     private ArrayList<Sprite> sprites;
     private Sprite activeSprite;
+    private Direction inputMoveDirection;
+    private double moveAnimationDelay;
+    private double lastAnimationStart;
 
-    public AvatarGraphicsComponent(Sprite sprite){
+    public AvatarGraphicsComponent(Sprite sprite, double moveAnimationDelay){
+        super(ComponentType.GRAPHICS_COMPONENT);
         this.sprites = new ArrayList<>();
         this.sprites.add(sprite);
         this.activeSprite = this.sprites.get(0);
+        this.moveAnimationDelay = moveAnimationDelay;
     }
 
     @Override
-    public void update(IUpdatableGameObject componentHolder) {
-        if(componentHolder.getTransformComponent().getMovingDirection() != null){
-            setActiveSpriteByID(getSpriteMovingIDByDirection(
-                    componentHolder.getTransformComponent().getMovingDirection()));
-        }
-        else{
-            setActiveSpriteByID(getSpriteIDByDirection(
-                    componentHolder.getTransformComponent().getFacingDirection()));
+    public void update(IGameObject gameObject) {
+            if(this.inputMoveDirection != null){
+                if(canActivate(moveAnimationDelay, lastAnimationStart)){
+                    inputMoveDirection = null;
+                }
+                else {
+                    setActiveSpriteByID(getSpriteMovingIDByDirection(inputMoveDirection));
+                }
+            }
+            else{
+                Optional<ScriptableComponent> optionalComponent =
+                        getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT);
+                if(optionalComponent.isPresent()){
+                    TransformComponent transformComponent = (TransformComponent)optionalComponent.get();
+                    setActiveSpriteByID(getSpriteIDByDirection(transformComponent.getFacingDirection()));
+            }
         }
     }
 
@@ -71,5 +86,18 @@ public class AvatarGraphicsComponent implements Component<IUpdatableGameObject>,
             case RIGHT: return 6;
             default: return 0;
         }
+    }
+
+    @Override
+    public void handle(Message message) {
+        if(message.type == ComponentType.INPUT_COMPONENT){
+            inputMoveDirection = (Direction) message.message;
+        }
+
+    }
+
+    @Override
+    public void innit(IGameObject gameObject) {
+        lastAnimationStart = System.currentTimeMillis();
     }
 }

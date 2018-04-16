@@ -6,24 +6,36 @@ import engine.entities.world.Tile;
 
 import java.io.Serializable;
 
-public class TransformComponent implements Component<IGameObject>, Serializable{
+public class TransformComponent extends ScriptableComponent{
 
     private IGameObject gameObject;
     private Tile currentTile;
     private Direction facingDirection;
+    protected Direction move;
 
-    public TransformComponent(IGameObject gameObject){
-        if (gameObject == null){
-            throw new IllegalStateException("GameObject is null");
-        }
-        this.gameObject = gameObject;
+    public TransformComponent(){
+        super(ComponentType.TRANSFORM_COMPONENT);
     }
 
-    public TransformComponent(){}
 
     @Override
     public void update(IGameObject componentHolder) {
         //Does nothing
+    }
+
+    @Override
+    public void handle(Message message) {
+        if(message.message instanceof Direction){
+            move = (Direction) message.message;
+        }
+    }
+
+    @Override
+    public void innit(IGameObject gameObject) {
+        if (gameObject == null){
+            throw new IllegalStateException("GameObject is null");
+        }
+        this.gameObject = gameObject;
     }
 
 

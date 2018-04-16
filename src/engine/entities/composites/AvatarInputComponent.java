@@ -4,24 +4,26 @@ import engine.controllers.ActionEvent;
 import engine.controllers.Direction;
 import engine.controllers.EventHandler;
 import engine.entities.Avatar;
+import engine.entities.interfaces.IGameObject;
+import engine.services.ComponentService;
 
-public class AvatarInputComponent implements InputComponent {
+import java.util.ArrayList;
+import java.util.List;
 
-    private WeaponComponent weaponComponent;
-    private TransformComponent transformComponent;
+public class AvatarInputComponent extends ScriptableComponent{
+
     private EventHandler eventHandler;
-    private Direction moveEvent;
-    private Direction attackEvent;
+    private List<ComponentType> moveListenerTypes;
+    private List<ComponentType> attackListenerTypes;
 
-    public AvatarInputComponent(EventHandler eventHandler, TransformComponent tc, WeaponComponent wc){
-        transformComponent = tc;
-        weaponComponent = wc;
+    public AvatarInputComponent(EventHandler eventHandler){
+        super(ComponentType.INPUT_COMPONENT);
         this.eventHandler = eventHandler;
-    }
-
-
-    public AvatarInputComponent(TransformComponent tc){
-        transformComponent = tc;
+        moveListenerTypes = new ArrayList<>();
+        moveListenerTypes.add(ComponentType.COLLISION_COMPONENT);
+        moveListenerTypes.add(ComponentType.GRAPHICS_COMPONENT);
+        attackListenerTypes = new ArrayList<>();
+        attackListenerTypes.add(ComponentType.WEAPON_COMPONENT);
     }
 
     public void setEventHandler(EventHandler eventHandler) {
@@ -29,60 +31,52 @@ public class AvatarInputComponent implements InputComponent {
     }
 
     @Override
-    public void update(Avatar avatar){
-        moveEvent = null;
-        attackEvent = null;
+    public void update(IGameObject gameObject){
         ActionEvent event = eventHandler.getEvent();
         if(event != null){
-            handleEvent(event);
+            handleEvent(gameObject, event);
         }
     }
 
-    private void handleMoving(Direction direction){
-        /*
-        if(transformComponent != null){
-         transformComponent.move(direction);
-        }
-         */
-           moveEvent = direction;
+    private void handleMoving(IGameObject gameObject, Direction direction){
+        ComponentService.getComponentsByListOfTypes(gameObject.getComponents(), moveListenerTypes)
+                .forEach(scriptableComponent -> scriptableComponent.handle(new Message(ComponentType.INPUT_COMPONENT, direction)));
     }
 
-    private void handleAttacking(Direction direction){
-        /*
-        if(weaponComponent != null && transformComponent != null){
-            weaponComponent.attack(direction, transformComponent);
-        }
-         */
-        attackEvent = direction;
+    private void handleAttacking(IGameObject gameObject, Direction direction){
+        ComponentService.getComponentsByListOfTypes(gameObject.getComponents(), moveListenerTypes)
+                .forEach(scriptableComponent -> scriptableComponent.handle(new Message(ComponentType.INPUT_COMPONENT, direction)));
     }
 
 
-    public void handleEvent(ActionEvent event) {
+    private void handleEvent(IGameObject gameObject, ActionEvent event) {
         switch (event){
-            case MOVE_UP: handleMoving(Direction.LEFT);
+            case MOVE_UP: handleMoving(gameObject, Direction.LEFT);
                 break;
-            case MOVE_DOWN: handleMoving(Direction.RIGHT);
+            case MOVE_DOWN: handleMoving(gameObject, Direction.RIGHT);
                 break;
-            case MOVE_LEFT: handleMoving(Direction.UP);
+            case MOVE_LEFT: handleMoving(gameObject, Direction.UP);
                 break;
-            case MOVE_RIGHT: handleMoving(Direction.DOWN);
+            case MOVE_RIGHT: handleMoving(gameObject, Direction.DOWN);
                 break;
-            case ATTACK_UP: handleAttacking(Direction.UP);
+            case ATTACK_UP: handleAttacking(gameObject, Direction.UP);
                 break;
-            case ATTACK_DOWN: handleAttacking(Direction.DOWN);
+            case ATTACK_DOWN: handleAttacking(gameObject, Direction.DOWN);
                 break;
-            case ATTACK_LEFT: handleAttacking(Direction.LEFT);
+            case ATTACK_LEFT: handleAttacking(gameObject, Direction.LEFT);
                 break;
-            case ATTACK_RIGHT: handleAttacking(Direction.RIGHT);
+            case ATTACK_RIGHT: handleAttacking(gameObject, Direction.RIGHT);
                 break;
         }
     }
 
-    public Direction getMoveEvent(){
-        return moveEvent;
+    @Override
+    public void handle(Message message) {
+
     }
 
-    public Direction getAttackEvent() {
-        return attackEvent;
+    @Override
+    public void innit(IGameObject gameObject) {
+
     }
 }
