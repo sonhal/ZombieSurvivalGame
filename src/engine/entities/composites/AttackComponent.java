@@ -1,13 +1,15 @@
 package engine.entities.composites;
 
-import engine.entities.GameObject;
-import engine.entities.Hittable;
+import engine.entities.interfaces.Hittable;
+import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
 
-public class AttackComponent {
+import java.io.Serializable;
+
+public class AttackComponent implements Serializable{
 
     public static void tryAttack(int damage, Tile attackTile){
-        GameObject objectToBeAttacked = attackTile.getGameObject();
+        IGameObject objectToBeAttacked = attackTile.getGameObject();
         if( objectToBeAttacked instanceof Hittable){
             ((Hittable)objectToBeAttacked).hit(damage);
         }

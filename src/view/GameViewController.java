@@ -2,6 +2,8 @@ package view;
 
 import engine.view.DrawableTile;
 
+import java.io.IOException;
+
 public interface GameViewController  {
 
 
@@ -18,5 +20,9 @@ public interface GameViewController  {
      * @param drawableMatrix a Tile 2D array containing tile objects to be drawn.
      */
     public void updateDrawableState(DrawableTile[][] drawableMatrix);
+
+    void goToMenu() throws IOException;
+
+    void stopGameLoop();
 
 }

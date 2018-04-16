@@ -3,6 +3,7 @@ package engine.entities;
 
 import engine.controllers.Direction;
 import engine.entities.composites.*;
+import engine.entities.interfaces.Hittable;
 import engine.entities.items.weapons.MeleeWeapon;
 import engine.entities.items.weapons.Weapon;
 import engine.entities.world.Tile;
@@ -33,8 +34,8 @@ class AvatarTest {
         weaponComponent = new WeaponComponent();
         collisionComponent = new CollisionComponent();
 
-        avatar = new Avatar(graphicsComponent,healthComponent, weaponComponent,collisionComponent);
-        world = new World(10);
+        //avatar = new Avatar(graphicsComponent,healthComponent, weaponComponent,collisionComponent);
+        world = new World();
         world.setPlayer(avatar);
     }
 
@@ -50,26 +51,10 @@ class AvatarTest {
         assertEquals(attackTile.getDown().getGameObject(), avatar, "Something went wrong setting the attacked Object");
         attackTile.setGameObject(testObject);
         transformComponent.setFacingDirection(Direction.UP);
-        avatar.attack(Direction.UP);
+        //avatar.attack(Direction.UP);
         assertTrue(((Hittable)testObject).isHit(), "GameObject was not hit");
     }
 
-
-    @Test
-    void getSpriteIDByDirection() {
-        assertEquals(avatar.getSpriteIDByDirection(Direction.UP), 3, "Up direction up should be 3, is: " + avatar.getSpriteIDByDirection(Direction.UP));
-        assertEquals(avatar.getSpriteIDByDirection(Direction.DOWN), 4, "Down direction up should be 4, is: " + avatar.getSpriteIDByDirection(Direction.UP));
-        assertEquals(avatar.getSpriteIDByDirection(Direction.LEFT), 2, "Left direction up should be 2, is: " + avatar.getSpriteIDByDirection(Direction.UP));
-        assertEquals(avatar.getSpriteIDByDirection(Direction.RIGHT), 1, "Right direction up should be 3, is: " + avatar.getSpriteIDByDirection(Direction.UP));
-    }
-
-    @Test
-    void getSpriteMovingIDByDirection() {
-        assertEquals(avatar.getSpriteMovingIDByDirection(Direction.UP), 7, "Up direction up should be 7, is: " + avatar.getSpriteIDByDirection(Direction.UP));
-        assertEquals(avatar.getSpriteMovingIDByDirection(Direction.DOWN), 8, "Down direction up should be 8, is: " + avatar.getSpriteIDByDirection(Direction.UP));
-        assertEquals(avatar.getSpriteMovingIDByDirection(Direction.LEFT), 5, "Left direction up should be 5, is: " + avatar.getSpriteIDByDirection(Direction.UP));
-        assertEquals(avatar.getSpriteMovingIDByDirection(Direction.RIGHT), 6, "Right direction up should be 6, is: " + avatar.getSpriteIDByDirection(Direction.UP));
-    }
 
     @Test
     void handleMoving() {

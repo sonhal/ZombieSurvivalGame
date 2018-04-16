@@ -1,17 +1,18 @@
 package engine.view;
 
 import engine.entities.GameObject;
+import engine.entities.interfaces.IGameObject;
 import engine.entities.composites.Sprite;
 import engine.entities.items.Item;
 
-import java.util.Random;
+import java.io.Serializable;
 
-public class DrawableTile {
-    private GameObject gameObject;
+public class DrawableTile implements Serializable{
+    private IGameObject gameObject;
     private Item item;
     private Sprite sprite;
 
-    public DrawableTile(GameObject gameObject, Item item, Sprite sprite){
+    public DrawableTile(IGameObject gameObject, Item item, Sprite sprite){
         this.gameObject = gameObject;
         this.item = item;
         this.sprite = sprite;
@@ -29,7 +30,7 @@ public class DrawableTile {
         return sprite;
     }
 
-    public GameObject getGameObject() {
+    public IGameObject getGameObject() {
         return gameObject;
     }
 

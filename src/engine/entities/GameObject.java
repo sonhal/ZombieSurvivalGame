@@ -1,17 +1,20 @@
 package engine.entities;
 
+import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
-import engine.controllers.Direction;
 import engine.entities.composites.GraphicsComponent;
 import engine.entities.composites.Sprite;
 import engine.entities.composites.TransformComponent;
 
+import java.io.Serializable;
+
 
 /**
- * Represents the abstract GameObject.
- * A GameObject subtype object can be on a Tile object.
+ * Represents the games base object, GameObjects represents entities in the world.
+ * A GameObject and its subtypes behaviour is defined in the components it contains.
+ * A GameObject object can be on a Tile object.
  */
-public class GameObject {
+public class GameObject implements IGameObject,Serializable{
     private TransformComponent transformComponent;
     private GraphicsComponent graphicsComponent;
 
@@ -36,36 +39,11 @@ public class GameObject {
 
     public GraphicsComponent getGraphicsComponent(){return graphicsComponent;}
 
-
     public TransformComponent getTransformComponent(){return transformComponent;}
-
-
-    public void move(Direction direction){
-        transformComponent.move(direction);
-    }
-
-    public void moveTowards(int playerPosX,int playerPosY){
-        boolean x = this.getTile().getCordX() > playerPosX;
-        boolean y = this.getTile().getCordY() > playerPosY;
-        if (x){
-            if (y){
-                if (Math.random() < 0.5) { this.move(Direction.UP);} else{this.move(Direction.RIGHT);}
-            }else {
-                if (Math.random() < 0.5) { this.move(Direction.DOWN);} else{this.move(Direction.RIGHT);}
-            }
-        }else {
-            if (y){
-                if (Math.random() < 0.5) { this.move(Direction.UP);} else{this.move(Direction.LEFT);}
-            }else {
-                if (Math.random() < 0.5) { this.move(Direction.DOWN);} else{this.move(Direction.LEFT);}
-            }
-        }
-    }
     
     public Sprite getSprite(){
         return graphicsComponent.getSprite();
     }
 
     public Tile getTile(){ return transformComponent.getCurrentTile();}
-
 }

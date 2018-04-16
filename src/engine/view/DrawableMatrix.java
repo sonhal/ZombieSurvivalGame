@@ -3,7 +3,9 @@ package engine.view;
 import engine.entities.world.Tile;
 import engine.entities.world.World;
 
-public class DrawableMatrix {
+import java.io.Serializable;
+
+public class DrawableMatrix implements Serializable{
     public DrawableTile[][] matrix;
 
     int direction = 0;

@@ -6,6 +6,10 @@ import javafx.scene.image.Image;
 
 import java.util.HashMap;
 
+/**
+ * Handles the transformation from Sprite objects in the game engine to actual image sprites written
+ * to the screen.
+ */
 public class SpriteTranslationHandler {
     private HashMap<Integer, String> spriteImageFiles;
     private HashMap<Integer, Image> sprites;
@@ -59,13 +63,17 @@ public class SpriteTranslationHandler {
         }
         else {
             System.out.println("Could not find sprite file for sprite code: " + key.toString());
-
             //Try to set default
             return new Image(spriteImageFiles.get(1));
         }
 
     }
 
+    /**
+     * The main usage method, returns a Image object corresponding to the Sprite object
+     * @param sprite the Sprite object a specific Tile, GameObject etc holds.
+     * @return Image, the Image object for the specific Sprite
+     */
     public Image getSpriteImage(Sprite sprite){
         return sprites.get(sprite.getSpriteIndex());
     }

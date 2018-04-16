@@ -52,7 +52,6 @@ class GameObjectTest {
         gameObject.getTransformComponent().setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
 
-        gameObject.move(Direction.UP);
         assertEquals(gameObject.getTransformComponent().getCurrentTile(), up, "Up failed");
     }
 
@@ -68,7 +67,6 @@ class GameObjectTest {
         gameObject.getTransformComponent().setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
 
-        gameObject.move(Direction.DOWN);
         assertEquals(gameObject.getTransformComponent().getCurrentTile(), down, "Down failed");
     }
 
@@ -83,7 +81,6 @@ class GameObjectTest {
         startTile.setGameObject(gameObject);
 
 
-        gameObject.move(Direction.LEFT);
         assertEquals(gameObject.getTransformComponent().getCurrentTile(), left, "Left failed");
     }
 
@@ -98,8 +95,6 @@ class GameObjectTest {
         gameObject.getTransformComponent().setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
 
-
-        gameObject.move(Direction.RIGHT);
         assertEquals(gameObject.getTransformComponent().getCurrentTile(), right, "Right failed");
 
 

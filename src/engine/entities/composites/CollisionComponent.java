@@ -1,35 +1,46 @@
 package engine.entities.composites;
 
 import engine.controllers.Direction;
+import engine.entities.interfaces.Collidable;
 import engine.entities.world.Tile;
 
-public class CollisionComponent {
+import java.io.Serializable;
+
+public class CollisionComponent implements Component<Collidable>, Serializable{
 
     private Direction collided;
 
-    public boolean collisionDetect(Tile currentTile, Direction direction){
+    private void collisionDetect(Tile currentTile, Direction direction){
 
-        boolean collision = false;
         switch (direction){
             case RIGHT:
-                if(currentTile.getRight().getGameObject() != null){ collision = true; collided = Direction.RIGHT;}
+                if(currentTile.getRight().getGameObject() != null){collided = Direction.RIGHT;}
                 break;
             case LEFT:
-                if(currentTile.getLeft().getGameObject() != null){ collision = true; collided = Direction.LEFT;}
+                if(currentTile.getLeft().getGameObject() != null){ collided = Direction.LEFT;}
                 break;
             case UP:
-                if(currentTile.getUp().getGameObject() != null){ collision = true; collided = Direction.UP;}
+                if(currentTile.getUp().getGameObject() != null){ collided = Direction.UP;}
                 break;
             case DOWN:
-                if(currentTile.getDown().getGameObject() != null){ collision = true; collided = Direction.DOWN;}
+                if(currentTile.getDown().getGameObject() != null){ collided = Direction.DOWN;}
                 break;
             default: collided = null;
         }
-        return collision;
     }
 
     public Direction collided(){
         return collided;
     }
+
     public void clearCollided(){ collided = null; }
+
+    @Override
+    public void update(Collidable componentHolder) {
+        if(componentHolder.getInputComponent().getMoveEvent() != null){
+            clearCollided();
+            collisionDetect(componentHolder.getTransformComponent().getCurrentTile(),
+                    componentHolder.getInputComponent().getMoveEvent());
+        }
+    }
 }

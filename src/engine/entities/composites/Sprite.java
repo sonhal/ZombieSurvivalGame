@@ -1,9 +1,11 @@
 package engine.entities.composites;
 
+import java.io.Serializable;
+
 /**
  * Represents the Sprite the view2D is to use to render a engine.entities.GameObject
  */
-public class Sprite {
+public class Sprite implements Serializable{
 
     private int spriteIndex;
 

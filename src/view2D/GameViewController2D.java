@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -19,11 +21,12 @@ import javafx.util.Duration;
 import view.GameViewController;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class GameViewController2D implements GameViewController, Initializable{
+public class GameViewController2D implements GameViewController, Initializable, Serializable{
 
     GameHandler gameHandler;
     DrawableTile[][] drawableMatrix;
@@ -31,11 +34,15 @@ public class GameViewController2D implements GameViewController, Initializable{
     Scene scene;
     Timeline gameLoop;
 
-
+    @FXML
+    public
+    MenuItem save;
 
     @FXML
     private
     Canvas gameCanvas;
+
+    private boolean loadGameFlag;
 
 
     @Override
@@ -66,9 +73,17 @@ public class GameViewController2D implements GameViewController, Initializable{
     public void initialize(URL location, ResourceBundle resources) {
         gameHandler = new GameHandler(this);
         initializeGameEnv();
-
-        startGameloop();
         setEventHandlers();
+
+        save.setOnAction((event) -> {
+            // play game button pressed
+            try {
+                saveGame();
+            }catch (Exception err){
+                //show error to player
+                err.printStackTrace();
+            }
+        });
     }
 
     public void runViewTick(){
@@ -85,14 +100,11 @@ public class GameViewController2D implements GameViewController, Initializable{
         gameLoop.play();
     }
 
-
     public GameHandler getGameHandler() {
         return gameHandler;
     }
 
-
     private void setEventHandlers(){
-
         Platform.runLater(new Runnable() {
             public void run() {
                 gameCanvas.getScene().setOnKeyPressed(e -> {
@@ -126,7 +138,8 @@ public class GameViewController2D implements GameViewController, Initializable{
         renderer.render(drawableMatrix);
     }
 
-    private void stopGameLoop(){
+    @Override
+    public void stopGameLoop(){
         gameLoop.stop();
     }
 
@@ -138,5 +151,30 @@ public class GameViewController2D implements GameViewController, Initializable{
         stage.setScene(new Scene(newRoot, 847, 593));
     }
 
+    public void startNewGame(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                gameHandler.startNewGame();
+                startGameloop();
+            }
+        });
+    }
+    public void startLoadGame(){
+        Platform.runLater(new Runnable() {
+            public void run() {
+                gameHandler.loadGame();
+                startGameloop();
+            }
+        });
+    }
 
+    public void saveGame(){
+        gameLoop.stop();
+        gameHandler.saveGame();
+        try {
+            goToMenu();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

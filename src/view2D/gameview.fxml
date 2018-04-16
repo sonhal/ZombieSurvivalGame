@@ -20,6 +20,9 @@
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
+              <items>
+                  <MenuItem mnemonicParsing="false" text="Save game" fx:id="save" />
+              </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>

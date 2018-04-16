@@ -1,8 +1,12 @@
 package engine.entities.composites;
 
+import engine.entities.interfaces.IGameObject;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GraphicsComponent implements Component {
+public class GraphicsComponent implements IGraphicsComponent, Component<IGameObject>, Serializable{
+
 
     private ArrayList<Sprite> sprites;
     private Sprite activeSprite;
@@ -27,5 +31,11 @@ public class GraphicsComponent implements Component {
 
     public void setActiveSpriteByID(int id) {
         this.activeSprite = sprites.get(id);
+    }
+
+
+    @Override
+    public void update(IGameObject componentHolder) {
+        //Do nothing
     }
 }

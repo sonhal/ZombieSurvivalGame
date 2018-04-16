@@ -31,7 +31,7 @@
                      <Font name="Stencil" size="18.0" />
                   </font>
                </Button>
-               <Button mnemonicParsing="false" style="-fx-background-color: #222328;" text="Load Save" textFill="#72757e">
+               <Button mnemonicParsing="false" style="-fx-background-color: #222328;" text="Load Save" fx:id="load" textFill="#5aae74">
                   <font>
                      <Font name="Stencil" size="18.0" />
                   </font>
