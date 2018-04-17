@@ -4,7 +4,6 @@ import engine.entities.composites.Sprite;
 import engine.entities.items.WeaponPickup;
 import engine.entities.items.weapons.MeleeWeapon;
 import engine.entities.world.World;
-import engine.entities.items.Item;
 import engine.view.DrawableMatrix;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -111,9 +111,9 @@ public class GameHandler extends Updater {
      */
     public DrawableTile[][] getDrawableWorld(){
         updateWordState();
-        if(player.getComponentByType(ComponentType.INPUT_COMPONENT).isPresent()){
+        if(player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).isPresent()){
             TransformComponent playerTransformComponent = (TransformComponent)
-                    player.getComponentByType(ComponentType.INPUT_COMPONENT).get();
+                    player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).get();
             return matrix.generateDrawable(world, playerTransformComponent.getCurrentTile(),10,10);
         }
         else {

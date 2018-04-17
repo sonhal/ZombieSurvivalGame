@@ -5,13 +5,14 @@ import engine.entities.interfaces.IGameObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GraphicsComponent implements IGraphicsComponent, Component<IGameObject>, Serializable{
+public class GraphicsComponent extends ScriptableComponent implements IGraphicsComponent{
 
 
     private ArrayList<Sprite> sprites;
     private Sprite activeSprite;
 
     public GraphicsComponent(Sprite sprite){
+        super(ComponentType.GRAPHICS_COMPONENT);
         this.sprites = new ArrayList<>();
         this.sprites.add(sprite);
         this.activeSprite = this.sprites.get(0);
@@ -36,6 +37,16 @@ public class GraphicsComponent implements IGraphicsComponent, Component<IGameObj
 
     @Override
     public void update(IGameObject componentHolder) {
+        //Do nothing
+    }
+
+    @Override
+    public void handle(Message message) {
+        //Do nothing
+    }
+
+    @Override
+    public void innit(IGameObject gameObject) {
         //Do nothing
     }
 }

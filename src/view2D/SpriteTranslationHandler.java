@@ -75,6 +75,9 @@ public class SpriteTranslationHandler {
      * @return Image, the Image object for the specific Sprite
      */
     public Image getSpriteImage(Sprite sprite){
+        if(sprite == null){
+            return sprites.get(1);
+        }
         return sprites.get(sprite.getSpriteIndex());
     }
 

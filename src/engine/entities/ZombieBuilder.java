@@ -42,6 +42,7 @@ public class ZombieBuilder {
         wc.setWeapon((new MeleeWeapon(1,5,1000)));
 
         ArrayList<ScriptableComponent> components = new ArrayList<>();
+        components.add(gc);
         components.add(wc);
         components.add(cc);
         components.add(hc);

@@ -24,10 +24,10 @@ public class GameObjectFactory {
         AvatarTransformComponent at = new AvatarTransformComponent(0);
         at.setCurrentTile(startTile);
         components.add(at);
-        components.add(new AvatarGraphicsComponent(getBulletSpriteByDirection(direction),0));
+        components.add(new GraphicsComponent(getBulletSpriteByDirection(direction)));
         components.add(new AttackComponent(damage));
         components.add(new CollisionComponent());
-        components.add(new ProjectileInputComponent(direction, 300));
+        components.add(new ProjectileInputComponent(direction, 100));
         return new ImpUpdatableGameObject(components);
     }
 

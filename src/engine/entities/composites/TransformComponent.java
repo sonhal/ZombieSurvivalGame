@@ -25,7 +25,7 @@ public class TransformComponent extends ScriptableComponent{
 
     @Override
     public void handle(Message message) {
-        if(message.message instanceof Direction){
+        if(message.event == ComponentEvent.MOVE_EVENT){
             move = (Direction) message.message;
         }
     }

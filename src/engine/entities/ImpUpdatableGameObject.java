@@ -14,29 +14,10 @@ public class ImpUpdatableGameObject extends UpdatableGameObject{
         super(components);
         initializeComponents();
     }
-    /**
-     * Signals to the Handler of the Object that the Object can be deleted.
-     *
-     * @return boolean, should the Object be deleted.
-     */
-    @Override
-    public boolean isDead() {
-        return false;
-    }
-
-    /**
-     * Method that should result in the IsDead() method returning true.
-     * Any Object clean-up should be done here.
-     */
-    @Override
-    public void die() {
-
-    }
 
     @Override
     public Sprite getSprite() {
-        Optional<ScriptableComponent> oComponent = ComponentService.getComponentByType(components,
-                ComponentType.GRAPHICS_COMPONENT);
+        Optional<ScriptableComponent> oComponent = getComponentByType(ComponentType.GRAPHICS_COMPONENT);
         if(oComponent.isPresent()){
             IGraphicsComponent graphicsComponent = (IGraphicsComponent)oComponent.get();
             return graphicsComponent.getSprite();

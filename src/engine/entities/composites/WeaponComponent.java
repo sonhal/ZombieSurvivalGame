@@ -37,9 +37,15 @@ public class WeaponComponent extends ScriptableComponent{
     public void update(IGameObject gameObject) {
         if(attackEvent != null){
             if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
-                attack(attackEvent, (TransformComponent)
-                        getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).get());
+
+
+                TransformComponent tc = (TransformComponent)
+                        getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).get();
+
+                //Shoot in direction Player is facing
+                attack(tc.getFacingDirection(), tc);
             }
+            attackEvent = null;
         }
     }
 

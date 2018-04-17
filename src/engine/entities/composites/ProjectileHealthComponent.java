@@ -14,7 +14,7 @@ public class ProjectileHealthComponent extends ScriptableComponent{
 
     @Override
     public void update(IGameObject gameObject) {
-        if(range < 0){
+        if(range <= 0){
             sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.DEATH_EVENT, true));
             if(gameObject instanceof IUpdatableGameObject){
                 UpdatableGameObject uo = (UpdatableGameObject)gameObject;

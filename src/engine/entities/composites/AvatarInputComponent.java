@@ -38,13 +38,11 @@ public class AvatarInputComponent extends ScriptableComponent{
     }
 
     private void handleMoving(IGameObject gameObject, Direction direction){
-        ComponentService.getComponentsByListOfTypes(gameObject.getComponents(), moveListenerTypes)
-                .forEach(scriptableComponent -> scriptableComponent.handle(new Message(ComponentEvent.MOVE_EVENT, direction)));
+        sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.MOVE_EVENT, direction));
     }
 
     private void handleAttacking(IGameObject gameObject, Direction direction){
-        ComponentService.getComponentsByListOfTypes(gameObject.getComponents(), moveListenerTypes)
-                .forEach(scriptableComponent -> scriptableComponent.handle(new Message(ComponentEvent.MOVE_EVENT, direction)));
+        sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.ATTACK_EVENT, direction));
     }
 
 
@@ -71,11 +69,11 @@ public class AvatarInputComponent extends ScriptableComponent{
 
     @Override
     public void handle(Message message) {
-
+        //Do nothing
     }
 
     @Override
     public void innit(IGameObject gameObject) {
-
+        //Do nothing
     }
 }

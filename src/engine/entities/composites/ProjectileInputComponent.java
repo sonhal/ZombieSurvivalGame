@@ -6,18 +6,18 @@ import engine.entities.interfaces.IGameObject;
 public class ProjectileInputComponent extends ScriptableComponent{
 
     private Direction flyingDirection;
-    private int speed;
+    private int delay;
     private double lastMoveTime;
 
-    public ProjectileInputComponent(Direction flyingDirection, int speed){
+    public ProjectileInputComponent(Direction flyingDirection, int flyingDelay){
         super(ComponentType.INPUT_COMPONENT);
         this.flyingDirection = flyingDirection;
-        this.speed = speed;
+        this.delay = flyingDelay;
     }
 
     @Override
     public void update(IGameObject gameObject){
-        if(canActivate(speed, lastMoveTime)){
+        if(canActivate(delay, lastMoveTime)){
             sendMessageToAllComponents(gameObject.getComponents(),
                     new Message(ComponentEvent.MOVE_EVENT, flyingDirection));
             lastMoveTime = System.currentTimeMillis();
