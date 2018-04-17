@@ -40,10 +40,11 @@ public class GameHandler extends Updater {
     }
 
     public void startNewGame(){
-        //Create Player object
-        this.player = PlayerBuilder.create(this, eventHandler,100);
+
         //Create game world
         createWorld(50);
+        //Create Player object
+        this.player = PlayerBuilder.create(this, eventHandler,100, world.getSeed());
         //Set player in world
         world.setPlayer(player);
         innitGame();

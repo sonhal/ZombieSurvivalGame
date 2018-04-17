@@ -21,21 +21,21 @@ public class HealthComponent extends ScriptableComponent{
     }
 
 
-    public void damage(int damageToInflict){
+    private void damage(int damageToInflict){
         isDamaged = true;
         healthAmount -= damageToInflict;
         timeDamaged = System.currentTimeMillis();
     }
 
-    public void heal(int healAmount){
+    private void heal(int healAmount){
         if(healthAmount > 0 && healAmount > 0){
             healthAmount += healthAmount;
         }
     }
 
-    public void broadcastStatus(IGameObject gameObject){
+    private void broadcastStatus(IGameObject gameObject){
         if(isDamaged){
-            sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.DAMAGE_EVENT, true));
+            sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.DAMAGE_TAKEN_EVENT, healthAmount));
         }
         if(!isAlive()){
             sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.DEATH_EVENT, true));
@@ -58,7 +58,7 @@ public class HealthComponent extends ScriptableComponent{
         return isDamaged;
     }
 
-    public void setIsDamaged(boolean isDamaged){
+    private void setIsDamaged(boolean isDamaged){
         this.isDamaged = isDamaged;
     }
 
@@ -82,13 +82,18 @@ public class HealthComponent extends ScriptableComponent{
 
     @Override
     public void handle(Message message) {
-        if(message.event == ComponentEvent.DAMAGE_EVENT){
+        if(message.event == ComponentEvent.HIT_EVENT){
             damageToTake.add((int)message.message);
         }
     }
 
     @Override
     public void innit(IGameObject gameObject) {
+
+    }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
 
     }
 }

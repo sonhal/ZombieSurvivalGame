@@ -10,24 +10,24 @@ import java.util.ArrayList;
 
 public class GameObjectFactory {
 
-    public static IGameObject createStaticGameObject(Sprite sprite){
+    public static IGameObject createStaticGameObject(Sprite sprite, Tile startTile){
         ArrayList<ScriptableComponent> components = new ArrayList<>();
 
-        components.add(new TransformComponent());
-        components.add(new AvatarGraphicsComponent(sprite,0));
+        components.add(new TransformComponent(startTile));
+        components.add(new GraphicsComponent(sprite));
         return new GameObject(components);
     }
 
     public static IUpdatableGameObject createBullet(Tile startTile, Direction direction, int damage){
         ArrayList<ScriptableComponent> components = new ArrayList<>();
 
-        AvatarTransformComponent at = new AvatarTransformComponent(0);
-        at.setCurrentTile(startTile);
+        AvatarTransformComponent at = new AvatarTransformComponent(startTile);
         components.add(at);
         components.add(new GraphicsComponent(getBulletSpriteByDirection(direction)));
         components.add(new AttackComponent(damage));
         components.add(new CollisionComponent());
         components.add(new ProjectileInputComponent(direction, 100));
+        components.add(new ProjectileHealthComponent(10));
         return new ImpUpdatableGameObject(components);
     }
 

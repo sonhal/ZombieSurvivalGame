@@ -65,4 +65,9 @@ public class WeaponComponent extends ScriptableComponent{
     public void innit(IGameObject gameObject) {
 
     }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
+
+    }
 }

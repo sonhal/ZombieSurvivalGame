@@ -34,4 +34,9 @@ public class ProjectileInputComponent extends ScriptableComponent{
     public void innit(IGameObject gameObject){
         lastMoveTime = System.currentTimeMillis();
     }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
+
+    }
 }

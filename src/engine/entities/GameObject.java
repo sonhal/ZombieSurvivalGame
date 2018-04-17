@@ -21,6 +21,7 @@ public class GameObject implements IGameObject{
 
     public GameObject(List<ScriptableComponent> components){
         this.components = components;
+        initializeComponents();
     }
 
     @Override

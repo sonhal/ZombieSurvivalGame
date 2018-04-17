@@ -1,6 +1,7 @@
 package engine.entities.composites;
 
 import engine.controllers.Direction;
+import engine.entities.GameObject;
 import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
 
@@ -8,18 +9,22 @@ import java.io.Serializable;
 
 public class TransformComponent extends ScriptableComponent{
 
-    private IGameObject gameObject;
     private Tile currentTile;
     private Direction facingDirection;
     protected Direction move;
+    protected boolean removeSelf;
 
-    public TransformComponent(){
+    public TransformComponent(Tile connectedTile){
         super(ComponentType.TRANSFORM_COMPONENT);
+        currentTile = connectedTile;
     }
 
 
     @Override
-    public void update(IGameObject componentHolder) {
+    public void update(IGameObject gameObject) {
+        if(removeSelf){
+            cleanUp(gameObject);
+        }
         //Does nothing
     }
 
@@ -28,14 +33,20 @@ public class TransformComponent extends ScriptableComponent{
         if(message.event == ComponentEvent.MOVE_EVENT){
             move = (Direction) message.message;
         }
+        if(message.event == ComponentEvent.DEATH_EVENT){
+            removeSelf = true;
+        }
     }
 
     @Override
     public void innit(IGameObject gameObject) {
-        if (gameObject == null){
-            throw new IllegalStateException("GameObject is null");
-        }
-        this.gameObject = gameObject;
+        this.currentTile.setGameObject(gameObject);
+    }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
+        getCurrentTile().clearGameObject();
+        currentTile = null;
     }
 
 
@@ -43,10 +54,8 @@ public class TransformComponent extends ScriptableComponent{
         return currentTile;
     }
 
-    public void setCurrentTile(Tile currentTile) {
-
-        this.currentTile = currentTile;
-        this.currentTile.setGameObject(gameObject);
+    public void setCurrentTile(Tile tile) {
+        this.currentTile = tile;
     }
 
     public Direction getFacingDirection() {
@@ -58,40 +67,39 @@ public class TransformComponent extends ScriptableComponent{
         this.facingDirection = facingDirection;
     }
 
-    public void move(Direction direction) {
+    private void switchTilePlacement(Tile oldTile, Tile newTile, IGameObject gameObject){
+        oldTile.clearGameObject();
+        setCurrentTile(newTile);
+        currentTile.setGameObject(gameObject);
+    }
+
+    public void move(Direction direction, IGameObject gameObject) {
         if (currentTile != null){
             Tile lastTile = currentTile;
             Tile newTile = currentTile.getTileInDirection(direction);
             switch (direction) {
                 case UP:
                     if(currentTile.getUp() != null){
-                        lastTile.clearGameObject();
-                        setCurrentTile(newTile);
+                        switchTilePlacement(lastTile, newTile, gameObject);
                         this.facingDirection = Direction.UP;}
                     break;
                 case DOWN:
                     if(currentTile.getDown() != null){
-                        lastTile.clearGameObject();
-                        setCurrentTile(newTile);
+                        switchTilePlacement(lastTile, newTile, gameObject);
                         this.facingDirection = Direction.DOWN;}
                     break;
                 case LEFT:
                     if(currentTile.getLeft() != null){
-                        lastTile.clearGameObject();
-                        setCurrentTile(newTile);
+                        switchTilePlacement(lastTile, newTile, gameObject);
                         this.facingDirection = Direction.LEFT;}
                     break;
                 case RIGHT:
                     if(currentTile.getRight() != null){
-                        lastTile.clearTile();
-                        setCurrentTile(newTile);
+                        switchTilePlacement(lastTile, newTile, gameObject);
                         this.facingDirection = Direction.RIGHT;}
                     break;
             }
         }
     }
 
-    public void setGameObject(IGameObject gameObject){
-        this.gameObject = gameObject;
-    }
 }

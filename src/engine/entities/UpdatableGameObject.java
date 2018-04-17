@@ -27,6 +27,7 @@ public abstract class UpdatableGameObject implements IUpdatableGameObject {
 
     @Override
     public void die(){
+        getComponents().forEach(scriptableComponent -> scriptableComponent.cleanUp(this));
         toBeDeleted = true;
     }
 

@@ -49,4 +49,9 @@ public class GraphicsComponent extends ScriptableComponent implements IGraphicsC
     public void innit(IGameObject gameObject) {
         //Do nothing
     }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
+
+    }
 }

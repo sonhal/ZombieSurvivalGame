@@ -10,10 +10,12 @@ public class ProjectileHealthComponent extends ScriptableComponent{
 
     public ProjectileHealthComponent(int range){
         super(ComponentType.HEALTH_COMPONENT);
+        this.range = range;
     }
 
     @Override
     public void update(IGameObject gameObject) {
+
         if(range <= 0){
             sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.DEATH_EVENT, true));
             if(gameObject instanceof IUpdatableGameObject){
@@ -35,6 +37,11 @@ public class ProjectileHealthComponent extends ScriptableComponent{
 
     @Override
     public void innit(IGameObject gameObject) {
+
+    }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
 
     }
 }

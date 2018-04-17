@@ -5,12 +5,13 @@ import engine.controllers.Updater;
 import engine.entities.composites.*;
 import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.Gun;
+import engine.entities.world.Tile;
 
 import java.util.ArrayList;
 
 public class PlayerBuilder {
 
-    public static IUpdatableGameObject create(Updater updater, EventHandler eventHandler, int health){
+    public static IUpdatableGameObject create(Updater updater, EventHandler eventHandler, int health, Tile startTile){
         ArrayList<Sprite> playerSprites = new ArrayList<>();
         ArrayList<ScriptableComponent> components = new ArrayList<>();
 
@@ -26,8 +27,8 @@ public class PlayerBuilder {
 
         components.add(new CollisionComponent());
         components.add(new HealthComponent(health));
-        components.add(new AvatarTransformComponent(0));
-        components.add(new AvatarInputComponent(eventHandler));
+        components.add(new AvatarTransformComponent(startTile));
+        components.add(new AvatarInputComponent(eventHandler, 0));
 
         AvatarGraphicsComponent gc = new AvatarGraphicsComponent(playerSprites.get(0), 300);
         WeaponComponent wc = new WeaponComponent();

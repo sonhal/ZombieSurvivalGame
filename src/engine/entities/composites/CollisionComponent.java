@@ -46,6 +46,11 @@ public class CollisionComponent extends ScriptableComponent {
         }
     }
 
+    @Override
+    public void cleanUp(IGameObject gameObject) {
+
+    }
+
     public Direction collided() {
         return collided;
     }

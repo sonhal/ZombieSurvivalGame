@@ -3,32 +3,25 @@ package engine.entities.composites;
 import engine.controllers.Direction;
 import engine.entities.interfaces.IGameObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class EnemyInputComponent extends ScriptableComponent{
 
-    private IGameObject player;
+    private IGameObject target;
     private TransformComponent playerTransformComponent;
     private TransformComponent gameObjectTransformComponent;
     private Direction collisionHasOccurred;
-    private List<ComponentType> attackListeners;
-    private List<ComponentType> moveListeners;
+    private double lastEventSent;
+    private double sendEventDelay;
 
-    public EnemyInputComponent(IGameObject player){
+
+    public EnemyInputComponent(IGameObject target, double sendEventDelay){
         super(ComponentType.INPUT_COMPONENT);
-        this.player = player;
-        this.attackListeners = new ArrayList<>();
-        this.moveListeners = new ArrayList<>();
-        this.attackListeners.add(ComponentType.WEAPON_COMPONENT);
-        this.moveListeners.add(ComponentType.COLLISION_COMPONENT);
-        this.moveListeners.add(ComponentType.TRANSFORM_COMPONENT);
-        this.moveListeners.add(ComponentType.GRAPHICS_COMPONENT);
+        this.target = target;
+        this.sendEventDelay = sendEventDelay;
     }
 
 
 
-    private Direction getDirectionAgainstPlayer(IGameObject enemy){
+    private Direction getDirectionAgainstPlayer(IGameObject gameObject){
 
         //Bad collision avoiding AI
         if (collisionHasOccurred != null){
@@ -72,7 +65,7 @@ public class EnemyInputComponent extends ScriptableComponent{
 
     private Direction isPlayerInRange(IGameObject gameObject){
         if(collisionHasOccurred != null){
-            if(gameObjectTransformComponent.getCurrentTile().getTileInDirection(collisionHasOccurred).getGameObject() == player){
+            if(gameObjectTransformComponent.getCurrentTile().getTileInDirection(collisionHasOccurred).getGameObject() == target){
                 return collisionHasOccurred;
             }
         }
@@ -83,16 +76,15 @@ public class EnemyInputComponent extends ScriptableComponent{
     public void update(IGameObject gameObject) {
         //If Player is in range, attack Player
         if(isPlayerInRange(gameObject) != null){
-            sendMessage(gameObject.getComponents(), attackListeners,
-                    new Message(ComponentEvent.ATTACK_EVENT, isPlayerInRange(gameObject)));
+            sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.ATTACK_EVENT, isPlayerInRange(gameObject)));
         }
         //If not, Move towards Player
         else {
-            sendMessage(gameObject.getComponents(), moveListeners,
-                    new Message(ComponentEvent.MOVE_EVENT, getDirectionAgainstPlayer(gameObject)));
+            if(canActivate(sendEventDelay, lastEventSent)){
+                sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.MOVE_EVENT, getDirectionAgainstPlayer(gameObject)));
+                lastEventSent = System.currentTimeMillis();
+            }
         }
-
-
     }
 
     @Override
@@ -106,18 +98,25 @@ public class EnemyInputComponent extends ScriptableComponent{
     @Override
     public void innit(IGameObject gameObject) {
         //Gets reference to Players TransformComponent
-        if(getComponentByType(player.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
+        if(getComponentByType(target.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
             this.playerTransformComponent =
-                    (TransformComponent) getComponentByType(player.getComponents()
+                    (TransformComponent) getComponentByType(target.getComponents()
                             , ComponentType.TRANSFORM_COMPONENT).get();
         }
 
         //Gets reference to its own TransformComponent
         if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
             this.gameObjectTransformComponent =
-                    (TransformComponent) getComponentByType(player.getComponents()
+                    (TransformComponent) getComponentByType(target.getComponents()
                             , ComponentType.TRANSFORM_COMPONENT).get();
         }
+
+        lastEventSent = System.currentTimeMillis();
+    }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
+
     }
 
 

@@ -27,12 +27,11 @@ public class ZombieBuilder {
 
         WeaponComponent wc = new WeaponComponent();
         CollisionComponent cc = new CollisionComponent();
-        HealthComponent hc = new HealthComponent(30);
-        AvatarTransformComponent tc = new AvatarTransformComponent(1000);
-        tc.setCurrentTile(spawnTile);
-        EnemyInputComponent ic = new EnemyInputComponent(player);
+        HealthComponent hc = new HealthComponent(100);
+        AvatarTransformComponent tc = new AvatarTransformComponent(spawnTile);
+        EnemyInputComponent ic = new EnemyInputComponent(player, 1000);
 
-        AvatarGraphicsComponent gc = new AvatarGraphicsComponent(zombieSprites.get(0), 300);
+        AvatarGraphicsComponent gc = new AvatarGraphicsComponent(zombieSprites.get(0), 500);
 
         for (Sprite sprite:
                 zombieSprites) {

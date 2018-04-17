@@ -12,17 +12,13 @@ import java.util.List;
 public class AvatarInputComponent extends ScriptableComponent{
 
     private EventHandler eventHandler;
-    private List<ComponentType> moveListenerTypes;
-    private List<ComponentType> attackListenerTypes;
+    private double moveDelay;
+    private double lastMoveEvent;
 
-    public AvatarInputComponent(EventHandler eventHandler){
+    public AvatarInputComponent(EventHandler eventHandler, double moveDelay){
         super(ComponentType.INPUT_COMPONENT);
         this.eventHandler = eventHandler;
-        moveListenerTypes = new ArrayList<>();
-        moveListenerTypes.add(ComponentType.COLLISION_COMPONENT);
-        moveListenerTypes.add(ComponentType.GRAPHICS_COMPONENT);
-        attackListenerTypes = new ArrayList<>();
-        attackListenerTypes.add(ComponentType.WEAPON_COMPONENT);
+        this.moveDelay = moveDelay;
     }
 
     public void setEventHandler(EventHandler eventHandler) {
@@ -38,7 +34,11 @@ public class AvatarInputComponent extends ScriptableComponent{
     }
 
     private void handleMoving(IGameObject gameObject, Direction direction){
-        sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.MOVE_EVENT, direction));
+        if(canActivate(moveDelay, lastMoveEvent)){
+            sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.MOVE_EVENT, direction));
+            lastMoveEvent = System.currentTimeMillis();
+        }
+
     }
 
     private void handleAttacking(IGameObject gameObject, Direction direction){
@@ -75,5 +75,10 @@ public class AvatarInputComponent extends ScriptableComponent{
     @Override
     public void innit(IGameObject gameObject) {
         //Do nothing
+    }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
+
     }
 }

@@ -51,7 +51,7 @@ class SaveGameHandlerTest {
     void loadGameTest(){
         World world = new World();
         Tile testTile = world.getWorld().get(2);
-        IUpdatableGameObject player = PlayerBuilder.create(new Updater(), new EventHandler(),10);
+        IUpdatableGameObject player = PlayerBuilder.create(new Updater(), new EventHandler(),10, testTile);
         TransformComponent tc = (TransformComponent) player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).get();
         SaveGameHandler.saveGame(world.getWorld());
         List<Tile> loadedWorld = SaveGameHandler.loadGame();

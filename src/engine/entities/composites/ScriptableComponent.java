@@ -72,4 +72,12 @@ public abstract class ScriptableComponent implements Serializable{
      */
     public abstract void innit(IGameObject gameObject);
 
+
+    /**
+     * Method called when a GameObject is to be removed. Gives a ScriptableComponent the oprotunity to do clean-up
+     * before the GameObject is removed.
+     * @param gameObject, holder of the Component
+     */
+    public abstract void cleanUp(IGameObject gameObject);
+
 }

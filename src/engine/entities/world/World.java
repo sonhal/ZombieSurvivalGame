@@ -47,7 +47,7 @@ public class World implements Serializable{
             for (int y = -initSize; y < initSize; y++){
 
                 Tile newTile = new Tile(x,y, generateRandomSprite());
-                newTile.setGameObject(generateWorldObject());
+                generateWorldObjectOnTile(newTile);
                 newWorld.add(newTile);
             }
         }
@@ -96,13 +96,10 @@ public class World implements Serializable{
         }}
     }
 
-    private IGameObject generateWorldObject(){
+    private void generateWorldObjectOnTile(Tile startTile){
         int i = random.nextInt(100);
         if (i < 8){
-            return GameObjectFactory.createStaticGameObject(new Sprite(28));
-        }
-        else {
-            return null;
+            GameObjectFactory.createStaticGameObject(new Sprite(28), startTile);
         }
     }
 

@@ -12,8 +12,11 @@ public class AvatarGraphicsComponent extends ScriptableComponent implements IGra
     private ArrayList<Sprite> sprites;
     private Sprite activeSprite;
     private Direction inputMoveDirection;
+    private Direction currentFacingDirection;
     private double moveAnimationDelay;
     private double lastAnimationStart;
+    private boolean isMoving;
+
 
     public AvatarGraphicsComponent(Sprite sprite, double moveAnimationDelay){
         super(ComponentType.GRAPHICS_COMPONENT);
@@ -25,22 +28,60 @@ public class AvatarGraphicsComponent extends ScriptableComponent implements IGra
 
     @Override
     public void update(IGameObject gameObject) {
-            if(this.inputMoveDirection != null){
+        if(inputMoveDirection != null){
+            if(isMoving && currentFacingDirection == inputMoveDirection){
                 if(canActivate(moveAnimationDelay, lastAnimationStart)){
-                    inputMoveDirection = null;
-                }
-                else {
-                    setActiveSpriteByID(getSpriteMovingIDByDirection(inputMoveDirection));
+                    setActiveSpriteByID(getSpriteIDByDirection(currentFacingDirection));
+                    lastAnimationStart = System.currentTimeMillis();
                 }
             }
-            else{
-                Optional<ScriptableComponent> optionalComponent =
-                        getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT);
-                if(optionalComponent.isPresent()){
-                    TransformComponent transformComponent = (TransformComponent)optionalComponent.get();
-                    setActiveSpriteByID(getSpriteIDByDirection(transformComponent.getFacingDirection()));
+            else {
+                currentFacingDirection = inputMoveDirection;
+                isMoving = true;
+                setActiveSpriteByID(getSpriteMovingIDByDirection(inputMoveDirection));
+                lastAnimationStart = System.currentTimeMillis();
+            }
+            inputMoveDirection = null;
+        }
+        else {
+            if(isMoving){
+                if(canActivate(moveAnimationDelay, lastAnimationStart)){
+                    setActiveSpriteByID(getSpriteIDByDirection(currentFacingDirection));
+                    isMoving = false;
+                    lastAnimationStart = System.currentTimeMillis();
+                }
             }
         }
+
+        /*
+        if(newInputReceived()){
+            if(currentFacingDirection == inputMoveDirection){
+                if(canActivate(moveAnimationDelay, lastAnimationStart)) {
+                    setActiveSpriteByID(getSpriteIDByDirection(currentFacingDirection));
+                    lastAnimationStart = System.currentTimeMillis();
+                }
+                else{
+                    currentFacingDirection = inputMoveDirection;
+                    setActiveSpriteByID(getSpriteMovingIDByDirection(inputMoveDirection));
+                }
+                    }
+            else{
+                currentFacingDirection = inputMoveDirection;
+                setActiveSpriteByID(getSpriteMovingIDByDirection(inputMoveDirection));
+                lastAnimationStart = System.currentTimeMillis();
+            }
+            inputMoveDirection = null;
+        }
+        else {
+            if(canActivate(moveAnimationDelay, lastAnimationStart)) {
+                setActiveSpriteByID(getSpriteIDByDirection(currentFacingDirection));
+                lastAnimationStart = System.currentTimeMillis();
+            }
+        }*/
+    }
+
+    private boolean newInputReceived(){
+        return (inputMoveDirection != null);
     }
 
     public Sprite getSprite() {
@@ -61,19 +102,21 @@ public class AvatarGraphicsComponent extends ScriptableComponent implements IGra
 
     private int getSpriteIDByDirection(Direction direction){
         int spriteId = 0;
-        switch (direction){
-            case DOWN:
-                spriteId = 4;
-                break;
-            case UP:
-                spriteId = 3;
-                break;
-            case LEFT:
-                spriteId = 2;
-                break;
-            case RIGHT:
-                spriteId = 1;
-                break;
+        if(direction != null){
+            switch (direction){
+                case DOWN:
+                    spriteId = 4;
+                    break;
+                case UP:
+                    spriteId = 3;
+                    break;
+                case LEFT:
+                    spriteId = 2;
+                    break;
+                case RIGHT:
+                    spriteId = 1;
+                    break;
+            }
         }
         return spriteId;
     }
@@ -99,5 +142,17 @@ public class AvatarGraphicsComponent extends ScriptableComponent implements IGra
     @Override
     public void innit(IGameObject gameObject) {
         lastAnimationStart = System.currentTimeMillis();
+        Optional<ScriptableComponent> optionalComponent =
+                getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT);
+        if (optionalComponent.isPresent()) {
+            TransformComponent transformComponent = (TransformComponent) optionalComponent.get();
+            setActiveSpriteByID(getSpriteIDByDirection(transformComponent.getFacingDirection()));
+            inputMoveDirection = transformComponent.getFacingDirection();
+        }
+    }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
+
     }
 }

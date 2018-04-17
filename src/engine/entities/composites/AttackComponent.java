@@ -20,8 +20,9 @@ public class AttackComponent extends ScriptableComponent{
 
     public static void tryAttack(int damage, Tile attackTile){
         IGameObject objectToBeAttacked = attackTile.getGameObject();
-        if( objectToBeAttacked instanceof Hittable){
-            ((Hittable)objectToBeAttacked).hit(damage);
+        if(objectToBeAttacked != null){
+            sendMessageToAllComponents(objectToBeAttacked.getComponents(),
+                    new Message(ComponentEvent.HIT_EVENT, damage));
         }
     }
 
@@ -48,5 +49,10 @@ public class AttackComponent extends ScriptableComponent{
     @Override
     public void innit(IGameObject gameObject) {
         //Do nothing
+    }
+
+    @Override
+    public void cleanUp(IGameObject gameObject) {
+
     }
 }
