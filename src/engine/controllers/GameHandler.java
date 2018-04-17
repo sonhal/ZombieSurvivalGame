@@ -1,16 +1,19 @@
 package engine.controllers;
 
-import engine.entities.Avatar;
-import engine.entities.PlayerFactory;
+import engine.entities.PlayerBuilder;
 import engine.entities.composites.AvatarInputComponent;
+import engine.entities.composites.ComponentType;
+import engine.entities.composites.TransformComponent;
+import engine.entities.composites.WeaponComponent;
+import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.Gun;
 import engine.entities.world.Tile;
 import engine.entities.world.World;
+import engine.services.ComponentService;
 import engine.services.save.SaveGameHandler;
 import engine.view.DrawableMatrix;
 import engine.view.DrawableTile;
 import view.GameViewController;
-import view2D.GameViewController2D;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,7 +27,7 @@ public class GameHandler extends Updater {
     private GameViewController gameViewController;
     private NpcController npcController;
     private EventHandler eventHandler;
-    private Avatar player;
+    private IUpdatableGameObject player;
     private DrawableMatrix matrix;
 
 
@@ -38,7 +41,7 @@ public class GameHandler extends Updater {
 
     public void startNewGame(){
         //Create Player object
-        this.player = PlayerFactory.create(this, eventHandler,100);
+        this.player = PlayerBuilder.create(this, eventHandler,100);
         //Create game world
         createWorld(50);
         //Set player in world
@@ -54,13 +57,17 @@ public class GameHandler extends Updater {
         world.loadInGameWorld(worldTiles, player);
         System.out.println("Game loaded");
         innitGame();
-        for (Avatar enemy:
+        for (IUpdatableGameObject enemy:
              SaveGameHandler.getEnemyInstances(worldTiles)) {
             npcController.addToUpdateList(enemy);
         }
-        if(player.getWeaponComponent().getWeapon() instanceof Gun){
-            Gun playerGun = (Gun) player.getWeaponComponent().getWeapon();
-            playerGun.setController(this);
+        if(ComponentService.getComponentByType(player.getComponents(), ComponentType.WEAPON_COMPONENT).isPresent()){
+            WeaponComponent weaponComponent = (WeaponComponent)
+                    ComponentService.getComponentByType(player.getComponents(), ComponentType.WEAPON_COMPONENT).get();
+            if(weaponComponent.getWeapon() instanceof Gun){
+                Gun playerGun = (Gun)weaponComponent.getWeapon();
+                playerGun.setController(this);
+            }
         }
     }
 
@@ -104,7 +111,14 @@ public class GameHandler extends Updater {
      */
     public DrawableTile[][] getDrawableWorld(){
         updateWordState();
-        return matrix.generateDrawable(world,player.getTransformComponent().getCurrentTile(),10,10);
+        if(player.getComponentByType(ComponentType.INPUT_COMPONENT).isPresent()){
+            TransformComponent playerTransformComponent = (TransformComponent)
+                    player.getComponentByType(ComponentType.INPUT_COMPONENT).get();
+            return matrix.generateDrawable(world, playerTransformComponent.getCurrentTile(),10,10);
+        }
+        else {
+            throw  new RuntimeException("Player is not in World");
+        }
     }
 
     private DrawableMatrix getDrawableMatrix( int diameter){
@@ -133,14 +147,17 @@ public class GameHandler extends Updater {
         }
     }
 
-    public Avatar getPlayer() {
+    public IUpdatableGameObject getPlayer() {
         return player;
     }
 
-    public void setPlayer(Avatar player) {
-        AvatarInputComponent component = (AvatarInputComponent)player.getInputComponent();
-        component.setEventHandler(eventHandler);
-        this.player = player;
+    public void setPlayer(IUpdatableGameObject player) {
+        if(player.getComponentByType(ComponentType.INPUT_COMPONENT).isPresent()){
+            AvatarInputComponent component = (AvatarInputComponent)
+                    player.getComponentByType(ComponentType.INPUT_COMPONENT).get();
+            component.setEventHandler(eventHandler);
+            this.player = player;
+        }
     }
 
     public World getWorld() {

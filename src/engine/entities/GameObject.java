@@ -1,12 +1,13 @@
 package engine.entities;
 
+import engine.entities.composites.*;
 import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
-import engine.entities.composites.GraphicsComponent;
-import engine.entities.composites.Sprite;
-import engine.entities.composites.TransformComponent;
+import engine.services.ComponentService;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -14,36 +15,47 @@ import java.io.Serializable;
  * A GameObject and its subtypes behaviour is defined in the components it contains.
  * A GameObject object can be on a Tile object.
  */
-public class GameObject implements IGameObject,Serializable{
-    private TransformComponent transformComponent;
-    private GraphicsComponent graphicsComponent;
+public class GameObject implements IGameObject{
+    private List<ScriptableComponent> components;
 
-    public GameObject(TransformComponent tc, GraphicsComponent gc){
-        this.transformComponent = tc;
-        this.graphicsComponent = gc;
+
+    public GameObject(List<ScriptableComponent> components){
+        this.components = components;
     }
 
-    public GameObject(GraphicsComponent gc){
-        this.graphicsComponent = gc;
-        this.transformComponent = new TransformComponent(this);
+    @Override
+    public Sprite getSprite() {
+        Optional<ScriptableComponent> oComponent = ComponentService.getComponentByType(components,
+                ComponentType.GRAPHICS_COMPONENT);
+        if(oComponent.isPresent()){
+            IGraphicsComponent graphicsComponent = (IGraphicsComponent)oComponent.get();
+            return graphicsComponent.getSprite();
+        }
+        else {
+            return null;
+        }
     }
 
-    public GameObject(Sprite sprite){
-        this.transformComponent = new TransformComponent(this);
-        this.graphicsComponent = new GraphicsComponent(sprite);
+    @Override
+    public Tile getTile() {
+        Optional<ScriptableComponent> oComponent = ComponentService.getComponentByType(components,
+                ComponentType.TRANSFORM_COMPONENT);
+        if(oComponent.isPresent()){
+            TransformComponent transformComponent = (TransformComponent) oComponent.get();
+            return transformComponent.getCurrentTile();
+        }
+        else {
+            return null;
+        }
     }
 
-    public GameObject(){
-        this(new Sprite(2));
+    @Override
+    public List<ScriptableComponent> getComponents() {
+        return components;
     }
 
-    public GraphicsComponent getGraphicsComponent(){return graphicsComponent;}
-
-    public TransformComponent getTransformComponent(){return transformComponent;}
-    
-    public Sprite getSprite(){
-        return graphicsComponent.getSprite();
+    @Override
+    public void initializeComponents() {
+        components.forEach(scriptableComponent -> scriptableComponent.innit(this));
     }
-
-    public Tile getTile(){ return transformComponent.getCurrentTile();}
 }

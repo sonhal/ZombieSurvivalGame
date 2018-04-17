@@ -1,5 +1,8 @@
 package engine.entities.composites;
+import engine.entities.UpdatableGameObject;
 import engine.entities.interfaces.IGameObject;
+import engine.entities.interfaces.IUpdatableGameObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +30,19 @@ public class HealthComponent extends ScriptableComponent{
     public void heal(int healAmount){
         if(healthAmount > 0 && healAmount > 0){
             healthAmount += healthAmount;
+        }
+    }
+
+    public void broadcastStatus(IGameObject gameObject){
+        if(isDamaged){
+            sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.DAMAGE_EVENT, true));
+        }
+        if(!isAlive()){
+            sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.DEATH_EVENT, true));
+            if(gameObject instanceof IUpdatableGameObject){
+                UpdatableGameObject uo = (UpdatableGameObject)gameObject;
+                uo.die();
+            }
         }
     }
 
@@ -61,11 +77,12 @@ public class HealthComponent extends ScriptableComponent{
     public void update(IGameObject gameObject) {
         takeDamage();
         updateDamagedStatus();
+        broadcastStatus(gameObject);
     }
 
     @Override
     public void handle(Message message) {
-        if(message.type == ComponentType.ATTACK_COMPONENT){
+        if(message.event == ComponentEvent.DAMAGE_EVENT){
             damageToTake.add((int)message.message);
         }
     }

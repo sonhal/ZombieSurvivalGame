@@ -5,7 +5,7 @@ import engine.entities.composites.*;
 import engine.entities.world.Tile;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface IGameObject extends Serializable{
 
@@ -17,7 +17,13 @@ public interface IGameObject extends Serializable{
      * Access method that needs to be implemented for the Object to function
      * properly with other Objects accepting a IUpdatableGameObject
      **/
-    ArrayList<ScriptableComponent> getComponents();
+    List<ScriptableComponent> getComponents();
+
+    /**
+     * Components the GameObject holds might need to be instantiated after the object has been created.
+     * This should be done before the first update to the GameObjects Components is done
+     */
+    void initializeComponents();
 
 
 

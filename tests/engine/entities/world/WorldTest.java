@@ -1,6 +1,7 @@
 package engine.entities.world;
 
 import engine.entities.Avatar;
+import engine.entities.PlayerBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,15 +72,12 @@ class WorldTest {
 
     @Test
     void setPlayer() {
-        assertNull(testWorld.getPlayer());
-        testWorld.setPlayer(new Avatar());
-        assertNotNull(testWorld.getPlayer());
+
     }
 
     @Test
     void getPlayer() {
-        testWorld.setPlayer(new Avatar());
-        assertNotNull(testWorld.getPlayer());
+
     }
 
     @Test

@@ -1,8 +1,14 @@
 package engine.entities.world;
 
-import engine.entities.Avatar;
-import engine.entities.GameObject;
+import engine.entities.*;
+import engine.entities.composites.AvatarTransformComponent;
+import engine.entities.composites.ComponentType;
 import engine.entities.composites.Sprite;
+import engine.entities.composites.TransformComponent;
+import engine.entities.interfaces.IGameObject;
+import engine.entities.interfaces.IUpdatableGameObject;
+import engine.services.ComponentService;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +18,7 @@ public class World implements Serializable{
 
     private List<Tile> world;
     private Tile seed;
-    private Avatar player;
+    private IUpdatableGameObject player;
     private Random random;
 
     public World(){ }
@@ -24,7 +30,7 @@ public class World implements Serializable{
         connectTiles(world);
     }
 
-    public void loadInGameWorld(List<Tile> tiles, Avatar player){
+    public void loadInGameWorld(List<Tile> tiles, IUpdatableGameObject player){
         System.out.println("Connect");
         this.world = tiles;
         seed = findTile(0,0);
@@ -66,11 +72,16 @@ public class World implements Serializable{
         return seed;
     }
 
-    public void setPlayer(Avatar player){
+    public void setPlayer(IUpdatableGameObject player){
         this.player = player;
-        player.getTransformComponent().setCurrentTile(seed);
+        if(ComponentService.getComponentByType(player.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
+            TransformComponent at = (TransformComponent)
+                    ComponentService.getComponentByType(player.getComponents(), ComponentType.TRANSFORM_COMPONENT).get();
+            at.setCurrentTile(seed);
+        }
     }
-    public Avatar getPlayer(){
+
+    public IUpdatableGameObject getPlayer(){
         return player;
     }
 
@@ -85,10 +96,10 @@ public class World implements Serializable{
         }}
     }
 
-    private GameObject generateWorldObject(){
+    private IGameObject generateWorldObject(){
         int i = random.nextInt(100);
         if (i < 8){
-            return new GameObject(new Sprite(28));
+            return GameObjectFactory.createStaticGameObject(new Sprite(28));
         }
         else {
             return null;

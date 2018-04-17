@@ -1,6 +1,7 @@
 package engine.entities.items.weapons;
 
 import engine.controllers.Updater;
+import engine.entities.GameObjectFactory;
 import engine.entities.composites.*;
 import engine.entities.world.Tile;
 import engine.controllers.Direction;
@@ -41,7 +42,7 @@ public class Gun extends Weapon {
             }
             //else instantiate Bullet and add it to the controllers update list
             else {
-                controller.addToUpdateList(new Bullet(new GraphicsComponent(Bullet.getSpriteByDirection(direction)), new TransformComponent(), range, this.getDamage(), 50, startTile, direction));
+                controller.addToUpdateList(GameObjectFactory.createBullet(startTile, direction, getDamage()));
             }
 
         }

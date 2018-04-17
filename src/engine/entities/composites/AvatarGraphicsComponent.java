@@ -90,7 +90,7 @@ public class AvatarGraphicsComponent extends ScriptableComponent implements IGra
 
     @Override
     public void handle(Message message) {
-        if(message.type == ComponentType.INPUT_COMPONENT){
+        if(message.event == ComponentEvent.MOVE_EVENT){
             inputMoveDirection = (Direction) message.message;
         }
 

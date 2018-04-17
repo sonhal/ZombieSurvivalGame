@@ -1,13 +1,15 @@
 package engine.entities;
 
 import engine.entities.composites.*;
+import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.MeleeWeapon;
+import engine.entities.world.Tile;
 
 import java.util.ArrayList;
 
-public class EnemyFactory {
+public class ZombieBuilder {
 
-    public static Avatar createZombie(Avatar player){
+    public static UpdatableGameObject createZombie(IUpdatableGameObject player, Tile spawnTile){
         ArrayList<Sprite> zombieSprites = new ArrayList<>();
 
         /*
@@ -26,19 +28,26 @@ public class EnemyFactory {
         WeaponComponent wc = new WeaponComponent();
         CollisionComponent cc = new CollisionComponent();
         HealthComponent hc = new HealthComponent(30);
-        AvatarTransformComponent tc = new AvatarTransformComponent(500,1000);
-        EnemyInputComponent ic = new EnemyInputComponent(player, tc);
+        AvatarTransformComponent tc = new AvatarTransformComponent(1000);
+        tc.setCurrentTile(spawnTile);
+        EnemyInputComponent ic = new EnemyInputComponent(player);
 
-        AvatarGraphicsComponent gc = new AvatarGraphicsComponent(zombieSprites.get(0));
+        AvatarGraphicsComponent gc = new AvatarGraphicsComponent(zombieSprites.get(0), 300);
 
         for (Sprite sprite:
                 zombieSprites) {
             gc.addSprite(sprite);
         }
-        Avatar zombie = new Avatar(gc, hc, wc, cc,ic, tc);
 
+        wc.setWeapon((new MeleeWeapon(1,5,1000)));
 
-        zombie.pickupWeapon(new MeleeWeapon(1,5,1000));
-        return zombie;
+        ArrayList<ScriptableComponent> components = new ArrayList<>();
+        components.add(wc);
+        components.add(cc);
+        components.add(hc);
+        components.add(tc);
+        components.add(ic);
+
+        return new ImpUpdatableGameObject(components);
     }
 }

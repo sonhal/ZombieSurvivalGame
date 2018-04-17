@@ -3,7 +3,6 @@ package engine.entities.composites;
 import engine.controllers.ActionEvent;
 import engine.controllers.Direction;
 import engine.controllers.EventHandler;
-import engine.entities.Avatar;
 import engine.entities.interfaces.IGameObject;
 import engine.services.ComponentService;
 
@@ -40,12 +39,12 @@ public class AvatarInputComponent extends ScriptableComponent{
 
     private void handleMoving(IGameObject gameObject, Direction direction){
         ComponentService.getComponentsByListOfTypes(gameObject.getComponents(), moveListenerTypes)
-                .forEach(scriptableComponent -> scriptableComponent.handle(new Message(ComponentType.INPUT_COMPONENT, direction)));
+                .forEach(scriptableComponent -> scriptableComponent.handle(new Message(ComponentEvent.MOVE_EVENT, direction)));
     }
 
     private void handleAttacking(IGameObject gameObject, Direction direction){
         ComponentService.getComponentsByListOfTypes(gameObject.getComponents(), moveListenerTypes)
-                .forEach(scriptableComponent -> scriptableComponent.handle(new Message(ComponentType.INPUT_COMPONENT, direction)));
+                .forEach(scriptableComponent -> scriptableComponent.handle(new Message(ComponentEvent.MOVE_EVENT, direction)));
     }
 
 

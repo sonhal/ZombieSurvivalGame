@@ -5,15 +5,14 @@ import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.world.Tile;
 import engine.services.ComponentService;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-public class ImplUpdatableGameObject implements IUpdatableGameObject{
+public class ImpUpdatableGameObject extends UpdatableGameObject{
 
-    ArrayList<ScriptableComponent> components;
-
-    public ImplUpdatableGameObject(ArrayList<ScriptableComponent> components){
-        this.components = components;
+    public ImpUpdatableGameObject(List<ScriptableComponent> components){
+        super(components);
+        initializeComponents();
     }
     /**
      * Signals to the Handler of the Object that the Object can be deleted.
@@ -32,28 +31,6 @@ public class ImplUpdatableGameObject implements IUpdatableGameObject{
     @Override
     public void die() {
 
-    }
-
-    /**
-     * Method called by the Updater Object holding a reference to this object.
-     * Should call relevant code the object should run each game tick.
-     */
-    @Override
-    public void update() {
-        for (ScriptableComponent component:
-             components) {
-            component.update(this);
-        }
-
-    }
-
-    /**
-     * Access method that needs to be implemented for the Object to function
-     * properly with other Objects accepting a IUpdatableGameObject
-     */
-    @Override
-    public ArrayList<ScriptableComponent> getComponents() {
-        return components;
     }
 
     @Override
@@ -81,4 +58,5 @@ public class ImplUpdatableGameObject implements IUpdatableGameObject{
             return null;
         }
     }
+
 }

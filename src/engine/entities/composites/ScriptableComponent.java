@@ -43,6 +43,15 @@ public abstract class ScriptableComponent implements Serializable{
         return ComponentService.getComponentByType(components, type);
     }
 
+    public static void sendMessage(List<ScriptableComponent> components, List<ComponentType> recipients, Message message){
+        ComponentService.getComponentsByListOfTypes(components, recipients)
+                .forEach(scriptableComponent -> scriptableComponent.handle(message));
+    }
+
+    public static void sendMessageToAllComponents(List<ScriptableComponent> components, Message message){
+        components.forEach(scriptableComponent -> scriptableComponent.handle(message));
+    }
+
     /**
      *The method called by a gameObject holding a Component each game tick
      * @param gameObject, GameObject that calls the Component

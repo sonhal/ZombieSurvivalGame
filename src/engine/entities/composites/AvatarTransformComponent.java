@@ -1,7 +1,6 @@
 package engine.entities.composites;
 
 import engine.controllers.Direction;
-import engine.entities.Avatar;
 import engine.entities.interfaces.IGameObject;
 
 

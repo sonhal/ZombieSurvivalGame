@@ -12,34 +12,38 @@ public class CollisionComponent extends ScriptableComponent {
 
     private Direction collided;
     private Direction inputDirection;
+    private TransformComponent gameObjectTransformComponent;
 
-    CollisionComponent() {
+    public CollisionComponent() {
         super(ComponentType.COLLISION_COMPONENT);
     }
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(IGameObject gameObject){
         if (inputDirection != null) {
             clearCollided();
-            Optional<ScriptableComponent> optionalComponent =
-                    getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT);
-            if (optionalComponent.isPresent()) {
-                TransformComponent transformComponent = (TransformComponent) optionalComponent.get();
-                collisionDetect(transformComponent.getCurrentTile(), inputDirection);
+            if(collisionDetect(gameObjectTransformComponent.getCurrentTile(), inputDirection) != null ){
+                sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.COLLISION_EVENT,
+                        collisionDetect(gameObjectTransformComponent.getCurrentTile(), inputDirection)));
             }
         }
     }
 
     @Override
     public void handle(Message message) {
-        if(message.type == ComponentType.INPUT_COMPONENT){
+        if(message.event == ComponentEvent.MOVE_EVENT){
             inputDirection = (Direction) message.message;
         }
     }
 
     @Override
     public void innit(IGameObject gameObject) {
-        //Do nothing
+        //Gets reference to its own TransformComponent
+        if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
+            this.gameObjectTransformComponent =
+                    (TransformComponent) getComponentByType(gameObject.getComponents()
+                            , ComponentType.TRANSFORM_COMPONENT).get();
+        }
     }
 
     public Direction collided() {
@@ -50,31 +54,29 @@ public class CollisionComponent extends ScriptableComponent {
         collided = null;
     }
 
-    private void collisionDetect(Tile currentTile, Direction direction) {
-
+    private Direction collisionDetect(Tile currentTile, Direction direction) {
         switch (direction) {
             case RIGHT:
                 if (currentTile.getRight().getGameObject() != null) {
-                    collided = Direction.RIGHT;
+                    return Direction.RIGHT;
                 }
                 break;
             case LEFT:
                 if (currentTile.getLeft().getGameObject() != null) {
-                    collided = Direction.LEFT;
+                    return Direction.LEFT;
                 }
                 break;
             case UP:
                 if (currentTile.getUp().getGameObject() != null) {
-                    collided = Direction.UP;
+                    return Direction.UP;
                 }
                 break;
             case DOWN:
                 if (currentTile.getDown().getGameObject() != null) {
-                    collided = Direction.DOWN;
+                    return Direction.DOWN;
                 }
                 break;
-            default:
-                collided = null;
         }
+        return null;
     }
 }

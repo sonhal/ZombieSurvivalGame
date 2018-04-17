@@ -1,42 +1,54 @@
 package engine.entities.composites;
 
 import engine.controllers.Direction;
-import engine.entities.Avatar;
+import engine.entities.interfaces.IGameObject;
 
-public class EnemyInputComponent implements InputComponent{
+import java.util.ArrayList;
+import java.util.List;
 
-    private Avatar player;
-    private TransformComponent transformComponent;
-    private Direction moveEvent;
-    private Direction attackEvent;
+public class EnemyInputComponent extends ScriptableComponent{
 
-    public EnemyInputComponent(Avatar player, TransformComponent tc){
-        transformComponent = tc;
+    private IGameObject player;
+    private TransformComponent playerTransformComponent;
+    private TransformComponent gameObjectTransformComponent;
+    private Direction collisionHasOccurred;
+    private List<ComponentType> attackListeners;
+    private List<ComponentType> moveListeners;
+
+    public EnemyInputComponent(IGameObject player){
+        super(ComponentType.INPUT_COMPONENT);
         this.player = player;
+        this.attackListeners = new ArrayList<>();
+        this.moveListeners = new ArrayList<>();
+        this.attackListeners.add(ComponentType.WEAPON_COMPONENT);
+        this.moveListeners.add(ComponentType.COLLISION_COMPONENT);
+        this.moveListeners.add(ComponentType.TRANSFORM_COMPONENT);
+        this.moveListeners.add(ComponentType.GRAPHICS_COMPONENT);
     }
 
 
 
-    private Direction getDirectionAgainstPlayer(Avatar enemy){
+    private Direction getDirectionAgainstPlayer(IGameObject enemy){
 
-        if (enemy.getCollisionComponent().collided() != null){
-            if(enemy.getCollisionComponent().collided() == Direction.UP){
+        //Bad collision avoiding AI
+        if (collisionHasOccurred != null){
+            if(collisionHasOccurred == Direction.UP){
                 return Direction.LEFT;
             }
-            if(enemy.getCollisionComponent().collided() == Direction.DOWN){
+            if(collisionHasOccurred == Direction.DOWN){
                 return Direction.RIGHT;
             }
-            if(enemy.getCollisionComponent().collided() == Direction.LEFT){
+            if(collisionHasOccurred == Direction.LEFT){
                 return Direction.UP;
             }
-            if(enemy.getCollisionComponent().collided() == Direction.RIGHT){
+            if(collisionHasOccurred == Direction.RIGHT){
                 return Direction.DOWN;
             }
         }
-        int playerX = player.getTransformComponent().getCurrentTile().getCordX();
-        int playerY = player.getTransformComponent().getCurrentTile().getCordY();
-        int enemyX = enemy.getTransformComponent().getCurrentTile().getCordX();
-        int enemyY = enemy.getTransformComponent().getCurrentTile().getCordY();
+        int playerX = playerTransformComponent.getCurrentTile().getCordX();
+        int playerY = playerTransformComponent.getCurrentTile().getCordY();
+        int enemyX = gameObjectTransformComponent.getCurrentTile().getCordX();
+        int enemyY = gameObjectTransformComponent.getCurrentTile().getCordY();
 
         if (playerX < enemyX){
             if(playerY < enemyY){
@@ -58,27 +70,55 @@ public class EnemyInputComponent implements InputComponent{
         }
     }
 
-    private void tryAttack(Avatar enemy){
-        if(enemy.getCollisionComponent().collided() != null){
-            if(enemy.getTile().getTileInDirection(enemy.getCollisionComponent().collided()).getGameObject() == player){
-                attackEvent = enemy.getCollisionComponent().collided();
+    private Direction isPlayerInRange(IGameObject gameObject){
+        if(collisionHasOccurred != null){
+            if(gameObjectTransformComponent.getCurrentTile().getTileInDirection(collisionHasOccurred).getGameObject() == player){
+                return collisionHasOccurred;
             }
+        }
+        return null;
+    }
+
+    @Override
+    public void update(IGameObject gameObject) {
+        //If Player is in range, attack Player
+        if(isPlayerInRange(gameObject) != null){
+            sendMessage(gameObject.getComponents(), attackListeners,
+                    new Message(ComponentEvent.ATTACK_EVENT, isPlayerInRange(gameObject)));
+        }
+        //If not, Move towards Player
+        else {
+            sendMessage(gameObject.getComponents(), moveListeners,
+                    new Message(ComponentEvent.MOVE_EVENT, getDirectionAgainstPlayer(gameObject)));
+        }
+
+
+    }
+
+    @Override
+    public void handle(Message message) {
+        if(message.event == ComponentEvent.COLLISION_EVENT){
+            this.collisionHasOccurred = (Direction) message.message;
+        }
+
+    }
+
+    @Override
+    public void innit(IGameObject gameObject) {
+        //Gets reference to Players TransformComponent
+        if(getComponentByType(player.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
+            this.playerTransformComponent =
+                    (TransformComponent) getComponentByType(player.getComponents()
+                            , ComponentType.TRANSFORM_COMPONENT).get();
+        }
+
+        //Gets reference to its own TransformComponent
+        if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
+            this.gameObjectTransformComponent =
+                    (TransformComponent) getComponentByType(player.getComponents()
+                            , ComponentType.TRANSFORM_COMPONENT).get();
         }
     }
 
-    @Override
-    public void update(Avatar enemy) {
-        tryAttack(enemy);
-        moveEvent = (getDirectionAgainstPlayer(enemy));
-    }
 
-    @Override
-    public Direction getMoveEvent() {
-        return moveEvent;
-    }
-
-    @Override
-    public Direction getAttackEvent() {
-        return attackEvent;
-    }
 }

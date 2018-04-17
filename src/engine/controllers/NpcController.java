@@ -1,9 +1,7 @@
 package engine.controllers;
 
-import engine.entities.Avatar;
-import engine.entities.EnemyFactory;
-import engine.entities.GameObject;
-import engine.entities.composites.Sprite;
+import engine.entities.ZombieBuilder;
+import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.world.Tile;
 import engine.entities.world.World;
 
@@ -14,10 +12,10 @@ public class NpcController extends Updater {
 
     private int spawnInterval = 0;
     private GameHandler gameHandler;
-    private Avatar player;
+    private IUpdatableGameObject player;
 
 
-    public NpcController(GameHandler gameHandler, Avatar player){
+    public NpcController(GameHandler gameHandler, IUpdatableGameObject player){
         System.out.println("Npc controller created");
         this.player = player;
         this.gameHandler = gameHandler;
@@ -36,8 +34,7 @@ public class NpcController extends Updater {
         Tile spawnTile = locateSpawnTile(world);
         if (spawnTile != null){
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
-            Avatar enemy = EnemyFactory.createZombie(player);
-            enemy.getTransformComponent().setCurrentTile(spawnTile);
+            IUpdatableGameObject enemy = ZombieBuilder.createZombie(player, spawnTile);
             addToUpdateList(enemy);
             spawnInterval = 10;
         }
@@ -70,12 +67,6 @@ public class NpcController extends Updater {
             }
 
         return null;
-    }
-
-    protected GameObject spawnEnemy(Tile tile, int stage){
-        // TODO-me Add logic which semi-randomly choses a enemy to spawn depending on which stage the player have reached here.
-        GameObject enemy = new GameObject(new Sprite(2));
-        return enemy;
     }
 
 }

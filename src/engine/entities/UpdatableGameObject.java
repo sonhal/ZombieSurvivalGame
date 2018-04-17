@@ -1,53 +1,76 @@
 package engine.entities;
 
 import engine.entities.composites.*;
+import engine.entities.interfaces.Hittable;
 import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.world.Tile;
+import engine.services.ComponentService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 public abstract class UpdatableGameObject implements IUpdatableGameObject {
 
-    private AvatarTransformComponent transformComponent;
-    private AvatarGraphicsComponent graphicsComponent;
-
-    public UpdatableGameObject(AvatarGraphicsComponent gc){
-        this.graphicsComponent = gc;
-    }
-
-    public UpdatableGameObject(Sprite sprite){
-        this.graphicsComponent = new AvatarGraphicsComponent(sprite);
-    }
-
+    protected List<ScriptableComponent> components;
     private boolean toBeDeleted;
+    private boolean isPlayer;
 
+    public UpdatableGameObject(List<ScriptableComponent> components){
+        this.components = components;
+    }
+
+    @Override
     public boolean isDead(){
         return toBeDeleted;
     }
 
+    @Override
     public void die(){
         toBeDeleted = true;
     }
 
+
+    /**
+     * Method called by the Updater Object holding a reference to this object.
+     * Should call relevant code the object should run each game tick.
+     */
     @Override
-    public Tile getTile(){
-        return this.transformComponent.getCurrentTile();
+    public void update() {
+        for (ScriptableComponent component:
+                components) {
+            component.update(this);
+        }
+
     }
 
     @Override
-    public Sprite getSprite(){
-        return graphicsComponent.getSprite();
+    public void initializeComponents() {
+        components.forEach(scriptableComponent -> scriptableComponent.innit(this));
     }
 
-    public abstract void update();
 
-    public AvatarGraphicsComponent getGraphicsComponent(){return graphicsComponent;}
-
-    public AvatarTransformComponent getTransformComponent(){return transformComponent;}
-
-    public void setTransformComponent(AvatarTransformComponent avatarTransformComponent){
-        this.transformComponent = avatarTransformComponent;
+    /**
+     * Access method that needs to be implemented for the Object to function
+     * properly with other Objects accepting a IUpdatableGameObject
+     */
+    @Override
+    public List<ScriptableComponent> getComponents() {
+        return components;
     }
 
-    public void setGraphicsComponent(AvatarGraphicsComponent graphicsComponent) {
-        this.graphicsComponent = graphicsComponent;
+    @Override
+    public Optional<ScriptableComponent> getComponentByType(ComponentType type){
+        return ComponentService.getComponentByType(getComponents(), type);
     }
+
+
+    public void setAsPlayer(boolean bool){
+        isPlayer = bool;
+    }
+
+    public boolean isPlayer(){
+        return isPlayer;
+    }
+
 }
