@@ -1,5 +1,6 @@
 package view2D;
 
+import engine.services.audio.AudioPlayer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,6 +15,12 @@ public class Main extends Application {
         primaryStage.setTitle("Zombie Game");
         primaryStage.setScene(new Scene(root, 847, 593));
         primaryStage.show();
+    }
+
+    @Override
+    public void stop() {
+        //Make sure that the AudioPlayer has properly shutdown
+        AudioPlayer.getInstance().shutdown();
     }
 
 

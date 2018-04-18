@@ -160,7 +160,7 @@ public class GameHandler extends Updater {
      */
     public void handlePlayerDeath(){
         try {
-            AudioPlayer.getInstance().stopBackgroundMusic();
+            shutDown();
             System.out.println("Game ended");
             gameViewController.goToMenu();
         }catch (IOException err){
@@ -190,5 +190,10 @@ public class GameHandler extends Updater {
         gameViewController = null;
         SaveGameHandler.saveGame(world.getWorld());
         System.out.println("Game saved");
+    }
+
+    public void shutDown(){
+        audioPlayer.stopBackgroundMusic();
+        audioPlayer.shutdown();
     }
 }
