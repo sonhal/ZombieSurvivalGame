@@ -7,7 +7,6 @@ import javafx.application.Platform;
 
 public class AudioComponent extends ScriptableComponent{
 
-    protected AudioPlayer audioPlayer;
     protected boolean attackEvent;
 
     public AudioComponent() {
@@ -17,7 +16,7 @@ public class AudioComponent extends ScriptableComponent{
     @Override
     public void update(IGameObject gameObject) {
         if(attackEvent){
-            audioPlayer.addToPlayerQueue(Sound.HIT_1, 1000);
+            AudioPlayer.getInstance().addToPlayerQueue(Sound.HIT_1, 1000);
         }
         attackEvent = false;
     }
@@ -32,7 +31,6 @@ public class AudioComponent extends ScriptableComponent{
 
     @Override
     public void innit(IGameObject gameObject) {
-        audioPlayer = AudioPlayer.getInstance();
     }
 
     @Override

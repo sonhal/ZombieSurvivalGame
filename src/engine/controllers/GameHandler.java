@@ -187,7 +187,9 @@ public class GameHandler extends Updater {
     }
 
     public void saveGame(){
+        shutDown();
         gameViewController = null;
+        audioPlayer = null;
         SaveGameHandler.saveGame(world.getWorld());
         System.out.println("Game saved");
     }

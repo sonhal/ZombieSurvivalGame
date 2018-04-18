@@ -6,6 +6,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -101,6 +102,7 @@ public class AudioPlayer {
     public void shutdown(){
         soundPool.shutdown();
         backGroundSounds.stream().forEach(mediaPlayer -> mediaPlayer.dispose());
+        instance = null;
     }
 
     /**
