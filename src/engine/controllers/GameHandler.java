@@ -85,14 +85,11 @@ public class GameHandler extends Updater {
         //Create the DrawableMatrix that handles the cut of the game world passed to the view
         this.matrix = getDrawableMatrix(10);
 
-        try {
-            this.audioPlayer = new AudioPlayer(30);
-            ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
-            backGroundMusic.add(Sound.BACKGROUND_MUSIC_1);
-            this.audioPlayer.setBackgroundMusic(backGroundMusic);
-        }catch (IOException err){
-            err.printStackTrace();
-        }
+        this.audioPlayer = AudioPlayer.getInstance();
+        ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
+        backGroundMusic.add(Sound.BACKGROUND_MUSIC_1);
+        this.audioPlayer.setBackgroundMusic(backGroundMusic);
+
     }
 
     /**
@@ -116,6 +113,7 @@ public class GameHandler extends Updater {
     public void updateWordState(){
         npcController.update(1, world);
         update();
+        AudioPlayer.getInstance().playSounds();
         if(player.isDead()){
             handlePlayerDeath();}
     }
@@ -162,6 +160,7 @@ public class GameHandler extends Updater {
      */
     public void handlePlayerDeath(){
         try {
+            AudioPlayer.getInstance().stopBackgroundMusic();
             System.out.println("Game ended");
             gameViewController.goToMenu();
         }catch (IOException err){

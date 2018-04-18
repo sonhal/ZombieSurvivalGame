@@ -47,6 +47,7 @@ public class ZombieBuilder {
         components.add(hc);
         components.add(tc);
         components.add(ic);
+        components.add(new ZombieAudioComponent());
 
         return new ImpUpdatableGameObject(components);
     }

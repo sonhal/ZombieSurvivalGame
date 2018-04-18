@@ -41,6 +41,7 @@ public class PlayerBuilder {
         }
 
         components.add(gc);
+        components.add(new AudioComponent());
 
         ImpUpdatableGameObject player = new ImpUpdatableGameObject(components);
         player.setAsPlayer(true);
