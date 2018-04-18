@@ -1,8 +1,6 @@
 package engine.entities.items;
 
-import engine.entities.GameObject;
-import engine.entities.composites.Sprite;
-import engine.entities.items.weapons.Weapon;
+import engine.entities.Sprite;
 
 import java.io.Serializable;
 

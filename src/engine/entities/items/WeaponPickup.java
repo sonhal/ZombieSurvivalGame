@@ -1,6 +1,6 @@
 package engine.entities.items;
 
-import engine.entities.composites.Sprite;
+import engine.entities.Sprite;
 import engine.entities.items.weapons.Weapon;
 
 /**

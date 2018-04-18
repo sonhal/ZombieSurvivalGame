@@ -6,7 +6,7 @@ import engine.controllers.GameHandler;
 import engine.controllers.Updater;
 import engine.entities.PlayerBuilder;
 import engine.entities.composites.ComponentType;
-import engine.entities.composites.Sprite;
+import engine.entities.Sprite;
 import engine.entities.composites.TransformComponent;
 import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.world.Tile;

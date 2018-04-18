@@ -1,11 +1,9 @@
 package engine.entities.world;
 
 import engine.entities.*;
-import engine.entities.composites.AvatarTransformComponent;
 import engine.entities.composites.ComponentType;
-import engine.entities.composites.Sprite;
+import engine.entities.Sprite;
 import engine.entities.composites.TransformComponent;
-import engine.entities.interfaces.IGameObject;
 import engine.entities.interfaces.IUpdatableGameObject;
 import engine.services.ComponentService;
 

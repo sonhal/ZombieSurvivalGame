@@ -2,7 +2,7 @@ package engine.view;
 
 import engine.entities.GameObject;
 import engine.entities.interfaces.IGameObject;
-import engine.entities.composites.Sprite;
+import engine.entities.Sprite;
 import engine.entities.items.Item;
 
 import java.io.Serializable;

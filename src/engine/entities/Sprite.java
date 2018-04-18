@@ -1,4 +1,4 @@
-package engine.entities.composites;
+package engine.entities;
 
 import java.io.Serializable;
 

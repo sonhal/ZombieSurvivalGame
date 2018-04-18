@@ -1,14 +1,10 @@
 package engine.entities;
 
-import engine.controllers.Direction;
 import engine.entities.composites.ComponentType;
-import engine.entities.composites.GraphicsComponent;
-import engine.entities.composites.Sprite;
 import engine.entities.composites.TransformComponent;
 import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
 import engine.services.ComponentService;
-import javafx.scene.canvas.GraphicsContext;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

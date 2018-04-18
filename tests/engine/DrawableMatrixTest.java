@@ -1,6 +1,6 @@
 package engine;
 
-import engine.entities.composites.Sprite;
+import engine.entities.Sprite;
 import engine.entities.items.WeaponPickup;
 import engine.entities.items.weapons.MeleeWeapon;
 import engine.entities.world.World;

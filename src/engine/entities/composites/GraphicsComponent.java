@@ -1,5 +1,6 @@
 package engine.entities.composites;
 
+import engine.entities.Sprite;
 import engine.entities.interfaces.IGameObject;
 
 import java.util.ArrayList;

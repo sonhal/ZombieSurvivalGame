@@ -1,6 +1,7 @@
 package engine.entities.interfaces;
 
 
+import engine.entities.Sprite;
 import engine.entities.composites.*;
 import engine.entities.world.Tile;
 

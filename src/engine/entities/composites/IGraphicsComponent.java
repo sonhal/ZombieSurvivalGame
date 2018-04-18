@@ -1,5 +1,7 @@
 package engine.entities.composites;
 
+import engine.entities.Sprite;
+
 import java.util.ArrayList;
 import java.util.Queue;
 

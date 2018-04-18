@@ -1,6 +1,6 @@
 package view2D;
 
-import engine.entities.composites.Sprite;
+import engine.entities.Sprite;
 import javafx.scene.image.Image;
 
 

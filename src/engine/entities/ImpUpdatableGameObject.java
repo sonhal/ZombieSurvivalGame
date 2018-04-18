@@ -1,7 +1,6 @@
 package engine.entities;
 
 import engine.entities.composites.*;
-import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.world.Tile;
 import engine.services.ComponentService;
 

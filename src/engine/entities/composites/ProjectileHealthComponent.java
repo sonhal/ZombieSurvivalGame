@@ -39,11 +39,11 @@ public class ProjectileHealthComponent extends ScriptableComponent{
 
     @Override
     public void innit(IGameObject gameObject) {
-
+        //Do nothing
     }
 
     @Override
     public void cleanUp(IGameObject gameObject) {
-
+        //Do nothing
     }
 }

@@ -5,7 +5,6 @@ import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
 import engine.services.ComponentService;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import java.util.Queue;

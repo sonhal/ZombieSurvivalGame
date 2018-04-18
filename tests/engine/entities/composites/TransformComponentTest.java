@@ -1,8 +1,8 @@
 package engine.entities.composites;
 
 import engine.controllers.Direction;
-import engine.entities.GameObject;
 import engine.entities.GameObjectFactory;
+import engine.entities.Sprite;
 import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
 import engine.services.ComponentService;
