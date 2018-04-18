@@ -26,7 +26,7 @@ public class GameObjectFactory {
         components.add(new GraphicsComponent(getBulletSpriteByDirection(direction)));
         components.add(new AttackComponent(damage));
         components.add(new CollisionComponent());
-        components.add(new ProjectileInputComponent(direction, 100));
+        components.add(new ProjectileInputComponent(direction, 10));
         components.add(new ProjectileHealthComponent(10));
         return new ImpUpdatableGameObject(components);
     }

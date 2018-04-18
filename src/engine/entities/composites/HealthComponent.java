@@ -71,6 +71,7 @@ public class HealthComponent extends ScriptableComponent{
              damageToTake) {
             damage(dmg);
         }
+        damageToTake.clear();
     }
 
     @Override

@@ -34,6 +34,9 @@ public class AttackComponent extends ScriptableComponent{
             if(oComponent.isPresent()){
                 TransformComponent transformComponent = (TransformComponent) oComponent.get();
                 tryAttack(this.damage, transformComponent.getCurrentTile().getTileInDirection(attackDirection));
+
+                sendMessageToAllComponents(gameObject.getComponents(),
+                        new Message(ComponentEvent.HIT_EVENT, damage));
             }
             attackDirection = null;
         }
@@ -41,7 +44,7 @@ public class AttackComponent extends ScriptableComponent{
 
     @Override
     public void handle(Message message) {
-        if(message.message instanceof Direction){
+        if(message.event == ComponentEvent.ATTACK_EVENT){
             attackDirection = (Direction) message.message;
         }
     }

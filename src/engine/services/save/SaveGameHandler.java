@@ -21,7 +21,7 @@ public class SaveGameHandler {
         }
         try {
             FileOutputStream fileOut =
-                    new FileOutputStream("tmp/savefile.ser");
+                    new FileOutputStream("gamefiles/savefile.ser");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(world);
             out.close();
@@ -34,7 +34,7 @@ public class SaveGameHandler {
     public static List<Tile> loadGame(){
         List<Tile> loadedWorld = null;
         try {
-            FileInputStream fileIn = new FileInputStream("tmp/savefile.ser");
+            FileInputStream fileIn = new FileInputStream("gamefiles/savefile.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             loadedWorld = (List<Tile>)in.readObject();
             in.close();

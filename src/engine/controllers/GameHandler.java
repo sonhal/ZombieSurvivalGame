@@ -10,12 +10,15 @@ import engine.entities.items.weapons.Gun;
 import engine.entities.world.Tile;
 import engine.entities.world.World;
 import engine.services.ComponentService;
+import engine.services.audio.AudioPlayer;
+import engine.services.audio.Sound;
 import engine.services.save.SaveGameHandler;
 import engine.view.DrawableMatrix;
 import engine.view.DrawableTile;
 import view.GameViewController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +32,7 @@ public class GameHandler extends Updater {
     private EventHandler eventHandler;
     private IUpdatableGameObject player;
     private DrawableMatrix matrix;
+    private AudioPlayer audioPlayer;
 
 
     public GameHandler(GameViewController gameViewController2D){
@@ -37,6 +41,7 @@ public class GameHandler extends Updater {
         //Create EventHandler that controls the flow of events from the view
         this.eventHandler = new EventHandler();
         this.world = new World();
+
     }
 
     public void startNewGame(){
@@ -79,6 +84,15 @@ public class GameHandler extends Updater {
         this.addToUpdateList(player);
         //Create the DrawableMatrix that handles the cut of the game world passed to the view
         this.matrix = getDrawableMatrix(10);
+
+        try {
+            this.audioPlayer = new AudioPlayer(30);
+            ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
+            backGroundMusic.add(Sound.BACKGROUND_MUSIC_1);
+            this.audioPlayer.setBackgroundMusic(backGroundMusic);
+        }catch (IOException err){
+            err.printStackTrace();
+        }
     }
 
     /**

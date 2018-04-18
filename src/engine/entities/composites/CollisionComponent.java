@@ -1,12 +1,7 @@
 package engine.entities.composites;
 import engine.controllers.Direction;
-import engine.entities.interfaces.Collidable;
 import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
-
-import java.io.Serializable;
-import java.util.Optional;
-import java.util.concurrent.ArrayBlockingQueue;
 
 public class CollisionComponent extends ScriptableComponent {
 
@@ -36,6 +31,9 @@ public class CollisionComponent extends ScriptableComponent {
     @Override
     public void handle(Message message) {
         if(message.event == ComponentEvent.MOVE_EVENT){
+            inputDirection = (Direction) message.message;
+        }
+        if(message.event == ComponentEvent.CHECK_FOR_COLLISION_EVENT){
             inputDirection = (Direction) message.message;
         }
     }

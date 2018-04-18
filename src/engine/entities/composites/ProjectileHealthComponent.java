@@ -15,7 +15,6 @@ public class ProjectileHealthComponent extends ScriptableComponent{
 
     @Override
     public void update(IGameObject gameObject) {
-
         if(range <= 0){
             sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.DEATH_EVENT, true));
             if(gameObject instanceof IUpdatableGameObject){
@@ -27,7 +26,7 @@ public class ProjectileHealthComponent extends ScriptableComponent{
 
     @Override
     public void handle(Message message) {
-        if(message.event == ComponentEvent.COLLISION_EVENT){
+        if(message.event == ComponentEvent.HIT_EVENT){
             if(message.message != null){
                 range = 0;
             }
