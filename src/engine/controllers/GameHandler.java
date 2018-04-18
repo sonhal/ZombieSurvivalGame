@@ -100,10 +100,10 @@ public class GameHandler extends Updater {
      * Main update method for the game state.
      */
     public void updateWordState(){
-        if(player.isDead()){
-            handlePlayerDeath();}
         npcController.update(1, world);
         update();
+        if(player.isDead()){
+            handlePlayerDeath();}
     }
 
     /**
@@ -111,11 +111,19 @@ public class GameHandler extends Updater {
      * @return DrawableTile 2D array
      */
     public DrawableTile[][] getDrawableWorld(){
+        Tile viewCenterTile;
+
         updateWordState();
         if(player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).isPresent()){
             TransformComponent playerTransformComponent = (TransformComponent)
                     player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).get();
-            return matrix.generateDrawable(world, playerTransformComponent.getCurrentTile(),10,10);
+            if(playerTransformComponent.getCurrentTile() == null){
+                viewCenterTile = world.findTile(0,0);
+            }
+            else {
+                viewCenterTile = playerTransformComponent.getCurrentTile();
+            }
+            return matrix.generateDrawable(world, viewCenterTile,10,10);
         }
         else {
             throw  new RuntimeException("Player is not in World");

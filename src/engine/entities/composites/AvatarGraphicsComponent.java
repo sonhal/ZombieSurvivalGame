@@ -2,27 +2,30 @@ package engine.entities.composites;
 
 import engine.controllers.Direction;
 import engine.entities.interfaces.IGameObject;
-import engine.entities.interfaces.IUpdatableGameObject;
 
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class AvatarGraphicsComponent extends ScriptableComponent implements IGraphicsComponent{
     private ArrayList<Sprite> sprites;
-    private Sprite activeSprite;
+    private Queue<Sprite> activeSprites;
     private Direction inputMoveDirection;
     private Direction currentFacingDirection;
     private double moveAnimationDelay;
     private double lastAnimationStart;
     private boolean isMoving;
+    private boolean hitEvent;
 
 
     public AvatarGraphicsComponent(Sprite sprite, double moveAnimationDelay){
         super(ComponentType.GRAPHICS_COMPONENT);
         this.sprites = new ArrayList<>();
         this.sprites.add(sprite);
-        this.activeSprite = this.sprites.get(0);
+        this.activeSprites = new ArrayBlockingQueue<>(3);
+        this.activeSprites.add(this.sprites.get(0));
         this.moveAnimationDelay = moveAnimationDelay;
     }
 
@@ -52,42 +55,24 @@ public class AvatarGraphicsComponent extends ScriptableComponent implements IGra
                 }
             }
         }
-
-        /*
-        if(newInputReceived()){
-            if(currentFacingDirection == inputMoveDirection){
-                if(canActivate(moveAnimationDelay, lastAnimationStart)) {
-                    setActiveSpriteByID(getSpriteIDByDirection(currentFacingDirection));
-                    lastAnimationStart = System.currentTimeMillis();
-                }
-                else{
-                    currentFacingDirection = inputMoveDirection;
-                    setActiveSpriteByID(getSpriteMovingIDByDirection(inputMoveDirection));
-                }
-                    }
-            else{
-                currentFacingDirection = inputMoveDirection;
-                setActiveSpriteByID(getSpriteMovingIDByDirection(inputMoveDirection));
-                lastAnimationStart = System.currentTimeMillis();
+        if(hitEvent){
+            if(activeSprites.size() < 2){
+                activeSprites.add(new Sprite(17));
             }
-            inputMoveDirection = null;
+            hitEvent = false;
         }
-        else {
-            if(canActivate(moveAnimationDelay, lastAnimationStart)) {
-                setActiveSpriteByID(getSpriteIDByDirection(currentFacingDirection));
-                lastAnimationStart = System.currentTimeMillis();
-            }
-        }*/
     }
 
     private boolean newInputReceived(){
         return (inputMoveDirection != null);
     }
 
-    public Sprite getSprite() {
-        return activeSprite;
+    @Override
+    public Queue<Sprite> getSprite() {
+        return activeSprites;
     }
 
+    @Override
     public ArrayList<Sprite> getSpriteList(){
         return sprites;
     }
@@ -97,7 +82,8 @@ public class AvatarGraphicsComponent extends ScriptableComponent implements IGra
     }
 
     public void setActiveSpriteByID(int id) {
-        this.activeSprite = sprites.get(id);
+        this.activeSprites.clear();
+        this.activeSprites.add(sprites.get(id));
     }
 
     private int getSpriteIDByDirection(Direction direction){
@@ -136,7 +122,9 @@ public class AvatarGraphicsComponent extends ScriptableComponent implements IGra
         if(message.event == ComponentEvent.MOVE_EVENT){
             inputMoveDirection = (Direction) message.message;
         }
-
+        if(message.event == ComponentEvent.DAMAGE_TAKEN_EVENT) {
+            hitEvent = true;
+        }
     }
 
     @Override

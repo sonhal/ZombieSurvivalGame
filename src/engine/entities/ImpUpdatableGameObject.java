@@ -7,6 +7,7 @@ import engine.services.ComponentService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Queue;
 
 public class ImpUpdatableGameObject extends UpdatableGameObject{
 
@@ -16,7 +17,7 @@ public class ImpUpdatableGameObject extends UpdatableGameObject{
     }
 
     @Override
-    public Sprite getSprite() {
+    public Queue<Sprite> getSprite() {
         Optional<ScriptableComponent> oComponent = getComponentByType(ComponentType.GRAPHICS_COMPONENT);
         if(oComponent.isPresent()){
             IGraphicsComponent graphicsComponent = (IGraphicsComponent)oComponent.get();

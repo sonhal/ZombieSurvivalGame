@@ -32,4 +32,5 @@ public interface IUpdatableGameObject extends IGameObject, Updatable,Serializabl
     void update();
 
     Optional<ScriptableComponent> getComponentByType(ComponentType type);
+
 }

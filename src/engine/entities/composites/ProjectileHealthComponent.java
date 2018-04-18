@@ -28,7 +28,9 @@ public class ProjectileHealthComponent extends ScriptableComponent{
     @Override
     public void handle(Message message) {
         if(message.event == ComponentEvent.COLLISION_EVENT){
-            range = 0;
+            if(message.message != null){
+                range = 0;
+            }
         }
         if(message.event == ComponentEvent.MOVE_EVENT){
             range--;

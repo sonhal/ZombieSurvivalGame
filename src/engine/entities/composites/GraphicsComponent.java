@@ -2,24 +2,27 @@ package engine.entities.composites;
 
 import engine.entities.interfaces.IGameObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class GraphicsComponent extends ScriptableComponent implements IGraphicsComponent{
 
 
     private ArrayList<Sprite> sprites;
-    private Sprite activeSprite;
+    private Queue<Sprite> activeSprites;
 
     public GraphicsComponent(Sprite sprite){
         super(ComponentType.GRAPHICS_COMPONENT);
         this.sprites = new ArrayList<>();
         this.sprites.add(sprite);
-        this.activeSprite = this.sprites.get(0);
+        this.activeSprites = new ArrayBlockingQueue<Sprite>(3);
+        this.activeSprites.add(this.sprites.get(0));
     }
 
-    public Sprite getSprite() {
-        return activeSprite;
+    public Queue<Sprite> getSprite() {
+
+        return activeSprites;
     }
 
     public ArrayList<Sprite> getSpriteList(){
@@ -31,7 +34,8 @@ public class GraphicsComponent extends ScriptableComponent implements IGraphicsC
     }
 
     public void setActiveSpriteByID(int id) {
-        this.activeSprite = sprites.get(id);
+        this.activeSprites.clear();
+        this.activeSprites.add(sprites.get(id));
     }
 
 

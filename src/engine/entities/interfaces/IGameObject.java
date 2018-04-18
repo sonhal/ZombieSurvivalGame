@@ -6,10 +6,11 @@ import engine.entities.world.Tile;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Queue;
 
 public interface IGameObject extends Serializable{
 
-    Sprite getSprite();
+    Queue<Sprite> getSprite();
 
     Tile getTile();
 

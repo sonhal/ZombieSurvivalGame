@@ -1,10 +1,13 @@
 package engine.entities;
 
 import engine.controllers.Direction;
+import engine.entities.composites.ComponentType;
 import engine.entities.composites.GraphicsComponent;
 import engine.entities.composites.Sprite;
 import engine.entities.composites.TransformComponent;
+import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
+import engine.services.ComponentService;
 import javafx.scene.canvas.GraphicsContext;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,30 +16,26 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameObjectTest {
-    private GameObject gameObject;
-    private TransformComponent transformComponent;
-    private GraphicsComponent graphicsComponent;
+    private IGameObject gameObject;
     private Sprite sprite;
+    private Tile testTile;
+    private TransformComponent transformComponent;
 
     @BeforeEach
     void setUp() {
         sprite = new Sprite(2);
-        graphicsComponent = new GraphicsComponent(sprite);
-        gameObject = new GameObject(transformComponent, graphicsComponent);
+        testTile = new Tile(0,0,sprite);
+        gameObject = GameObjectFactory.createStaticGameObject(sprite, testTile);
+
+        if(ComponentService.getComponentByType(gameObject.getComponents(), ComponentType.INPUT_COMPONENT).isPresent()){
+            transformComponent = (TransformComponent)
+                    ComponentService.getComponentByType(gameObject.getComponents(),
+                            ComponentType.INPUT_COMPONENT).get();
+        }
     }
 
     @AfterEach
     void tearDown() {
-    }
-
-    @Test
-    void getGraphicsComponent() {
-        assertEquals(graphicsComponent, gameObject.getGraphicsComponent());
-    }
-
-    @Test
-    void getTransformComponent() {
-        assertEquals(transformComponent, gameObject.getTransformComponent());
     }
 
     @Test
@@ -45,14 +44,9 @@ class GameObjectTest {
         Tile up = new Tile(1,2, new Sprite(1));
 
         startTile.setUp(up);
-
-
-
-
-        gameObject.getTransformComponent().setCurrentTile(startTile);
+        transformComponent.setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
-
-        assertEquals(gameObject.getTransformComponent().getCurrentTile(), up, "Up failed");
+        assertEquals(transformComponent.getCurrentTile(), up, "Up failed");
     }
 
     @Test
@@ -60,14 +54,8 @@ class GameObjectTest {
         Tile startTile = new Tile(1,2, new Sprite(1));
         Tile down = new Tile(1,2, new Sprite(1));
         startTile.setDown(down);
-
-
-
-
-        gameObject.getTransformComponent().setCurrentTile(startTile);
-        startTile.setGameObject(gameObject);
-
-        assertEquals(gameObject.getTransformComponent().getCurrentTile(), down, "Down failed");
+        transformComponent.setCurrentTile(startTile);
+        assertEquals(transformComponent.getCurrentTile(), down, "Down failed");
     }
 
     @Test
@@ -77,11 +65,11 @@ class GameObjectTest {
         startTile.setLeft(left);
 
 
-        gameObject.getTransformComponent().setCurrentTile(startTile);
+        transformComponent.setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
 
 
-        assertEquals(gameObject.getTransformComponent().getCurrentTile(), left, "Left failed");
+        assertEquals(transformComponent.getCurrentTile(), left, "Left failed");
     }
 
     @Test
@@ -90,14 +78,10 @@ class GameObjectTest {
         Tile right = new Tile(1,2, new Sprite(1));
         startTile.setRight(right);
 
-
-
-        gameObject.getTransformComponent().setCurrentTile(startTile);
+        transformComponent.setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
 
-        assertEquals(gameObject.getTransformComponent().getCurrentTile(), right, "Right failed");
-
-
+        assertEquals(transformComponent.getCurrentTile(), right, "Right failed");
     }
 
     @Test
@@ -108,10 +92,9 @@ class GameObjectTest {
     @Test
     void getTile() {
         Tile startTile = new Tile(1,2, new Sprite(1));
-        gameObject.getTransformComponent().setCurrentTile(startTile);
+        transformComponent.setCurrentTile(startTile);
         startTile.setGameObject(gameObject);
         assertEquals(startTile, gameObject.getTile());
-
     }
 
 

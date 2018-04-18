@@ -1,10 +1,11 @@
 package engine.entities.composites;
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public interface IGraphicsComponent {
 
-    Sprite getSprite();
+    Queue<Sprite> getSprite();
 
     ArrayList<Sprite> getSpriteList();
 

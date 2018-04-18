@@ -8,6 +8,7 @@ import engine.services.ComponentService;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
+import java.util.Queue;
 
 
 /**
@@ -25,7 +26,7 @@ public class GameObject implements IGameObject{
     }
 
     @Override
-    public Sprite getSprite() {
+    public Queue<Sprite> getSprite() {
         Optional<ScriptableComponent> oComponent = ComponentService.getComponentByType(components,
                 ComponentType.GRAPHICS_COMPONENT);
         if(oComponent.isPresent()){

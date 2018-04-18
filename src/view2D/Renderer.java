@@ -48,9 +48,7 @@ public class Renderer {
             drawOnCanvas(tile.getItem().getSprite(), xPos, yPos);
         }
         if(tile.getGameObject() != null){
-            drawOnCanvas(tile.getGameObject().getSprite(), xPos, yPos);
-            if (tile.getGameObject() instanceof Hittable && ((Hittable)tile.getGameObject()).isHit()) {
-                drawOnCanvas(new Sprite(17),xPos, yPos);}
+            tile.getGameObject().getSprite().forEach(sprite -> drawOnCanvas(sprite, xPos, yPos));
         }
 
     }

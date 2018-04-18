@@ -22,12 +22,14 @@ public abstract class UpdatableGameObject implements IUpdatableGameObject {
 
     @Override
     public boolean isDead(){
+        if(toBeDeleted){
+            getComponents().forEach(scriptableComponent -> scriptableComponent.cleanUp(this));
+        }
         return toBeDeleted;
     }
 
     @Override
     public void die(){
-        getComponents().forEach(scriptableComponent -> scriptableComponent.cleanUp(this));
         toBeDeleted = true;
     }
 
@@ -38,11 +40,10 @@ public abstract class UpdatableGameObject implements IUpdatableGameObject {
      */
     @Override
     public void update() {
-        for (ScriptableComponent component:
-                components) {
-            component.update(this);
-        }
-
+            for (ScriptableComponent component:
+                    components) {
+                component.update(this);
+            }
     }
 
     @Override

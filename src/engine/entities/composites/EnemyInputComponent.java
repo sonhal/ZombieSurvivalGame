@@ -6,7 +6,7 @@ import engine.entities.interfaces.IGameObject;
 public class EnemyInputComponent extends ScriptableComponent{
 
     private IGameObject target;
-    private TransformComponent playerTransformComponent;
+    private TransformComponent targetTransformComponent;
     private TransformComponent gameObjectTransformComponent;
     private Direction collisionHasOccurred;
     private double lastEventSent;
@@ -38,25 +38,25 @@ public class EnemyInputComponent extends ScriptableComponent{
                 return Direction.DOWN;
             }
         }
-        int playerX = playerTransformComponent.getCurrentTile().getCordX();
-        int playerY = playerTransformComponent.getCurrentTile().getCordY();
+        int targetX = targetTransformComponent.getCurrentTile().getCordX();
+        int targetY = targetTransformComponent.getCurrentTile().getCordY();
         int enemyX = gameObjectTransformComponent.getCurrentTile().getCordX();
         int enemyY = gameObjectTransformComponent.getCurrentTile().getCordY();
 
-        if (playerX < enemyX){
-            if(playerY < enemyY){
+        if (targetX < enemyX){
+            if(targetY < enemyY){
                 return Direction.DOWN;
             }
-            else if (playerY == enemyY){
+            else if (targetY == enemyY){
                 return Direction.LEFT;
             }
             else return Direction.UP;
         }
         else {
-            if(playerY < enemyY){
+            if(targetY < enemyY){
                 return Direction.DOWN;
             }
-            else if (playerY == enemyY){
+            else if (targetY == enemyY){
                 return Direction.RIGHT;
             }
             else return Direction.UP;
@@ -99,7 +99,7 @@ public class EnemyInputComponent extends ScriptableComponent{
     public void innit(IGameObject gameObject) {
         //Gets reference to Players TransformComponent
         if(getComponentByType(target.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
-            this.playerTransformComponent =
+            this.targetTransformComponent =
                     (TransformComponent) getComponentByType(target.getComponents()
                             , ComponentType.TRANSFORM_COMPONENT).get();
         }
@@ -107,7 +107,7 @@ public class EnemyInputComponent extends ScriptableComponent{
         //Gets reference to its own TransformComponent
         if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
             this.gameObjectTransformComponent =
-                    (TransformComponent) getComponentByType(target.getComponents()
+                    (TransformComponent) getComponentByType(gameObject.getComponents()
                             , ComponentType.TRANSFORM_COMPONENT).get();
         }
 

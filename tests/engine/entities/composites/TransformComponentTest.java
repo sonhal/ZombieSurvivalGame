@@ -2,7 +2,10 @@ package engine.entities.composites;
 
 import engine.controllers.Direction;
 import engine.entities.GameObject;
+import engine.entities.GameObjectFactory;
+import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
+import engine.services.ComponentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +18,13 @@ class TransformComponentTest {
 
     @BeforeEach
     void setUp() {
-        GameObject gameObject = new GameObject();
-        transformComponent = gameObject.getTransformComponent();
         tile = new Tile(1,1,new Sprite(1));
-        this.transformComponent.setCurrentTile(tile);
+        IGameObject gameObject = GameObjectFactory.createStaticGameObject(new Sprite(1), tile);
+        if(ComponentService.getComponentByType(gameObject.getComponents(), ComponentType.INPUT_COMPONENT).isPresent()){
+            transformComponent = (TransformComponent)
+                    ComponentService.getComponentByType(gameObject.getComponents(),
+                            ComponentType.INPUT_COMPONENT).get();
+        }
     }
 
     @Test
@@ -50,7 +56,7 @@ class TransformComponentTest {
     void move() {
         Tile upTile = new Tile(2,1, new Sprite(1));
         tile.setUp(upTile);
-        transformComponent.move(Direction.UP);
+        transformComponent.handle(new Message(ComponentEvent.MOVE_EVENT, Direction.UP));
         assertEquals(upTile, transformComponent.getCurrentTile());
     }
 

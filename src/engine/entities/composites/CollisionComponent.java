@@ -26,6 +26,10 @@ public class CollisionComponent extends ScriptableComponent {
                 sendMessageToAllComponents(gameObject.getComponents(), new Message(ComponentEvent.COLLISION_EVENT,
                         collisionDetect(gameObjectTransformComponent.getCurrentTile(), inputDirection)));
             }
+            else {
+                sendMessageToAllComponents(gameObject.getComponents(),
+                        new Message(ComponentEvent.COLLISION_EVENT,null));
+            }
         }
     }
 
