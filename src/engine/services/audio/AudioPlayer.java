@@ -18,15 +18,13 @@ import java.util.concurrent.Executors;
  */
 public class AudioPlayer {
 
-    ExecutorService soundPool;
+    private ExecutorService soundPool;
     private ArrayList<SoundData> soundBuffer;
 
     private HashMap<Sound, AudioClip> audioEffectCollection;
     private HashMap<Sound, Media> backgroundMusicCollection;
     private List<MediaPlayer> backGroundSounds;
     private static AudioPlayer instance;
-    private static final double PLAY_DELAY = 100;
-    private double lastPlay;
 
     private AudioPlayer(){
         soundBuffer = new ArrayList<>();
@@ -67,6 +65,7 @@ public class AudioPlayer {
                 }
             });
             soundBuffer.remove(soundData);
+            soundBuffer.trimToSize();
         }
     }
 

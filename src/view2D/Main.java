@@ -23,7 +23,6 @@ public class Main extends Application {
         AudioPlayer.getInstance().shutdown();
     }
 
-
     public static void main(String[] args) {
         launch(args);
     }
