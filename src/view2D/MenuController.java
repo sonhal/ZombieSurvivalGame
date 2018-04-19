@@ -55,7 +55,7 @@ public class MenuController implements Initializable{
         //Parent newRoot = FXMLLoader.load(getClass().getResource("gameview.fxml"));
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource(
-                        "gameview.fxml"
+                        "gameviewV2.fxml"
                 )
         );
         stage.setScene(new Scene(loader.load(), StaticFields.WINDOW_WIDTH, StaticFields.WINDOW_HEIGHT));
@@ -69,7 +69,7 @@ public class MenuController implements Initializable{
         Stage stage = (Stage)play.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource(
-                        "gameview.fxml"
+                        "gameviewV2.fxml"
                 )
         );
         stage.setScene(new Scene(loader.load(), StaticFields.WINDOW_WIDTH, StaticFields.WINDOW_HEIGHT));

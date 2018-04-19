@@ -15,6 +15,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -36,11 +37,15 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @FXML
     public
-    MenuItem save;
+    Button save;
 
     @FXML
     private
     Canvas gameCanvas;
+
+    @FXML
+    private
+    Pane settings, colorBG, anchor;
 
     private boolean loadGameFlag;
 
@@ -53,8 +58,13 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @Override
     public void initializeGameEnv() {
         System.out.println("Game controller active");
-        gameCanvas.setHeight(StaticFields.CANVAS_SIZE);
-        gameCanvas.setWidth(StaticFields.CANVAS_SIZE);
+        gameCanvas.setHeight(gameCanvas.getHeight());
+        gameCanvas.setWidth(gameCanvas.getWidth());
+        colorBG.setManaged(false);
+        colorBG.setVisible(false);
+        settings.setVisible(false);
+        settings.setManaged(false);
+
 
         System.out.println("Game controller active 2");
 
@@ -166,6 +176,21 @@ public class GameViewController2D implements GameViewController, Initializable, 
                 startGameloop();
             }
         });
+    }
+    public void openMenu(){
+        gameLoop.pause();
+        colorBG.setVisible(true);
+        settings.setVisible(true);
+        colorBG.setManaged(true);
+        settings.setManaged(true);
+    }
+
+    public void Continue(){
+        gameLoop.playFromStart();
+        settings.setManaged(false);
+        settings.setVisible(false);
+        colorBG.setVisible(false);
+        colorBG.setManaged(false);
     }
 
     public void saveGame(){

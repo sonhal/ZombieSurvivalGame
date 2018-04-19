@@ -123,7 +123,7 @@ public class GameHandler extends Updater {
             else {
                 viewCenterTile = playerTransformComponent.getCurrentTile();
             }
-            return matrix.generateDrawable(world, viewCenterTile,10,10);
+            return matrix.generateDrawable(world, viewCenterTile,15,15);
         }
         else {
             throw  new RuntimeException("Player is not in World");
