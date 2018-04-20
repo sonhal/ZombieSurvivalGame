@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="593.0" prefWidth="847.0" style="-fx-background-color: #2E3138;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.MenuController">
+<BorderPane prefHeight="593.0" prefWidth="847.0" style="-fx-background-color: #2E3138;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <padding><Insets bottom="25" left="25" right="25" top="25" /></padding>
 
     <center>
@@ -18,27 +18,22 @@
          </BorderPane.margin>
          <children>
               <VBox alignment="CENTER" layoutX="234.0" layoutY="55.0" prefHeight="363.0" prefWidth="330.0" spacing="40.0" style="-fx-background-color: #454954;">
-                  <Button fx:id="play" prefHeight="37.0" prefWidth="108.0" style="-fx-background-color: #222328;" text="Play" textFill="#5aae74">
+                  <Button fx:id="play" prefHeight="37.0" prefWidth="108.0" style="-fx-background-color: #222328;" stylesheets="@btnStyle.css" text="Play" textFill="#5aae74">
                   <VBox.margin>
                      <Insets />
                   </VBox.margin>
                   <font>
-                     <Font name="Stencil" size="18.0" />
+                     <Font name="SansSerif Regular" size="18.0" />
                   </font>
                </Button>
-               <Button mnemonicParsing="false" style="-fx-background-color: #222328;" text="New Game" textFill="#72757e">
+               <Button fx:id="load" mnemonicParsing="false" style="-fx-background-color: #222328;" stylesheets="@btnStyle.css" text="Load Save" textFill="#84cfff">
                   <font>
-                     <Font name="Stencil" size="18.0" />
+                     <Font name="SansSerif Regular" size="18.0" />
                   </font>
                </Button>
-               <Button mnemonicParsing="false" style="-fx-background-color: #222328;" text="Load Save" fx:id="load" textFill="#5aae74">
+               <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #222328;" stylesheets="@btnStyle.css" text="Settings" textFill="#84cfff">
                   <font>
-                     <Font name="Stencil" size="18.0" />
-                  </font>
-               </Button>
-               <Button mnemonicParsing="false" style="-fx-background-color: #222328;" text="Settings" textFill="#72757e">
-                  <font>
-                     <Font name="Stencil" size="18.0" />
+                     <Font name="SansSerif Regular" size="18.0" />
                   </font>
                </Button>
               </VBox>

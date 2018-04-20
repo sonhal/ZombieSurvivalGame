@@ -12,8 +12,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -34,12 +37,20 @@ public class GameViewController2D implements GameViewController, Initializable, 
     Timeline gameLoop;
 
     @FXML
+    private
+    Label gameOverLbl;
+
+    @FXML
     public
-    MenuItem save;
+    Button save, gameBtn, settingsBtn;
 
     @FXML
     private
     Canvas gameCanvas;
+
+    @FXML
+    private
+    Pane settingsSet, gameSet , colorBG, anchor, gameOver;
 
     private boolean loadGameFlag;
 
@@ -52,8 +63,20 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @Override
     public void initializeGameEnv() {
         System.out.println("Game controller active");
-        gameCanvas.setHeight(StaticFields.CANVAS_SIZE);
-        gameCanvas.setWidth(StaticFields.CANVAS_SIZE);
+        gameCanvas.setHeight(gameCanvas.getHeight());
+        gameCanvas.setWidth(gameCanvas.getWidth());
+        colorBG.setManaged(false);
+        colorBG.setVisible(false);
+        settingsSet.setVisible(false);
+        settingsSet.setManaged(false);
+        gameSet.setVisible(false);
+        gameSet.setManaged(false);
+        gameBtn.setVisible(false);
+        settingsBtn.setVisible(false);
+        gameOver.setVisible(false);
+        gameOver.setManaged(false);
+
+
 
         System.out.println("Game controller active 2");
 
@@ -127,6 +150,17 @@ public class GameViewController2D implements GameViewController, Initializable, 
                         System.out.println("Space key was pressed");
                         gameHandler.sendEvent(ActionEvent.ATTACK_UP);
                     }
+                    if (e.getCode() == KeyCode.ESCAPE) {
+                        System.out.println("Escape key was pressed");
+                        gameLoop.pause();
+                        gameSet.setManaged(true);
+                        gameSet.setVisible(true);
+                        colorBG.setVisible(true);
+                        colorBG.setManaged(true);
+                        gameBtn.setVisible(true);
+                        settingsBtn.setVisible(true);
+                        gameOverLbl.setVisible(false);
+                    }
                 });
             }
         });
@@ -144,10 +178,21 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     public void goToMenu() throws IOException {
         stopGameLoop();
-        System.out.println("Game ended!");
+        System.out.println("Back to main menu");
         Stage stage = (Stage)gameCanvas.getScene().getWindow();
-        Parent newRoot = FXMLLoader.load(getClass().getResource("gamemenu.fxml"));
-        stage.setScene(new Scene(newRoot, 847, 593));
+        Parent newRoot = FXMLLoader.load(getClass().getResource("gamemenuV2.fxml"));
+        stage.setScene(new Scene(newRoot, 715, 711));
+    }
+
+    public void goToDeathScreen() throws IOException {
+        stopGameLoop();
+        System.out.println("Game ended");
+        gameOver.setVisible(true);
+        gameOver.setManaged(true);
+        colorBG.setVisible(true);
+        colorBG.setManaged(true);
+        settingsBtn.setVisible(true);
+        gameBtn.setVisible(true);
     }
 
     public void startNewGame(){
@@ -165,6 +210,55 @@ public class GameViewController2D implements GameViewController, Initializable, 
                 startGameloop();
             }
         });
+    }
+    public void openMenu(){
+        gameLoop.pause();
+        colorBG.setVisible(true);
+        settingsSet.setVisible(true);
+        colorBG.setManaged(true);
+        settingsSet.setManaged(true);
+    }
+
+    public void switchGame() {
+        gameOver.setVisible(false);
+        gameOver.setManaged(false);
+        gameSet.setVisible(true);
+        gameSet.setManaged(true);
+        settingsSet.setVisible(false);
+        settingsSet.setManaged(false);
+        gameOverLbl.setVisible(false);
+    }
+
+    public void switchSettings() {
+        gameOver.setVisible(false);
+        gameOver.setManaged(false);
+        gameSet.setVisible(false);
+        gameSet.setManaged(false);
+        settingsSet.setVisible(true);
+        settingsSet.setManaged(true);
+        gameOverLbl.setVisible(false);
+    }
+
+    public void switchHighscore(){
+        gameSet.setManaged(false);
+        gameSet.setVisible(false);
+        settingsSet.setVisible(false);
+        settingsSet.setManaged(false);
+        gameOver.setManaged(true);
+        gameOver.setVisible(true);
+        gameOverLbl.setVisible(false);
+    }
+
+    public void Continue(){
+        gameLoop.playFromStart();
+        settingsSet.setManaged(false);
+        settingsSet.setVisible(false);
+        gameSet.setManaged(false);
+        gameSet.setVisible(false);
+        colorBG.setVisible(false);
+        colorBG.setManaged(false);
+        gameBtn.setVisible(false);
+        settingsBtn.setVisible(false);
     }
 
     public void saveGame(){
