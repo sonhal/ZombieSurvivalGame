@@ -1,10 +1,12 @@
 package engine.controllers.interfaces;
 
-public interface Level {
+import java.io.Serializable;
+
+public interface Level extends Serializable {
 
     int getEnemyPoolValue();
 
-    double getEnemySpeed();
+    double getEnemySpeedBaseValue();
 
     double getHealthPackSpawnRate();
 

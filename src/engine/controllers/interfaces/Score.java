@@ -1,6 +1,8 @@
 package engine.controllers.interfaces;
 
-public interface Score {
+import java.io.Serializable;
 
+public interface Score extends Serializable {
 
+    int scoreValue();
 }

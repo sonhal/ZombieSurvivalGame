@@ -1,5 +1,10 @@
 package engine.controllers;
 
+import engine.controllers.gamestate.GameStateMessengerMediator;
+import engine.controllers.gamestate.messages.GameEventMessage;
+import engine.controllers.gamestate.messages.NewLevelMessage;
+import engine.controllers.interfaces.Messenger;
+import engine.controllers.interfaces.MessengerMediator;
 import engine.entities.ZombieBuilder;
 import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.world.Tile;
@@ -8,17 +13,20 @@ import engine.entities.world.World;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class NpcController extends Updater {
+public class NpcController extends Updater implements Messenger {
 
     private int spawnInterval = 0;
     private GameHandler gameHandler;
     private IUpdatableGameObject player;
+    private MessengerMediator gameStateMessengerMediator;
 
 
-    public NpcController(GameHandler gameHandler, IUpdatableGameObject player){
+    public NpcController(GameHandler gameHandler, IUpdatableGameObject player, MessengerMediator gameMessengerMediator){
         System.out.println("Npc controller created");
         this.player = player;
         this.gameHandler = gameHandler;
+        this.gameStateMessengerMediator = gameMessengerMediator;
+        this.gameStateMessengerMediator.subscribe(this);
     }
 
     public void update(int stage, World world){
@@ -69,4 +77,17 @@ public class NpcController extends Updater {
         return null;
     }
 
+    @Override
+    public void handleMessage(GameEventMessage message) {
+        if(message instanceof NewLevelMessage){
+            //[TODO]
+        }
+    }
+
+    @Override
+    public void sendMessage(GameEventMessage message) {
+        if(gameStateMessengerMediator != null){
+            gameStateMessengerMediator.broadcast(message);
+        }
+    }
 }

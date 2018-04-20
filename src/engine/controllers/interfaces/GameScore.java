@@ -2,11 +2,10 @@ package engine.controllers.interfaces;
 
 import engine.entities.interfaces.IGameObject;
 
-public interface GameScore {
+import java.io.Serializable;
 
-    Score getPlayerScore();
+public interface GameScore extends Serializable {
 
-    void update(IGameObject gameObject);
-
+    Score getScore();
 
 }

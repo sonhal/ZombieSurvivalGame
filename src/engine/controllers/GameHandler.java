@@ -1,5 +1,7 @@
 package engine.controllers;
 
+import engine.controllers.gamestate.GameStateKeeper;
+import engine.controllers.gamestate.GameStateMessengerMediator;
 import engine.entities.PlayerBuilder;
 import engine.entities.composites.AvatarInputComponent;
 import engine.entities.composites.ComponentType;
@@ -32,7 +34,8 @@ public class GameHandler extends Updater {
     private EventHandler eventHandler;
     private IUpdatableGameObject player;
     private DrawableMatrix matrix;
-    private AudioPlayer audioPlayer;
+    private GameStateKeeper gameStateKeeper;
+    private GameStateMessengerMediator gameStateMessenger;
 
 
     public GameHandler(GameViewController gameViewController2D){
@@ -45,17 +48,19 @@ public class GameHandler extends Updater {
     }
 
     public void startNewGame(){
-
         //Create game world
         createWorld(50);
         //Create Player object
         this.player = PlayerBuilder.create(this, eventHandler,100, world.getSeed());
         //Set player in world
         world.setPlayer(player);
+        this.gameStateMessenger = new GameStateMessengerMediator();
+
         innitGame();
     }
 
     public void loadGame(){
+        this.gameStateMessenger = new GameStateMessengerMediator();
         List<Tile> worldTiles = SaveGameHandler.loadGame();
         System.out.println("loaded");
         setPlayer(SaveGameHandler.getPlayerInstance(worldTiles));
@@ -79,17 +84,20 @@ public class GameHandler extends Updater {
 
     private void innitGame(){
         //Object responsible for enemies in the game world
-        this.npcController  = new NpcController(this, player);
+        this.npcController  = new NpcController(this, player, gameStateMessenger);
         //Add player to list of objects that the EventHandler updates each tick
         this.addToUpdateList(player);
         //Create the DrawableMatrix that handles the cut of the game world passed to the view
         this.matrix = getDrawableMatrix(10);
+        //Create GameStateKeeper
+        this.gameStateKeeper = new GameStateKeeper();
 
-        this.audioPlayer = AudioPlayer.getInstance();
+
+
+        //Set background music
         ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
         backGroundMusic.add(Sound.BACKGROUND_MUSIC_1);
-        this.audioPlayer.setBackgroundMusic(backGroundMusic);
-
+        AudioPlayer.getInstance().setBackgroundMusic(backGroundMusic);
     }
 
     /**
@@ -190,13 +198,12 @@ public class GameHandler extends Updater {
     public void saveGame(){
         shutDown();
         gameViewController = null;
-        audioPlayer = null;
         SaveGameHandler.saveGame(world.getWorld());
         System.out.println("Game saved");
     }
 
     public void shutDown(){
-        audioPlayer.stopBackgroundMusic();
-        audioPlayer.shutdown();
+        AudioPlayer.getInstance().stopBackgroundMusic();
+        AudioPlayer.getInstance().shutdown();
     }
 }

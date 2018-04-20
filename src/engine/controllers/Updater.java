@@ -7,7 +7,10 @@ import java.util.ArrayList;
 
 /**
  * Object that can hold Updatable objects.
- * Will try to update every object i its update list each game tick.
+ * Will try to update every object in its update list each time update is called on the object.
+ * Used by objects that handles the updating of Updatable objects in the game.
+ * Handles the isDead() method on Updatable Objects and disposes of them during next update.
+ * Handles adding of new objects, appends new objects to the update list before each update.
  */
 public class Updater implements Serializable{
     private ArrayList<Updatable> updateObjects;
