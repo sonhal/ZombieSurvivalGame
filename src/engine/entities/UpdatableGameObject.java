@@ -1,12 +1,9 @@
 package engine.entities;
 
 import engine.entities.composites.*;
-import engine.entities.interfaces.Hittable;
 import engine.entities.interfaces.IUpdatableGameObject;
-import engine.entities.world.Tile;
 import engine.services.ComponentService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

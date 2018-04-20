@@ -1,11 +1,9 @@
 package engine.entities.composites;
 
 import engine.controllers.Direction;
-import engine.entities.interfaces.Hittable;
 import engine.entities.interfaces.IGameObject;
 import engine.entities.world.Tile;
 
-import java.io.Serializable;
 import java.util.Optional;
 
 public class AttackComponent extends ScriptableComponent{

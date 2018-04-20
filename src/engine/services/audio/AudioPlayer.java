@@ -96,12 +96,12 @@ public class AudioPlayer {
     }
 
     public void stopBackgroundMusic(){
-        backGroundSounds.stream().forEach(mediaPlayer -> mediaPlayer.stop());
+        backGroundSounds.forEach(mediaPlayer -> mediaPlayer.stop());
     }
 
     public void shutdown(){
         soundPool.shutdown();
-        backGroundSounds.stream().forEach(mediaPlayer -> mediaPlayer.dispose());
+        backGroundSounds.forEach(mediaPlayer -> mediaPlayer.dispose());
         instance = null;
     }
 
