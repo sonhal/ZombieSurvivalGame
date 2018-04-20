@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.MenuController">
+   <children>
+      <ImageView fitHeight="716.0" fitWidth="715.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@static/menuBG.jpg" />
+         </image>
+      </ImageView>
+      <VBox alignment="CENTER" layoutX="225.0" layoutY="241.0" prefHeight="263.0" prefWidth="266.0" spacing="40.0" style="-fx-background-color: #454954;">
+         <children>
+            <Button fx:id="play" prefHeight="37.0" prefWidth="108.0" style="-fx-background-color: #222328;" stylesheets="@btnStyle.css" text="Play" textFill="#5aae74">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <font>
+                  <Font name="SansSerif Regular" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="load" mnemonicParsing="false" style="-fx-background-color: #222328;" stylesheets="@btnStyle.css" text="Load Save" textFill="#84cfff">
+               <font>
+                  <Font name="SansSerif Regular" size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #222328;" stylesheets="@btnStyle.css" text="Settings" textFill="#84cfff">
+               <font>
+                  <Font name="SansSerif Regular" size="18.0" />
+               </font>
+            </Button>
+         </children>
+         <effect>
+            <DropShadow blurType="ONE_PASS_BOX" height="70.41" radius="34.955" spread="0.25" width="71.41" />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <Label fx:id="menuTitle" layoutX="145.0" layoutY="144.0" text="Zombie Survival" textFill="WHITE">
+         <font>
+            <Font name="Tempus Sans ITC" size="63.0" />
+         </font>
+         <effect>
+            <DropShadow radius="12.965" spread="0.64" width="32.86" />
+         </effect>
+      </Label>
+   </children>
+</Pane>
