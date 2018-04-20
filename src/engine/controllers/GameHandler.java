@@ -169,6 +169,7 @@ public class GameHandler extends Updater {
         }
     }
 
+
     public World getWorld() {
         return world;
     }
