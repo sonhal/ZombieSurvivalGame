@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.GameViewController2D">
+   <children>
+      <Canvas fx:id="gameCanvas" height="786.0" layoutY="25.0" width="1046.0" />
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="997.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#openMenu" text="Settings" />
+               </items></Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Pane fx:id="colorBG" layoutY="25.0" minHeight="786.0" minWidth="1046.0" opacity="0.87" prefHeight="732.0" prefWidth="1006.0" style="-fx-background-color: #121212;">
+         <children>
+            <Pane layoutX="76.0" layoutY="111.0" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="gameBtn" layoutX="63.0" layoutY="-3.0" mnemonicParsing="false" onAction="#switchGame" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="GAME" textFill="#91c0ff">
+                     <font>
+                        <Font name="SansSerif Regular" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="settingsBtn" layoutX="62.0" layoutY="44.0" mnemonicParsing="false" onAction="#switchSettings" prefHeight="33.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="SETTINGS" textFill="#ffe491">
+                     <font>
+                        <Font name="SansSerif Regular" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="highscoreBtn" layoutX="63.0" layoutY="90.0" mnemonicParsing="false" onAction="#switchHighscore" prefHeight="33.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="HIGHSCORE" textFill="#ff4d4d">
+                     <font>
+                        <Font name="SansSerif Regular" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+            <Label fx:id="gameOverLbl" layoutX="396.0" layoutY="64.0" text="Game over" textFill="#91acff">
+               <font>
+                  <Font name="SansSerif Regular" size="40.0" />
+               </font>
+            </Label>
+         </children></Pane>
+       <Pane fx:id="settingsSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
+       <children>
+           <Label layoutX="143.0" layoutY="28.0" text="Settings" textFill="#ffe491">
+               <font>
+                  <Font name="SansSerif Regular" size="40.0" />
+               </font>
+           </Label>
+       </children>
+   </Pane>
+      <Pane fx:id="gameSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
+         <children>
+            <Label layoutX="90.0" layoutY="32.0" text="Game paused" textFill="#91acff">
+               <font>
+                  <Font name="SansSerif Regular" size="40.0" />
+               </font>
+            </Label>
+            <Button fx:id="save" layoutX="147.0" layoutY="281.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="137.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="save &amp; Exit" textFill="#91acff">
+               <font>
+                  <Font name="SansSerif Regular" size="18.0" />
+               </font>
+            </Button>
+            <Button layoutX="147.0" layoutY="199.0" mnemonicParsing="false" onAction="#Continue" prefHeight="33.0" prefWidth="137.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Continue" textFill="#84ffa9">
+               <font>
+                  <Font name="SansSerif Regular" size="18.0" />
+               </font>
+            </Button>
+
+         </children>
+      </Pane>
+      <Pane fx:id="gameOver" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
+         <children>
+            <Button layoutX="140.0" layoutY="463.0" mnemonicParsing="false" onAction="#goToMenu" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Back to Menu" textFill="#84ffa9">
+               <font>
+                  <Font name="SansSerif Regular" size="18.0" />
+               </font>
+            </Button>
+            <Label layoutX="122.0" layoutY="34.0" text="HighScore" textFill="#ff4d4d">
+               <font>
+                  <Font name="SansSerif Regular" size="40.0" />
+               </font>
+            </Label>
+            <TextArea layoutX="14.0" layoutY="168.0" prefHeight="281.0" prefWidth="402.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>

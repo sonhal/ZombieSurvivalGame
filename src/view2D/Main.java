@@ -10,9 +10,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("gamemenu.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gamemenuV2.fxml"));
         primaryStage.setTitle("Zombie Game");
-        primaryStage.setScene(new Scene(root, 847, 593));
+        primaryStage.setScene(new Scene(root, 715, 711));
         primaryStage.show();
     }
 

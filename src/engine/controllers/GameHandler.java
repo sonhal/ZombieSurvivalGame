@@ -149,7 +149,7 @@ public class GameHandler extends Updater {
     public void handlePlayerDeath(){
         try {
             System.out.println("Game ended");
-            gameViewController.goToMenu();
+            gameViewController.goToDeathScreen();
         }catch (IOException err){
             System.out.println("Could not end game");
             err.printStackTrace();

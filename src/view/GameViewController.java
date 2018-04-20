@@ -23,6 +23,8 @@ public interface GameViewController  {
 
     void goToMenu() throws IOException;
 
+    void goToDeathScreen() throws IOException;
+
     void stopGameLoop();
 
 }
