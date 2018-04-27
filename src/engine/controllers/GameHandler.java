@@ -55,7 +55,6 @@ public class GameHandler extends Updater {
         //Set player in world
         world.setPlayer(player);
         this.gameStateMessenger = new GameStateMessengerMediator();
-
         innitGame();
     }
 
