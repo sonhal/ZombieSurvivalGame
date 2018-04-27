@@ -67,6 +67,7 @@ public class GameInitializer {
         //Create EventHandler
         EventHandler eventHandler = new EventHandler();
         setPlayerEventHandler(player, eventHandler);
+        gameUpdater.addToUpdateList(player);
         for (IUpdatableGameObject enemy:
                 SaveGameHandler.getEnemyInstances(worldTiles)) {
             npcController.addToUpdateList(enemy);
