@@ -1,8 +1,14 @@
 package engine.controllers.gamestate.messages;
 
-public class EnemyKilledMessage extends GameEventMessage {
+public class EnemyKilledMessage implements GameEventMessage {
 
-    public EnemyKilledMessage(int body) {
-        super(body);
+    private int valueOfEnemyKilled;
+
+    public EnemyKilledMessage(int valueOfEnemyKilled){
+        this.valueOfEnemyKilled = valueOfEnemyKilled;
+    }
+    @Override
+    public Integer messageBody() {
+        return valueOfEnemyKilled;
     }
 }

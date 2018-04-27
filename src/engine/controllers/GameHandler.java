@@ -40,7 +40,8 @@ public class GameHandler extends Updater {
 
 
     public GameHandler(GameViewController gameViewController2D, World gameWorld, GameUpdater gameUpdater,
-                       EventHandler eventHandler, IUpdatableGameObject player, NpcController npcController){
+                       EventHandler eventHandler, IUpdatableGameObject player, NpcController npcController,
+                       GameStateKeeper gameStateKeeper){
         //Set gameplay components
         System.out.println("GameHandler active");
         this.gameViewController = gameViewController2D;
@@ -55,7 +56,7 @@ public class GameHandler extends Updater {
         //Create the DrawableMatrix that handles the cut of the game world passed to the view
         this.matrix = getDrawableMatrix(10);
         //Create GameStateKeeper
-        this.gameStateKeeper = new GameStateKeeper();
+        this.gameStateKeeper = gameStateKeeper;
         //Set background music
         ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
         backGroundMusic.add(Sound.BACKGROUND_MUSIC_1);

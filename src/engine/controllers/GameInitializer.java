@@ -1,5 +1,6 @@
 package engine.controllers;
 
+import engine.controllers.gamestate.GameStateKeeper;
 import engine.controllers.gamestate.GameStateMessengerMediator;
 import engine.entities.PlayerBuilder;
 import engine.entities.composites.AvatarInputComponent;
@@ -43,7 +44,9 @@ public class GameInitializer {
         GameStateMessengerMediator gamerMediator = new GameStateMessengerMediator();
 
         NpcController npcController = new NpcController(player, gamerMediator);
-        return new GameHandler(gameViewController,world,gameUpdater, eventHandler,player, npcController );
+        GameStateKeeper gameStateKeeper = new GameStateKeeper();
+        return new GameHandler(gameViewController,world,gameUpdater,
+                eventHandler, player, npcController, gameStateKeeper);
     }
 
     /**
@@ -80,7 +83,9 @@ public class GameInitializer {
                 playerGun.setController(gameUpdater);
             }
         }
-        return new GameHandler(gameViewController, world, gameUpdater, eventHandler, player, npcController);
+        GameStateKeeper gameStateKeeper = new GameStateKeeper();
+        return new GameHandler(gameViewController, world, gameUpdater,
+                eventHandler, player, npcController, gameStateKeeper);
     }
 
     private static void setPlayerEventHandler(IUpdatableGameObject player, EventHandler eventHandler) {

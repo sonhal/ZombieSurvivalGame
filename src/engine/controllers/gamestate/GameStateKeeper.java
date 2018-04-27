@@ -4,6 +4,9 @@ import engine.controllers.gamestate.messages.EnemyKilledMessage;
 import engine.controllers.gamestate.messages.GameEventMessage;
 import engine.controllers.interfaces.Messenger;
 
+/**
+ * Responsible for keeping the track of relevant statistics in the game.
+ */
 public class GameStateKeeper implements Messenger{
 
     private PlayerGameScore playerGameScore;
