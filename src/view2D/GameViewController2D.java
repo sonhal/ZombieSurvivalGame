@@ -2,6 +2,7 @@ package view2D;
 
 import engine.controllers.ActionEvent;
 import engine.controllers.GameHandler;
+import engine.controllers.GameInitializer;
 import engine.view.DrawableTile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -93,7 +94,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        gameHandler = new GameHandler(this);
         initializeGameEnv();
         setEventHandlers();
 
@@ -195,18 +195,18 @@ public class GameViewController2D implements GameViewController, Initializable, 
         gameBtn.setVisible(true);
     }
 
-    public void startNewGame(){
+    public void startNewGame(GameViewController gameViewController){
         Platform.runLater(new Runnable() {
             public void run() {
-                gameHandler.startNewGame();
+                gameHandler = GameInitializer.newGame(gameViewController);
                 startGameloop();
             }
         });
     }
-    public void startLoadGame(){
+    public void startLoadGame(GameViewController gameViewController){
         Platform.runLater(new Runnable() {
             public void run() {
-                gameHandler.loadGame();
+                gameHandler = GameInitializer.loadGame(gameViewController);
                 startGameloop();
             }
         });

@@ -16,29 +16,27 @@ import java.util.concurrent.ThreadLocalRandom;
 public class NpcController extends Updater implements Messenger {
 
     private int spawnInterval = 0;
-    private GameHandler gameHandler;
     private IUpdatableGameObject player;
     private MessengerMediator gameStateMessengerMediator;
 
 
-    public NpcController(GameHandler gameHandler, IUpdatableGameObject player, MessengerMediator gameMessengerMediator){
+    public NpcController(IUpdatableGameObject player, MessengerMediator gameMessengerMediator){
         System.out.println("Npc controller created");
         this.player = player;
-        this.gameHandler = gameHandler;
         this.gameStateMessengerMediator = gameMessengerMediator;
         this.gameStateMessengerMediator.subscribe(this);
     }
 
-    public void update(int stage, World world){
+    public void update(World world){
         ArrayList enemies = getUpdateObjects();
         if (enemies.size() < 50){
-            spawner(world, stage);
+            spawner(world);
         }
         super.update();
         //enemies.stream().forEach((e)->{e.update();});
     }
 
-    protected void spawner(World world, int stage){
+    protected void spawner(World world){
         Tile spawnTile = locateSpawnTile(world);
         if (spawnTile != null){
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());

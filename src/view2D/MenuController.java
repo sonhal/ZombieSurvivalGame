@@ -61,7 +61,7 @@ public class MenuController implements Initializable{
         stage.setScene(new Scene(loader.load(), StaticFields.WINDOW_WIDTH, StaticFields.WINDOW_HEIGHT));
         GameViewController2D controller =
                 loader.<GameViewController2D>getController();
-        controller.startNewGame();
+        controller.startNewGame(controller);
     }
 
     private void loadGame() throws IOException{
@@ -75,7 +75,7 @@ public class MenuController implements Initializable{
         stage.setScene(new Scene(loader.load(), StaticFields.WINDOW_WIDTH, StaticFields.WINDOW_HEIGHT));
         GameViewController2D controller =
                 loader.<GameViewController2D>getController();
-        controller.startLoadGame();
+        controller.startLoadGame(controller);
     }
 
 

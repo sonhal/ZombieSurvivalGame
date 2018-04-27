@@ -35,64 +35,27 @@ public class GameHandler extends Updater {
     private IUpdatableGameObject player;
     private DrawableMatrix matrix;
     private GameStateKeeper gameStateKeeper;
+    private GameUpdater gameUpdater;
     private GameStateMessengerMediator gameStateMessenger;
 
 
-    public GameHandler(GameViewController gameViewController2D){
+    public GameHandler(GameViewController gameViewController2D, World gameWorld, GameUpdater gameUpdater,
+                       EventHandler eventHandler, IUpdatableGameObject player, NpcController npcController){
+        //Set gameplay components
         System.out.println("GameHandler active");
         this.gameViewController = gameViewController2D;
-        //Create EventHandler that controls the flow of events from the view
-        this.eventHandler = new EventHandler();
-        this.world = new World();
-
-    }
-
-    public void startNewGame(){
-        //Create game world
-        createWorld(50);
-        //Create Player object
-        this.player = PlayerBuilder.create(this, eventHandler,100, world.getSeed());
-        //Set player in world
-        world.setPlayer(player);
+        this.eventHandler = eventHandler;
+        this.world = gameWorld;
+        this.gameUpdater = gameUpdater;
+        this.player = player;
         this.gameStateMessenger = new GameStateMessengerMediator();
-        innitGame();
-    }
+        this.npcController  = npcController;
 
-    public void loadGame(){
-        this.gameStateMessenger = new GameStateMessengerMediator();
-        List<Tile> worldTiles = SaveGameHandler.loadGame();
-        System.out.println("loaded");
-        setPlayer(SaveGameHandler.getPlayerInstance(worldTiles));
-        System.out.println("added as eventlistner");
-        world.loadInGameWorld(worldTiles, player);
-        System.out.println("Game loaded");
-        innitGame();
-        for (IUpdatableGameObject enemy:
-             SaveGameHandler.getEnemyInstances(worldTiles)) {
-            npcController.addToUpdateList(enemy);
-        }
-        if(ComponentService.getComponentByType(player.getComponents(), ComponentType.WEAPON_COMPONENT).isPresent()){
-            WeaponComponent weaponComponent = (WeaponComponent)
-                    ComponentService.getComponentByType(player.getComponents(), ComponentType.WEAPON_COMPONENT).get();
-            if(weaponComponent.getWeapon() instanceof Gun){
-                Gun playerGun = (Gun)weaponComponent.getWeapon();
-                playerGun.setController(this);
-            }
-        }
-    }
 
-    private void innitGame(){
-        //Object responsible for enemies in the game world
-        this.npcController  = new NpcController(this, player, gameStateMessenger);
-        //Add player to list of objects that the EventHandler updates each tick
-        this.addToUpdateList(player);
         //Create the DrawableMatrix that handles the cut of the game world passed to the view
         this.matrix = getDrawableMatrix(10);
         //Create GameStateKeeper
         this.gameStateKeeper = new GameStateKeeper();
-
-
-
         //Set background music
         ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
         backGroundMusic.add(Sound.BACKGROUND_MUSIC_1);
@@ -100,26 +63,11 @@ public class GameHandler extends Updater {
     }
 
     /**
-     * Creates a new instance of World.
-     */
-    public void createWorld() {
-        this.world.createNewGameWorld(10);
-    }
-
-    /**
-     * Creates a new instance of World with a given size.
-     * @param size declares the size of the world to be created.
-     */
-    public void createWorld(int size) {
-        this.world.createNewGameWorld(size);
-    }
-
-    /**
      * Main update method for the game state.
      */
     public void updateWordState(){
-        npcController.update(1, world);
-        update();
+        npcController.update(world);
+        gameUpdater.update();
         AudioPlayer.getInstance().playSounds();
         if(player.isDead()){
             handlePlayerDeath();}
@@ -131,8 +79,9 @@ public class GameHandler extends Updater {
      */
     public DrawableTile[][] getDrawableWorld(){
         Tile viewCenterTile;
-
         updateWordState();
+
+        //Ugly edge case handling for first couple of updates
         if(player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).isPresent()){
             TransformComponent playerTransformComponent = (TransformComponent)
                     player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).get();
@@ -179,16 +128,6 @@ public class GameHandler extends Updater {
     public IUpdatableGameObject getPlayer() {
         return player;
     }
-
-    public void setPlayer(IUpdatableGameObject player) {
-        if(player.getComponentByType(ComponentType.INPUT_COMPONENT).isPresent()){
-            AvatarInputComponent component = (AvatarInputComponent)
-                    player.getComponentByType(ComponentType.INPUT_COMPONENT).get();
-            component.setEventHandler(eventHandler);
-            this.player = player;
-        }
-    }
-
 
     public World getWorld() {
         return world;
