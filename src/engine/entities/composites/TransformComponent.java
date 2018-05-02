@@ -45,8 +45,10 @@ public class TransformComponent extends ScriptableComponent{
 
     @Override
     public void cleanUp(IGameObject gameObject) {
-        getCurrentTile().clearGameObject();
-        currentTile = null;
+        if(currentTile != null){
+            getCurrentTile().clearGameObject();
+            currentTile = null;
+        }
     }
 
 

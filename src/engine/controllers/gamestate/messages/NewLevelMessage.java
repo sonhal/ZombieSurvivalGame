@@ -5,6 +5,7 @@ import engine.controllers.interfaces.Level;
 public class NewLevelMessage implements GameEventMessage {
 
     private Level newLevel;
+
     public NewLevelMessage(Level newLevel) {
         this.newLevel = newLevel;
     }

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public interface Level extends Serializable {
 
+    int getScoreNeeded();
+
     int getEnemyPoolValue();
 
     double getEnemySpeedBaseValue();
@@ -11,5 +13,11 @@ public interface Level extends Serializable {
     double getHealthPackSpawnRate();
 
     double getWeaponSpawnRate();
+
+    int getNextLevelScore();
+
+    int getLevel();
+
+
 
 }

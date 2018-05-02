@@ -13,18 +13,25 @@
 <Pane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.GameViewController2D">
    <children>
       <Canvas fx:id="gameCanvas" height="786.0" layoutY="25.0" width="1046.0" />
+       <Label fx:id="levelLabel" layoutX="30" layoutY="40" text="Level 0" textFill="#ffe491"><font>
+           <Font name="SansSerif Regular" size="20.0" /></font>
+       </Label>
+       <Label fx:id="scoreLabel" layoutX="130" layoutY="40" text="Score 0" textFill="#ffe491"><font>
+           <Font name="SansSerif Regular" size="20.0" />
+           </font>
+       </Label>
       <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="997.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
+         <menus>
+            <Menu mnemonicParsing="false" text="File">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#openMenu" text="Settings" />
                </items></Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
       </MenuBar>
       <Pane fx:id="colorBG" layoutY="25.0" minHeight="786.0" minWidth="1046.0" opacity="0.87" prefHeight="732.0" prefWidth="1006.0" style="-fx-background-color: #121212;">
          <children>
@@ -53,15 +60,15 @@
                </font>
             </Label>
          </children></Pane>
-       <Pane fx:id="settingsSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
-       <children>
-           <Label layoutX="143.0" layoutY="28.0" text="Settings" textFill="#ffe491">
+      <Pane fx:id="settingsSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
+         <children>
+            <Label layoutX="143.0" layoutY="28.0" text="Settings" textFill="#ffe491">
                <font>
                   <Font name="SansSerif Regular" size="40.0" />
                </font>
-           </Label>
-       </children>
-   </Pane>
+            </Label>
+         </children>
+      </Pane>
       <Pane fx:id="gameSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
          <children>
             <Label layoutX="90.0" layoutY="32.0" text="Game paused" textFill="#91acff">

@@ -6,6 +6,6 @@ import java.io.Serializable;
 
 public interface GameScore extends Serializable {
 
-    Score getScore();
+    int getScore();
 
 }

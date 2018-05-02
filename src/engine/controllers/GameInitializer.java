@@ -44,7 +44,7 @@ public class GameInitializer {
         GameStateMessengerMediator gamerMediator = new GameStateMessengerMediator();
 
         NpcController npcController = new NpcController(player, gamerMediator);
-        GameStateKeeper gameStateKeeper = new GameStateKeeper();
+        GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
         return new GameHandler(gameViewController,world,gameUpdater,
                 eventHandler, player, npcController, gameStateKeeper);
     }
@@ -83,7 +83,7 @@ public class GameInitializer {
                 playerGun.setController(gameUpdater);
             }
         }
-        GameStateKeeper gameStateKeeper = new GameStateKeeper();
+        GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
         return new GameHandler(gameViewController, world, gameUpdater,
                 eventHandler, player, npcController, gameStateKeeper);
     }

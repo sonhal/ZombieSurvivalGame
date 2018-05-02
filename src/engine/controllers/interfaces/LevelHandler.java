@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public interface LevelHandler extends Serializable {
 
-    void update(Score score);
+    void update(GameScore score);
 
     Level getCurrentLevel();
 

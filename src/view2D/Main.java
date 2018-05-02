@@ -18,7 +18,8 @@ public class Main extends Application {
     }
 
     @Override
-    public void stop() {
+    public void stop() throws Exception {
+        super.stop();
         //Make sure that the AudioPlayer has properly shutdown
         AudioPlayer.getInstance().shutdown();
     }

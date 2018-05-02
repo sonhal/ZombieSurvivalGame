@@ -1,8 +1,10 @@
 package engine.controllers;
 
 import engine.controllers.gamestate.GameStateMessengerMediator;
+import engine.controllers.gamestate.messages.EnemyKilledMessage;
 import engine.controllers.gamestate.messages.GameEventMessage;
 import engine.controllers.gamestate.messages.NewLevelMessage;
+import engine.controllers.interfaces.Level;
 import engine.controllers.interfaces.Messenger;
 import engine.controllers.interfaces.MessengerMediator;
 import engine.entities.ZombieBuilder;
@@ -18,13 +20,14 @@ public class NpcController extends Updater implements Messenger {
     private int spawnInterval = 0;
     private IUpdatableGameObject player;
     private MessengerMediator gameStateMessengerMediator;
+    private Level gameLevel;
 
 
     public NpcController(IUpdatableGameObject player, MessengerMediator gameMessengerMediator){
         System.out.println("Npc controller created");
         this.player = player;
         this.gameStateMessengerMediator = gameMessengerMediator;
-        this.gameStateMessengerMediator.subscribe(this);
+        gameStateMessengerMediator.subscribe(this);
     }
 
     public void update(World world){
@@ -32,6 +35,9 @@ public class NpcController extends Updater implements Messenger {
         if (enemies.size() < 50){
             spawner(world);
         }
+        getUpdateObjects().forEach(updatable -> {if(updatable.isDead()){
+            sendMessage(new EnemyKilledMessage(10));
+        }});
         super.update();
         //enemies.stream().forEach((e)->{e.update();});
     }
@@ -78,7 +84,7 @@ public class NpcController extends Updater implements Messenger {
     @Override
     public void handleMessage(GameEventMessage message) {
         if(message instanceof NewLevelMessage){
-            //[TODO]
+            gameLevel = ((NewLevelMessage) message).messageBody();
         }
     }
 

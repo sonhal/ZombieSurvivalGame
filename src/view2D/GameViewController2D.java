@@ -39,7 +39,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @FXML
     private
-    Label gameOverLbl;
+    Label gameOverLbl, levelLabel, scoreLabel;
 
     @FXML
     public
@@ -169,6 +169,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     private void update(){
         drawableMatrix = gameHandler.getDrawableWorld();
         renderer.render(drawableMatrix);
+        updateUI();
     }
 
     @Override
@@ -269,5 +270,10 @@ public class GameViewController2D implements GameViewController, Initializable, 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void updateUI(){
+        levelLabel.setText("Level " + String.valueOf(gameHandler.getGameStateKeeper().getGameLevelHandler().getCurrentLevel().getLevel()));
+        scoreLabel.setText("Score " + String.valueOf(gameHandler.getGameStateKeeper().getPlayerGameScore().getScore()));
     }
 }

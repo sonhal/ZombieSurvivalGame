@@ -1,35 +1,45 @@
 package engine.controllers.gamestate;
 
-import engine.controllers.interfaces.Level;
-import engine.controllers.interfaces.LevelHandler;
-import engine.controllers.interfaces.Score;
+import engine.controllers.gamestate.messages.GameEventMessage;
+import engine.controllers.gamestate.messages.NewLevelMessage;
+import engine.controllers.interfaces.*;
 
-public class GameLevelHandler implements LevelHandler {
+import java.util.List;
+import java.util.Queue;
+import java.util.stream.Stream;
 
-    private Score currentScore;
+public class GameLevelHandler implements LevelHandler, Messenger {
 
-    public GameLevelHandler(){
-        this.currentScore = ((Score) () -> 0);
+    private Level currentLevel;
+    private Queue<Level> levels;
+    private GameStateMessengerMediator gameStateMessengerMediator;
+
+    public GameLevelHandler(GameStateMessengerMediator gameStateMessengerMediator, Queue<Level> levels){
+        this.gameStateMessengerMediator = gameStateMessengerMediator;
+        this.levels = levels;
+        this.currentLevel = levels.poll();
     }
 
     @Override
-    public void update(Score score) {
-        currentScore = score;
+    public void update(GameScore score) {
+        if(currentLevel.getNextLevelScore() <= score.getScore()){
+            currentLevel = levels.poll();
+            sendMessage(new NewLevelMessage(currentLevel));
+        }
     }
 
     @Override
     public Level getCurrentLevel() {
-        return getLevelOnScore(currentScore);
+        return currentLevel;
     }
 
+    @Override
+    public void handleMessage(GameEventMessage message) {
+        //Do nothing
+    }
 
-    private Level getLevelOnScore(Score score){
-
-        if(score.scoreValue() > 1000){
-            return new GameLevel(1000,100,10,10);
-        }
-        else{
-            return new GameLevel(500,500,50,50);
-        }
+    @Override
+    public void sendMessage(GameEventMessage message) {
+        gameStateMessengerMediator.broadcast(message);
     }
 }

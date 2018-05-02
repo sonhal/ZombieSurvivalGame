@@ -145,4 +145,8 @@ public class GameHandler extends Updater {
         AudioPlayer.getInstance().stopBackgroundMusic();
         AudioPlayer.getInstance().shutdown();
     }
+
+    public GameStateKeeper getGameStateKeeper() {
+        return gameStateKeeper;
+    }
 }

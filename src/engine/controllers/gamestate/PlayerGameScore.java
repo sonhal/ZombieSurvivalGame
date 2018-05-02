@@ -6,36 +6,16 @@ import engine.controllers.interfaces.Score;
 public class PlayerGameScore implements GameScore{
 
     private int enemiesKilledValue;
-
-    public PlayerGameScore(){
-
-    }
+    private int score;
 
     @Override
-    public Score getScore() {
-        return calculatePlayerScore();
+    public int getScore() {
+        return score;
     }
 
-    public void update(int newEnemyKilledValue){
+    public void addToScore(int newEnemyKilledValue){
         enemiesKilledValue += newEnemyKilledValue;
-    }
-
-    private Score calculatePlayerScore(){
-
-        if(enemiesKilledValue == 0){
-            return new Score() {
-                @Override
-                public int scoreValue() {
-                    return 0;
-                }
-            };
-        }
-        return new Score() {
-            @Override
-            public int scoreValue() {
-                return enemiesKilledValue + (int)(System.currentTimeMillis() / 1000);
-            }
-        };
+        score += enemiesKilledValue;
     }
 
 }

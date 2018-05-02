@@ -3,6 +3,7 @@ package engine.controllers.gamestate;
 import engine.controllers.gamestate.messages.EnemyKilledMessage;
 import engine.controllers.gamestate.messages.GameEventMessage;
 import engine.controllers.interfaces.Messenger;
+import engine.entities.interfaces.Updatable;
 
 /**
  * Responsible for keeping the track of relevant statistics in the game.
@@ -12,12 +13,15 @@ public class GameStateKeeper implements Messenger{
     private PlayerGameScore playerGameScore;
     private GameLevelHandler gameLevelHandler;
     private GameState gameState;
+    private GameStateMessengerMediator messengerMediator;
 
 
-    public GameStateKeeper(){
+    public GameStateKeeper(GameStateMessengerMediator messengerMediator){
         this.playerGameScore = new PlayerGameScore();
-        this.gameLevelHandler = new GameLevelHandler();
+        this.gameLevelHandler = new GameLevelHandler(messengerMediator, GameLevelBuilder.basicLevels(10,100));
         this.gameState = new GameState();
+        this.messengerMediator = messengerMediator;
+        messengerMediator.subscribe(this);
     }
 
     public PlayerGameScore getPlayerGameScore() {
@@ -32,7 +36,8 @@ public class GameStateKeeper implements Messenger{
     public void handleMessage(GameEventMessage message) {
         if(message instanceof EnemyKilledMessage){
             gameState.totalEnemieskilled++;
-            playerGameScore.update((int)message.body);
+            playerGameScore.addToScore(((EnemyKilledMessage) message).messageBody());
+            gameLevelHandler.update(playerGameScore);
         }
     }
 
@@ -41,6 +46,9 @@ public class GameStateKeeper implements Messenger{
 
     }
 
+    /**
+     * Internal helper data class for keeping the data
+     */
     private class GameState {
         private int totalEnemieskilled;
 
