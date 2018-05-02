@@ -44,7 +44,7 @@ public class Gun extends Weapon {
             else {
                 controller.addToUpdateList(GameObjectFactory.createBullet(startTile, direction, getDamage()));
             }
-
+            lastActivateTime = System.currentTimeMillis();
         }
     }
 

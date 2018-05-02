@@ -27,7 +27,7 @@ public class ZombieBuilder {
 
         WeaponComponent wc = new WeaponComponent();
         CollisionComponent cc = new CollisionComponent();
-        HealthComponent hc = new HealthComponent(100);
+        HealthComponent hc = new HealthComponent(30);
         AvatarTransformComponent tc = new AvatarTransformComponent(spawnTile);
         EnemyInputComponent ic = new EnemyInputComponent(player, 1000);
 

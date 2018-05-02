@@ -32,7 +32,7 @@ public class PlayerBuilder {
 
         AvatarGraphicsComponent gc = new AvatarGraphicsComponent(playerSprites.get(0), 300);
         WeaponComponent wc = new WeaponComponent();
-        wc.setWeapon(new Gun(updater,10,10,200));
+        wc.setWeapon(new Gun(updater,10,10,100));
         components.add(wc);
 
         for (Sprite sprite:
