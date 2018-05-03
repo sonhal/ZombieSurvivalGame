@@ -30,7 +30,7 @@ public class Gun extends Weapon {
     }
 
     @Override
-    public void activate(Tile fromTile, Direction direction) {
+    public boolean activate(Tile fromTile, Direction direction) {
         if(TimeComponent.canUpdate(activateDelay, lastActivateTime)){
 
             System.out.println("Weapon activated!");
@@ -45,7 +45,9 @@ public class Gun extends Weapon {
                 controller.addToUpdateList(GameObjectFactory.createBullet(startTile, direction, getDamage()));
             }
             lastActivateTime = System.currentTimeMillis();
+            return true;
         }
+        return false;
     }
 
 

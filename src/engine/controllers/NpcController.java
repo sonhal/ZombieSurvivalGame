@@ -1,16 +1,17 @@
 package engine.controllers;
 
-import engine.controllers.gamestate.GameStateMessengerMediator;
 import engine.controllers.gamestate.messages.EnemyKilledMessage;
 import engine.controllers.gamestate.messages.GameEventMessage;
 import engine.controllers.gamestate.messages.NewLevelMessage;
-import engine.controllers.interfaces.Level;
+import engine.controllers.gamestate.interfaces.Level;
 import engine.controllers.interfaces.Messenger;
-import engine.controllers.interfaces.MessengerMediator;
+import engine.controllers.gamestate.interfaces.MessengerMediator;
+import engine.entities.BasicEntityBlueprint;
 import engine.entities.ZombieBuilder;
 import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.world.Tile;
 import engine.entities.world.World;
+import engine.services.audio.Sound;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -20,7 +21,7 @@ public class NpcController extends Updater implements Messenger {
     private int spawnInterval = 0;
     private IUpdatableGameObject player;
     private MessengerMediator gameStateMessengerMediator;
-    private Level gameLevel;
+    private int gameLevel;
 
 
     public NpcController(IUpdatableGameObject player, MessengerMediator gameMessengerMediator){
@@ -46,7 +47,8 @@ public class NpcController extends Updater implements Messenger {
         Tile spawnTile = locateSpawnTile(world);
         if (spawnTile != null){
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
-            IUpdatableGameObject enemy = ZombieBuilder.createZombie(player, spawnTile);
+            IUpdatableGameObject enemy = ZombieBuilder.createZombie(player, spawnTile, new BasicEntityBlueprint(
+                    30 + gameLevel, 10 + gameLevel, 1000 - (gameLevel * 50), Sound.ZOMBIE_ATTACK));
             addToUpdateList(enemy);
             spawnInterval = 10;
         }
@@ -91,7 +93,7 @@ public class NpcController extends Updater implements Messenger {
     @Override
     public void sendMessage(GameEventMessage message) {
         if(gameStateMessengerMediator != null){
-            gameStateMessengerMediator.broadcast(message);
+            gameStateMessengerMediator.broadcast(this, message);
         }
     }
 }

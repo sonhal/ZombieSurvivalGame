@@ -1,35 +1,36 @@
 package engine.controllers.gamestate;
 
+import engine.controllers.gamestate.interfaces.GameScore;
+import engine.controllers.gamestate.interfaces.LevelHandler;
 import engine.controllers.gamestate.messages.GameEventMessage;
 import engine.controllers.gamestate.messages.NewLevelMessage;
 import engine.controllers.interfaces.*;
 
-import java.util.List;
-import java.util.Queue;
-import java.util.stream.Stream;
-
 public class GameLevelHandler implements LevelHandler, Messenger {
 
-    private Level currentLevel;
-    private Queue<Level> levels;
+    private int currentLevel;
+    private LevelConfig config;
     private GameStateMessengerMediator gameStateMessengerMediator;
 
-    public GameLevelHandler(GameStateMessengerMediator gameStateMessengerMediator, Queue<Level> levels){
+    public GameLevelHandler(GameStateMessengerMediator gameStateMessengerMediator, LevelConfig config){
         this.gameStateMessengerMediator = gameStateMessengerMediator;
-        this.levels = levels;
-        this.currentLevel = levels.poll();
+        this.config = config;
+        this.currentLevel = 1;
+    }
+
+    private void nextLevel(){
+        currentLevel++;
+        gameStateMessengerMediator.broadcast(this, new NewLevelMessage(currentLevel));
     }
 
     @Override
     public void update(GameScore score) {
-        if(currentLevel.getNextLevelScore() <= score.getScore()){
-            currentLevel = levels.poll();
-            sendMessage(new NewLevelMessage(currentLevel));
+        if((currentLevel * config.getLevelScalar()) < score.getScore()){
+            nextLevel();
         }
     }
 
-    @Override
-    public Level getCurrentLevel() {
+    public int getCurrentLevel() {
         return currentLevel;
     }
 
@@ -40,6 +41,6 @@ public class GameLevelHandler implements LevelHandler, Messenger {
 
     @Override
     public void sendMessage(GameEventMessage message) {
-        gameStateMessengerMediator.broadcast(message);
+        gameStateMessengerMediator.broadcast(this, message);
     }
 }

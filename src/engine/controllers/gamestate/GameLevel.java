@@ -1,6 +1,6 @@
 package engine.controllers.gamestate;
 
-import engine.controllers.interfaces.Level;
+import engine.controllers.gamestate.interfaces.Level;
 
 public class GameLevel implements Level {
 

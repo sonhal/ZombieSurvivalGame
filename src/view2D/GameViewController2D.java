@@ -273,7 +273,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
     private void updateUI(){
-        levelLabel.setText("Level " + String.valueOf(gameHandler.getGameStateKeeper().getGameLevelHandler().getCurrentLevel().getLevel()));
+        levelLabel.setText("Level " + String.valueOf(gameHandler.getGameStateKeeper().getGameLevelHandler().getCurrentLevel()));
         scoreLabel.setText("Score " + String.valueOf(gameHandler.getGameStateKeeper().getPlayerGameScore().getScore()));
     }
 }

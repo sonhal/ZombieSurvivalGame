@@ -7,11 +7,12 @@ import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Singleton class that handles all the playing of audio in the game.
@@ -20,7 +21,7 @@ import java.util.concurrent.Executors;
 public class AudioPlayer {
 
     private ExecutorService soundPool;
-    private ArrayList<SoundData> soundBuffer;
+    private Set<SoundData> soundBuffer;
 
     private HashMap<Sound, AudioClip> audioEffectCollection;
     private HashMap<Sound, Media> backgroundMusicCollection;
@@ -28,7 +29,7 @@ public class AudioPlayer {
     private static AudioPlayer instance;
 
     private AudioPlayer(){
-        soundBuffer = new ArrayList<>();
+        soundBuffer = new LinkedHashSet<>();
         audioEffectCollection = new HashMap<>();
         backgroundMusicCollection = new HashMap<>();
         backGroundSounds = new ArrayList<>();
@@ -58,7 +59,7 @@ public class AudioPlayer {
      */
     public synchronized void playSounds(){
         if(soundBuffer.size() > 0) {
-            SoundData soundData = soundBuffer.get(soundBuffer.size() - 1);
+            SoundData soundData = soundBuffer.iterator().next();
             soundPool.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -66,7 +67,6 @@ public class AudioPlayer {
                 }
             });
             soundBuffer.remove(soundData);
-            soundBuffer.trimToSize();
         }
     }
 
@@ -116,6 +116,14 @@ public class AudioPlayer {
         SoundData(Sound sound, double playtime){
             this.sound = sound;
             this.playtime = playtime;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if(obj instanceof SoundData){
+                return sound == ((SoundData)obj).sound;
+            }
+            return false;
         }
     }
 }

@@ -1,7 +1,6 @@
 package engine.controllers.gamestate;
 
-import engine.controllers.interfaces.GameScore;
-import engine.controllers.interfaces.Score;
+import engine.controllers.gamestate.interfaces.GameScore;
 
 public class PlayerGameScore implements GameScore{
 
@@ -15,7 +14,7 @@ public class PlayerGameScore implements GameScore{
 
     public void addToScore(int newEnemyKilledValue){
         enemiesKilledValue += newEnemyKilledValue;
-        score += enemiesKilledValue;
+        score += newEnemyKilledValue;
     }
 
 }

@@ -1,4 +1,4 @@
-package engine.controllers.interfaces;
+package engine.controllers.gamestate.interfaces;
 
 import engine.entities.interfaces.IGameObject;
 

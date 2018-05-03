@@ -26,7 +26,7 @@ public abstract class Weapon implements Serializable{
     }
 
 
-    public abstract void activate(Tile fromTile, Direction direction);
+    public abstract boolean activate(Tile fromTile, Direction direction);
 
     /**
      * Method to get the damage the weapon deals

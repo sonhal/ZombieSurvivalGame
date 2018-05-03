@@ -4,12 +4,14 @@ import engine.entities.composites.*;
 import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.MeleeWeapon;
 import engine.entities.world.Tile;
+import engine.services.audio.Sound;
 
 import java.util.ArrayList;
 
 public class ZombieBuilder {
 
-    public static UpdatableGameObject createZombie(IUpdatableGameObject player, Tile spawnTile){
+    public static UpdatableGameObject createZombie(IUpdatableGameObject player,
+                                                   Tile spawnTile, BasicEntityBlueprint blueprint){
         ArrayList<Sprite> zombieSprites = new ArrayList<>();
 
         /*
@@ -27,18 +29,18 @@ public class ZombieBuilder {
 
         WeaponComponent wc = new WeaponComponent();
         CollisionComponent cc = new CollisionComponent();
-        HealthComponent hc = new HealthComponent(30);
+        HealthComponent hc = new HealthComponent(blueprint.health);
         AvatarTransformComponent tc = new AvatarTransformComponent(spawnTile);
-        EnemyInputComponent ic = new EnemyInputComponent(player, 1000);
+        EnemyInputComponent ic = new EnemyInputComponent(player, blueprint.moveDelay);
 
-        AvatarGraphicsComponent gc = new AvatarGraphicsComponent(zombieSprites.get(0), 500);
+        AvatarGraphicsComponent gc = new AvatarGraphicsComponent(zombieSprites.get(0), blueprint.moveDelay);
 
         for (Sprite sprite:
                 zombieSprites) {
             gc.addSprite(sprite);
         }
 
-        wc.setWeapon((new MeleeWeapon(1,5,1000)));
+        wc.setWeapon(new MeleeWeapon(1,blueprint.attackDamage,500));
 
         ArrayList<ScriptableComponent> components = new ArrayList<>();
         components.add(gc);
@@ -47,7 +49,7 @@ public class ZombieBuilder {
         components.add(hc);
         components.add(tc);
         components.add(ic);
-        components.add(new ZombieAudioComponent());
+        components.add(new AudioComponent(500, blueprint.attackSound));
 
         return new ImpUpdatableGameObject(components);
     }

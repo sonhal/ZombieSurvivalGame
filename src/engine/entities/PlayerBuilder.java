@@ -6,6 +6,7 @@ import engine.entities.composites.*;
 import engine.entities.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.Gun;
 import engine.entities.world.Tile;
+import engine.services.audio.Sound;
 
 import java.util.ArrayList;
 
@@ -41,7 +42,7 @@ public class PlayerBuilder {
         }
 
         components.add(gc);
-        components.add(new AudioComponent());
+        components.add(new AudioComponent(100, Sound.HIT_1));
 
         ImpUpdatableGameObject player = new ImpUpdatableGameObject(components);
         player.setAsPlayer(true);

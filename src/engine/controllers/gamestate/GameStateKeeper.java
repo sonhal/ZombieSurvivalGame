@@ -18,7 +18,7 @@ public class GameStateKeeper implements Messenger{
 
     public GameStateKeeper(GameStateMessengerMediator messengerMediator){
         this.playerGameScore = new PlayerGameScore();
-        this.gameLevelHandler = new GameLevelHandler(messengerMediator, GameLevelBuilder.basicLevels(10,100));
+        this.gameLevelHandler = new GameLevelHandler(messengerMediator, new LevelConfig(100));
         this.gameState = new GameState();
         this.messengerMediator = messengerMediator;
         messengerMediator.subscribe(this);

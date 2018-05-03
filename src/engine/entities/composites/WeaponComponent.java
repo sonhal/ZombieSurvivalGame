@@ -18,9 +18,12 @@ public class WeaponComponent extends ScriptableComponent{
     }
 
 
-    public void attack(Direction direction, TransformComponent transformComponent){
+    public void attack(Direction direction, TransformComponent transformComponent, IGameObject gameObject){
         if (weapon != null){
-            weapon.activate(transformComponent.getCurrentTile(), direction);
+            if(weapon.activate(transformComponent.getCurrentTile(), direction)){
+                sendMessageToAllComponents(gameObject.getComponents(),
+                        new Message(ComponentEvent.ATTACK_COMPLETED_EVENT, true));
+            }
         }
     }
 
@@ -43,7 +46,7 @@ public class WeaponComponent extends ScriptableComponent{
                         getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).get();
 
                 //Shoot in direction Player is facing
-                attack(tc.getFacingDirection(), tc);
+                attack(tc.getFacingDirection(), tc , gameObject);
             }
             attackEvent = null;
         }

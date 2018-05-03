@@ -1,17 +1,15 @@
 package engine.controllers.gamestate.messages;
 
-import engine.controllers.interfaces.Level;
-
 public class NewLevelMessage implements GameEventMessage {
 
-    private Level newLevel;
+    private int newLevel;
 
-    public NewLevelMessage(Level newLevel) {
+    public NewLevelMessage(int newLevel) {
         this.newLevel = newLevel;
     }
 
     @Override
-    public Level messageBody() {
+    public Integer messageBody() {
         return newLevel;
     }
 }

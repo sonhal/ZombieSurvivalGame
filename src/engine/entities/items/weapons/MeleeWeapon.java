@@ -27,12 +27,14 @@ public class MeleeWeapon extends Weapon {
     }
 
     @Override
-    public void activate(Tile fromTile, Direction direction) {
+    public boolean activate(Tile fromTile, Direction direction) {
         if(TimeComponent.canUpdate(activateDelay, lastActivateTime)){
             System.out.println("Weapon activated!");
             AttackComponent.tryAttack(getDamage(), fromTile.getTileInDirection(direction));
             lastActivateTime = System.currentTimeMillis();
+            return true;
         }
+        return false;
     }
 
 }

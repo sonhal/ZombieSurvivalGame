@@ -2,7 +2,7 @@ package engine.controllers.gamestate;
 
 import engine.controllers.gamestate.messages.GameEventMessage;
 import engine.controllers.interfaces.Messenger;
-import engine.controllers.interfaces.MessengerMediator;
+import engine.controllers.gamestate.interfaces.MessengerMediator;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class GameStateMessengerMediator implements MessengerMediator {
     }
 
     @Override
-    public void broadcast(GameEventMessage message) {
-        subscribers.forEach(recipient -> recipient.handleMessage(message));
+    public void broadcast(Messenger sender, GameEventMessage message) {
+        subscribers.forEach(recipient -> {if(recipient != sender)recipient.handleMessage(message);} );
     }
 }
