@@ -47,7 +47,6 @@ public class NpcController extends Updater {
         }
         int spawnableRangeX = 20;
         int spawnableRangeY = 20;
-            System.out.println("Locating spawnTile");
 
             int randomNumX = 0;
             int randomNumY = 0;

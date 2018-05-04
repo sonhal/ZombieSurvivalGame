@@ -47,7 +47,7 @@ public class GameHandler extends Updater {
     public void startNewGame(){
 
         //Create game world
-        createWorld(50);
+        createWorld(1000);
         //Create Player object
         this.player = PlayerBuilder.create(this, eventHandler,100, world.getSeed());
         //Set player in world
@@ -96,7 +96,6 @@ public class GameHandler extends Updater {
      * Creates a new instance of World.
      */
     public void createWorld() {
-        this.world.createNewGameWorld(10);
     }
 
     /**
