@@ -1,5 +1,6 @@
 package engine.view;
 
+import engine.entities.Sprite;
 import engine.entities.world.Tile;
 import engine.entities.world.World;
 
@@ -24,15 +25,30 @@ public class DrawableMatrix implements Serializable{
             currentTile = currentTile.getUp();
         }
         Tile rowBeggining = currentTile;
+        boolean bottomEndReached = false;
         for (int y = 0; y < radiY * 2; y++){
-
+            boolean lineEndReached = false;
             for (int x = 0; x < radiX * 2; x++){
-                drawableWorld[x][y] = new DrawableTile(currentTile.getGameObject(),
-                        currentTile.getItem(), currentTile.getSprite());
-                currentTile = currentTile.getRight();
+                if (lineEndReached == false && bottomEndReached == false){
+                    drawableWorld[x][y] = new DrawableTile(currentTile.getGameObject(),
+                            currentTile.getItem(), currentTile.getSprite());
+                    if(currentTile != currentTile.getRight()) {
+                        currentTile = currentTile.getRight();
+                    }else{
+                        lineEndReached = true;
+                    }
+                }else{
+                    drawableWorld[x][y] = new DrawableTile(null, null, new Sprite(29));
+                    currentTile = currentTile.getRight();
+                }
+
             }
-            rowBeggining = rowBeggining.getDown();
-            currentTile = rowBeggining;
+            if (rowBeggining != rowBeggining.getDown()) {
+                rowBeggining = rowBeggining.getDown();
+                currentTile = rowBeggining;
+            }else{
+                bottomEndReached = true;
+            }
         }
         return drawableWorld;
     }
