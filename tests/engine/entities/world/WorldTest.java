@@ -1,7 +1,4 @@
 package engine.entities.world;
-
-import engine.entities.Avatar;
-import engine.entities.PlayerBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +14,7 @@ class WorldTest {
 
     @BeforeEach
     void setUp() {
-        testWorld = new World(60);
+        testWorld = new World();
     }
 
     @AfterEach
@@ -43,7 +40,7 @@ class WorldTest {
 
     @Test
     void connectTiles() {
-        testWorld.setWorld(testWorld.generate(100));
+        //testWorld.setWorld(testWorld.generate(100));
         long t1 = System.nanoTime();
         testWorld.connectTiles(testWorld.getWorld());
         long t2 = System.nanoTime();

@@ -3,6 +3,7 @@ package engine.services.save;
 import engine.GameViewStub;
 import engine.controllers.EventHandler;
 import engine.controllers.GameHandler;
+import engine.controllers.GameInitializer;
 import engine.controllers.Updater;
 import engine.entities.PlayerBuilder;
 import engine.entities.composites.ComponentType;
@@ -22,10 +23,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SaveGameHandlerTest {
 
+    SaveGameHandler saveGameHandler;
+
     @BeforeEach
     void setUp() {
-        SaveGameHandler saveGameHandler = new SaveGameHandler();
-
+        this.saveGameHandler = new SaveGameHandler();
     }
 
     @AfterEach
@@ -65,7 +67,7 @@ class SaveGameHandlerTest {
     @Test
     void saveWorldTest(){
         GameViewStub gameViewStub = new GameViewStub();
-        GameHandler gameHandler = new GameHandler(gameViewStub);
+        GameHandler gameHandler = GameInitializer.newGame(gameViewStub);
         World world = gameHandler.getWorld();
         List<Tile> tiles = world.getWorld();
 

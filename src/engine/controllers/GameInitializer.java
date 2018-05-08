@@ -89,7 +89,7 @@ public class GameInitializer {
     }
 
     private static void setPlayerEventHandler(IUpdatableGameObject player, EventHandler eventHandler) {
-        if(player.getComponentByType(ComponentType.INPUT_COMPONENT).isPresent()){
+         if(player.getComponentByType(ComponentType.INPUT_COMPONENT).isPresent()){
             AvatarInputComponent component = (AvatarInputComponent)
                     player.getComponentByType(ComponentType.INPUT_COMPONENT).get();
             component.setEventHandler(eventHandler);
