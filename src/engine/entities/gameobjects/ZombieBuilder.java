@@ -30,11 +30,10 @@ public class ZombieBuilder {
         zombieSprites.add(new Sprite(25)); //left
 
         WeaponComponent wc = new WeaponComponent();
-        CollisionComponent cc = new CollisionComponent();
         HealthComponent hc = new HealthComponent(blueprint.health);
         UpdatableTransformComponent tc = new UpdatableTransformComponent(spawnTile);
         EnemyInputComponent ic = new EnemyInputComponent(player, blueprint.moveDelay);
-
+        CollisionComponent cc = new CollisionComponent(tc);
         UpdatableGraphicsComponent gc = new UpdatableGraphicsComponent(zombieSprites.get(0), blueprint.moveDelay);
 
         for (Sprite sprite:

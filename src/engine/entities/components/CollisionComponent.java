@@ -11,8 +11,9 @@ public class CollisionComponent extends ScriptableComponent {
     private Direction inputDirection;
     private TransformComponent gameObjectTransformComponent;
 
-    public CollisionComponent() {
+    public CollisionComponent(TransformComponent transformComponent) {
         super(ComponentType.COLLISION_COMPONENT);
+        gameObjectTransformComponent = transformComponent;
     }
 
     @Override
@@ -43,11 +44,14 @@ public class CollisionComponent extends ScriptableComponent {
     @Override
     public void innit(IGameObject gameObject) {
         //Gets reference to its own TransformComponent
-        if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
-            this.gameObjectTransformComponent =
-                    (TransformComponent) getComponentByType(gameObject.getComponents()
-                            , ComponentType.TRANSFORM_COMPONENT).get();
-        }
+       /* if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
+            if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).get() instanceof TransformComponent){
+                this.gameObjectTransformComponent =
+                        (TransformComponent) getComponentByType(gameObject.getComponents()
+                                , ComponentType.TRANSFORM_COMPONENT).get();
+            }
+
+        }*/
     }
 
     @Override

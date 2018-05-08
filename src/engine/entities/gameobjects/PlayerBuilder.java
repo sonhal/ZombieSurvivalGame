@@ -25,10 +25,10 @@ public class PlayerBuilder {
         for (int i = 12; i <= 15; i++){
             playerSprites.add(new Sprite(i));
         }
-
-        components.add(new CollisionComponent());
+        UpdatableTransformComponent transformComponent = new UpdatableTransformComponent(startTile);
+        components.add(new CollisionComponent(transformComponent));
         components.add(new HealthComponent(1000));
-        components.add(new UpdatableTransformComponent(startTile));
+        components.add(transformComponent);
         components.add(new PlayerInputComponent(eventHandler, 0));
 
         UpdatableGraphicsComponent gc = new UpdatableGraphicsComponent(playerSprites.get(0), 300);
