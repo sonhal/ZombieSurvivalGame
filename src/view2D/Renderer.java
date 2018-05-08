@@ -5,12 +5,15 @@ import engine.entities.Sprite;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Renderer {
+import java.awt.*;
 
+
+public class Renderer {
     private Canvas canvas;
     private GraphicsContext gc;
     private SpriteTranslationHandler spriteTranslator;
-    private double entitySize;
+    private double enitySize;
+    private int drawHealth = 100;
 
     public Renderer(Canvas canvas){
         this.canvas = canvas;
@@ -22,9 +25,6 @@ public class Renderer {
 
     public void render(DrawableTile[][] drawableMatrix){
         setEntitySize(drawableMatrix);
-        canvas.setWidth(canvas.getScene().getHeight());
-        canvas.setHeight(canvas.getScene().getHeight());
-
         gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight() );
         int yAxisOffset = 0;
         for (DrawableTile[] tileRow: drawableMatrix) {
@@ -32,9 +32,9 @@ public class Renderer {
             for (DrawableTile tile: tileRow) {
 
                 drawTile(tile, xAxisOffset, yAxisOffset);
-                xAxisOffset += entitySize;
+                xAxisOffset += enitySize;
             }
-            yAxisOffset += entitySize;
+            yAxisOffset += enitySize;
 
         }
     }
@@ -56,14 +56,15 @@ public class Renderer {
 
     private void drawOnCanvas(Sprite sprite, int xPos, int yPos){
         gc.drawImage(spriteTranslator.getSpriteImage(sprite),
-                xPos, yPos, entitySize, entitySize);
+                xPos, yPos, enitySize, enitySize);
     }
 
     public void setEntitySize(DrawableTile[][] drawableMatrix){
 
         if (drawableMatrix != null) {
-            entitySize = canvas.getWidth() / drawableMatrix.length;
+            enitySize = canvas.getWidth() / drawableMatrix.length;
         }
-        else entitySize = 0;
+        else enitySize = 0;
     }
+
 }
