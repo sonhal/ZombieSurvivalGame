@@ -1,4 +1,4 @@
-package engine.controllers.gamestate.interfaces;
+package engine.gamestate.interfaces;
 
 import java.io.Serializable;
 

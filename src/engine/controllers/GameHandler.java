@@ -1,17 +1,12 @@
 package engine.controllers;
 
-import engine.controllers.gamestate.GameStateKeeper;
-import engine.controllers.gamestate.GameStateMessengerMediator;
-import engine.entities.PlayerBuilder;
-import engine.entities.composites.AvatarInputComponent;
+import engine.gamestate.GameStateKeeper;
+import engine.gamestate.GameStateMessengerMediator;
 import engine.entities.composites.ComponentType;
 import engine.entities.composites.TransformComponent;
-import engine.entities.composites.WeaponComponent;
 import engine.entities.interfaces.IUpdatableGameObject;
-import engine.entities.items.weapons.Gun;
 import engine.entities.world.Tile;
 import engine.entities.world.World;
-import engine.services.ComponentService;
 import engine.services.audio.AudioPlayer;
 import engine.services.audio.Sound;
 import engine.services.save.SaveGameHandler;
@@ -21,7 +16,6 @@ import view.GameViewController;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Class controlling the state and changes in the game world.

@@ -1,6 +1,4 @@
-package engine.controllers.gamestate.interfaces;
-
-import engine.controllers.gamestate.interfaces.Score;
+package engine.gamestate.interfaces;
 
 import java.io.Serializable;
 import java.util.List;

@@ -1,6 +1,4 @@
-package engine.controllers.gamestate.interfaces;
-
-import engine.entities.interfaces.IGameObject;
+package engine.gamestate.interfaces;
 
 import java.io.Serializable;
 

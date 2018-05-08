@@ -1,4 +1,4 @@
-package engine.controllers.gamestate.messages;
+package engine.gamestate.messages;
 
 public class NewLevelMessage implements GameEventMessage {
 

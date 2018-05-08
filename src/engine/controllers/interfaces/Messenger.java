@@ -1,6 +1,6 @@
 package engine.controllers.interfaces;
 
-import engine.controllers.gamestate.messages.GameEventMessage;
+import engine.gamestate.messages.GameEventMessage;
 
 public interface Messenger {
 

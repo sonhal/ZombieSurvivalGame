@@ -1,4 +1,4 @@
-package engine.controllers.gamestate.messages;
+package engine.gamestate.messages;
 
 public interface GameEventMessage {
      <T> T messageBody();

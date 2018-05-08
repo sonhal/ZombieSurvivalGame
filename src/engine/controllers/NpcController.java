@@ -1,11 +1,10 @@
 package engine.controllers;
 
-import engine.controllers.gamestate.messages.EnemyKilledMessage;
-import engine.controllers.gamestate.messages.GameEventMessage;
-import engine.controllers.gamestate.messages.NewLevelMessage;
-import engine.controllers.gamestate.interfaces.Level;
+import engine.gamestate.messages.EnemyKilledMessage;
+import engine.gamestate.messages.GameEventMessage;
+import engine.gamestate.messages.NewLevelMessage;
 import engine.controllers.interfaces.Messenger;
-import engine.controllers.gamestate.interfaces.MessengerMediator;
+import engine.gamestate.interfaces.MessengerMediator;
 import engine.entities.BasicEntityBlueprint;
 import engine.entities.ZombieBuilder;
 import engine.entities.interfaces.IUpdatableGameObject;
@@ -33,7 +32,7 @@ public class NpcController extends Updater implements Messenger {
 
     public void update(World world){
         ArrayList enemies = getUpdateObjects();
-        if (enemies.size() < 50){
+        if (enemies.size() < 100){
             spawner(world);
         }
         getUpdateObjects().forEach(updatable -> {if(updatable.isDead()){

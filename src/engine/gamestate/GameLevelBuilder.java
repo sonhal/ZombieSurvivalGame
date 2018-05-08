@@ -1,6 +1,6 @@
-package engine.controllers.gamestate;
+package engine.gamestate;
 
-import engine.controllers.gamestate.interfaces.Level;
+import engine.gamestate.interfaces.Level;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;

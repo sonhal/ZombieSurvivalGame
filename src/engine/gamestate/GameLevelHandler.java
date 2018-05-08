@@ -1,9 +1,9 @@
-package engine.controllers.gamestate;
+package engine.gamestate;
 
-import engine.controllers.gamestate.interfaces.GameScore;
-import engine.controllers.gamestate.interfaces.LevelHandler;
-import engine.controllers.gamestate.messages.GameEventMessage;
-import engine.controllers.gamestate.messages.NewLevelMessage;
+import engine.gamestate.interfaces.GameScore;
+import engine.gamestate.interfaces.LevelHandler;
+import engine.gamestate.messages.GameEventMessage;
+import engine.gamestate.messages.NewLevelMessage;
 import engine.controllers.interfaces.*;
 
 public class GameLevelHandler implements LevelHandler, Messenger {

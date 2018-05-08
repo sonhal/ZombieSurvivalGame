@@ -1,4 +1,4 @@
-package engine.controllers.gamestate;
+package engine.gamestate;
 
 public class LevelConfig {
     private double scoreLevelScalar;

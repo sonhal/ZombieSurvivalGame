@@ -27,7 +27,7 @@ public class PlayerBuilder {
         }
 
         components.add(new CollisionComponent());
-        components.add(new HealthComponent(health));
+        components.add(new HealthComponent(100));
         components.add(new AvatarTransformComponent(startTile));
         components.add(new AvatarInputComponent(eventHandler, 0));
 

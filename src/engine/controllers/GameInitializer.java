@@ -1,7 +1,7 @@
 package engine.controllers;
 
-import engine.controllers.gamestate.GameStateKeeper;
-import engine.controllers.gamestate.GameStateMessengerMediator;
+import engine.gamestate.GameStateKeeper;
+import engine.gamestate.GameStateMessengerMediator;
 import engine.entities.PlayerBuilder;
 import engine.entities.composites.AvatarInputComponent;
 import engine.entities.composites.ComponentType;

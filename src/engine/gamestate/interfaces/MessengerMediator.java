@@ -1,6 +1,6 @@
-package engine.controllers.gamestate.interfaces;
+package engine.gamestate.interfaces;
 
-import engine.controllers.gamestate.messages.GameEventMessage;
+import engine.gamestate.messages.GameEventMessage;
 import engine.controllers.interfaces.Messenger;
 
 public interface MessengerMediator {

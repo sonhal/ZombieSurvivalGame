@@ -1,12 +1,12 @@
-package engine.controllers.gamestate;
+package engine.gamestate;
 
-import engine.controllers.gamestate.messages.EnemyKilledMessage;
-import engine.controllers.gamestate.messages.GameEventMessage;
+import engine.gamestate.messages.EnemyKilledMessage;
+import engine.gamestate.messages.GameEventMessage;
 import engine.controllers.interfaces.Messenger;
-import engine.entities.interfaces.Updatable;
 
 /**
  * Responsible for keeping the track of relevant statistics in the game.
+ * [TODO] Move Gamestate out of controllers
  */
 public class GameStateKeeper implements Messenger{
 

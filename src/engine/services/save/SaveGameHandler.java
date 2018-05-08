@@ -10,6 +10,8 @@ import java.util.List;
 
 public class SaveGameHandler {
 
+    private static String SAVE_FILE_PATH = "gamefiles/saves/savefile.ser";
+
 
     public static void saveGame(List<Tile> world){
         for (Tile tile:
@@ -21,7 +23,7 @@ public class SaveGameHandler {
         }
         try {
             FileOutputStream fileOut =
-                    new FileOutputStream("gamefiles/savefile.ser");
+                    new FileOutputStream(SAVE_FILE_PATH);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(world);
             out.close();
@@ -34,7 +36,7 @@ public class SaveGameHandler {
     public static List<Tile> loadGame(){
         List<Tile> loadedWorld = null;
         try {
-            FileInputStream fileIn = new FileInputStream("gamefiles/savefile.ser");
+            FileInputStream fileIn = new FileInputStream(SAVE_FILE_PATH);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             loadedWorld = (List<Tile>)in.readObject();
             in.close();

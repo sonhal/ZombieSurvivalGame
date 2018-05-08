@@ -1,6 +1,6 @@
-package engine.controllers.gamestate;
+package engine.gamestate;
 
-import engine.controllers.gamestate.interfaces.GameScore;
+import engine.gamestate.interfaces.GameScore;
 
 public class PlayerGameScore implements GameScore{
 

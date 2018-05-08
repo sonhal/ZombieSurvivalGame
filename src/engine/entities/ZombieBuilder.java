@@ -8,6 +8,9 @@ import engine.services.audio.Sound;
 
 import java.util.ArrayList;
 
+/**
+ * Helper class, Builds new Zombies
+ */
 public class ZombieBuilder {
 
     public static UpdatableGameObject createZombie(IUpdatableGameObject player,

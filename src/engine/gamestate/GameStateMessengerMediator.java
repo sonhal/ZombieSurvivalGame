@@ -1,8 +1,8 @@
-package engine.controllers.gamestate;
+package engine.gamestate;
 
-import engine.controllers.gamestate.messages.GameEventMessage;
+import engine.gamestate.messages.GameEventMessage;
 import engine.controllers.interfaces.Messenger;
-import engine.controllers.gamestate.interfaces.MessengerMediator;
+import engine.gamestate.interfaces.MessengerMediator;
 
 import java.util.ArrayList;
 
