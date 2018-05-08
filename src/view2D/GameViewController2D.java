@@ -7,6 +7,8 @@ import engine.view.DrawableTile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +22,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import view.GameViewController;
@@ -43,7 +46,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @FXML
     public
-    Button save, gameBtn, settingsBtn;
+    Button save, gameBtn, settingsBtn, gotomenuBtn;
 
     @FXML
     private
@@ -51,7 +54,10 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @FXML
     private
-    Pane settingsSet, gameSet , colorBG, anchor, gameOver, toolBar, toolBarUnder, canvasPane;
+    Pane settingsSet, gameSet , colorBG, anchor, gameOver, gameOver1, toolBar, toolBarUnder, canvasPane, btnTab;
+
+    @FXML
+    private Rectangle redBar, greenBar;
 
     private boolean loadGameFlag;
 
@@ -197,6 +203,8 @@ public class GameViewController2D implements GameViewController, Initializable, 
         settingsBtn.setVisible(false);
         gameOver.setVisible(false);
         gameOver.setManaged(false);
+        gameOver1.setVisible(false);
+        gameOver1.setManaged(false);
     }
 
     @Override
@@ -213,14 +221,21 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
     public void goToDeathScreen() throws IOException {
+        final BooleanProperty firstTime = new SimpleBooleanProperty(true);
         stopGameLoop();
         System.out.println("Game ended");
-        gameOver.setVisible(true);
-        gameOver.setManaged(true);
+        gameOver1.setVisible(true);
+        gameOver1.setManaged(true);
         colorBG.setVisible(true);
         colorBG.setManaged(true);
-        settingsBtn.setVisible(true);
-        gameBtn.setVisible(true);
+        btnTab.setVisible(false);
+        btnTab.setManaged(false);
+        gotomenuBtn.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
+            if(newValue && firstTime.get()){
+                gameOver1.requestFocus(); // Delegate the focus to container
+                firstTime.setValue(false); // Variable value changed for future references
+            }
+        });
     }
 
     public void startNewGame(GameViewController gameViewController){
