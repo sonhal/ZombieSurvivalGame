@@ -5,9 +5,7 @@ import engine.controllers.Direction;
 import engine.controllers.EventHandler;
 import engine.entities.components.ComponentEvent.AttackEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
-import engine.entities.components.ComponentEvent.ComponentEventEnum;
 import engine.entities.components.ComponentEvent.MoveEvent;
-import engine.entities.components.componentEventHandlers.Message;
 import engine.entities.gameobjects.interfaces.IGameObject;
 
 public class PlayerInputComponent extends ScriptableComponent{

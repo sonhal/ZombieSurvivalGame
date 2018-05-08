@@ -2,7 +2,6 @@ package engine.entities.components;
 
 import engine.entities.components.ComponentEvent.*;
 import engine.entities.gameobjects.UpdatableGameObject;
-import engine.entities.components.componentEventHandlers.Message;
 import engine.entities.gameobjects.interfaces.IGameObject;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 

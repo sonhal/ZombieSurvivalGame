@@ -2,7 +2,6 @@ package engine.entities.components;
 
 import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.gameobjects.Sprite;
-import engine.entities.components.componentEventHandlers.Message;
 import engine.entities.components.interfaces.IGraphicsComponent;
 import engine.entities.gameobjects.interfaces.IGameObject;
 

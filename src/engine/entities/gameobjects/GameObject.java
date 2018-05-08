@@ -1,12 +1,10 @@
 package engine.entities.gameobjects;
 
 import engine.entities.components.*;
-import engine.entities.components.ComponentEvent.ComponentEventWrapper;
 import engine.entities.gameobjects.interfaces.IGameObject;
 import engine.world.Tile;
 import engine.services.ComponentService;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,8 +17,6 @@ import java.util.Optional;
  */
 public class GameObject implements IGameObject{
     private List<ScriptableComponent> components;
-    private HashMap<? extends ComponentEventWrapper, List<ScriptableComponent>> componentEventListeners;
-
 
     public GameObject(List<ScriptableComponent> components){
         this.components = components;

@@ -3,8 +3,6 @@ package engine.entities.components;
 import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.CollisionEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
-import engine.entities.components.ComponentEvent.ComponentEventEnum;
-import engine.entities.components.componentEventHandlers.Message;
 import engine.entities.gameobjects.interfaces.IGameObject;
 import engine.world.Tile;
 

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class CollisionEventTest {
-    ComponentEventWrapper<CollisionEvent> event;
+
 
     @BeforeEach
     void SetUp(){
@@ -14,8 +14,5 @@ class CollisionEventTest {
 
     @Test
     void collisonDirection() {
-        event = new ComponentEventWrapper<>(new CollisionEvent(Direction.UP));
-        CollisionEvent test = event.getEvent();
-        test.collisonDirection();
     }
 }
