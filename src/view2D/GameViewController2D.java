@@ -34,7 +34,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
     GameHandler gameHandler;
     DrawableTile[][] drawableMatrix;
     Renderer renderer;
-    Scene scene;
     Timeline gameLoop;
 
     @FXML
