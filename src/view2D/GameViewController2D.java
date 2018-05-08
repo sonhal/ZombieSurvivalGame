@@ -7,43 +7,29 @@ import engine.view.DrawableTile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import view.GameViewController;
-import javafx.scene.input.KeyEvent;
-import javafx.event.EventHandler;
 
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
-import java.util.EventListener;
 import java.util.ResourceBundle;
-import java.util.TimerTask;
-
-import static javafx.scene.paint.Color.*;
 
 
-public class GameViewController2D implements GameViewController, Initializable{
+public class GameViewController2D implements GameViewController, Initializable, Serializable{
 
     GameHandler gameHandler;
     DrawableTile[][] drawableMatrix;
@@ -70,42 +56,9 @@ public class GameViewController2D implements GameViewController, Initializable{
     private boolean loadGameFlag;
 
 
-    @FXML
-    public
-    MenuItem settingsMenu;
-
-    @FXML
-    public
-    Pane settings, shaderSetting, motherPane;
-
-    @FXML
-    public
-    Rectangle greenBar;
-
     @Override
     public void updateDrawableState(DrawableTile[][] drawableMatrix) {
         this.drawableMatrix = drawableMatrix;
-    }
-
-    public void openMenu () {
-        settings.setVisible(true);
-        settings.setManaged(true);
-        shaderSetting.setVisible(false);
-    }
-
-    public void closeMenu () {
-        settings.setVisible(false);
-        settings.setManaged(false);
-        shaderSetting.setVisible(false);
-    }
-
-
-    @FXML
-    public void keyHandler (KeyEvent event){
-        if(event.getCode() == KeyCode.KP_UP){
-            System.out.println("Key pressed");
-            event.consume();
-        }
     }
 
     @Override
@@ -129,7 +82,7 @@ public class GameViewController2D implements GameViewController, Initializable{
         System.out.println("Game controller active 2");
 
         renderer = new Renderer(gameCanvas);
-        gameCanvas.getGraphicsContext2D().setFill(BLACK);
+        gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
         gameCanvas.getGraphicsContext2D().fillRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight());
         System.out.println("Game controller active 3");
         //gameHandler.setObjectInWorld();
@@ -217,18 +170,6 @@ public class GameViewController2D implements GameViewController, Initializable{
         drawableMatrix = gameHandler.getDrawableWorld();
         renderer.render(drawableMatrix);
         updateUI();
-    }
-    //work in progress
-    private void changeCanvasSize(){
-        double canvasWidth = 0;
-        double canvasHeight = 0;
-        canvasWidth = gameCanvas.getWidth();
-        canvasHeight = gameCanvas.getHeight();
-    }
-    @FXML
-    public void HealthBar () {
-        greenBar.setWidth(200.0);
-
     }
 
     @Override

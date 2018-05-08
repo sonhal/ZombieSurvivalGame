@@ -5,15 +5,12 @@ import engine.entities.Sprite;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
-import java.awt.*;
-
-
 public class Renderer {
+
     private Canvas canvas;
     private GraphicsContext gc;
     private SpriteTranslationHandler spriteTranslator;
     private double enitySize;
-    private int drawHealth = 100;
 
     public Renderer(Canvas canvas){
         this.canvas = canvas;
@@ -25,6 +22,7 @@ public class Renderer {
 
     public void render(DrawableTile[][] drawableMatrix){
         setEntitySize(drawableMatrix);
+
         gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight() );
         int yAxisOffset = 0;
         for (DrawableTile[] tileRow: drawableMatrix) {
@@ -66,5 +64,4 @@ public class Renderer {
         }
         else enitySize = 0;
     }
-
 }
