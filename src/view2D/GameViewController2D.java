@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -50,7 +51,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @FXML
     private
-    Pane settingsSet, gameSet , colorBG, anchor, gameOver;
+    Pane settingsSet, gameSet , colorBG, anchor, gameOver, toolBar, toolBarUnder, canvasPane;
 
     private boolean loadGameFlag;
 
@@ -63,18 +64,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @Override
     public void initializeGameEnv() {
         System.out.println("Game controller active");
-        gameCanvas.setHeight(gameCanvas.getHeight());
-        gameCanvas.setWidth(gameCanvas.getWidth());
-        colorBG.setManaged(false);
-        colorBG.setVisible(false);
-        settingsSet.setVisible(false);
-        settingsSet.setManaged(false);
-        gameSet.setVisible(false);
-        gameSet.setManaged(false);
-        gameBtn.setVisible(false);
-        settingsBtn.setVisible(false);
-        gameOver.setVisible(false);
-        gameOver.setManaged(false);
+        scaleWidth();
+        scaleHeight();
+        initializeView();
 
 
 
@@ -89,6 +81,29 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     public void startGameloop(){
         runViewTick();
+    }
+
+
+    public void scaleWidth(){
+        anchor.widthProperty().addListener((ov, oldWidth, newWidth) ->{
+
+            colorBG.setMinWidth((Double) newWidth);
+            toolBar.setMinWidth((Double) newWidth);
+            toolBarUnder.setMinWidth((Double) newWidth);
+            if(gameCanvas.getHeight() >= 900){
+                System.out.println("max height achieved");
+            }else{
+                gameCanvas.setWidth((Double) newWidth);
+
+            }
+        } );
+    }
+
+    public void scaleHeight(){
+        anchor.heightProperty().addListener((ov, oldHeight, newHeight) ->{
+            colorBG.setMinHeight((Double) newHeight);
+            gameCanvas.setHeight((Double) newHeight);
+        } );
     }
 
     @Override
@@ -169,6 +184,19 @@ public class GameViewController2D implements GameViewController, Initializable, 
         drawableMatrix = gameHandler.getDrawableWorld();
         renderer.render(drawableMatrix);
         updateUI();
+    }
+
+    public void initializeView(){
+        colorBG.setManaged(false);
+        colorBG.setVisible(false);
+        settingsSet.setVisible(false);
+        settingsSet.setManaged(false);
+        gameSet.setVisible(false);
+        gameSet.setManaged(false);
+        gameBtn.setVisible(false);
+        settingsBtn.setVisible(false);
+        gameOver.setVisible(false);
+        gameOver.setManaged(false);
     }
 
     @Override
