@@ -1,7 +1,7 @@
 package engine.services.save;
-import engine.entities.ImpUpdatableGameObject;
-import engine.entities.interfaces.IUpdatableGameObject;
-import engine.entities.world.Tile;
+import engine.entities.gameobjects.ImpUpdatableGameObject;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
+import engine.world.Tile;
 
 
 import java.io.*;

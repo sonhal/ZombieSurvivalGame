@@ -1,7 +1,8 @@
 package engine.entities.items.weapons;
 
 
-import engine.entities.world.Tile;
+import engine.entities.components.AttackComponent;
+import engine.world.Tile;
 import engine.controllers.Direction;
 
 import java.io.Serializable;
@@ -12,17 +13,10 @@ import java.security.InvalidParameterException;
  */
 public abstract class Weapon implements Serializable{
 
-    private int damage;
+    protected AttackComponent attackComponent;
 
-    /**
-     * Sets the damage for the weapon
-     * @param damage the damage the weapon deals
-     */
-    public Weapon(int damage){
-        if(damage < 1){
-            throw new InvalidParameterException("A Weapons damage cannot be lower than 1");
-        }
-        this.damage = damage;
+    public Weapon(AttackComponent attackComponent){
+        this.attackComponent  = attackComponent;
     }
 
 
@@ -32,8 +26,8 @@ public abstract class Weapon implements Serializable{
      * Method to get the damage the weapon deals
      * @return the damage the weapon deals
      */
-    public int getDamage() {
-        return damage;
+    public AttackComponent getAttackComponent() {
+        return attackComponent;
     }
 
 

@@ -1,6 +1,6 @@
 package engine.entities.items;
 
-import engine.entities.Sprite;
+import engine.entities.gameobjects.Sprite;
 
 import java.io.Serializable;
 

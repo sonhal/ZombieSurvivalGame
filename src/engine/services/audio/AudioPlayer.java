@@ -52,6 +52,7 @@ public class AudioPlayer {
         audioEffectCollection.put(Sound.HIT_1, new AudioClip(new File("gamefiles/8bit_bomb_explosion.wav").toURI().toString()));
         backgroundMusicCollection.put(Sound.BACKGROUND_MUSIC_1, new Media(new File("gamefiles/happy.mp3").toURI().toString()));
         audioEffectCollection.put(Sound.ZOMBIE_ATTACK, new AudioClip(new File("gamefiles/zombie_sound.wav").toURI().toString()));
+        backgroundMusicCollection.put(Sound.BACKGROUND_MUSIC_2, new Media(new File("gamefiles/dream_raid_p1.mp3").toURI().toString()));
     }
 
     /**

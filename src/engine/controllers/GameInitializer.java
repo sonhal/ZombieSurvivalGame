@@ -2,14 +2,14 @@ package engine.controllers;
 
 import engine.gamestate.GameStateKeeper;
 import engine.gamestate.GameStateMessengerMediator;
-import engine.entities.PlayerBuilder;
-import engine.entities.composites.AvatarInputComponent;
-import engine.entities.composites.ComponentType;
-import engine.entities.composites.WeaponComponent;
-import engine.entities.interfaces.IUpdatableGameObject;
+import engine.entities.gameobjects.PlayerBuilder;
+import engine.entities.components.PlayerInputComponent;
+import engine.entities.components.ComponentType;
+import engine.entities.components.WeaponComponent;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.Gun;
-import engine.entities.world.Tile;
-import engine.entities.world.World;
+import engine.world.Tile;
+import engine.world.World;
 import engine.services.ComponentService;
 import engine.services.save.SaveGameHandler;
 import view.GameViewController;
@@ -90,7 +90,7 @@ public class GameInitializer {
 
     private static void setPlayerEventHandler(IUpdatableGameObject player, EventHandler eventHandler) {
          if(player.getComponentByType(ComponentType.INPUT_COMPONENT).isPresent()){
-            AvatarInputComponent component = (AvatarInputComponent)
+            PlayerInputComponent component = (PlayerInputComponent)
                     player.getComponentByType(ComponentType.INPUT_COMPONENT).get();
             component.setEventHandler(eventHandler);
         }

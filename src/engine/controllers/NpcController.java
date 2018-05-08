@@ -5,11 +5,11 @@ import engine.gamestate.messages.GameEventMessage;
 import engine.gamestate.messages.NewLevelMessage;
 import engine.controllers.interfaces.Messenger;
 import engine.gamestate.interfaces.MessengerMediator;
-import engine.entities.BasicEntityBlueprint;
-import engine.entities.ZombieBuilder;
-import engine.entities.interfaces.IUpdatableGameObject;
-import engine.entities.world.Tile;
-import engine.entities.world.World;
+import engine.entities.gameobjects.BasicEntityBlueprint;
+import engine.entities.gameobjects.ZombieBuilder;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
+import engine.world.Tile;
+import engine.world.World;
 import engine.services.audio.Sound;
 
 import java.util.ArrayList;

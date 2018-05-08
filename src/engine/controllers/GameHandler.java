@@ -2,11 +2,11 @@ package engine.controllers;
 
 import engine.gamestate.GameStateKeeper;
 import engine.gamestate.GameStateMessengerMediator;
-import engine.entities.composites.ComponentType;
-import engine.entities.composites.TransformComponent;
-import engine.entities.interfaces.IUpdatableGameObject;
-import engine.entities.world.Tile;
-import engine.entities.world.World;
+import engine.entities.components.ComponentType;
+import engine.entities.components.TransformComponent;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
+import engine.world.Tile;
+import engine.world.World;
 import engine.services.audio.AudioPlayer;
 import engine.services.audio.Sound;
 import engine.services.save.SaveGameHandler;
@@ -53,7 +53,7 @@ public class GameHandler extends Updater {
         this.gameStateKeeper = gameStateKeeper;
         //Set background music
         ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
-        backGroundMusic.add(Sound.BACKGROUND_MUSIC_1);
+        backGroundMusic.add(Sound.BACKGROUND_MUSIC_2);
         AudioPlayer.getInstance().setBackgroundMusic(backGroundMusic);
     }
 

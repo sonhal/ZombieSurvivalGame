@@ -1,8 +1,8 @@
 package engine.view;
 
-import engine.entities.GameObject;
-import engine.entities.interfaces.IGameObject;
-import engine.entities.Sprite;
+import engine.entities.gameobjects.GameObject;
+import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.gameobjects.Sprite;
 import engine.entities.items.Item;
 
 import java.io.Serializable;

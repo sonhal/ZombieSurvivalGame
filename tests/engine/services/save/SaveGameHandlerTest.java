@@ -1,17 +1,14 @@
 package engine.services.save;
 
-import engine.GameViewStub;
 import engine.controllers.EventHandler;
-import engine.controllers.GameHandler;
-import engine.controllers.GameInitializer;
 import engine.controllers.Updater;
-import engine.entities.PlayerBuilder;
-import engine.entities.composites.ComponentType;
-import engine.entities.Sprite;
-import engine.entities.composites.TransformComponent;
-import engine.entities.interfaces.IUpdatableGameObject;
-import engine.entities.world.Tile;
-import engine.entities.world.World;
+import engine.entities.gameobjects.PlayerBuilder;
+import engine.entities.components.ComponentType;
+import engine.entities.gameobjects.Sprite;
+import engine.entities.components.TransformComponent;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
+import engine.world.Tile;
+import engine.world.World;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,21 +21,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class SaveGameHandlerTest {
 
     SaveGameHandler saveGameHandler;
+    World gameWorld;
 
     @BeforeEach
     void setUp() {
         this.saveGameHandler = new SaveGameHandler();
+        this.gameWorld = new World();
     }
 
     @AfterEach
     void tearDown() {
     }
 
-    @Test
-    void saveGame(){
-        World world = new World();
-        SaveGameHandler.saveGame(world.getWorld());
-    }
 
     @Test
     void SaveTileList(){
@@ -51,11 +45,11 @@ class SaveGameHandlerTest {
 
     @Test
     void loadGameTest(){
-        World world = new World();
-        Tile testTile = world.getWorld().get(2);
+        gameWorld.createNewGameWorld(10);
+        Tile testTile = gameWorld.getWorld().get(2);
         IUpdatableGameObject player = PlayerBuilder.create(new Updater(), new EventHandler(),10, testTile);
         TransformComponent tc = (TransformComponent) player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).get();
-        SaveGameHandler.saveGame(world.getWorld());
+        SaveGameHandler.saveGame(gameWorld.getWorld());
         List<Tile> loadedWorld = SaveGameHandler.loadGame();
         IUpdatableGameObject result = (IUpdatableGameObject) loadedWorld.get(2).getGameObject();
         assertNotNull(result, "GameObject should be set");
@@ -66,16 +60,9 @@ class SaveGameHandlerTest {
 
     @Test
     void saveWorldTest(){
-        GameViewStub gameViewStub = new GameViewStub();
-        GameHandler gameHandler = GameInitializer.newGame(gameViewStub);
-        World world = gameHandler.getWorld();
-        List<Tile> tiles = world.getWorld();
-
-
+        gameWorld.createNewGameWorld(10);
+        List<Tile> tiles = gameWorld.getWorld();
         SaveGameHandler.saveGame(tiles);
-        System.out.println("Game saved");
-        //List<Tile> loadedWorld = SaveGameHandler.loadGame();
-        //assertNotNull(loadedWorld);
     }
 
 

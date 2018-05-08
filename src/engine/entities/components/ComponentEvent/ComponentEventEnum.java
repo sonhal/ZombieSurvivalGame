@@ -1,0 +1,6 @@
+package engine.entities.components.ComponentEvent;
+
+public enum ComponentEventEnum {
+    COLLISION_EVENT, HIT_EVENT, DAMAGE_TAKEN_EVENT, MOVE_EVENT, ATTACK_EVENT, DEATH_EVENT,
+    AUDIO_EVENT, PICK_UP_EVENT, CHECK_FOR_COLLISION_EVENT, ATTACK_COMPLETED_EVENT
+}

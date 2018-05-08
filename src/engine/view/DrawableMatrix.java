@@ -1,8 +1,8 @@
 package engine.view;
 
-import engine.entities.Sprite;
-import engine.entities.world.Tile;
-import engine.entities.world.World;
+import engine.entities.gameobjects.Sprite;
+import engine.world.Tile;
+import engine.world.World;
 
 import java.io.Serializable;
 

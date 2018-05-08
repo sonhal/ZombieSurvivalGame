@@ -1,7 +1,7 @@
 package engine.services;
 
-import engine.entities.composites.ComponentType;
-import engine.entities.composites.ScriptableComponent;
+import engine.entities.components.ComponentType;
+import engine.entities.components.ScriptableComponent;
 
 import java.util.List;
 import java.util.Optional;

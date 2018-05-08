@@ -1,9 +1,15 @@
 package view2D;
 
+import engine.entities.components.ComponentType;
+import engine.entities.components.ScriptableComponent;
+import engine.entities.components.interfaces.IGraphicsComponent;
+import engine.entities.gameobjects.interfaces.IGameObject;
 import engine.view.DrawableTile;
-import engine.entities.Sprite;
+import engine.entities.gameobjects.Sprite;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+
+import java.util.Optional;
 
 /**
  *
@@ -42,8 +48,6 @@ public class Renderer {
         }
     }
 
-
-
     private void drawTile(DrawableTile tile, int xPos, int yPos){
 
         drawOnCanvas(tile.getSprite(), xPos, yPos);
@@ -52,7 +56,12 @@ public class Renderer {
             drawOnCanvas(tile.getItem().getSprite(), xPos, yPos);
         }
         if(tile.getGameObject() != null){
-            tile.getGameObject().getSprite().forEach(sprite -> drawOnCanvas(sprite, xPos, yPos));
+            IGameObject gameObject = tile.getGameObject();
+            Optional<ScriptableComponent> optionalComponent =
+                    gameObject.getComponentByType(ComponentType.GRAPHICS_COMPONENT);
+
+            optionalComponent.ifPresent(scriptableComponent -> ((IGraphicsComponent) scriptableComponent)
+                    .getActiveSprites().forEach(sprite -> drawOnCanvas(sprite, xPos, yPos)));
         }
 
     }
