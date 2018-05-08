@@ -30,13 +30,21 @@ class ConnectLeftRight implements Runnable {
         worldToBeConnected.sort(xDirectionalSorting);
         Iterator xIterator = worldToBeConnected.iterator();
         Tile last = null;
+        Tile beginning = null;
+        Tile ending = null;
         while (xIterator.hasNext()) {
             Tile current = (Tile) xIterator.next();
+            if (beginning == null){ beginning = current;}
             if (last != null && current != null && last.getCordX() == current.getCordX() - 1) {
                 current.setLeft(last);
                 last.setRight(current);
+            }else if (current != null && last != null && last.getCordX() != current.getCordX() - 1){
+                    beginning.setLeft(last);
+                    last.setRight(beginning);
+                    beginning = current;
             }
             last = current;
         }
+        last.setRight(beginning);
     }
 }

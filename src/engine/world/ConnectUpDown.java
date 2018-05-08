@@ -33,14 +33,23 @@ public class ConnectUpDown implements Runnable {
         worldToBeConnected.sort(yDirectionalSorting);
         Iterator yIterator = worldToBeConnected.iterator();
         Tile last = null;
+        Tile beginning = null;
         while (yIterator.hasNext()) {
             Tile current = (Tile) yIterator.next();
+            if (beginning == null){ beginning = current;}
             if (last != null && current != null && last.getCordY() == current.getCordY() - 1) {
                 current.setUp(last);
                 last.setDown(current);
+            }else{
+                if (current != null && last != null && last.getCordY() != current.getCordY() - 1){
+                    beginning.setUp(last);
+                    last.setDown(beginning);
+                    beginning = current;
+                }
             }
             last = current;
         }
+        last.setDown(beginning);
     }
 
 }
