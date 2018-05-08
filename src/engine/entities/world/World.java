@@ -50,73 +50,19 @@ public class World implements Serializable{
         return newWorld;
     }
 
-    Comparator<Tile> xDirectionalSorting = new Comparator<Tile>() {
-        @Override
-        public int compare(Tile t1, Tile t2) {
-            if ((t1.getCordY() >= t2.getCordY() && (t1.getCordX() > t2.getCordX()) || t1.getCordY() > t2.getCordY())) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
-    };
-
-    Comparator<Tile> yDirectionalSorting = new Comparator<Tile>() {
-        @Override
-        public int compare(Tile t1, Tile t2) {
-            if (t1.getCordX() >= t2.getCordX() && (t1.getCordY() > t2.getCordY()) || t1.getCordX() > t2.getCordX()) {
-                return 1;
-            } else {
-                return -1;
-            }
-        }
-    };
-
-    public void  connectLeftRight() {
-        world.sort(xDirectionalSorting);
-        Iterator xIterator = world.iterator();
-        Tile last = null;
-        while (xIterator.hasNext()) {
-            Tile current = (Tile) xIterator.next();
-            if (last != null && current != null &&  last.getCordX() == current.getCordX()-1) {
-
-                current.setLeft(last);
-                last.setRight(current);
-            }
-            last = current;
-        }
-    }
-
-    public void connectUpDown() {
-        world.sort(yDirectionalSorting);
-        Iterator yIterator = world.iterator();
-        Tile last = null;
-        while (yIterator.hasNext()) {
-            Tile current = (Tile) yIterator.next();
-            if (last != null && current != null &&  last.getCordY() == current.getCordY()-1) {
-                current.setUp(last);
-                last.setDown(current);
-            }
-            last = current;
-        }
-    }
-
 
     public void connectTiles(List<Tile> worldToConnect) {
-        world = worldToConnect;
-        connectLeftRight();
-        connectUpDown();
 
-/*
-        //Good example of a O(2^n) function, should not be used on large worlds
-        worldToConnect.parallelStream().forEach(e->{
-                    e.setUp(findTile(e.getCordX(),e.getCordY()+1));
-                    e.setDown(findTile(e.getCordX(),e.getCordY()-1));
-                    e.setLeft(findTile(e.getCordX()-1,e.getCordY()));
-                    e.setRight(findTile(e.getCordX()+1,e.getCordY()));
-                }
-        );
-        */
+        ConnectLeftRight connectLeftRight = new ConnectLeftRight(worldToConnect);
+        ConnectUpDown connectUpDown = new ConnectUpDown(worldToConnect);
+
+        try {
+            connectLeftRight.t.join();
+            connectUpDown.t.join();
+        } catch (InterruptedException e) {
+
+        }
+
     }
 
     public Tile findTile(int x, int y){
