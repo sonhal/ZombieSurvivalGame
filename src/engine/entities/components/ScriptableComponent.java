@@ -1,7 +1,7 @@
 package engine.entities.components;
 
 import engine.entities.components.ComponentEvent.ComponentEvent;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.services.ComponentService;
 
 import java.io.Serializable;
@@ -14,20 +14,6 @@ import java.util.Optional;
  */
 public abstract class ScriptableComponent implements Serializable{
 
-    private ComponentType type;
-
-    ScriptableComponent(ComponentType type){
-        this.type = type;
-    }
-
-    /**
-     * Every Component has a type that describes the responsibility and interests of the Component
-     * @return ComponentType, Enum giving a broad definition about domain the component handles
-     */
-    public ComponentType getType(){
-        return type;
-    }
-
     //new method name: delayElapsed?
     /**
      * Method Components can use to evaluate if it can take time dependent actions
@@ -39,13 +25,8 @@ public abstract class ScriptableComponent implements Serializable{
         return (System.currentTimeMillis() > lastUpdateTime  + delay );
     }
 
-    public static Optional<ScriptableComponent> getComponentByType(List<ScriptableComponent> components, ComponentType type){
-        return ComponentService.getComponentByType(components, type);
-    }
-
-    public static void sendMessage(List<ScriptableComponent> components, List<ComponentType> recipients, ComponentEvent message){
-        ComponentService.getComponentsByListOfTypes(components, recipients)
-                .forEach(scriptableComponent -> scriptableComponent.handle(message));
+    public static Optional<ScriptableComponent> getComponentByType(List<ScriptableComponent> components, Class<ScriptableComponent> subClass){
+        return ComponentService.getComponentByType(components, subClass);
     }
 
     public void sendMessageToAllComponents(List<ScriptableComponent> components, ComponentEvent message){
@@ -56,30 +37,30 @@ public abstract class ScriptableComponent implements Serializable{
 
     /**
      *The method called by a gameObject holding a Component each game tick
-     * @param gameObject, GameObject that calls the Component
+     * @param gameObject, StaticGameObject that calls the Component
      */
-    public abstract void update(IGameObject gameObject);
+    public abstract void update(GameObject gameObject);
 
     /**
      * Messaging method used to send the Component a message, the component implementation defines what type and how it
      * handles calls to this method
-     * @param eventWrapper, the Message sent to the Component
+     * @param event, the Message sent to the Component
      */
-    public abstract void handle(ComponentEvent eventWrapper);
+    public abstract void handle(ComponentEvent event);
 
     /**
-     * Method that initializes the Component if it needs to. A GameObject should attempt to innit all components ith holds
+     * Method that initializes the Component if it needs to. A StaticGameObject should attempt to innit all components ith holds
      * immediately after instantiation
-     * @param gameObject, the GameObject that calls the Component
+     * @param gameObject, the StaticGameObject that calls the Component
      */
-    public abstract void innit(IGameObject gameObject);
+    public abstract void innit(GameObject gameObject);
 
 
     /**
-     * Method called when a GameObject is to be removed. Gives a ScriptableComponent the oprotunity to do clean-up
-     * before the GameObject is removed.
+     * Method called when a StaticGameObject is to be removed. Gives a ScriptableComponent the oprotunity to do clean-up
+     * before the StaticGameObject is removed.
      * @param gameObject, holder of the Component
      */
-    public abstract void cleanUp(IGameObject gameObject);
+    public abstract void cleanUp(GameObject gameObject);
 
 }
