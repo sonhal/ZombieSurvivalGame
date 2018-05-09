@@ -1,9 +1,8 @@
 package view2D;
 
-import engine.entities.components.ComponentType;
 import engine.entities.components.ScriptableComponent;
-import engine.entities.components.interfaces.IGraphicsComponent;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.components.interfaces.GraphicsComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.view.DrawableTile;
 import engine.entities.gameobjects.Sprite;
 import javafx.scene.canvas.Canvas;
@@ -56,11 +55,10 @@ public class Renderer {
             drawOnCanvas(tile.getItem().getSprite(), xPos, yPos);
         }
         if(tile.getGameObject() != null){
-            IGameObject gameObject = tile.getGameObject();
+            GameObject gameObject = tile.getGameObject();
             Optional<ScriptableComponent> optionalComponent =
-                    gameObject.getComponentByType(ComponentType.GRAPHICS_COMPONENT);
-
-            optionalComponent.ifPresent(scriptableComponent -> ((IGraphicsComponent) scriptableComponent)
+                    gameObject.getComponentByType(GraphicsComponent.class);
+            optionalComponent.ifPresent(scriptableComponent -> ((GraphicsComponent) scriptableComponent)
                     .getActiveSprites().forEach(sprite -> drawOnCanvas(sprite, xPos, yPos)));
         }
 

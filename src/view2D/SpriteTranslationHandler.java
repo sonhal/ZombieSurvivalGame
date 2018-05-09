@@ -72,7 +72,7 @@ public class SpriteTranslationHandler {
 
     /**
      * The main usage method, returns a Image object corresponding to the Sprite object
-     * @param sprite the Sprite object a specific Tile, GameObject etc holds.
+     * @param sprite the Sprite object a specific Tile, StaticGameObject etc holds.
      * @return Image, the Image object for the specific Sprite
      */
     public Image getSpriteImage(Sprite sprite){

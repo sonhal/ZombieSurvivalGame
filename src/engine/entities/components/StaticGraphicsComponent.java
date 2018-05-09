@@ -2,8 +2,8 @@ package engine.entities.components;
 
 import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.gameobjects.Sprite;
-import engine.entities.components.interfaces.IGraphicsComponent;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.components.interfaces.GraphicsComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 
 import java.util.ArrayList;
 
@@ -11,12 +11,11 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
-public class GraphicsComponent extends ScriptableComponent implements IGraphicsComponent {
+public class StaticGraphicsComponent extends GraphicsComponent {
     private Queue<Sprite> activeSprites;
     private ArrayList<Sprite> sprites;
 
-    public GraphicsComponent(Sprite sprite){
-        super(ComponentType.GRAPHICS_COMPONENT);
+    public StaticGraphicsComponent(Sprite sprite){
         this.activeSprites = new ArrayBlockingQueue<>(3);
         this.sprites = new ArrayList<>();
         this.sprites.add(sprite);
@@ -44,7 +43,7 @@ public class GraphicsComponent extends ScriptableComponent implements IGraphicsC
 
 
     @Override
-    public void update(IGameObject componentHolder) {
+    public void update(GameObject componentHolder) {
         //Do nothing
     }
 
@@ -54,12 +53,12 @@ public class GraphicsComponent extends ScriptableComponent implements IGraphicsC
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
         //Do nothing
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
 
     }
 }

@@ -2,21 +2,22 @@ package engine.entities.components;
 
 import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.*;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.components.interfaces.TransformComponent;
+import engine.entities.components.interfaces.WeaponComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.items.weapons.Weapon;
 
-public class WeaponComponent extends ScriptableComponent{
+public class SingleWeaponComponent extends WeaponComponent {
 
     private Weapon weapon;
     private Direction attackEvent;
 
-    public WeaponComponent(){
-        super(ComponentType.WEAPON_COMPONENT);
+    public SingleWeaponComponent(){
         this.weapon = null;
     }
 
 
-    public void attack(Direction direction, TransformComponent transformComponent, IGameObject gameObject){
+    public void attack(Direction direction, TransformComponent transformComponent, GameObject gameObject){
         if (weapon != null){
             if(weapon.activate(transformComponent.getCurrentTile(), direction)){
                 sendMessageToAllComponents(gameObject.getComponents(),
@@ -35,17 +36,11 @@ public class WeaponComponent extends ScriptableComponent{
 
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(GameObject gameObject) {
         if(attackEvent != null){
-            if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
-
-
-                TransformComponent tc = (TransformComponent)
-                        getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).get();
-
-                //Shoot in direction Player is facing
-                attack(tc.getFacingDirection(), tc , gameObject);
-            }
+            //Attack in direction StaticGameObject is facing
+            attack(gameObject.getTransformComponent().getFacingDirection(),
+                    gameObject.getTransformComponent() , gameObject);
             attackEvent = null;
         }
     }
@@ -61,12 +56,12 @@ public class WeaponComponent extends ScriptableComponent{
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
 
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
 
     }
 }

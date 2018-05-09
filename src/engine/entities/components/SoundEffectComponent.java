@@ -2,26 +2,26 @@ package engine.entities.components;
 
 import engine.entities.components.ComponentEvent.AttackCompletedEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.components.interfaces.AudioComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.services.audio.AudioPlayer;
 import engine.services.audio.Sound;
 
-public class AudioComponent extends ScriptableComponent{
+public class SoundEffectComponent extends AudioComponent {
 
     protected boolean attackEvent;
     private int delay;
     private double lastActivationTime;
     private Sound sound;
 
-    public AudioComponent(int delay, Sound sound) {
-        super(ComponentType.AUDIO_COMPONENT);
+    public SoundEffectComponent(int delay, Sound sound) {
         this.delay = delay;
         this.lastActivationTime = System.currentTimeMillis();
         this.sound = sound;
     }
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(GameObject gameObject) {
         if(attackEvent && canActivate(delay, lastActivationTime)){
             AudioPlayer.getInstance().addToPlayerQueue(sound, 1000);
             lastActivationTime = System.currentTimeMillis();
@@ -37,11 +37,11 @@ public class AudioComponent extends ScriptableComponent{
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
 
     }
 }

@@ -1,21 +1,21 @@
 package engine.entities.components;
 
 import engine.entities.components.ComponentEvent.*;
+import engine.entities.components.interfaces.HealthComponent;
 import engine.entities.gameobjects.UpdatableGameObject;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 
-public class ProjectileHealthComponent extends ScriptableComponent{
+public class ProjectileHealthComponent extends HealthComponent {
 
     private int range;
 
     public ProjectileHealthComponent(int range){
-        super(ComponentType.HEALTH_COMPONENT);
         this.range = range;
     }
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(GameObject gameObject) {
         if(range <= 0){
             sendMessageToAllComponents(gameObject.getComponents(), new DeathEvent());
             if(gameObject instanceof IUpdatableGameObject){
@@ -36,12 +36,12 @@ public class ProjectileHealthComponent extends ScriptableComponent{
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
         //Do nothing
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
         //Do nothing
     }
 }

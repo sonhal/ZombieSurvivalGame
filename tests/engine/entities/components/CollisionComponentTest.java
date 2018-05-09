@@ -4,9 +4,10 @@ import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.CollisionEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.components.ComponentEvent.MoveEvent;
-import engine.entities.gameobjects.GameObject;
-import engine.entities.gameobjects.ImpUpdatableGameObject;
+import engine.entities.gameobjects.StaticGameObject;
 import engine.entities.gameobjects.Sprite;
+import engine.entities.gameobjects.UpdatableGameObject;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.world.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,20 +18,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CollisionComponentTest {
 
-    CollisionComponent collisionComponent;
-    ImpUpdatableGameObject testObject;
+    GameObjectCollisionComponent collisionComponent;
+    IUpdatableGameObject testObject;
     TestComponent testComponent;
-    TransformComponent testTransformComponent;
+    StaticTransformComponent testTransformComponent;
 
     @BeforeEach
     void setUp(){
         Tile testTile = new Tile(1,1, new Sprite(1));
         Tile testTile2 = new Tile(1,2, new Sprite(1));
-        testTile2.setGameObject(new GameObject(new ArrayList<>()));
+        testTransformComponent = new StaticTransformComponent(testTile);
+        StaticGameObject testObject2 = new StaticGameObject.Builder(new StaticTransformComponent(testTile2))
+                .build();
         testTile.setUp(testTile2);
-        testTransformComponent = new TransformComponent(testTile);
-        collisionComponent = new CollisionComponent(testTransformComponent);
-        testComponent = new TestComponent(ComponentType.TRANSFORM_COMPONENT) {
+        collisionComponent = new GameObjectCollisionComponent();
+        testComponent = new TestComponent() {
             boolean collided;
 
             @Override
@@ -45,10 +47,11 @@ class CollisionComponentTest {
                 }
             }
         };
-        ArrayList<ScriptableComponent> list = new ArrayList<>();
-        list.add(collisionComponent);
-        list.add(testComponent);
-        testObject = new ImpUpdatableGameObject(list);
+
+        testObject = new UpdatableGameObject.Builder(testTransformComponent)
+                .addComponent(collisionComponent)
+                .addComponent(testComponent)
+                .build();
     }
 
     @Test
@@ -72,13 +75,4 @@ class CollisionComponentTest {
     void cleanUp() {
     }
 
-    @Test
-    void collided() {
-        collisionComponent.handle(new MoveEvent(Direction.UP));
-        assertEquals(Direction.UP, collisionComponent.collided());
-    }
-
-    @Test
-    void clearCollided() {
-    }
 }

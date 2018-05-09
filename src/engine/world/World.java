@@ -1,11 +1,8 @@
 package engine.world;
 
-import engine.entities.components.ComponentType;
 import engine.entities.gameobjects.GameObjectFactory;
 import engine.entities.gameobjects.Sprite;
-import engine.entities.components.TransformComponent;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
-import engine.services.ComponentService;
 
 import java.io.Serializable;
 import java.util.*;
@@ -75,11 +72,7 @@ public class World implements Serializable{
 
     public void setPlayer(IUpdatableGameObject player){
         this.player = player;
-        if(ComponentService.getComponentByType(player.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
-            TransformComponent at = (TransformComponent)
-                    ComponentService.getComponentByType(player.getComponents(), ComponentType.TRANSFORM_COMPONENT).get();
-            at.setCurrentTile(seed);
-        }
+        player.getTransformComponent().setCurrentTile(seed);
     }
 
     public IUpdatableGameObject getPlayer(){

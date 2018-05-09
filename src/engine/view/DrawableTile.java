@@ -1,18 +1,18 @@
 package engine.view;
 
-import engine.entities.gameobjects.GameObject;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.gameobjects.StaticGameObject;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.gameobjects.Sprite;
 import engine.entities.items.Item;
 
 import java.io.Serializable;
 
 public class DrawableTile implements Serializable{
-    private IGameObject gameObject;
+    private GameObject gameObject;
     private Item item;
     private Sprite sprite;
 
-    public DrawableTile(IGameObject gameObject, Item item, Sprite sprite){
+    public DrawableTile(GameObject gameObject, Item item, Sprite sprite){
         this.gameObject = gameObject;
         this.item = item;
         this.sprite = sprite;
@@ -20,7 +20,7 @@ public class DrawableTile implements Serializable{
     }
     public DrawableTile(){};
 
-    public void setGameAndItem(GameObject gameObject, Item item){
+    public void setGameAndItem(StaticGameObject gameObject, Item item){
         this.gameObject = gameObject;
         this.item = item;
         this.sprite = new Sprite(1);
@@ -30,11 +30,11 @@ public class DrawableTile implements Serializable{
         return sprite;
     }
 
-    public IGameObject getGameObject() {
+    public GameObject getGameObject() {
         return gameObject;
     }
 
-    public void setGameObject(GameObject gameObject) {
+    public void setGameObject(StaticGameObject gameObject) {
         this.gameObject = gameObject;
     }
 

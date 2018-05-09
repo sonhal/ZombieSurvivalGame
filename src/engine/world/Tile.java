@@ -1,7 +1,7 @@
 package engine.world;
 
 import engine.controllers.Direction;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.gameobjects.Sprite;
 import engine.entities.items.Item;
 
@@ -17,7 +17,7 @@ public class Tile implements Serializable{
     private int cordX;
     private int cordY;
 
-    private IGameObject gameObject;
+    private GameObject gameObject;
     private Item item;
     private Sprite sprite;
 
@@ -81,11 +81,11 @@ public class Tile implements Serializable{
         return "x: " + cordX + " y: " + cordY;
     }
 
-    public IGameObject getGameObject() {
+    public GameObject getGameObject() {
         return gameObject;
     }
 
-    public void setGameObject(IGameObject gameObject) {
+    public void setGameObject(GameObject gameObject) {
         if (gameObject != null){
             this.gameObject = gameObject;
         }

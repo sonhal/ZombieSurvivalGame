@@ -2,8 +2,6 @@ package engine.controllers;
 
 import engine.gamestate.GameStateKeeper;
 import engine.gamestate.GameStateMessengerMediator;
-import engine.entities.components.ComponentType;
-import engine.entities.components.TransformComponent;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.world.Tile;
 import engine.world.World;
@@ -77,14 +75,12 @@ public class GameHandler extends Updater {
         updateWordState();
 
         //Ugly edge case handling for first couple of updates
-        if(player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).isPresent()){
-            TransformComponent playerTransformComponent = (TransformComponent)
-                    player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).get();
-            if(playerTransformComponent.getCurrentTile() == null){
+        if(player.getTransformComponent() != null){
+            if(player.getTransformComponent().getCurrentTile() == null){
                 viewCenterTile = world.findTile(0,0);
             }
             else {
-                viewCenterTile = playerTransformComponent.getCurrentTile();
+                viewCenterTile =player.getTransformComponent().getCurrentTile();
             }
             return matrix.generateDrawable(world, viewCenterTile,15,15);
         }

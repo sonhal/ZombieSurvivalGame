@@ -1,8 +1,10 @@
 package engine.entities.gameobjects;
 
-import engine.entities.components.ComponentType;
 import engine.entities.components.ScriptableComponent;
-import engine.entities.components.TransformComponent;
+import engine.entities.components.StaticGraphicsComponent;
+import engine.entities.components.StaticTransformComponent;
+import engine.entities.components.interfaces.GraphicsComponent;
+import engine.entities.components.interfaces.TransformComponent;
 import engine.world.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,28 +15,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GameObjectTest {
 
-    GameObject gameObject;
+    StaticGameObject gameObject;
     Tile testTile;
-    TransformComponent testTransformComponent;
+    StaticTransformComponent testTransformComponent;
 
     @BeforeEach
     void setUp() {
         testTile = new Tile(1,1, new Sprite(1));
-        testTransformComponent = new TransformComponent(testTile);
-        ArrayList<ScriptableComponent> list = new ArrayList<>();
-        list.add(testTransformComponent);
-        gameObject = new GameObject(list);
+        testTransformComponent = new StaticTransformComponent(testTile);
+        StaticGraphicsComponent graphicsComponent = new StaticGraphicsComponent(new Sprite(1));
+        gameObject = new StaticGameObject.Builder(testTransformComponent)
+                .addComponent(graphicsComponent)
+                .build();
     }
 
     @Test
     void getTile() {
-        assertNotNull(gameObject.getTile(), "Should return a Tile object");
+        assertNotNull(gameObject.getTransformComponent().getCurrentTile(), "Should return a Tile object");
     }
 
     @Test
     void getComponentByType() {
-        assertNotNull(gameObject.getComponentByType(ComponentType.TRANSFORM_COMPONENT).get(),
+        assertNotNull(gameObject.getComponentByType(TransformComponent.class).get(),
                 "Should return a Transform Component");
+        assertNotNull(gameObject.getComponentByType(GraphicsComponent.class).get(),
+                "Should return a Graphic Component");
     }
 
     @Test

@@ -3,11 +3,11 @@ package engine.entities.components;
 import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.CollisionEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.world.Tile;
 
 
-public class UpdatableTransformComponent extends TransformComponent {
+public class UpdatableTransformComponent extends StaticTransformComponent {
 
     private Direction collision;
 
@@ -15,18 +15,17 @@ public class UpdatableTransformComponent extends TransformComponent {
         super(connectedTile);
     }
 
-    public void move(Direction direction, IGameObject gameObject){
+    public void move(Direction direction, GameObject gameObject){
             super.move(direction, gameObject);
             setFacingDirection(direction);
     }
 
     @Override
-    public void update (IGameObject gameObject){
+    public void update (GameObject gameObject){
             if(move != null){
                 setFacingDirection(move);
                 if(move != collision){
                     move(move, gameObject);
-                    collision = null;
                 }
                 move = null;
             }
@@ -38,7 +37,6 @@ public class UpdatableTransformComponent extends TransformComponent {
         if(event instanceof CollisionEvent){
             collision = ((CollisionEvent)event).collisonDirection();
         }
-
     }
 
 }

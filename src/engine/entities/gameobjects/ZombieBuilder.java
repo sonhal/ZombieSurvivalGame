@@ -29,11 +29,11 @@ public class ZombieBuilder {
         zombieSprites.add(new Sprite(24)); //right
         zombieSprites.add(new Sprite(25)); //left
 
-        WeaponComponent wc = new WeaponComponent();
-        HealthComponent hc = new HealthComponent(blueprint.health);
+        SingleWeaponComponent wc = new SingleWeaponComponent();
+        KillableHealthComponent hc = new KillableHealthComponent(blueprint.health);
         UpdatableTransformComponent tc = new UpdatableTransformComponent(spawnTile);
         EnemyInputComponent ic = new EnemyInputComponent(player, blueprint.moveDelay);
-        CollisionComponent cc = new CollisionComponent(tc);
+        GameObjectCollisionComponent cc = new GameObjectCollisionComponent();
         UpdatableGraphicsComponent gc = new UpdatableGraphicsComponent(zombieSprites.get(0), blueprint.moveDelay);
 
         for (Sprite sprite:
@@ -41,17 +41,15 @@ public class ZombieBuilder {
             gc.addSprite(sprite);
         }
 
-        wc.setWeapon(new MeleeWeapon(100 ,new AttackComponent(blueprint.attackDamage)));
+        wc.setWeapon(new MeleeWeapon(100 ,new SingleAttackComponent(blueprint.attackDamage)));
 
-        ArrayList<ScriptableComponent> components = new ArrayList<>();
-        components.add(gc);
-        components.add(wc);
-        components.add(cc);
-        components.add(hc);
-        components.add(tc);
-        components.add(ic);
-        components.add(new AudioComponent(500, blueprint.attackSound));
-
-        return new ImpUpdatableGameObject(components);
+        return new UpdatableGameObject.Builder(tc)
+                .addComponent(gc)
+                .addComponent(wc)
+                .addComponent(cc)
+                .addComponent(hc)
+                .addComponent(ic)
+                .addComponent(new SoundEffectComponent(500, blueprint.attackSound))
+                .build();
     }
 }

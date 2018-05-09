@@ -14,8 +14,6 @@ public class PlayerBuilder {
 
     public static IUpdatableGameObject create(Updater updater, EventHandler eventHandler, int health, Tile startTile){
         ArrayList<Sprite> playerSprites = new ArrayList<>();
-        ArrayList<ScriptableComponent> components = new ArrayList<>();
-
         /*
         Setting the sprites for a player, the numbering is not intuitive
         */
@@ -25,26 +23,28 @@ public class PlayerBuilder {
         for (int i = 12; i <= 15; i++){
             playerSprites.add(new Sprite(i));
         }
-        UpdatableTransformComponent transformComponent = new UpdatableTransformComponent(startTile);
-        components.add(new CollisionComponent(transformComponent));
-        components.add(new HealthComponent(1000));
-        components.add(transformComponent);
-        components.add(new PlayerInputComponent(eventHandler, 0));
 
         UpdatableGraphicsComponent gc = new UpdatableGraphicsComponent(playerSprites.get(0), 300);
-        WeaponComponent wc = new WeaponComponent();
-        wc.setWeapon(new Gun(updater,10,40, new AttackComponent(20)));
-        components.add(wc);
-
         for (Sprite sprite:
                 playerSprites) {
             gc.addSprite(sprite);
         }
 
-        components.add(gc);
-        components.add(new AudioComponent(100, Sound.HIT_1));
+        SingleWeaponComponent wc = new SingleWeaponComponent();
+        wc.setWeapon(new Gun(updater,10,40, new SingleAttackComponent(20)));
 
-        ImpUpdatableGameObject player = new ImpUpdatableGameObject(components);
+
+
+        IUpdatableGameObject player = new UpdatableGameObject.Builder(new UpdatableTransformComponent(startTile))
+                .addComponent(new PlayerInputComponent(eventHandler, 0))
+                .addComponent(new GameObjectCollisionComponent())
+                .addComponent(new KillableHealthComponent(1000))
+                .addComponent(gc)
+                .addComponent(wc)
+                .addComponent(new SoundEffectComponent(100, Sound.HIT_1))
+                .build();
+
+
         player.setAsPlayer(true);
         return player;
     }

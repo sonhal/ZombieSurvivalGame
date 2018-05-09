@@ -1,11 +1,12 @@
 package engine.controllers;
 
+import engine.entities.components.interfaces.InputComponent;
+import engine.entities.components.interfaces.WeaponComponent;
 import engine.gamestate.GameStateKeeper;
 import engine.gamestate.GameStateMessengerMediator;
 import engine.entities.gameobjects.PlayerBuilder;
 import engine.entities.components.PlayerInputComponent;
-import engine.entities.components.ComponentType;
-import engine.entities.components.WeaponComponent;
+import engine.entities.components.SingleWeaponComponent;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.Gun;
 import engine.world.Tile;
@@ -75,9 +76,9 @@ public class GameInitializer {
                 SaveGameHandler.getEnemyInstances(worldTiles)) {
             npcController.addToUpdateList(enemy);
         }
-        if(ComponentService.getComponentByType(player.getComponents(), ComponentType.WEAPON_COMPONENT).isPresent()){
-            WeaponComponent weaponComponent = (WeaponComponent)
-                    ComponentService.getComponentByType(player.getComponents(), ComponentType.WEAPON_COMPONENT).get();
+        if(ComponentService.getComponentByType(player.getComponents(), WeaponComponent.class).isPresent()){
+            SingleWeaponComponent weaponComponent = (SingleWeaponComponent)
+                    ComponentService.getComponentByType(player.getComponents(), WeaponComponent.class).get();
             if(weaponComponent.getWeapon() instanceof Gun){
                 Gun playerGun = (Gun)weaponComponent.getWeapon();
                 playerGun.setController(gameUpdater);
@@ -89,9 +90,9 @@ public class GameInitializer {
     }
 
     private static void setPlayerEventHandler(IUpdatableGameObject player, EventHandler eventHandler) {
-         if(player.getComponentByType(ComponentType.INPUT_COMPONENT).isPresent()){
+         if(player.getComponentByType(InputComponent.class).isPresent()){
             PlayerInputComponent component = (PlayerInputComponent)
-                    player.getComponentByType(ComponentType.INPUT_COMPONENT).get();
+                    player.getComponentByType(InputComponent.class).get();
             component.setEventHandler(eventHandler);
         }
     }

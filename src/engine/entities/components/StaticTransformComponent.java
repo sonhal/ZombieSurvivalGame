@@ -4,24 +4,24 @@ import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.components.ComponentEvent.DeathEvent;
 import engine.entities.components.ComponentEvent.MoveEvent;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.components.interfaces.TransformComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.world.Tile;
 
-public class TransformComponent extends ScriptableComponent{
+public class StaticTransformComponent extends TransformComponent {
 
     private Tile currentTile;
     private Direction facingDirection;
     protected Direction move;
     protected boolean removeSelf;
 
-    public TransformComponent(Tile connectedTile){
-        super(ComponentType.TRANSFORM_COMPONENT);
+    public StaticTransformComponent(Tile connectedTile){
         currentTile = connectedTile;
     }
 
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(GameObject gameObject) {
         if(removeSelf){
             cleanUp(gameObject);
         }
@@ -39,43 +39,47 @@ public class TransformComponent extends ScriptableComponent{
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
         this.currentTile.setGameObject(gameObject);
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
         if(currentTile != null){
             getCurrentTile().clearGameObject();
             currentTile = null;
         }
     }
 
-
+    @Override
     public Tile getCurrentTile() {
         return currentTile;
     }
 
+    @Override
     public void setCurrentTile(Tile tile) {
         this.currentTile = tile;
     }
 
+    @Override
     public Direction getFacingDirection() {
         if (facingDirection == null){return Direction.UP;}
         return facingDirection;
     }
 
+    @Override
     public void setFacingDirection(Direction facingDirection) {
         this.facingDirection = facingDirection;
     }
 
-    private void switchTilePlacement(Tile oldTile, Tile newTile, IGameObject gameObject){
+    private void switchTilePlacement(Tile oldTile, Tile newTile, GameObject gameObject){
         oldTile.clearGameObject();
         setCurrentTile(newTile);
         currentTile.setGameObject(gameObject);
     }
 
-    public void move(Direction direction, IGameObject gameObject) {
+    @Override
+    public void move(Direction direction, GameObject gameObject) {
         if (currentTile != null){
             Tile lastTile = currentTile;
             Tile newTile = currentTile.getTileInDirection(direction);

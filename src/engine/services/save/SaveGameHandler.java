@@ -1,5 +1,5 @@
 package engine.services.save;
-import engine.entities.gameobjects.ImpUpdatableGameObject;
+import engine.entities.gameobjects.UpdatableGameObject;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.world.Tile;
 
@@ -49,11 +49,11 @@ public class SaveGameHandler {
         return loadedWorld;
     }
 
-    public static ImpUpdatableGameObject getPlayerInstance(List<Tile> tiles){
+    public static UpdatableGameObject getPlayerInstance(List<Tile> tiles){
         for (Tile tile:
                 tiles) {
-            if(tile.getGameObject() instanceof ImpUpdatableGameObject){
-                ImpUpdatableGameObject avatar = (ImpUpdatableGameObject) tile.getGameObject();
+            if(tile.getGameObject() instanceof UpdatableGameObject){
+                UpdatableGameObject avatar = (UpdatableGameObject) tile.getGameObject();
                 if(avatar.isPlayer()){
                     return avatar;
                 }
@@ -66,8 +66,8 @@ public class SaveGameHandler {
          ArrayList<IUpdatableGameObject> enemies = new ArrayList<>();
         for (Tile tile:
                 tiles) {
-            if(tile.getGameObject() instanceof ImpUpdatableGameObject){
-                ImpUpdatableGameObject avatar = (ImpUpdatableGameObject) tile.getGameObject();
+            if(tile.getGameObject() instanceof UpdatableGameObject){
+                UpdatableGameObject avatar = (UpdatableGameObject) tile.getGameObject();
                 if(!avatar.isPlayer()){
                     enemies.add(avatar);
                 }

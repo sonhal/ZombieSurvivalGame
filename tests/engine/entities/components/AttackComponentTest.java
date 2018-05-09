@@ -4,7 +4,7 @@ import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.AttackEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.components.ComponentEvent.HitEvent;
-import engine.entities.gameobjects.GameObject;
+import engine.entities.gameobjects.StaticGameObject;
 import engine.entities.gameobjects.Sprite;
 import engine.world.Tile;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,17 +15,17 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AttackComponentTest {
-    AttackComponent attackComponent;
+    SingleAttackComponent attackComponent;
     Tile testTile;
-    GameObject testObject;
+    StaticGameObject testObject;
     TestComponent testComponent;
 
 
     @BeforeEach
     void setUp() {
-        attackComponent = new AttackComponent(10);
+        attackComponent = new SingleAttackComponent(10);
         testTile = new Tile(1,1, new Sprite(1));
-        testComponent = new TestComponent(ComponentType.HEALTH_COMPONENT) {
+        testComponent = new TestComponent() {
             boolean wasHit;
 
             @Override
@@ -40,10 +40,9 @@ class AttackComponentTest {
                 }
             }
         };
-        ArrayList<ScriptableComponent> list = new ArrayList<>();
-        list.add(testComponent);
-        list.add(new TransformComponent(testTile));
-        testObject = new GameObject(list);
+        testObject = new StaticGameObject.Builder(new StaticTransformComponent(testTile))
+                .addComponent(testComponent)
+                .build();
 
     }
 

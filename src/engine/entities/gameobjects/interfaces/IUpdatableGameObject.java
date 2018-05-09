@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Interface describing a IUpdatableGameObject and the expected functionality it will implement.
  * A Object implementing this interface can be added to a Updater.
  */
-public interface IUpdatableGameObject extends IGameObject, Updatable,Serializable {
+public interface IUpdatableGameObject extends GameObject, Updatable,Serializable {
 
     /**
      * Signals to the Handler of the Object that the Object can be deleted.
@@ -26,4 +26,7 @@ public interface IUpdatableGameObject extends IGameObject, Updatable,Serializabl
      */
     void update();
 
+    void setAsPlayer(boolean bool);
+
+    boolean isPlayer();
 }

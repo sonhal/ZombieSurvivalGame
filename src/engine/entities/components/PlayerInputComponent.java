@@ -6,16 +6,16 @@ import engine.controllers.EventHandler;
 import engine.entities.components.ComponentEvent.AttackEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.components.ComponentEvent.MoveEvent;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.components.interfaces.InputComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 
-public class PlayerInputComponent extends ScriptableComponent{
+public class PlayerInputComponent extends InputComponent {
 
     private EventHandler eventHandler;
     private double moveDelay;
     private double lastMoveEvent;
 
     public PlayerInputComponent(EventHandler eventHandler, double moveDelay){
-        super(ComponentType.INPUT_COMPONENT);
         this.eventHandler = eventHandler;
         this.moveDelay = moveDelay;
     }
@@ -25,14 +25,14 @@ public class PlayerInputComponent extends ScriptableComponent{
     }
 
     @Override
-    public void update(IGameObject gameObject){
+    public void update(GameObject gameObject){
         ActionEvent event = eventHandler.getEvent();
         if(event != null){
             handleEvent(gameObject, event);
         }
     }
 
-    private void handleMoving(IGameObject gameObject, Direction direction){
+    private void handleMoving(GameObject gameObject, Direction direction){
         if(canActivate(moveDelay, lastMoveEvent)){
             sendMessageToAllComponents(gameObject.getComponents(), new MoveEvent(direction));
             lastMoveEvent = System.currentTimeMillis();
@@ -40,12 +40,12 @@ public class PlayerInputComponent extends ScriptableComponent{
 
     }
 
-    private void handleAttacking(IGameObject gameObject, Direction direction){
+    private void handleAttacking(GameObject gameObject, Direction direction){
         sendMessageToAllComponents(gameObject.getComponents(), new AttackEvent(direction));
     }
 
 
-    private void handleEvent(IGameObject gameObject, ActionEvent event) {
+    private void handleEvent(GameObject gameObject, ActionEvent event) {
         switch (event){
             case MOVE_UP: handleMoving(gameObject, Direction.LEFT);
                 break;
@@ -72,12 +72,12 @@ public class PlayerInputComponent extends ScriptableComponent{
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
         //Do nothing
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
 
     }
 }

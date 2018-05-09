@@ -5,15 +5,14 @@ import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.components.ComponentEvent.DamageTakenEvent;
 import engine.entities.components.ComponentEvent.MoveEvent;
 import engine.entities.gameobjects.Sprite;
-import engine.entities.components.interfaces.IGraphicsComponent;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.components.interfaces.GraphicsComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public class UpdatableGraphicsComponent extends ScriptableComponent implements IGraphicsComponent {
+public class UpdatableGraphicsComponent extends GraphicsComponent {
     private List<Sprite> sprites;
     private List<Sprite> activeSprites;
     private Direction inputMoveDirection;
@@ -25,7 +24,6 @@ public class UpdatableGraphicsComponent extends ScriptableComponent implements I
 
 
     public UpdatableGraphicsComponent(Sprite sprite, double moveAnimationDelay){
-        super(ComponentType.GRAPHICS_COMPONENT);
         this.sprites = new ArrayList<>();
         this.sprites.add(sprite);
         this.activeSprites = new ArrayList<>();
@@ -34,7 +32,7 @@ public class UpdatableGraphicsComponent extends ScriptableComponent implements I
     }
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(GameObject gameObject) {
         if(inputMoveDirection != null){
             if(isMoving && currentFacingDirection == inputMoveDirection){
                 if(canActivate(moveAnimationDelay, lastAnimationStart)){
@@ -132,19 +130,14 @@ public class UpdatableGraphicsComponent extends ScriptableComponent implements I
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
         lastAnimationStart = System.currentTimeMillis();
-        Optional<ScriptableComponent> optionalComponent =
-                getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT);
-        if (optionalComponent.isPresent()) {
-            TransformComponent transformComponent = (TransformComponent) optionalComponent.get();
-            setActiveSpriteByID(getSpriteIDByDirection(transformComponent.getFacingDirection()));
-            inputMoveDirection = transformComponent.getFacingDirection();
-        }
+        setActiveSpriteByID(getSpriteIDByDirection(gameObject.getTransformComponent().getFacingDirection()));
+        inputMoveDirection = gameObject.getTransformComponent().getFacingDirection();
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
 
     }
 }

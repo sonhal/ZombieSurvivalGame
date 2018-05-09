@@ -1,21 +1,20 @@
 package engine.entities.items.weapons;
 
 
-import engine.entities.components.AttackComponent;
+import engine.entities.components.SingleAttackComponent;
 import engine.world.Tile;
 import engine.controllers.Direction;
 
 import java.io.Serializable;
-import java.security.InvalidParameterException;
 
 /**
 * Represents a weapon a player can pickup and use in the game.
  */
 public abstract class Weapon implements Serializable{
 
-    protected AttackComponent attackComponent;
+    protected SingleAttackComponent attackComponent;
 
-    public Weapon(AttackComponent attackComponent){
+    public Weapon(SingleAttackComponent attackComponent){
         this.attackComponent  = attackComponent;
     }
 
@@ -26,7 +25,7 @@ public abstract class Weapon implements Serializable{
      * Method to get the damage the weapon deals
      * @return the damage the weapon deals
      */
-    public AttackComponent getAttackComponent() {
+    public SingleAttackComponent getAttackComponent() {
         return attackComponent;
     }
 

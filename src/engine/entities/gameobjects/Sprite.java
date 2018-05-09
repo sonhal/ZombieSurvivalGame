@@ -3,7 +3,7 @@ package engine.entities.gameobjects;
 import java.io.Serializable;
 
 /**
- * Represents the Sprite the view2D is to use to render a engine.entities.gameobjects.GameObject
+ * Represents the Sprite the view2D is to use to render a engine.entities.gameobjects.StaticGameObject
  */
 public class Sprite implements Serializable{
 

@@ -9,7 +9,7 @@ import engine.controllers.Direction;
 
 /**
  * Weapon subclass that fires Bullets.
- * Is meant to be held and activated by a WeaponComponent
+ * Is meant to be held and activated by a SingleWeaponComponent
  */
 public class Gun extends Weapon {
 
@@ -18,7 +18,7 @@ public class Gun extends Weapon {
     private double activateDelay;
     private int range;
 
-    public Gun(Updater controller, int range, double activateDelay, AttackComponent attackComponent) {
+    public Gun(Updater controller, int range, double activateDelay, SingleAttackComponent attackComponent) {
         super(attackComponent);
         this.controller = controller;
         this.lastActivateTime = System.currentTimeMillis();
@@ -37,7 +37,7 @@ public class Gun extends Weapon {
             System.out.println("Weapon activated!");
             Tile startTile = fromTile.getTileInDirection(direction);
 
-            //if adjacent Tile is occupied, hit GameObject on Tile
+            //if adjacent Tile is occupied, hit StaticGameObject on Tile
             if (startTile.getGameObject() != null){
                 attackComponent.tryAttack(startTile);
             }

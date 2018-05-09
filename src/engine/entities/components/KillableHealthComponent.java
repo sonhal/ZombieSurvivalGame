@@ -1,13 +1,14 @@
 package engine.entities.components;
 import engine.entities.components.ComponentEvent.*;
+import engine.entities.components.interfaces.HealthComponent;
 import engine.entities.gameobjects.UpdatableGameObject;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HealthComponent extends ScriptableComponent{
+public class KillableHealthComponent extends HealthComponent {
 
     private int healthAmount;
     private boolean isDamaged;
@@ -15,8 +16,7 @@ public class HealthComponent extends ScriptableComponent{
     private static final int DAMAGE_TIME = 500;
     private List<Integer> damageToTake;
 
-    public HealthComponent(int healthAmount){
-        super(ComponentType.HEALTH_COMPONENT);
+    public KillableHealthComponent(int healthAmount){
         this.healthAmount = healthAmount;
         this.damageToTake = new ArrayList<>();
     }
@@ -34,7 +34,7 @@ public class HealthComponent extends ScriptableComponent{
         }
     }
 
-    private void broadcastStatus(IGameObject gameObject){
+    private void broadcastStatus(GameObject gameObject){
         if(isDamaged){
             sendMessageToAllComponents(gameObject.getComponents(), new DamageTakenEvent(healthAmount));
         }
@@ -76,7 +76,7 @@ public class HealthComponent extends ScriptableComponent{
     }
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(GameObject gameObject) {
         takeDamage();
         updateDamagedStatus();
         broadcastStatus(gameObject);
@@ -90,12 +90,12 @@ public class HealthComponent extends ScriptableComponent{
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
 
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
 
     }
 }

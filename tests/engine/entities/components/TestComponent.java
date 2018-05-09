@@ -1,18 +1,15 @@
 package engine.entities.components;
 
 import engine.entities.components.ComponentEvent.ComponentEvent;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.gameobjects.interfaces.GameObject;
 
 public abstract class TestComponent extends ScriptableComponent {
 
-    TestComponent(ComponentType type) {
-        super(type);
-    }
 
     public abstract Object result();
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(GameObject gameObject) {
         //Do nothing
     }
 
@@ -22,12 +19,12 @@ public abstract class TestComponent extends ScriptableComponent {
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
         //Do nothing
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
         //Do nothing
     }
 }

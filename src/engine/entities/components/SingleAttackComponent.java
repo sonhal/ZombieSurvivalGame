@@ -2,48 +2,42 @@ package engine.entities.components;
 
 import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.*;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.components.interfaces.AttackComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.world.Tile;
 
-import java.util.Optional;
-
-public class AttackComponent extends ScriptableComponent{
+public class SingleAttackComponent extends AttackComponent {
 
     private Direction attackDirection;
-    private int damage;
+    private final int damage;
 
-    public AttackComponent(int damage) {
-        super(ComponentType.ATTACK_COMPONENT);
+    public SingleAttackComponent(int damage) {
         this.damage = damage;
         if (damage < 1){
             throw new IllegalArgumentException("Damage cannot be below 1");
         }
     }
 
+    @Override
     public void tryAttack( Tile attackTile){
-        IGameObject objectToBeAttacked = attackTile.getGameObject();
+        GameObject objectToBeAttacked = attackTile.getGameObject();
         if(objectToBeAttacked != null){
             sendMessageToAllComponents(objectToBeAttacked.getComponents(), new HitEvent(damage));
         }
     }
 
+    @Override
     public int getDamage() {
         return damage;
     }
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(GameObject gameObject) {
         if(attackDirection != null){
-            Optional<ScriptableComponent> oComponent =
-                    getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT);
-            if(oComponent.isPresent()){
-                TransformComponent transformComponent = (TransformComponent) oComponent.get();
-                tryAttack(transformComponent.getCurrentTile().getTileInDirection(attackDirection));
-
+                tryAttack(gameObject.getTransformComponent().getCurrentTile().getTileInDirection(attackDirection));
                 sendMessageToAllComponents(gameObject.getComponents(),new HitEvent(damage));
-            }
-            attackDirection = null;
         }
+        attackDirection = null;
     }
 
     @Override
@@ -54,12 +48,12 @@ public class AttackComponent extends ScriptableComponent{
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
+    public void innit(GameObject gameObject) {
         //Do nothing
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
 
     }
 }

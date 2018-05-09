@@ -2,10 +2,10 @@ package engine.services.save;
 
 import engine.controllers.EventHandler;
 import engine.controllers.Updater;
+import engine.entities.components.StaticTransformComponent;
+import engine.entities.components.interfaces.TransformComponent;
 import engine.entities.gameobjects.PlayerBuilder;
-import engine.entities.components.ComponentType;
 import engine.entities.gameobjects.Sprite;
-import engine.entities.components.TransformComponent;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.world.Tile;
 import engine.world.World;
@@ -48,12 +48,12 @@ class SaveGameHandlerTest {
         gameWorld.createNewGameWorld(10);
         Tile testTile = gameWorld.getWorld().get(2);
         IUpdatableGameObject player = PlayerBuilder.create(new Updater(), new EventHandler(),10, testTile);
-        TransformComponent tc = (TransformComponent) player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).get();
+        StaticTransformComponent tc = (StaticTransformComponent) player.getComponentByType(TransformComponent.class).get();
         SaveGameHandler.saveGame(gameWorld.getWorld());
         List<Tile> loadedWorld = SaveGameHandler.loadGame();
         IUpdatableGameObject result = (IUpdatableGameObject) loadedWorld.get(2).getGameObject();
-        assertNotNull(result, "GameObject should be set");
-        Tile resultTile = result.getTile();
+        assertNotNull(result, "StaticGameObject should be set");
+        Tile resultTile = result.getTransformComponent().getCurrentTile();
         assertEquals(testTile.getCordX(), resultTile.getCordX(), "Tiles not the same");
         assertEquals(testTile.getCordY(), resultTile.getCordY(), "Tiles not the same");
     }

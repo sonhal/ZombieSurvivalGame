@@ -2,7 +2,7 @@ package engine.entities.gameobjects;
 
 import engine.controllers.Direction;
 import engine.entities.components.*;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.world.Tile;
 
@@ -10,25 +10,21 @@ import java.util.ArrayList;
 
 public class GameObjectFactory {
 
-    public static IGameObject createStaticGameObject(Sprite sprite, Tile startTile){
-        ArrayList<ScriptableComponent> components = new ArrayList<>();
+    public static GameObject createStaticGameObject(Sprite sprite, Tile startTile){
 
-        components.add(new TransformComponent(startTile));
-        components.add(new GraphicsComponent(sprite));
-        return new GameObject(components);
+        return new StaticGameObject.Builder(new StaticTransformComponent(startTile))
+                .addComponent(new StaticGraphicsComponent(sprite))
+                .build();
     }
 
     public static IUpdatableGameObject createBullet(Tile startTile, Direction direction, int damage){
-        ArrayList<ScriptableComponent> components = new ArrayList<>();
-
-        UpdatableTransformComponent at = new UpdatableTransformComponent(startTile);
-        components.add(at);
-        components.add(new GraphicsComponent(getBulletSpriteByDirection(direction)));
-        components.add(new AttackComponent(damage));
-        components.add(new CollisionComponent(at));
-        components.add(new ProjectileInputComponent(direction, 10));
-        components.add(new ProjectileHealthComponent(20));
-        return new ImpUpdatableGameObject(components);
+        return new UpdatableGameObject.Builder(new UpdatableTransformComponent(startTile))
+                .addComponent(new StaticGraphicsComponent(getBulletSpriteByDirection(direction)))
+                .addComponent(new SingleAttackComponent(damage))
+                .addComponent(new GameObjectCollisionComponent())
+                .addComponent(new ProjectileInputComponent(direction, 10))
+                .addComponent(new ProjectileHealthComponent(20))
+                .build();
     }
 
     protected static Sprite getBulletSpriteByDirection(Direction direction){

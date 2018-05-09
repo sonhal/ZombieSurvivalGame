@@ -1,7 +1,7 @@
 package engine.entities.items.weapons;
 
 import engine.controllers.Direction;
-import engine.entities.components.AttackComponent;
+import engine.entities.components.SingleAttackComponent;
 import engine.services.TimeService;
 import engine.world.Tile;
 
@@ -19,7 +19,7 @@ public class MeleeWeapon extends Weapon {
      * @param attackComponent
      * @param activateDelay
      */
-    public MeleeWeapon(double activateDelay, AttackComponent attackComponent) {
+    public MeleeWeapon(double activateDelay, SingleAttackComponent attackComponent) {
         super(attackComponent);
         this.lastActivateTime = System.currentTimeMillis();
         this.activateDelay = activateDelay;

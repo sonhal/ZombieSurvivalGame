@@ -1,7 +1,6 @@
 package engine.entities.components.ComponentEvent;
 
 import engine.controllers.Direction;
-import engine.entities.components.AttackComponent;
 
 public class AttackEvent implements ComponentEvent {
 

@@ -2,11 +2,13 @@ package engine.entities.components;
 
 import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.*;
-import engine.entities.gameobjects.interfaces.IGameObject;
+import engine.entities.components.interfaces.InputComponent;
+import engine.entities.components.interfaces.TransformComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 
-public class EnemyInputComponent extends ScriptableComponent{
+public class EnemyInputComponent extends InputComponent {
 
-    private IGameObject target;
+    private GameObject target;
     private TransformComponent targetTransformComponent;
     private TransformComponent gameObjectTransformComponent;
     private Direction collisionHasOccurred;
@@ -14,15 +16,14 @@ public class EnemyInputComponent extends ScriptableComponent{
     private double sendEventDelay;
 
 
-    public EnemyInputComponent(IGameObject target, double sendEventDelay){
-        super(ComponentType.INPUT_COMPONENT);
+    public EnemyInputComponent(GameObject target, double sendEventDelay){
         this.target = target;
         this.sendEventDelay = sendEventDelay;
     }
 
 
 
-    private Direction getDirectionAgainstPlayer(IGameObject gameObject){
+    private Direction getDirectionAgainstPlayer(GameObject gameObject){
 
         //Bad collision avoiding AI
         if (collisionHasOccurred != null){
@@ -64,7 +65,7 @@ public class EnemyInputComponent extends ScriptableComponent{
         }
     }
 
-    private Direction isPlayerInRange(IGameObject gameObject){
+    private Direction isPlayerInRange(GameObject gameObject){
         if(collisionHasOccurred != null){
             if(gameObjectTransformComponent.getCurrentTile().getTileInDirection(collisionHasOccurred).getGameObject() == target){
                 return collisionHasOccurred;
@@ -74,7 +75,7 @@ public class EnemyInputComponent extends ScriptableComponent{
     }
 
     @Override
-    public void update(IGameObject gameObject) {
+    public void update(GameObject gameObject) {
         //If Player is in range, attack Player
         if(isPlayerInRange(gameObject) != null){
             sendMessageToAllComponents(gameObject.getComponents(), new AttackEvent(isPlayerInRange(gameObject)));
@@ -97,26 +98,18 @@ public class EnemyInputComponent extends ScriptableComponent{
     }
 
     @Override
-    public void innit(IGameObject gameObject) {
-        //Gets reference to Players TransformComponent
-        if(getComponentByType(target.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
-            this.targetTransformComponent =
-                    (TransformComponent) getComponentByType(target.getComponents()
-                            , ComponentType.TRANSFORM_COMPONENT).get();
-        }
+    public void innit(GameObject gameObject) {
+        //Gets reference to Players StaticTransformComponent
+        this.targetTransformComponent = target.getTransformComponent();
 
-        //Gets reference to its own TransformComponent
-        if(getComponentByType(gameObject.getComponents(), ComponentType.TRANSFORM_COMPONENT).isPresent()){
-            this.gameObjectTransformComponent =
-                    (TransformComponent) getComponentByType(gameObject.getComponents()
-                            , ComponentType.TRANSFORM_COMPONENT).get();
-        }
+        //Gets reference to its own StaticTransformComponent
+        this.gameObjectTransformComponent = gameObject.getTransformComponent();
 
         lastEventSent = System.currentTimeMillis();
     }
 
     @Override
-    public void cleanUp(IGameObject gameObject) {
+    public void cleanUp(GameObject gameObject) {
 
     }
 

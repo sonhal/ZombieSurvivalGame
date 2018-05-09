@@ -54,7 +54,7 @@ public class NpcController extends Updater implements Messenger {
     }
 
     protected Tile locateSpawnTile(World world){
-        Tile playerTile = world.getPlayer().getTile();
+        Tile playerTile = world.getPlayer().getTransformComponent().getCurrentTile();
         if(playerTile == null){
             throw new RuntimeException("Player Tile is Null");
         }
