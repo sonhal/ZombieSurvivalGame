@@ -7,6 +7,10 @@ import engine.entities.items.Item;
 
 import java.io.Serializable;
 
+/** Tile Call containing the state for each tile on the board.
+ * Implements the serializable interface in order to make it posible to extract the data to a binary file.
+ */
+
 public class Tile implements Serializable{
 
     private Tile up;
@@ -22,17 +26,30 @@ public class Tile implements Serializable{
     private Sprite sprite;
 
 
-
+    /**
+     * Constructor class. Setts the cordinates, and tile sprite on creation.
+     * @param x X cordinate.
+     * @param y Y cordinate.
+     * @param sprite Sprite which gets assigned to the tile.
+     */
     public Tile(int x, int y, Sprite sprite){
         cordX = x;
         cordY = y;
         this.sprite = sprite;
     }
 
+    /**
+     * Gets the sprite from the tile. Typically used if you are gonna render the gameboard into a image
+     * @return
+     */
     public Sprite getSprite() {
         return sprite;
     }
 
+    /**
+     * Get the tile located in front of the current tile.
+     * @return top tile.
+     */
     public Tile getUp() {
         if (up != null){
             return up;
@@ -40,10 +57,19 @@ public class Tile implements Serializable{
         else return this;
     }
 
+    /**
+     * Sets refference to the tile which is in front of the current tile
+     * @param up Tile where the x cordinate is the same, but y cordinate is +1 of this one
+     */
     public void setUp(Tile up) {
         this.up = up;
     }
 
+    /**
+     * Retturns the refference to the tile mapped beneath this tile.
+     * Can also creativily be used as a portal, or looping the world
+     * @return tile object mapped beneath this.
+     */
     public Tile getDown() {
         if (down != null){
             return down;
@@ -94,9 +120,13 @@ public class Tile implements Serializable{
         }
     }
 
+    /**
+     * Sets the gameobject refference on this tile to null.
+     */
     public void clearTile(){
         gameObject = null;
     }
+
 
     public Item getItem() {
         return item;
@@ -118,6 +148,11 @@ public class Tile implements Serializable{
         return cordY;
     }
 
+    /**
+     * Gets tile in direction of ENUM direction
+     * @param direction Enum containing a direction
+     * @return Tile in specified direction of this.
+     */
     public Tile getTileInDirection(Direction direction){
         switch (direction){
             case UP:
@@ -133,6 +168,10 @@ public class Tile implements Serializable{
         }
     }
 
+    /**
+     * To string method used when testing.
+     * @return String describing X and y cordinate of this tile.
+     */
     @Override
     public String toString() {
         return super.toString() +": location x: " + getCordX() +", y: " + getCordY();

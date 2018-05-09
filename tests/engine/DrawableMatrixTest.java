@@ -1,6 +1,6 @@
 package engine;
 
-import engine.entities.components.SingleAttackComponent;
+import engine.entities.components.AttackComponent;
 import engine.entities.gameobjects.Sprite;
 import engine.entities.items.WeaponPickup;
 import engine.entities.items.weapons.MeleeWeapon;
@@ -19,6 +19,7 @@ class DrawableMatrixTest {
     @BeforeEach
     void setUp() {
         testWorld = new World();
+        testWorld.createNewGameWorld(50);
 
     }
 
@@ -28,13 +29,13 @@ class DrawableMatrixTest {
 
     @Test
     void generateDrawable() {
-        int diameterSize = 30;
-        testWorld.findTile(0,0).setItem(new WeaponPickup(new Sprite(1), new MeleeWeapon(1,new SingleAttackComponent(1))));
-        testWorld.findTile(5,5).setItem(new WeaponPickup(new Sprite(1), new MeleeWeapon(1,new SingleAttackComponent(1))));
+        int diameterSize = 50;
+        testWorld.findTile(0,0).setItem(new WeaponPickup(new Sprite(1), new MeleeWeapon(1,new AttackComponent(1))));
+        testWorld.findTile(5,5).setItem(new WeaponPickup(new Sprite(1), new MeleeWeapon(1,new AttackComponent(1))));
         matrix = new DrawableMatrix(testWorld, testWorld.getSeed(), diameterSize,diameterSize);
 
         assertNotNull(matrix.matrix[diameterSize][diameterSize].getItem());
-        assertNotNull(matrix.matrix[diameterSize+5][diameterSize-5].getItem());
+        assertNotNull(matrix.matrix[diameterSize+5][diameterSize+5].getItem());
         assertNull(matrix.matrix[diameterSize-5][diameterSize-5].getItem());
     }
 

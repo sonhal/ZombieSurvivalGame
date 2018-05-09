@@ -5,10 +5,20 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Class connecting each of the tiles in the x direction. As the design structure of the game allows us to have hundreds of thousands of tiles, it is important that this connectiong algorytm is as effective as posible.
+ * First this process sorts the list of every tile by its x cordinates making a long strip of one dimentional game.
+ * Then it iterates through the list of sorted tiles, mapping the tiles which are located at the same row.
+ */
+
 class ConnectLeftRight implements Runnable {
     List<Tile> worldToBeConnected;
     Thread t;
 
+    /**
+     * Constructor spawning the thread
+     * @param worldList Reference to the list of tiles representing the world.
+     */
     ConnectLeftRight(List<Tile> worldList) {
         worldToBeConnected = new ArrayList(worldList);
         t = new Thread(this);
@@ -31,10 +41,11 @@ class ConnectLeftRight implements Runnable {
         Iterator xIterator = worldToBeConnected.iterator();
         Tile last = null;
         Tile beginning = null;
-        Tile ending = null;
+        if (xIterator.hasNext()) {
+            beginning = (Tile) xIterator.next();
+        }
         while (xIterator.hasNext()) {
             Tile current = (Tile) xIterator.next();
-            if (beginning == null){ beginning = current;}
             if (last != null && current != null && last.getCordX() == current.getCordX() - 1) {
                 current.setLeft(last);
                 last.setRight(current);

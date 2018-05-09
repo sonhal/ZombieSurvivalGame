@@ -15,6 +15,7 @@ class WorldTest {
     @BeforeEach
     void setUp() {
         testWorld = new World();
+        testWorld.createNewGameWorld(20);
     }
 
     @AfterEach
@@ -64,6 +65,7 @@ class WorldTest {
 
     @Test
     void getSeed() {
+        System.out.println(testWorld.getSeed().getCordX());
         assertEquals(testWorld.getSeed().equals(testWorld.findTile(0,0)), true);
     }
 
