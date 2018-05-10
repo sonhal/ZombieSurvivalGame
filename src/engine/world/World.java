@@ -18,6 +18,7 @@ public class World implements Serializable{
     private Tile seed;
     private IUpdatableGameObject player;
     private Random random;
+    private int size;
 
     public World(){ }
 
@@ -30,6 +31,7 @@ public class World implements Serializable{
         world = generate(n);
         seed = findTile(0,0);
         connectTiles(world);
+        size = (n * 2);
     }
 
     /**
@@ -144,6 +146,14 @@ public class World implements Serializable{
      */
     public List<Tile> getWorld() {
         return world;
+    }
+
+    public int getwidth(){
+        return size;
+    }
+
+    public int getHeight(){
+        return size;
     }
 
 

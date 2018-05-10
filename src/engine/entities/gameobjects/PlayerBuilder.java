@@ -38,7 +38,7 @@ public class PlayerBuilder {
         IUpdatableGameObject player = new UpdatableGameObject.Builder(new UpdatableTransformComponent(startTile))
                 .addComponent(new PlayerInputComponent(eventHandler, 0))
                 .addComponent(new GameObjectCollisionComponent())
-                .addComponent(new KillableHealthComponent(1000))
+                .addComponent(new KillableHealthComponent(200))
                 .addComponent(gc)
                 .addComponent(wc)
                 .addComponent(new SoundEffectComponent(100, Sound.HIT_1))

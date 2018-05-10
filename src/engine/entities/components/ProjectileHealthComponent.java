@@ -44,4 +44,9 @@ public class ProjectileHealthComponent extends HealthComponent {
     public void cleanUp(GameObject gameObject) {
         //Do nothing
     }
+
+    @Override
+    public int getHealthAmount() {
+        return range;
+    }
 }

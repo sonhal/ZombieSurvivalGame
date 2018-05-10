@@ -5,6 +5,10 @@ import engine.entities.components.ComponentEvent.*;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.components.interfaces.TransformComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
+import engine.services.pathfinder.*;
+import engine.world.Tile;
+
+import java.util.concurrent.Future;
 
 public class EnemyInputComponent extends InputComponent {
 
@@ -14,55 +18,45 @@ public class EnemyInputComponent extends InputComponent {
     private Direction collisionHasOccurred;
     private double lastEventSent;
     private double sendEventDelay;
+    private double lastPathSearch;
+    private Path enemyPath;
+    private PathSearchService pathSearchService;
+    private Future<Path> currentPath;
+    private Future<Path> nextPath;
 
 
-    public EnemyInputComponent(GameObject target, double sendEventDelay){
+    public EnemyInputComponent(GameObject target, PathSearchService pathSearchService, double sendEventDelay){
         this.target = target;
         this.sendEventDelay = sendEventDelay;
+        this.pathSearchService = pathSearchService;
     }
 
 
 
     private Direction getDirectionAgainstPlayer(GameObject gameObject){
+        if(nextPath != null && nextPath.isDone()){
+            currentPath = nextPath;
+        }
 
-        //Bad collision avoiding AI
-        if (collisionHasOccurred != null){
-            if(collisionHasOccurred == Direction.UP){
-                return Direction.LEFT;
-            }
-            if(collisionHasOccurred == Direction.DOWN){
-                return Direction.RIGHT;
-            }
-            if(collisionHasOccurred == Direction.LEFT){
-                return Direction.UP;
-            }
-            if(collisionHasOccurred == Direction.RIGHT){
-                return Direction.DOWN;
+        if(currentPath != null && currentPath.isDone()){
+            try {
+                if(currentPath.get() != null){
+                    Direction nextStep = currentPath.get().getNextStepDirection();
+                    if(nextStep == null){
+                        System.out.println("Empty step");
+                        return Direction.UP;
+                    }
+                    return nextStep;
+                }
+                else {
+                    System.out.println("NULL path");
+                }
+            }catch (Exception err){
+                err.printStackTrace();
             }
         }
-        int targetX = targetTransformComponent.getCurrentTile().getCordX();
-        int targetY = targetTransformComponent.getCurrentTile().getCordY();
-        int enemyX = gameObjectTransformComponent.getCurrentTile().getCordX();
-        int enemyY = gameObjectTransformComponent.getCurrentTile().getCordY();
+        return Direction.UP;
 
-        if (targetX < enemyX){
-            if(targetY < enemyY){
-                return Direction.DOWN;
-            }
-            else if (targetY == enemyY){
-                return Direction.LEFT;
-            }
-            else return Direction.UP;
-        }
-        else {
-            if(targetY < enemyY){
-                return Direction.DOWN;
-            }
-            else if (targetY == enemyY){
-                return Direction.RIGHT;
-            }
-            else return Direction.UP;
-        }
     }
 
     private Direction isPlayerInRange(GameObject gameObject){
@@ -76,6 +70,15 @@ public class EnemyInputComponent extends InputComponent {
 
     @Override
     public void update(GameObject gameObject) {
+
+        if(canActivate(3000, lastPathSearch)){
+            Tile currentTile = gameObject.getTransformComponent().getCurrentTile();
+            nextPath = pathSearchService.getNewPath(currentTile.getCordX(), currentTile.getCordY(),
+                    targetTransformComponent.getCurrentTile().getCordX(), targetTransformComponent.getCurrentTile().getCordY());
+            lastPathSearch = System.currentTimeMillis();
+        }
+
+
         //If Player is in range, attack Player
         if(isPlayerInRange(gameObject) != null){
             sendMessageToAllComponents(gameObject.getComponents(), new AttackEvent(isPlayerInRange(gameObject)));
@@ -83,7 +86,8 @@ public class EnemyInputComponent extends InputComponent {
         //If not, Move towards Player
         else {
             if(canActivate(sendEventDelay, lastEventSent)){
-                sendMessageToAllComponents(gameObject.getComponents(), new MoveEvent(getDirectionAgainstPlayer(gameObject)));
+                Direction direction  = getDirectionAgainstPlayer(gameObject);
+                sendMessageToAllComponents(gameObject.getComponents(), new MoveEvent(direction));
                 lastEventSent = System.currentTimeMillis();
             }
         }
@@ -106,6 +110,7 @@ public class EnemyInputComponent extends InputComponent {
         this.gameObjectTransformComponent = gameObject.getTransformComponent();
 
         lastEventSent = System.currentTimeMillis();
+        lastPathSearch = System.currentTimeMillis();
     }
 
     @Override

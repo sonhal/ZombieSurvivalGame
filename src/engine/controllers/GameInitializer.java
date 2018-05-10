@@ -9,6 +9,7 @@ import engine.entities.components.PlayerInputComponent;
 import engine.entities.components.SingleWeaponComponent;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.Gun;
+import engine.services.pathfinder.PathSearchService;
 import engine.world.Tile;
 import engine.world.World;
 import engine.services.ComponentService;
@@ -44,7 +45,9 @@ public class GameInitializer {
         gameUpdater.addToUpdateList(player);
         GameStateMessengerMediator gamerMediator = new GameStateMessengerMediator();
 
-        NpcController npcController = new NpcController(player, gamerMediator);
+        PathSearchService pathSearchService = new PathSearchService(world);
+
+        NpcController npcController = new NpcController(player, gamerMediator, pathSearchService);
         GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
         return new GameHandler(gameViewController,world,gameUpdater,
                 eventHandler, player, npcController, gameStateKeeper);
@@ -65,7 +68,8 @@ public class GameInitializer {
         world.loadInGameWorld(worldTiles, player);
         System.out.println("Game loaded");
         GameStateMessengerMediator gamerMediator = new GameStateMessengerMediator();
-        NpcController npcController = new NpcController(player, gamerMediator);
+        PathSearchService pathSearchService = new PathSearchService(world);
+        NpcController npcController = new NpcController(player, gamerMediator, pathSearchService);
         //Game Updater
         GameUpdater gameUpdater = new GameUpdater();
         //Create EventHandler

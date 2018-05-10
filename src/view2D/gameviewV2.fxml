@@ -20,7 +20,7 @@
       <Pane fx:id="toolBar" layoutX="-1.0" layoutY="-3.0" prefHeight="47.0" prefWidth="997.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="25.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ff48" height="25.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ff48" height="25.0" stroke="BLACK" strokeType="INSIDE" width="200.0" fx:id="healthBar" />
             <Label fx:id="levelLabel" layoutX="30" layoutY="40" text="Level 0" textFill="#ffe491"><font>
                <Font name="SansSerif Regular" size="20.0" /></font>
             </Label>

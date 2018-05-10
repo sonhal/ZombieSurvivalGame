@@ -47,6 +47,7 @@ public class KillableHealthComponent extends HealthComponent {
         }
     }
 
+    @Override
     public int getHealthAmount() {
         return healthAmount;
     }
