@@ -27,16 +27,16 @@ public class EnemyInputComponent extends ScriptableComponent{
         //Bad collision avoiding AI
         if (collisionHasOccurred != null){
             if(collisionHasOccurred == Direction.UP){
-                return Direction.LEFT;
-            }
-            if(collisionHasOccurred == Direction.DOWN){
-                return Direction.RIGHT;
-            }
-            if(collisionHasOccurred == Direction.LEFT){
                 return Direction.UP;
             }
-            if(collisionHasOccurred == Direction.RIGHT){
+            if(collisionHasOccurred == Direction.DOWN){
                 return Direction.DOWN;
+            }
+            if(collisionHasOccurred == Direction.LEFT){
+                return Direction.LEFT;
+            }
+            if(collisionHasOccurred == Direction.RIGHT){
+                return Direction.RIGHT;
             }
         }
         int targetX = targetTransformComponent.getCurrentTile().getCordX();

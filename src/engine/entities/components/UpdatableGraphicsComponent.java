@@ -95,16 +95,16 @@ public class UpdatableGraphicsComponent extends ScriptableComponent implements I
         if(direction != null){
             switch (direction){
                 case DOWN:
-                    spriteId = 4;
+                    spriteId = 1;
                     break;
                 case UP:
-                    spriteId = 3;
-                    break;
-                case LEFT:
                     spriteId = 2;
                     break;
+                case LEFT:
+                    spriteId = 3;
+                    break;
                 case RIGHT:
-                    spriteId = 1;
+                    spriteId = 4;
                     break;
             }
         }
@@ -113,10 +113,10 @@ public class UpdatableGraphicsComponent extends ScriptableComponent implements I
 
     private int getSpriteMovingIDByDirection(Direction direction){
         switch (direction){
-            case UP: return  7;
-            case DOWN: return 8;
-            case LEFT: return 5;
-            case RIGHT: return 6;
+            case UP: return  5;
+            case DOWN: return 6;
+            case LEFT: return 7;
+            case RIGHT: return 8;
             default: return 0;
         }
     }
