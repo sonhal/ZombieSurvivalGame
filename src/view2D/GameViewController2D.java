@@ -70,8 +70,8 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @Override
     public void initializeGameEnv() {
         System.out.println("Game controller active");
-        scaleWidth();
-        scaleHeight();
+        //scaleWidth();
+        //scaleHeight();
         initializeView();
 
 
@@ -80,7 +80,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
         renderer = new Renderer(gameCanvas);
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
-        gameCanvas.getGraphicsContext2D().fillRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight());
+        gameCanvas.getGraphicsContext2D().fillRect(0,0,StaticFields.WINDOW_WIDTH,StaticFields.WINDOW_HEIGHT);
         System.out.println("Game controller active 3");
         //gameHandler.setObjectInWorld();
     }
