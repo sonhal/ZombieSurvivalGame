@@ -1,8 +1,8 @@
 package engine.view;
 
-import engine.entities.Sprite;
-import engine.entities.world.Tile;
-import engine.entities.world.World;
+import engine.entities.gameobjects.Sprite;
+import engine.world.Tile;
+import engine.world.World;
 
 import java.io.Serializable;
 
@@ -30,7 +30,7 @@ public class DrawableMatrix implements Serializable{
             boolean lineEndReached = false;
             for (int x = 0; x < radiX * 2; x++){
                 if (lineEndReached == false && bottomEndReached == false){
-                    drawableWorld[x][y] = new DrawableTile(currentTile.getGameObject(),
+                    drawableWorld[y][x] = new DrawableTile(currentTile.getGameObject(),
                             currentTile.getItem(), currentTile.getSprite());
                     if(currentTile != currentTile.getRight()) {
                         currentTile = currentTile.getRight();
@@ -38,7 +38,7 @@ public class DrawableMatrix implements Serializable{
                         lineEndReached = true;
                     }
                 }else{
-                    drawableWorld[x][y] = new DrawableTile(null, null, new Sprite(29));
+                    drawableWorld[y][x] = new DrawableTile(null, null, new Sprite(29));
                     currentTile = currentTile.getRight();
                 }
 

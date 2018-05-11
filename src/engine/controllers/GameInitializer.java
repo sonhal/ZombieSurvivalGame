@@ -1,15 +1,17 @@
 package engine.controllers;
 
+import engine.entities.components.interfaces.InputComponent;
+import engine.entities.components.interfaces.WeaponComponent;
 import engine.gamestate.GameStateKeeper;
 import engine.gamestate.GameStateMessengerMediator;
-import engine.entities.PlayerBuilder;
-import engine.entities.composites.AvatarInputComponent;
-import engine.entities.composites.ComponentType;
-import engine.entities.composites.WeaponComponent;
-import engine.entities.interfaces.IUpdatableGameObject;
+import engine.entities.gameobjects.PlayerBuilder;
+import engine.entities.components.PlayerInputComponent;
+import engine.entities.components.SingleWeaponComponent;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.Gun;
-import engine.entities.world.Tile;
-import engine.entities.world.World;
+import engine.services.pathfinder.PathSearchService;
+import engine.world.Tile;
+import engine.world.World;
 import engine.services.ComponentService;
 import engine.services.save.SaveGameHandler;
 import view.GameViewController;
@@ -43,7 +45,9 @@ public class GameInitializer {
         gameUpdater.addToUpdateList(player);
         GameStateMessengerMediator gamerMediator = new GameStateMessengerMediator();
 
-        NpcController npcController = new NpcController(player, gamerMediator);
+        PathSearchService pathSearchService = new PathSearchService(world);
+
+        NpcController npcController = new NpcController(player, gamerMediator, pathSearchService);
         GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
         return new GameHandler(gameViewController,world,gameUpdater,
                 eventHandler, player, npcController, gameStateKeeper);
@@ -64,7 +68,8 @@ public class GameInitializer {
         world.loadInGameWorld(worldTiles, player);
         System.out.println("Game loaded");
         GameStateMessengerMediator gamerMediator = new GameStateMessengerMediator();
-        NpcController npcController = new NpcController(player, gamerMediator);
+        PathSearchService pathSearchService = new PathSearchService(world);
+        NpcController npcController = new NpcController(player, gamerMediator, pathSearchService);
         //Game Updater
         GameUpdater gameUpdater = new GameUpdater();
         //Create EventHandler
@@ -75,9 +80,9 @@ public class GameInitializer {
                 SaveGameHandler.getEnemyInstances(worldTiles)) {
             npcController.addToUpdateList(enemy);
         }
-        if(ComponentService.getComponentByType(player.getComponents(), ComponentType.WEAPON_COMPONENT).isPresent()){
-            WeaponComponent weaponComponent = (WeaponComponent)
-                    ComponentService.getComponentByType(player.getComponents(), ComponentType.WEAPON_COMPONENT).get();
+        if(ComponentService.getComponentByType(player.getComponents(), WeaponComponent.class).isPresent()){
+            SingleWeaponComponent weaponComponent = (SingleWeaponComponent)
+                    ComponentService.getComponentByType(player.getComponents(), WeaponComponent.class).get();
             if(weaponComponent.getWeapon() instanceof Gun){
                 Gun playerGun = (Gun)weaponComponent.getWeapon();
                 playerGun.setController(gameUpdater);
@@ -89,9 +94,9 @@ public class GameInitializer {
     }
 
     private static void setPlayerEventHandler(IUpdatableGameObject player, EventHandler eventHandler) {
-        if(player.getComponentByType(ComponentType.INPUT_COMPONENT).isPresent()){
-            AvatarInputComponent component = (AvatarInputComponent)
-                    player.getComponentByType(ComponentType.INPUT_COMPONENT).get();
+         if(player.getComponentByType(InputComponent.class).isPresent()){
+            PlayerInputComponent component = (PlayerInputComponent)
+                    player.getComponentByType(InputComponent.class).get();
             component.setEventHandler(eventHandler);
         }
     }

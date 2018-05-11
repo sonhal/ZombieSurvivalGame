@@ -5,14 +5,16 @@ import engine.gamestate.messages.GameEventMessage;
 import engine.gamestate.messages.NewLevelMessage;
 import engine.controllers.interfaces.Messenger;
 import engine.gamestate.interfaces.MessengerMediator;
-import engine.entities.BasicEntityBlueprint;
-import engine.entities.ZombieBuilder;
-import engine.entities.interfaces.IUpdatableGameObject;
-import engine.entities.world.Tile;
-import engine.entities.world.World;
+import engine.entities.gameobjects.BasicEntityBlueprint;
+import engine.entities.gameobjects.ZombieBuilder;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
+import engine.services.pathfinder.PathSearchService;
+import engine.world.Tile;
+import engine.world.World;
 import engine.services.audio.Sound;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class NpcController extends Updater implements Messenger {
@@ -21,12 +23,14 @@ public class NpcController extends Updater implements Messenger {
     private IUpdatableGameObject player;
     private MessengerMediator gameStateMessengerMediator;
     private int gameLevel;
+    private PathSearchService pathSearchService;
 
 
-    public NpcController(IUpdatableGameObject player, MessengerMediator gameMessengerMediator){
+    public NpcController(IUpdatableGameObject player, MessengerMediator gameMessengerMediator, PathSearchService pathSearchService){
         System.out.println("Npc controller created");
         this.player = player;
         this.gameStateMessengerMediator = gameMessengerMediator;
+        this.pathSearchService = pathSearchService;
         gameStateMessengerMediator.subscribe(this);
     }
 
@@ -45,16 +49,17 @@ public class NpcController extends Updater implements Messenger {
     protected void spawner(World world){
         Tile spawnTile = locateSpawnTile(world);
         if (spawnTile != null){
+            Random rand = new Random();
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
             IUpdatableGameObject enemy = ZombieBuilder.createZombie(player, spawnTile, new BasicEntityBlueprint(
-                    30 + gameLevel, 10 + gameLevel, 1000 - (gameLevel * 50), Sound.ZOMBIE_ATTACK));
+                    30 + gameLevel, 10 + gameLevel, (1000 - (gameLevel * 50) ) - rand.nextInt(50) , Sound.ZOMBIE_ATTACK), pathSearchService);
             addToUpdateList(enemy);
             spawnInterval = 10;
         }
     }
 
     protected Tile locateSpawnTile(World world){
-        Tile playerTile = world.getPlayer().getTile();
+        Tile playerTile = world.getPlayer().getTransformComponent().getCurrentTile();
         if(playerTile == null){
             throw new RuntimeException("Player Tile is Null");
         }

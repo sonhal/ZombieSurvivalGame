@@ -4,9 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -22,12 +19,12 @@
       <Pane fx:id="toolBarUnder" layoutY="1.0" opacity="0.29" prefHeight="33.0" prefWidth="997.0" style="-fx-background-color: #1C1C1C;" />
       <Pane fx:id="toolBar" layoutX="-1.0" layoutY="-3.0" prefHeight="47.0" prefWidth="997.0">
          <children>
-            <Rectangle fx:id="redBar" arcHeight="5.0" arcWidth="5.0" fill="RED" height="25.0" layoutX="210.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-            <Rectangle fx:id="greenBar" arcHeight="5.0" arcWidth="5.0" fill="#00ff48" height="25.0" layoutX="210.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-            <Label fx:id="levelLabel" layoutX="40.0" layoutY="5.0" text="Level 0" textFill="#ffe491"><font>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="RED" height="25.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00ff48" height="25.0" stroke="BLACK" strokeType="INSIDE" width="200.0" fx:id="healthBar" />
+            <Label fx:id="levelLabel" layoutX="30" layoutY="40" text="Level 0" textFill="#ffe491"><font>
                <Font name="SansSerif Regular" size="20.0" /></font>
             </Label>
-            <Label fx:id="scoreLabel" layoutX="130" layoutY="5.0" text="Score 0" textFill="#ffe491"><font>
+            <Label fx:id="scoreLabel" layoutX="130" layoutY="40" text="Score 0" textFill="#ffe491"><font>
                <Font name="SansSerif Regular" size="20.0" />
             </font>
             </Label>
@@ -35,7 +32,7 @@
       </Pane>
       <Pane fx:id="colorBG" layoutY="-5.0" minHeight="733.0" minWidth="997.0" opacity="0.87" prefHeight="763.0" prefWidth="997.0" style="-fx-background-color: #121212;">
          <children>
-            <Pane fx:id="btnTab" layoutX="76.0" layoutY="111.0" prefHeight="200.0" prefWidth="200.0">
+            <Pane layoutX="76.0" layoutY="111.0" prefHeight="200.0" prefWidth="200.0">
                <children>
                   <Button fx:id="gameBtn" layoutX="63.0" layoutY="-3.0" mnemonicParsing="false" onAction="#switchGame" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="GAME" textFill="#91c0ff">
                      <font>
@@ -54,6 +51,11 @@
                   </Button>
                </children>
             </Pane>
+            <Label fx:id="gameOverLbl" layoutX="396.0" layoutY="64.0" text="Game over" textFill="#91acff">
+               <font>
+                  <Font name="SansSerif Regular" size="40.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
        <Pane fx:id="settingsSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
@@ -96,37 +98,6 @@
                <font>
                   <Font name="SansSerif Regular" size="40.0" />
                </font>
-            </Label>
-            <TextArea layoutX="14.0" layoutY="168.0" prefHeight="281.0" prefWidth="402.0" />
-         </children>
-      </Pane>
-      <Pane fx:id="gameOver1" layoutX="293.0" layoutY="146.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
-         <children>
-            <ImageView fitHeight="407.0" fitWidth="431.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@static/bloodsplatt.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="gameOverLbl" layoutX="116.0" layoutY="22.0" text="Game over" textFill="#91acff">
-               <font>
-                  <Font name="SansSerif Regular" size="40.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Label>
-            <Button fx:id="gotomenuBtn" layoutX="140.0" layoutY="463.0" mnemonicParsing="false" onAction="#goToMenu" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Back to Menu" textFill="#84ffa9">
-               <font>
-                  <Font name="SansSerif Regular" size="18.0" />
-               </font>
-            </Button>
-            <Label layoutX="122.0" layoutY="104.0" text="HighScore" textFill="#ff4d4d">
-               <font>
-                  <Font name="SansSerif Regular" size="40.0" />
-               </font>
-               <effect>
-                  <DropShadow />
-               </effect>
             </Label>
             <TextArea layoutX="14.0" layoutY="168.0" prefHeight="281.0" prefWidth="402.0" />
          </children>

@@ -1,9 +1,9 @@
 package engine.entities.items.weapons;
 
 import engine.controllers.Direction;
-import engine.entities.composites.AttackComponent;
-import engine.entities.composites.TimeComponent;
-import engine.entities.world.Tile;
+import engine.entities.components.SingleAttackComponent;
+import engine.services.TimeService;
+import engine.world.Tile;
 
 /**
  * Weapon subclass
@@ -15,22 +15,21 @@ public class MeleeWeapon extends Weapon {
     private double activateDelay;
 
     /**
-     * Sets the damage for the weapon
      *
-     * @param range
-     * @param damage the damage the weapon deals
+     * @param attackComponent
+     * @param activateDelay
      */
-    public MeleeWeapon(int range, int damage, double activateDelay) {
-        super(damage);
+    public MeleeWeapon(double activateDelay, SingleAttackComponent attackComponent) {
+        super(attackComponent);
         this.lastActivateTime = System.currentTimeMillis();
         this.activateDelay = activateDelay;
     }
 
     @Override
     public boolean activate(Tile fromTile, Direction direction) {
-        if(TimeComponent.canUpdate(activateDelay, lastActivateTime)){
+        if(TimeService.canUpdate(activateDelay, lastActivateTime)){
             System.out.println("Weapon activated!");
-            AttackComponent.tryAttack(getDamage(), fromTile.getTileInDirection(direction));
+            attackComponent.tryAttack(fromTile.getTileInDirection(direction));
             lastActivateTime = System.currentTimeMillis();
             return true;
         }

@@ -1,6 +1,7 @@
 package engine;
 
-import engine.entities.Sprite;
+import engine.entities.components.SingleAttackComponent;
+import engine.entities.gameobjects.Sprite;
 import engine.entities.items.WeaponPickup;
 import engine.entities.items.weapons.MeleeWeapon;
 import engine.view.DrawableTile;
@@ -25,14 +26,14 @@ class DrawableTileTest {
     }
     @Test
     void setGameAndItem() {
-        testTile.setGameAndItem(null, new WeaponPickup(new Sprite(1), new MeleeWeapon(1,1,1)));
+        testTile.setGameAndItem(null, new WeaponPickup(new Sprite(1), new MeleeWeapon(1,new SingleAttackComponent(1))));
             assertNull(testTile.getGameObject());
             assertNotNull(testTile.getItem());
     }
 
     @Test
     void getItem(){
-        testTile.setItem(new WeaponPickup(new Sprite(1), new MeleeWeapon(1,1,1)));
+        testTile.setItem(new WeaponPickup(new Sprite(1), new MeleeWeapon(1,new SingleAttackComponent(1))));
         assertNotNull(testTile.getItem());
     }
 }

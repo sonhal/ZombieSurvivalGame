@@ -32,6 +32,11 @@ public class GameViewStub implements GameViewController, Serializable{
     }
 
     @Override
+    public void goToDeathScreen() throws IOException {
+
+    }
+
+    @Override
     public void stopGameLoop() {
 
     }

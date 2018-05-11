@@ -3,6 +3,7 @@ package view2D;
 import engine.controllers.ActionEvent;
 import engine.controllers.GameHandler;
 import engine.controllers.GameInitializer;
+import engine.entities.components.interfaces.HealthComponent;
 import engine.view.DrawableTile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -58,6 +59,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @FXML
     private Rectangle redBar, greenBar;
+
+    @FXML
+    private Rectangle healthBar;
 
     private boolean loadGameFlag;
 
@@ -315,7 +319,15 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
     private void updateUI(){
-        levelLabel.setText("Level " + String.valueOf(gameHandler.getGameStateKeeper().getGameLevelHandler().getCurrentLevel()));
-        scoreLabel.setText("Score " + String.valueOf(gameHandler.getGameStateKeeper().getPlayerGameScore().getScore()));
+
+        gameHandler.getPlayer().getComponentByType(HealthComponent.class)
+                .ifPresent(scriptableComponent ->
+                        healthBar.setWidth(((HealthComponent)scriptableComponent).getHealthAmount()) );
+
+        levelLabel.setText("Level "
+                + String.valueOf(gameHandler.getGameStateKeeper().getGameLevelHandler().getCurrentLevel()));
+
+        scoreLabel.setText("Score "
+                + String.valueOf(gameHandler.getGameStateKeeper().getPlayerGameScore().getScore()));
     }
 }

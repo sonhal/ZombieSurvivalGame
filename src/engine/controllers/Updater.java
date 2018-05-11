@@ -1,6 +1,6 @@
 package engine.controllers;
 
-import engine.entities.interfaces.Updatable;
+import engine.entities.gameobjects.interfaces.Updatable;
 
 import java.io.Serializable;
 import java.util.ArrayList;

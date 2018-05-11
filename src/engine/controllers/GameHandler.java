@@ -2,11 +2,9 @@ package engine.controllers;
 
 import engine.gamestate.GameStateKeeper;
 import engine.gamestate.GameStateMessengerMediator;
-import engine.entities.composites.ComponentType;
-import engine.entities.composites.TransformComponent;
-import engine.entities.interfaces.IUpdatableGameObject;
-import engine.entities.world.Tile;
-import engine.entities.world.World;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
+import engine.world.Tile;
+import engine.world.World;
 import engine.services.audio.AudioPlayer;
 import engine.services.audio.Sound;
 import engine.services.save.SaveGameHandler;
@@ -53,7 +51,7 @@ public class GameHandler extends Updater {
         this.gameStateKeeper = gameStateKeeper;
         //Set background music
         ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
-        backGroundMusic.add(Sound.BACKGROUND_MUSIC_1);
+        backGroundMusic.add(Sound.BACKGROUND_MUSIC_2);
         AudioPlayer.getInstance().setBackgroundMusic(backGroundMusic);
     }
 
@@ -77,14 +75,12 @@ public class GameHandler extends Updater {
         updateWordState();
 
         //Ugly edge case handling for first couple of updates
-        if(player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).isPresent()){
-            TransformComponent playerTransformComponent = (TransformComponent)
-                    player.getComponentByType(ComponentType.TRANSFORM_COMPONENT).get();
-            if(playerTransformComponent.getCurrentTile() == null){
+        if(player.getTransformComponent() != null){
+            if(player.getTransformComponent().getCurrentTile() == null){
                 viewCenterTile = world.findTile(0,0);
             }
             else {
-                viewCenterTile = playerTransformComponent.getCurrentTile();
+                viewCenterTile =player.getTransformComponent().getCurrentTile();
             }
             return matrix.generateDrawable(world, viewCenterTile,15,15);
         }
