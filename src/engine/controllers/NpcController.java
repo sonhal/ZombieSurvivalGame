@@ -36,7 +36,7 @@ public class NpcController extends Updater implements Messenger {
 
     public void update(World world){
         ArrayList enemies = getUpdateObjects();
-        if (enemies.size() < 0){
+        if (enemies.size() < 50){
             spawner(world);
         }
         getUpdateObjects().forEach(updatable -> {if(updatable.isDead()){

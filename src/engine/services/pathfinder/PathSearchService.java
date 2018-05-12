@@ -97,4 +97,9 @@ public class PathSearchService implements Updatable {
         }
     }
 
+    public void shutdown(){
+        searchPool.shutdown();
+        searchPool.shutdownNow();
+    }
+
 }

@@ -3,6 +3,7 @@ package engine.controllers;
 import engine.gamestate.GameStateKeeper;
 import engine.gamestate.GameStateMessengerMediator;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
+import engine.services.pathfinder.PathSearchService;
 import engine.world.Tile;
 import engine.world.World;
 import engine.services.audio.AudioPlayer;
@@ -29,11 +30,12 @@ public class GameHandler extends Updater {
     private GameStateKeeper gameStateKeeper;
     private GameUpdater gameUpdater;
     private GameStateMessengerMediator gameStateMessenger;
+    private PathSearchService pathSearchService;
 
 
     public GameHandler(GameViewController gameViewController2D, World gameWorld, GameUpdater gameUpdater,
                        EventHandler eventHandler, IUpdatableGameObject player, NpcController npcController,
-                       GameStateKeeper gameStateKeeper){
+                       GameStateKeeper gameStateKeeper, PathSearchService pathSearchService){
         //Set gameplay components
         System.out.println("GameHandler active");
         this.gameViewController = gameViewController2D;
@@ -43,6 +45,7 @@ public class GameHandler extends Updater {
         this.player = player;
         this.gameStateMessenger = new GameStateMessengerMediator();
         this.npcController  = npcController;
+        this.pathSearchService = pathSearchService;
 
 
         //Create the DrawableMatrix that handles the cut of the game world passed to the view
@@ -134,6 +137,7 @@ public class GameHandler extends Updater {
     public void shutDown(){
         AudioPlayer.getInstance().stopBackgroundMusic();
         AudioPlayer.getInstance().shutdown();
+        pathSearchService.shutdown();
     }
 
     public GameStateKeeper getGameStateKeeper() {

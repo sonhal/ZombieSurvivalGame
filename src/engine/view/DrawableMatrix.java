@@ -31,14 +31,14 @@ public class DrawableMatrix implements Serializable{
             for (int x = 0; x < radiX * 2; x++){
                 if (lineEndReached == false && bottomEndReached == false){
                     drawableWorld[y][x] = new DrawableTile(currentTile.getGameObject(),
-                            currentTile.getItem(), currentTile.getSprite());
+                            currentTile.getItem(), currentTile.getSprite(), currentTile.getParticleEffect());
                     if(currentTile != currentTile.getRight()) {
                         currentTile = currentTile.getRight();
                     }else{
                         lineEndReached = true;
                     }
                 }else{
-                    drawableWorld[y][x] = new DrawableTile(null, null, new Sprite(29));
+                    drawableWorld[y][x] = new DrawableTile(null, null, new Sprite(29), null);
                     currentTile = currentTile.getRight();
                 }
 

@@ -52,7 +52,7 @@ public class GameInitializer {
         NpcController npcController = new NpcController(player, gamerMediator, pathSearchService);
         GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
         return new GameHandler(gameViewController,world,gameUpdater,
-                eventHandler, player, npcController, gameStateKeeper);
+                eventHandler, player, npcController, gameStateKeeper, pathSearchService);
     }
 
     /**
@@ -93,7 +93,7 @@ public class GameInitializer {
         }
         GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
         return new GameHandler(gameViewController, world, gameUpdater,
-                eventHandler, player, npcController, gameStateKeeper);
+                eventHandler, player, npcController, gameStateKeeper, pathSearchService);
     }
 
     private static void setPlayerEventHandler(IUpdatableGameObject player, EventHandler eventHandler) {

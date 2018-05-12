@@ -206,6 +206,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @Override
     public void stopGameLoop(){
+        gameHandler.shutDown();
         gameLoop.stop();
     }
 
@@ -213,8 +214,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
         stopGameLoop();
         System.out.println("Back to main menu");
         Stage stage = (Stage)gameCanvas.getScene().getWindow();
-        Parent newRoot = FXMLLoader.load(getClass().getResource("gamemenuV2.fxml"));
-        stage.setScene(new Scene(newRoot, 715, 711));
+        Parent newRoot = FXMLLoader.load(getClass().getResource("gamemenu.fxml"));
+        stage.setScene(new Scene(newRoot, 650, 650));
+        stage.getScene().setFill(Color.BLACK);
     }
 
     public void goToDeathScreen() throws IOException {
