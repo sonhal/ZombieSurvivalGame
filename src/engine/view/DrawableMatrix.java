@@ -30,15 +30,15 @@ public class DrawableMatrix implements Serializable{
             boolean lineEndReached = false;
             for (int x = 0; x < radiX * 2; x++){
                 if (lineEndReached == false && bottomEndReached == false){
-                    drawableWorld[x][y] = new DrawableTile(currentTile.getGameObject(),
-                            currentTile.getItem(), currentTile.getSprite(), currentTile.getParticleEffect());
+                    drawableWorld[y][x] = new DrawableTile(currentTile.getGameObject(),
+                            currentTile.getItem(), currentTile.getSprite());
                     if(currentTile != currentTile.getRight()) {
                         currentTile = currentTile.getRight();
                     }else{
                         lineEndReached = true;
                     }
                 }else{
-                    drawableWorld[x][y] = new DrawableTile(null, null, new Sprite(29),null);
+                    drawableWorld[y][x] = new DrawableTile(null, null, new Sprite(29));
                     currentTile = currentTile.getRight();
                 }
 

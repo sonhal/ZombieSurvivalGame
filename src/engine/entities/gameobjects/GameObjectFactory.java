@@ -56,13 +56,13 @@ public class GameObjectFactory {
     protected static Sprite getBulletSpriteByDirection(Direction direction){
         switch (direction){
             case UP:
-                return new Sprite(10);
-            case DOWN:
-                return new Sprite(11);
-            case LEFT:
                 return new Sprite(8);
-            case RIGHT:
+            case DOWN:
                 return new Sprite(9);
+            case LEFT:
+                return new Sprite(10);
+            case RIGHT:
+                return new Sprite(11);
             default:
                 return new Sprite(8);
         }

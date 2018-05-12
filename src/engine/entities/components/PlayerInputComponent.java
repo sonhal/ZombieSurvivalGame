@@ -48,13 +48,13 @@ public class PlayerInputComponent extends InputComponent {
 
     private void handleEvent(GameObject gameObject, ActionEvent event) {
         switch (event){
-            case MOVE_UP: handleMoving(gameObject, Direction.LEFT);
+            case MOVE_UP: handleMoving(gameObject, Direction.UP);
                 break;
-            case MOVE_DOWN: handleMoving(gameObject, Direction.RIGHT);
+            case MOVE_DOWN: handleMoving(gameObject, Direction.DOWN);
                 break;
-            case MOVE_LEFT: handleMoving(gameObject, Direction.UP);
+            case MOVE_LEFT: handleMoving(gameObject, Direction.LEFT);
                 break;
-            case MOVE_RIGHT: handleMoving(gameObject, Direction.DOWN);
+            case MOVE_RIGHT: handleMoving(gameObject, Direction.RIGHT);
                 break;
             case ATTACK_UP: handleAttacking(gameObject, Direction.UP);
                 break;
