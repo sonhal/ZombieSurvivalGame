@@ -58,7 +58,7 @@
             </Label>
          </children>
       </Pane>
-       <Pane fx:id="settingsSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
+      <Pane fx:id="settingsSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
        <children>
            <Label layoutX="143.0" layoutY="28.0" text="Settings" textFill="#ffe491">
                <font>
@@ -102,5 +102,6 @@
             <TextArea layoutX="14.0" layoutY="168.0" prefHeight="281.0" prefWidth="402.0" />
          </children>
       </Pane>
+      <Pane fx:id="gameOver1"></Pane>
    </children>
 </AnchorPane>

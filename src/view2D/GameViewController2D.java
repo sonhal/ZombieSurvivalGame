@@ -36,10 +36,10 @@ import java.util.ResourceBundle;
 
 public class GameViewController2D implements GameViewController, Initializable, Serializable{
 
-    GameHandler gameHandler;
-    DrawableTile[][] drawableMatrix;
-    Renderer renderer;
-    Timeline gameLoop;
+    private GameHandler gameHandler;
+    private DrawableTile[][] drawableMatrix;
+    private Renderer renderer;
+    private Timeline gameLoop;
 
     @FXML
     private
@@ -63,7 +63,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @FXML
     private Rectangle healthBar;
 
-    private boolean loadGameFlag;
 
 
     @Override
@@ -73,7 +72,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @Override
     public void initializeGameEnv() {
-        System.out.println("Game controller active");
         scaleWidth();
         scaleHeight();
         initializeView();
@@ -324,7 +322,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
         gameHandler.getPlayer().getComponentByType(HealthComponent.class)
                 .ifPresent(scriptableComponent ->
-                        greenBar.setWidth(((HealthComponent)scriptableComponent).getHealthAmount()) );
+                        healthBar.setWidth(((HealthComponent)scriptableComponent).getHealthAmount()) );
 
         levelLabel.setText("Level "
                 + String.valueOf(gameHandler.getGameStateKeeper().getGameLevelHandler().getCurrentLevel()));
