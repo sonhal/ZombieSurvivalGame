@@ -75,4 +75,9 @@ public class SaveGameHandler {
         }
         return enemies;
     }
+
+    public static boolean isSaveFileValid(){
+            File saveFile = new File(SAVE_FILE_PATH);
+            return saveFile.isFile();
+    }
 }

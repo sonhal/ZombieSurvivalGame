@@ -13,6 +13,7 @@ public class Pathfinder {
     private int maxSearchDistance;
     Heuristic heuristic;
     private NodeMap nodes;
+    private Node currentDeepest;
 
 
     public Pathfinder(int maxSearchDistance, NodeMap worldMap, Heuristic heuristic){
@@ -72,6 +73,7 @@ public class Pathfinder {
                             maxDepth = Math.max(maxDepth, neighbour.setParent(current));
                             neighbour.heuristic = getHeuristicCost(xPoint, yPoint, nodes.getNode(targetX, targetY).x, nodes.getNode(targetX, targetY).y);
                             addToOpen(neighbour);
+                            currentDeepest = neighbour;
                         }
 
                     }
@@ -84,7 +86,14 @@ public class Pathfinder {
 
         }
         if(nodes.getNode(targetX, targetY).parent == null){
-            return  null;
+            Path path = new Path();
+            Node target = currentDeepest;
+            while (target != nodes.getNode(startX, startY)){
+                path.addStep(target.x, target.y);
+                target = target.parent;
+            }
+            path.addStep(nodes.getNode(startX,startY).x, nodes.getNode(startX,startY).y);
+            return path;
         }
         Path path = new Path();
         Node target = nodes.getNode(targetX, targetY);

@@ -36,7 +36,7 @@ public class NpcController extends Updater implements Messenger {
 
     public void update(World world){
         ArrayList enemies = getUpdateObjects();
-        if (enemies.size() < 100){
+        if (enemies.size() < 0){
             spawner(world);
         }
         getUpdateObjects().forEach(updatable -> {if(updatable.isDead()){
@@ -52,7 +52,7 @@ public class NpcController extends Updater implements Messenger {
             Random rand = new Random();
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
             IUpdatableGameObject enemy = ZombieBuilder.createZombie(player, spawnTile, new BasicEntityBlueprint(
-                    30 + gameLevel, 10 + gameLevel, (1000 - (gameLevel * 50) ) - rand.nextInt(50) , Sound.ZOMBIE_ATTACK), pathSearchService);
+                    30 + gameLevel, 10 + gameLevel, (500 - (gameLevel * 50) ) - rand.nextInt(50) , Sound.ZOMBIE_ATTACK), pathSearchService);
             addToUpdateList(enemy);
             spawnInterval = 10;
         }

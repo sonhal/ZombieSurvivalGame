@@ -11,11 +11,13 @@ public class DrawableTile implements Serializable{
     private GameObject gameObject;
     private Item item;
     private Sprite sprite;
+    private GameObject particleEffect;
 
-    public DrawableTile(GameObject gameObject, Item item, Sprite sprite){
+    public DrawableTile(GameObject gameObject, Item item, Sprite sprite, GameObject particleEffect){
         this.gameObject = gameObject;
         this.item = item;
         this.sprite = sprite;
+        this.particleEffect = particleEffect;
 
     }
     public DrawableTile(){};
@@ -44,5 +46,13 @@ public class DrawableTile implements Serializable{
 
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    public GameObject getParticleEffect() {
+        return particleEffect;
+    }
+
+    public void setParticleEffect(GameObject particleEffect) {
+        this.particleEffect = particleEffect;
     }
 }

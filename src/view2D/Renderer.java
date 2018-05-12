@@ -61,6 +61,13 @@ public class Renderer {
             optionalComponent.ifPresent(scriptableComponent -> ((GraphicsComponent) scriptableComponent)
                     .getActiveSprites().forEach(sprite -> drawOnCanvas(sprite, xPos, yPos)));
         }
+        if(tile.getParticleEffect() != null){
+            GameObject particleEffect = tile.getParticleEffect();
+            Optional<ScriptableComponent> optionalComponent =
+                    particleEffect.getComponentByType(GraphicsComponent.class);
+            optionalComponent.ifPresent(scriptableComponent -> ((GraphicsComponent) scriptableComponent)
+                    .getActiveSprites().forEach(sprite -> drawOnCanvas(sprite, xPos, yPos)));
+        }
 
     }
 

@@ -21,6 +21,7 @@ public class Tile implements Serializable{
     private int cordX;
     private int cordY;
 
+    private GameObject particleEffect;
     private GameObject gameObject;
     private Item item;
     private Sprite sprite;
@@ -118,6 +119,19 @@ public class Tile implements Serializable{
         else{
             System.out.println("WARNING: You tried to pass null object to a Tile");
         }
+    }
+
+    public void setParticleEffect(GameObject particleEffect) {
+        if(particleEffect != null){
+            this.particleEffect = particleEffect;
+        }
+    }
+
+    public GameObject getParticleEffect() {
+        return particleEffect;
+    }
+    public void clearParticleEffect(){
+        particleEffect = null;
     }
 
     /**

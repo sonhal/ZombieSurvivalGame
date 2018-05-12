@@ -1,6 +1,7 @@
 package engine.entities.gameobjects;
 
 import engine.controllers.Direction;
+import engine.controllers.Updater;
 import engine.entities.components.*;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
@@ -24,6 +25,31 @@ public class GameObjectFactory {
                 .addComponent(new GameObjectCollisionComponent())
                 .addComponent(new ProjectileInputComponent(direction, 10))
                 .addComponent(new ProjectileHealthComponent(20))
+                .build();
+    }
+
+    public static IUpdatableGameObject explodingBullet(Tile startTile, Direction direction, int damage, Updater updater){
+        return new UpdatableGameObject.Builder(new UpdatableTransformComponent(startTile))
+                .addComponent(new StaticGraphicsComponent(getBulletSpriteByDirection(direction)))
+                .addComponent(new SingleAttackComponent(damage))
+                .addComponent(new GameObjectCollisionComponent())
+                .addComponent(new ProjectileInputComponent(direction, 10))
+                .addComponent(new ProjectileHealthComponent(20))
+                .addComponent(new OnDeathComponent(updater))
+                .build();
+    }
+
+    public static IUpdatableGameObject explosion(Tile tile, Direction direction, int damage){
+        ArrayList<Sprite> sprites = new ArrayList<>();
+        sprites.add(new Sprite(30));
+        sprites.add(new Sprite(31));
+        sprites.add(new Sprite(32));
+        sprites.add(new Sprite(33));
+        sprites.add(new Sprite(34));
+        sprites.add(new Sprite(35));
+
+        return new UpdatableGameObject.Builder(new ParticleTransformComponent(tile))
+                .addComponent(new OneUseUpdatableGraphicsComponent(sprites,100))
                 .build();
     }
 

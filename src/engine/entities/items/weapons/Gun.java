@@ -43,7 +43,7 @@ public class Gun extends Weapon {
             }
             //else instantiate Bullet and add it to the controllers update list
             else {
-                controller.addToUpdateList(GameObjectFactory.createBullet(startTile, direction, attackComponent.getDamage()));
+                controller.addToUpdateList(GameObjectFactory.explodingBullet(startTile, direction, attackComponent.getDamage(), controller));
             }
             lastActivateTime = System.currentTimeMillis();
             return true;
