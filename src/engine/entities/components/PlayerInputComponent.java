@@ -6,6 +6,7 @@ import engine.controllers.EventHandler;
 import engine.entities.components.ComponentEvent.AttackEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.components.ComponentEvent.MoveEvent;
+import engine.entities.components.ComponentEvent.PickUpWeaponEvent;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 

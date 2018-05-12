@@ -46,7 +46,9 @@ public class StaticTransformComponent extends TransformComponent {
     @Override
     public void cleanUp(GameObject gameObject) {
         if(currentTile != null){
-            getCurrentTile().clearGameObject();
+            if(getCurrentTile().getGameObject() == gameObject){
+                getCurrentTile().clearGameObject();
+            }
             currentTile = null;
         }
     }

@@ -16,6 +16,7 @@ import engine.services.ComponentService;
 import engine.services.save.SaveGameHandler;
 import view.GameViewController;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -46,6 +47,7 @@ public class GameInitializer {
         GameStateMessengerMediator gamerMediator = new GameStateMessengerMediator();
 
         PathSearchService pathSearchService = new PathSearchService(world);
+        gameUpdater.addToUpdateList(pathSearchService);
 
         NpcController npcController = new NpcController(player, gamerMediator, pathSearchService);
         GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
@@ -58,7 +60,7 @@ public class GameInitializer {
      * @param gameViewController reference to the View rendering the game
      * @return GameHandler handling the big gameplay components and behaviour
      */
-    public static GameHandler loadGame(GameViewController gameViewController){
+    public static GameHandler loadGame(GameViewController gameViewController) {
         World world = new World();
         List<Tile> worldTiles = SaveGameHandler.loadGame();
         System.out.println("loaded");
@@ -76,6 +78,7 @@ public class GameInitializer {
         EventHandler eventHandler = new EventHandler();
         setPlayerEventHandler(player, eventHandler);
         gameUpdater.addToUpdateList(player);
+        gameUpdater.addToUpdateList(pathSearchService);
         for (IUpdatableGameObject enemy:
                 SaveGameHandler.getEnemyInstances(worldTiles)) {
             npcController.addToUpdateList(enemy);
