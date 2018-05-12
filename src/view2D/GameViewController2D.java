@@ -74,8 +74,8 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @Override
     public void initializeGameEnv() {
         System.out.println("Game controller active");
-        //scaleWidth();
-        //scaleHeight();
+        scaleWidth();
+        scaleHeight();
         initializeView();
 
 
@@ -84,7 +84,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
         renderer = new Renderer(gameCanvas);
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
-        gameCanvas.getGraphicsContext2D().fillRect(0,0,StaticFields.WINDOW_WIDTH,StaticFields.WINDOW_HEIGHT);
+        gameCanvas.getGraphicsContext2D().fillRect(0,0,gameCanvas.getWidth(),gameCanvas.getHeight());
         System.out.println("Game controller active 3");
         //gameHandler.setObjectInWorld();
     }
@@ -322,7 +322,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
         gameHandler.getPlayer().getComponentByType(HealthComponent.class)
                 .ifPresent(scriptableComponent ->
-                        healthBar.setWidth(((HealthComponent)scriptableComponent).getHealthAmount()) );
+                        greenBar.setWidth(((HealthComponent)scriptableComponent).getHealthAmount()) );
 
         levelLabel.setText("Level "
                 + String.valueOf(gameHandler.getGameStateKeeper().getGameLevelHandler().getCurrentLevel()));
