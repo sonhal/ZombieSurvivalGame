@@ -45,6 +45,10 @@ public class PlayerInputComponent extends InputComponent {
         sendMessageToAllComponents(gameObject.getComponents(), new AttackEvent(direction));
     }
 
+    private void handleChangeWeapon(GameObject gameObject){
+        sendMessageToAllComponents(gameObject.getComponents(), new ChangeWeaponEvent());
+    }
+
 
     private void handleEvent(GameObject gameObject, ActionEvent event) {
         switch (event){
@@ -63,6 +67,8 @@ public class PlayerInputComponent extends InputComponent {
             case ATTACK_LEFT: handleAttacking(gameObject, Direction.LEFT);
                 break;
             case ATTACK_RIGHT: handleAttacking(gameObject, Direction.RIGHT);
+                break;
+            case CHANGE_WEAPON: handleChangeWeapon(gameObject);
                 break;
         }
     }

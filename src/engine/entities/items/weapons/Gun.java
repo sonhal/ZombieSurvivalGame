@@ -45,6 +45,7 @@ public class Gun extends Weapon {
             else {
                 controller.addToUpdateList(GameObjectFactory.explodingBullet(startTile, direction, attackComponent.getDamage(), controller));
             }
+            System.out.println("Gun fired!");
             lastActivateTime = System.currentTimeMillis();
             return true;
         }

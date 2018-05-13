@@ -31,9 +31,7 @@ public class PlayerBuilder {
         }
 
         SingleWeaponComponent wc = new SingleWeaponComponent();
-        wc.setWeapon(new Gun(updater,10,40, new SingleAttackComponent(20)));
-
-
+        InventoryComponent inventoryComponent = new InventoryComponent(wc, new Gun(updater,10,40, new SingleAttackComponent(20)));
 
         IUpdatableGameObject player = new UpdatableGameObject.Builder(new UpdatableTransformComponent(startTile))
                 .addComponent(new PlayerInputComponent(eventHandler, 0))
@@ -42,6 +40,8 @@ public class PlayerBuilder {
                 .addComponent(gc)
                 .addComponent(wc)
                 .addComponent(new SoundEffectComponent(100, Sound.HIT_1))
+                .addComponent(new SoundEffectComponent(100, Sound.HIT_1))
+                .addComponent(inventoryComponent)
                 .build();
 
 

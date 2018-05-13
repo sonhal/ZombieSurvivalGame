@@ -9,15 +9,19 @@ import java.io.Serializable;
  */
 public abstract class Item implements Serializable{
 
+    private String name;
     private Sprite sprite;
 
     public Item(Sprite sprite){
         this.sprite = sprite;
+    }
+    public Item(Sprite sprite, String name){
+        this.sprite = sprite;
+        this.name = name;
     }
 
     public Sprite getSprite() {
         return sprite;
     }
 
-    public abstract Object pickup();
 }
