@@ -3,10 +3,7 @@ package engine.services.pathfinder;
 import engine.entities.gameobjects.interfaces.Updatable;
 import engine.world.World;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.*;
 
 public class PathSearchService implements Updatable {
@@ -26,35 +23,35 @@ public class PathSearchService implements Updatable {
 
     }
 
-    public void getNewPath(AsyncPathReceiver receiver, int startX, int startY, int targetX, int targetY){
+    public Optional<Future<Path>> getNewPath(int startX, int startY, int targetX, int targetY){
 
-        if(!requestList.contains(receiver)){
             if(requestList.size() < 50){
-                PathRequest pathRequest = new PathRequest(receiver, startX, startY, targetX, targetY);
+                CompletableFuture completableFuture = new CompletableFuture();
+                PathRequest pathRequest = new PathRequest(completableFuture, startX, startY, targetX, targetY);
                 requestList.add(pathRequest);
+                return Optional.of(completableFuture);
             }
             else {
                 System.out.println("Full list");
+                return Optional.empty();
             }
-        }
     }
 
 
     public void update(){
-        sendNewPaths();
         counter++;
         if(counter == 5){
             if(requestList.size() > 0){
                 PathRequest request = requestList.remove(0);
 
-                pathPairs.add(new PathPair(searchPool.submit(new Callable<Path>() {
+                searchPool.submit(new Runnable() {
                     @Override
-                    public Path call() throws Exception {
+                    public void run(){
                         NodeMap nodeMap = new NodeMap(world);
                         Pathfinder pathfinder = new Pathfinder(100,nodeMap, new Heuristic());
-                        return pathfinder.findPath(request.startX,request.startY,request.targetX,request.targetY);
+                        request.future.complete(pathfinder.findPath(request.startX,request.startY,request.targetX,request.targetY));
                     }
-                }),request.receiver));
+                });
                 System.out.println("New Path made");
             }
             counter = 0;
@@ -76,14 +73,14 @@ public class PathSearchService implements Updatable {
         public  final  int startY;
         public  final  int targetX;
         public  final int targetY;
-        public final AsyncPathReceiver receiver;
+        public final CompletableFuture<Path> future;
 
-        public PathRequest(AsyncPathReceiver receiver, int startX, int startY, int targetX, int targetY) {
+        public PathRequest(CompletableFuture<Path> completableFuture, int startX, int startY, int targetX, int targetY) {
             this.startX = startX;
             this.startY = startY;
             this.targetX = targetX;
             this.targetY = targetY;
-            this.receiver = receiver;
+            this.future = completableFuture;
         }
     }
 

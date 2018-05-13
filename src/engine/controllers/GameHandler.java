@@ -62,6 +62,7 @@ public class GameHandler extends Updater {
      * Main update method for the game state.
      */
     public void updateWordState(){
+        pathSearchService.update();
         npcController.update(world);
         gameUpdater.update();
         AudioPlayer.getInstance().playSounds();

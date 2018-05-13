@@ -19,19 +19,19 @@ class PathfinderTest {
         world.createNewGameWorld(50);
         nodeMap = new NodeMap(world);
         Heuristic heuristic = new Heuristic();
-        pathfinder = new Pathfinder(1000, nodeMap, heuristic);
+        pathfinder = new Pathfinder(17, nodeMap, heuristic);
     }
 
     @Test
     void findPath() {
-        Path path = pathfinder.findPath(-4,-4,-23,-32);
+        Path path = pathfinder.findPath(1,1,2,3);
         assertNotNull(path);
         int[] step = path.getStep();
         while (step != null){
             System.out.println(step[0] + " " + step[1]);
             step = path.getStep();
         }
-        Path path2 = pathfinder.findPath(-4,-4,-23,-23);
+        Path path2 = pathfinder.findPath(1,1,2,3);
         assertNotNull(path2);
         Direction step2 = path2.getNextStepDirection();
         while (step2 != null){

@@ -47,7 +47,6 @@ public class GameInitializer {
         GameStateMessengerMediator gamerMediator = new GameStateMessengerMediator();
 
         PathSearchService pathSearchService = new PathSearchService(world);
-        gameUpdater.addToUpdateList(pathSearchService);
 
         NpcController npcController = new NpcController(player, gamerMediator, pathSearchService);
         GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
@@ -78,7 +77,6 @@ public class GameInitializer {
         EventHandler eventHandler = new EventHandler();
         setPlayerEventHandler(player, eventHandler);
         gameUpdater.addToUpdateList(player);
-        gameUpdater.addToUpdateList(pathSearchService);
         for (IUpdatableGameObject enemy:
                 SaveGameHandler.getEnemyInstances(worldTiles)) {
             npcController.addToUpdateList(enemy);

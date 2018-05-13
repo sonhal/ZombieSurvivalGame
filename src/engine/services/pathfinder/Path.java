@@ -8,6 +8,7 @@ import java.util.List;
 public class Path {
 
     private List<int[]> path;
+    private int[] lastPoint;
 
     public Path() {
         path = new ArrayList<>();
@@ -29,31 +30,38 @@ public class Path {
     }
 
     public Direction getNextStepDirection(){
-        if(path.size() < 2){
+        if(path.size() < 1){
             return null;
         }
-        int[] point = path.remove(0);
+        if(lastPoint == null){
+            lastPoint = path.remove(0);
+        }
+
         int[] nextPoint = path.remove(0);
-        return pointToPointDirection(point, nextPoint);
+        Direction direction = pointToPointDirection(lastPoint, nextPoint);
+        lastPoint = nextPoint;
+        return direction;
 
     }
 
-    private Direction pointToPointDirection(int[] start, int[] target){
-        int startX = start[0];
-        int startY = start[1];
+    private Direction pointToPointDirection(int[] last, int[] next){
+        int startX = last[0];
+        int startY = last[1];
 
-        int targetX = target[0];
-        int targetY = target[1];
+        int targetX = next[0];
+        int targetY = next[1];
 
         if(startX == targetX){
-            if(startY < targetY){
+            if (startY < targetY){
                 return Direction.UP;
             }
             return Direction.DOWN;
         }
-        if(startX < targetX){
-            return Direction.LEFT;
+        else {
+            if (startX < targetX){
+                return Direction.LEFT;
+            }
+            return Direction.RIGHT;
         }
-        return Direction.RIGHT;
     }
 }

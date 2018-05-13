@@ -8,11 +8,13 @@ import engine.entities.gameobjects.interfaces.GameObject;
 import engine.services.pathfinder.*;
 import engine.world.Tile;
 
+import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-public class EnemyInputComponent extends InputComponent implements AsyncPathReceiver {
+public class EnemyInputComponent extends InputComponent{
 
     private GameObject target;
     private TransformComponent targetTransformComponent;
@@ -24,7 +26,7 @@ public class EnemyInputComponent extends InputComponent implements AsyncPathRece
     private Path enemyPath;
     private PathSearchService pathSearchService;
     private Future<Path> currentPath;
-    private Future<Path> nextPath;
+    private Optional<Future<Path>> nextPath;
     private Path path;
 
 
@@ -36,34 +38,36 @@ public class EnemyInputComponent extends InputComponent implements AsyncPathRece
 
 
 
-    private Direction getDirectionAgainstPlayer(GameObject gameObject){
+    private Direction getNextDirection(GameObject gameObject){
         Direction nextStep = null;
+
+        if(nextPath != null && nextPath.isPresent()){
+            currentPath = nextPath.get();
+            nextPath = null;
+        }
+
+        if(currentPath !=null && currentPath.isDone()){
+            try {
+                path = currentPath.get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
 
         if(path != null){
             nextStep = path.getNextStepDirection();
-            }
+        }
         else {
             System.out.println("NULL path");
         }
 
-
-        if(nextPath != null && nextPath.isDone()){
-            currentPath = nextPath;
-        }
-
-        if(currentPath != null) {
-            try {
-                path = currentPath.get(100, TimeUnit.MILLISECONDS);
-                currentPath = null;
-            }catch(Exception err){
-                currentPath = null;
-                err.printStackTrace();
-            }
-        }
         if(nextStep != null){
             return nextStep;
         }
-        return getRandomDirection();
+        System.out.println("Close step active");
+        return getDirectionAgainstTile(gameObject, target.getTransformComponent().getCurrentTile());
     }
 
     private Direction isPlayerInRange(GameObject gameObject){
@@ -80,9 +84,9 @@ public class EnemyInputComponent extends InputComponent implements AsyncPathRece
         Random random = new Random();
 
 
-        if(canActivate(3000 +(random.nextInt(1000)), lastPathSearch)){
+        if(canActivate(2000 +(random.nextInt(1000)), lastPathSearch)){
             Tile currentTile = gameObject.getTransformComponent().getCurrentTile();
-            pathSearchService.getNewPath(this,currentTile.getCordX(), currentTile.getCordY(),
+            nextPath = pathSearchService.getNewPath(currentTile.getCordX(), currentTile.getCordY(),
                     targetTransformComponent.getCurrentTile().getCordX(), targetTransformComponent.getCurrentTile().getCordY());
             lastPathSearch = System.currentTimeMillis();
         }
@@ -95,8 +99,10 @@ public class EnemyInputComponent extends InputComponent implements AsyncPathRece
         //If not, Move towards Player
         else {
             if(canActivate(sendEventDelay, lastEventSent)){
-                Direction direction  = getDirectionAgainstPlayer(gameObject);
-                sendMessageToAllComponents(gameObject.getComponents(), new MoveEvent(direction));
+                Direction direction  = getNextDirection(gameObject);
+                if(direction != null){
+                    sendMessageToAllComponents(gameObject.getComponents(), new MoveEvent(direction));
+                }
                 lastEventSent = System.currentTimeMillis();
             }
         }
@@ -112,7 +118,7 @@ public class EnemyInputComponent extends InputComponent implements AsyncPathRece
                 currentPath.cancel(true);
             }
             if(nextPath != null){
-                nextPath.cancel(true);
+                nextPath.ifPresent(pathFuture -> pathFuture.cancel(true));
             }
 
         }
@@ -136,12 +142,6 @@ public class EnemyInputComponent extends InputComponent implements AsyncPathRece
 
     }
 
-
-    @Override
-    public void receiveNewPath(Future<Path> newPath) {
-        this.nextPath = newPath;
-    }
-
     private Direction getRandomDirection(){
         Random random = new Random();
         int dir = random.nextInt(4);
@@ -151,5 +151,29 @@ public class EnemyInputComponent extends InputComponent implements AsyncPathRece
             case 3: return Direction.LEFT;
             default: return Direction.RIGHT;
         }
+    }
+
+    private Direction getDirectionAgainstTile(GameObject gameObject, Tile tile){
+        int targetX = tile.getCordX();
+        int targetY = tile.getCordY();
+
+        int thisX = gameObject.getTransformComponent().getCurrentTile().getCordX();
+        int thisY = gameObject.getTransformComponent().getCurrentTile().getCordY();
+
+        if (thisX == targetX ) {
+            if(thisY < targetY){
+                return Direction.DOWN;
+            }
+            else {
+                return Direction.UP;
+            }
+        }
+        if(thisX < targetX){
+            return Direction.RIGHT;
+        }
+        else {
+            return Direction.LEFT;
+        }
+
     }
 }

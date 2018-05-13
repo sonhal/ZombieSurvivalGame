@@ -40,4 +40,8 @@ public class SortedList {
     public boolean contains(Object o) {
         return list.contains(o);
     }
+
+    public Node get(int i){
+        return (Node)list.get(i);
+    }
 }

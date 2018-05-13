@@ -8,7 +8,7 @@ import java.util.List;
 
 public class Pathfinder {
 
-    private List<Node> openList;
+    private SortedList openList;
     private SortedList closedList;
     private int maxSearchDistance;
     Heuristic heuristic;
@@ -19,7 +19,7 @@ public class Pathfinder {
     public Pathfinder(int maxSearchDistance, NodeMap worldMap, Heuristic heuristic){
         this.maxSearchDistance = maxSearchDistance;
         this.heuristic = heuristic;
-        openList = new ArrayList<>();
+        openList = new SortedList();
         closedList = new SortedList();
         this.nodes = worldMap;
 
@@ -73,7 +73,6 @@ public class Pathfinder {
                             maxDepth = Math.max(maxDepth, neighbour.setParent(current));
                             neighbour.heuristic = getHeuristicCost(xPoint, yPoint, nodes.getNode(targetX, targetY).x, nodes.getNode(targetX, targetY).y);
                             addToOpen(neighbour);
-                            currentDeepest = neighbour;
                         }
 
                     }
@@ -87,7 +86,7 @@ public class Pathfinder {
         }
         if(nodes.getNode(targetX, targetY).parent == null){
             Path path = new Path();
-            Node target = currentDeepest;
+            Node target = openList.get(0);
             while (target != nodes.getNode(startX, startY)){
                 path.addStep(target.x, target.y);
                 target = target.parent;
