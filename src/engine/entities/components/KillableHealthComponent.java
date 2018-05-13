@@ -37,6 +37,7 @@ public class KillableHealthComponent extends HealthComponent {
     public void heal(int healAmount){
         if(healthAmount > 0 && healAmount > 0){
             healthAmount += healthAmount;
+            if(healthAmount >200){ healthAmount = 200;}
         }
     }
 
