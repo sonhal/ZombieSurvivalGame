@@ -9,8 +9,8 @@ import java.io.Serializable;
  */
 public abstract class Item implements Serializable{
 
-    private String name;
-    private Sprite sprite;
+    protected String name;
+    protected Sprite sprite;
 
     public Item(Sprite sprite){
         this.sprite = sprite;
@@ -24,4 +24,7 @@ public abstract class Item implements Serializable{
         return sprite;
     }
 
+    public String getName() {
+        return name;
+    }
 }

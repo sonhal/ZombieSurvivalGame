@@ -19,10 +19,9 @@ public class MeleeWeapon extends Weapon {
      * @param attackComponent
      * @param activateDelay
      */
-    public MeleeWeapon(double activateDelay, SingleAttackComponent attackComponent) {
-        super(attackComponent);
-        this.lastActivateTime = System.currentTimeMillis();
-        this.activateDelay = activateDelay;
+    public MeleeWeapon() {
+        super(attackComponent, updater, activateDelay, range);
+
     }
 
     @Override
@@ -35,5 +34,6 @@ public class MeleeWeapon extends Weapon {
         }
         return false;
     }
+
 
 }

@@ -1,12 +1,21 @@
 package engine.entities.components;
 
+import engine.controllers.Direction;
+import engine.controllers.Updater;
 import engine.entities.components.ComponentEvent.ChangeWeaponEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.components.ComponentEvent.MoveEvent;
+import engine.entities.components.interfaces.AttackComponent;
+import engine.entities.components.interfaces.HealthComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.entities.items.Item;
-import engine.entities.items.weapons.MeleeWeapon;
+import engine.entities.items.loot.DroppedWeapon;
+import engine.entities.items.loot.HealthPottion;
+import engine.entities.items.weapons.Gun;
+import engine.entities.items.weapons.Knife;
 import engine.entities.items.weapons.Weapon;
+import engine.world.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +26,16 @@ public class InventoryComponent extends ScriptableComponent {
     Weapon currentWeapon;
     int selectedWeapon = 0;
     SingleWeaponComponent singleWeaponComponent;
+    Updater updater;
+    IUpdatableGameObject player;
 
-    public InventoryComponent(SingleWeaponComponent singleWeaponComponent, Weapon starterWeapon) {
+    List<ScriptableComponent> scriptableComponents;
+
+    public InventoryComponent(SingleWeaponComponent singleWeaponComponent, Updater updater) {
         this.singleWeaponComponent = singleWeaponComponent;
-        weaponsinventory.add(new MeleeWeapon(4, new SingleAttackComponent(1000)));
-        weaponsinventory.add(new MeleeWeapon(4, new SingleAttackComponent(1000)));
-        weaponsinventory.add(starterWeapon);
+        weaponsinventory.add(new Knife(new SingleAttackComponent(1000), updater, 4, 5  ));
         singleWeaponComponent.setWeapon(weaponsinventory.get(0));
+        this.updater = updater;
     }
 
     @Override
@@ -43,7 +55,7 @@ public class InventoryComponent extends ScriptableComponent {
 
     @Override
     public void innit(GameObject gameObject) {
-
+        scriptableComponents = gameObject.getComponents();
     }
 
     @Override
@@ -51,11 +63,22 @@ public class InventoryComponent extends ScriptableComponent {
 
     }
 
+
+
     void pickupItem(Item item){
-        if (item instanceof Weapon){
-            weaponsinventory.add((Weapon) item);
+        if (item instanceof DroppedWeapon){
+            weaponsinventory.add(makeWeapon((DroppedWeapon)item));
+        }else if (item instanceof HealthPottion){
+            player.getComponentByType(HealthComponent.class)
+                    .ifPresent(scriptableComponent ->
+                            ((KillableHealthComponent)scriptableComponent).heal(50)) ;
         }
     }
+
+    Weapon makeWeapon(DroppedWeapon item){
+        return new Gun(new SingleAttackComponent(item.getDamage()), updater, item.getActivateDelay(), item.getRange());
+    }
+
 
     void cycleWeapon(){
         System.out.println("Cycling weapons");
@@ -71,6 +94,7 @@ public class InventoryComponent extends ScriptableComponent {
         System.out.println("Weapon " + selectedWeapon + " selected.");
     }
 
-
-
+    public void setPlayer(IUpdatableGameObject player) {
+        this.player = player;
+    }
 }
