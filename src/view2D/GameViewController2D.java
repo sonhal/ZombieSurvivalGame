@@ -172,6 +172,10 @@ public class GameViewController2D implements GameViewController, Initializable, 
                         System.out.println("Space key was pressed");
                         gameHandler.sendEvent(ActionEvent.ATTACK_UP);
                     }
+                    if (e.getCode() == KeyCode.C) {
+                        System.out.println("C key was pressed");
+                        gameHandler.sendEvent(ActionEvent.CHANGE_WEAPON);
+                    }
                     if (e.getCode() == KeyCode.ESCAPE) {
                         System.out.println("Escape key was pressed");
                         gameLoop.pause();

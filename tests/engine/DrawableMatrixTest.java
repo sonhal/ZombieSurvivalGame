@@ -1,10 +1,11 @@
 package engine;
 
 
+import engine.controllers.Updater;
 import engine.entities.components.SingleAttackComponent;
 import engine.entities.gameobjects.Sprite;
 import engine.entities.items.WeaponPickup;
-import engine.entities.items.weapons.MeleeWeapon;
+import engine.entities.items.weapons.Knife;
 import engine.world.World;
 import engine.view.DrawableMatrix;
 import org.junit.jupiter.api.AfterEach;
@@ -30,9 +31,10 @@ class DrawableMatrixTest {
 
     @Test
     void generateDrawable() {
+        Updater updater = new Updater();
         int diameterSize = 50;
-        testWorld.findTile(0,0).setItem(new WeaponPickup(new Sprite(1), new MeleeWeapon(1,new SingleAttackComponent(1))));
-        testWorld.findTile(5,5).setItem(new WeaponPickup(new Sprite(1), new MeleeWeapon(1,new SingleAttackComponent(1))));
+        testWorld.findTile(0,0).setItem(new WeaponPickup(new Sprite(1), new Knife(new SingleAttackComponent(1), updater, 4, 5  )));
+        testWorld.findTile(5,5).setItem(new WeaponPickup(new Sprite(1), new Knife(new SingleAttackComponent(1), updater, 4, 5 )));
         matrix = new DrawableMatrix(testWorld, testWorld.getSeed(), diameterSize,diameterSize);
 
         assertNotNull(matrix.matrix[diameterSize][diameterSize].getItem());

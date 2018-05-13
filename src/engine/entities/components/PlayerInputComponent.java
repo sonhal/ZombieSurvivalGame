@@ -3,10 +3,7 @@ package engine.entities.components;
 import engine.controllers.ActionEvent;
 import engine.controllers.Direction;
 import engine.controllers.EventHandler;
-import engine.entities.components.ComponentEvent.AttackEvent;
-import engine.entities.components.ComponentEvent.ComponentEvent;
-import engine.entities.components.ComponentEvent.MoveEvent;
-import engine.entities.components.ComponentEvent.PickUpWeaponEvent;
+import engine.entities.components.ComponentEvent.*;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 
@@ -45,6 +42,10 @@ public class PlayerInputComponent extends InputComponent {
         sendMessageToAllComponents(gameObject.getComponents(), new AttackEvent(direction));
     }
 
+    private void handleChangeWeapon(GameObject gameObject){
+        sendMessageToAllComponents(gameObject.getComponents(), new ChangeWeaponEvent());
+    }
+
 
     private void handleEvent(GameObject gameObject, ActionEvent event) {
         switch (event){
@@ -63,6 +64,8 @@ public class PlayerInputComponent extends InputComponent {
             case ATTACK_LEFT: handleAttacking(gameObject, Direction.LEFT);
                 break;
             case ATTACK_RIGHT: handleAttacking(gameObject, Direction.RIGHT);
+                break;
+            case CHANGE_WEAPON: handleChangeWeapon(gameObject);
                 break;
         }
     }
