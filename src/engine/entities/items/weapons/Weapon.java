@@ -32,6 +32,15 @@ public abstract class Weapon implements Serializable{
 
     }
 
+    protected Weapon(SingleAttackComponent attackComponent, double activateDelay) {
+            this.attackComponent  = attackComponent;
+            this.lastActivateTime = System.currentTimeMillis();
+            this.activateDelay = activateDelay;
+    }
+
+    protected Weapon() {
+    }
+
     public boolean activate(Tile fromTile, Direction direction) {
         if(TimeService.canUpdate(activateDelay, lastActivateTime)){
             System.out.println("Weapon activated!");
