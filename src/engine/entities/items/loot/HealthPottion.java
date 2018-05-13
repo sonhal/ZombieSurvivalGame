@@ -2,28 +2,16 @@ package engine.entities.items.loot;
 import engine.entities.gameobjects.Sprite;
 import engine.entities.items.Item;
 
-public class DroppedWeapon extends Item {
+public class HealthPottion extends Item {
 
-    protected double activateDelay;
-    protected int range;
-    protected int damage;
+    protected int hp;
 
-    public DroppedWeapon(Sprite sprite, String name, double activateDelay, int range, int damage){
+    public HealthPottion(Sprite sprite, String name, int hp){
         super(sprite, name);
-        this.activateDelay = activateDelay;
-        this.range = range;
-        this.damage = damage;
+        this.hp = hp;
     }
 
-    public double getActivateDelay() {
-        return activateDelay;
-    }
-
-    public int getRange() {
-        return range;
-    }
-
-    public int getDamage() {
-        return damage;
+    public int getHp() {
+        return hp;
     }
 }
