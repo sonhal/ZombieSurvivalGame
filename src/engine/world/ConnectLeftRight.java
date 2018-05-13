@@ -52,6 +52,7 @@ class ConnectLeftRight implements Runnable {
             }else if (current != null && last != null && last.getCordX() != current.getCordX() - 1){
                     beginning.setLeft(last);
                     last.setRight(beginning);
+                    current.setLeft(last);
                     beginning = current;
             }
             last = current;

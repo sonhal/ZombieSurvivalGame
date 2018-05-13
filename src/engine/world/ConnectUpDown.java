@@ -50,6 +50,7 @@ public class ConnectUpDown implements Runnable {
             last = current;
         }
         last.setDown(beginning);
+        beginning.setUp(last);
     }
 
 }
