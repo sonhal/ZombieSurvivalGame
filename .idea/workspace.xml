@@ -1,0 +1,1048 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="330192d0-49a6-46bd-a229-714edd18f050" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/git fetch &amp;&amp; git checkout master.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/controllers/ActionEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/controllers/Direction.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/controllers/EventHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/controllers/GameHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/controllers/GameInitializer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/controllers/GameUpdater.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/controllers/NpcController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/controllers/Updater.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/controllers/interfaces/Messenger.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/AttackCompletedEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/AttackEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/CheckForCollisionEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/CollisionEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/ComponentEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/ComponentEventEnum.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/DamageTakenEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/DeathEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/HitEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/MoveEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ComponentEvent/PickUpWeaponEvent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/EnemyInputComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/GameObjectCollisionComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/KillableHealthComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/OnDeathComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/OneUseUpdatableGraphicsComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ParticleTransformComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/PlayerInputComponent$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/PlayerInputComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ProjectileHealthComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ProjectileInputComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/ScriptableComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/SingleAttackComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/SingleWeaponComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/SoundEffectComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/StaticGraphicsComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/StaticTransformComponent$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/StaticTransformComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/UpdatableGraphicsComponent$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/UpdatableGraphicsComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/UpdatableTransformComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/interfaces/AttackComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/interfaces/AudioComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/interfaces/CollisionComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/interfaces/GraphicsComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/interfaces/HealthComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/interfaces/InputComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/interfaces/TransformComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/components/interfaces/WeaponComponent.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/BasicEntityBlueprint.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/GameObjectFactory$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/GameObjectFactory.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/PlayerBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/PlayerStats.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/Sprite.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/StaticGameObject$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/StaticGameObject$Builder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/StaticGameObject.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/UpdatableGameObject$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/UpdatableGameObject$Builder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/UpdatableGameObject.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/ZombieBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/interfaces/GameObject.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/interfaces/IUpdatableGameObject.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/gameobjects/interfaces/Updatable.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/items/Item.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/items/WeaponPickup.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/items/weapons/Gun.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/items/weapons/MeleeWeapon.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/entities/items/weapons/Weapon.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/GameLevel.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/GameLevelBuilder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/GameLevelHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/GameStateKeeper$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/GameStateKeeper$GameState.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/GameStateKeeper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/GameStateMessengerMediator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/LevelConfig.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/PlayerGameScore.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/interfaces/GameScore.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/interfaces/HighScore.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/interfaces/Level.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/interfaces/LevelHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/interfaces/MessengerMediator.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/interfaces/Score.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/interfaces/StateKeeper.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/messages/EnemyKilledMessage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/messages/GameEventMessage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/gamestate/messages/NewLevelMessage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/ComponentService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/TimeService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/audio/AudioPlayer$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/audio/AudioPlayer$SoundData.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/audio/AudioPlayer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/audio/Sound.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/AsyncPathReceiver.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/Heuristic.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/Node.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/NodeMap.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/Path.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/PathSearchService$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/PathSearchService$PathPair.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/PathSearchService$PathRequest.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/PathSearchService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/Pathfinder.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/pathfinder/SortedList.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/services/save/SaveGameHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/view/Drawable.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/view/DrawableMatrix.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/view/DrawableTile.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/world/ConnectLeftRight$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/world/ConnectLeftRight.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/world/ConnectUpDown$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/world/ConnectUpDown.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/world/Tile$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/world/Tile.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/engine/world/World.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view/GameViewController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/GameViewController2D$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/GameViewController2D$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/GameViewController2D$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/GameViewController2D.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/MenuController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/MenuStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/Renderer.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/SpriteTranslationHandler.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/StaticFields.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/btnStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/canvasPaneStyle.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/gamemenu.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/gamemenuV2.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/gameview.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/gameviewV2.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/gameviewV3.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/black.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/bloodsplatt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/bush.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/bush.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/dirt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/explosion_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/explosion_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/explosion_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/explosion_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/explosion_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/explosion_6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/fire_bullet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/fire_bullet_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/fire_bullet_left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/fire_bullet_right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/fire_bullet_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/grass_sprite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/grass_v2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/grass_v3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/hit_sprite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/menuBG.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/red_still_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/red_still_left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/red_still_right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/red_still_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/red_walking_half_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/red_walking_half_left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/red_walking_half_right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/red_walking_half_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/sword.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/tree.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/water_bucket.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/zombie_still_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/zombie_still_left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/zombie_still_right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/zombie_still_up.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/zombie_walking_half_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/zombie_walking_half_left.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/zombie_walking_half_right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/git fetch &amp;&amp; git checkout master/view2D/static/zombie_walking_half_up.png" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/git_fetch____git_checkout_master$Main.coverage" NAME="Main Coverage Results" MODIFIED="1524221512105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>view2D.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GameViewController2D.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view2D/GameViewController2D.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="95" column="14" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gameviewV2.fxml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view2D/gameviewV2.fxml">
+          <provider editor-type-id="JavaFX-Scene-Builder" />
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="Renderer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/view2D/Renderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="40" selection-start-line="40" selection-end-line="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/engine/controllers/GameHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1513">
+              <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DrawableMatrix.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/engine/view/DrawableMatrix.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="40" column="64" selection-start-line="40" selection-start-column="64" selection-end-line="40" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DrawableTile.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/engine/view/DrawableTile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConnectUpDown.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/engine/world/ConnectUpDown.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameViewController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view/GameViewController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="408">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MenuController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/view2D/MenuController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="431">
+              <caret line="88" column="35" selection-start-line="88" selection-start-column="35" selection-end-line="88" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>world</find>
+      <find>center</find>
+      <find>goToDeath</find>
+      <find>goToMenu</find>
+      <find>high</find>
+      <find>canvasPane</find>
+      <find>greenBar</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/view2D/btnStyle.css" />
+        <option value="$PROJECT_DIR$/src/view2D/gamemenu.fxml" />
+        <option value="$PROJECT_DIR$/src/view/GameViewController.java" />
+        <option value="$PROJECT_DIR$/src/view2D/gamemenuV2.fxml" />
+        <option value="$PROJECT_DIR$/src/view2D/canvasStyle.css" />
+        <option value="$PROJECT_DIR$/src/view2D/canvasPaneStyle.css" />
+        <option value="$PROJECT_DIR$/src/view2D/gameviewV2.fxml" />
+        <option value="$PROJECT_DIR$/src/view2D/StaticFields.java" />
+        <option value="$PROJECT_DIR$/src/view2D/Main.java" />
+        <option value="$PROJECT_DIR$/src/view2D/gameview.fxml" />
+        <option value="$PROJECT_DIR$/src/engine/controllers/GameHandler.java" />
+        <option value="$PROJECT_DIR$/src/view2D/Renderer.java" />
+        <option value="$PROJECT_DIR$/src/engine/view/DrawableMatrix.java" />
+        <option value="$PROJECT_DIR$/src/view2D/MenuController.java" />
+        <option value="$PROJECT_DIR$/src/view2D/gameviewV3.fxml" />
+        <option value="$PROJECT_DIR$/src/view2D/GameViewController2D.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="1209" />
+    <option name="height" value="1047" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="ComponentEvent" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
+              <item name="gameobjects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="gamestate" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="pathfinder" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="engine" type="462c0819:PsiDirectoryNode" />
+              <item name="world" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="git fetch &amp;&amp; git checkout master" type="b2602c69:ProjectViewProjectNode" />
+              <item name="git fetch &amp;&amp; git checkout master" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="view2D" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="C:/Program Files/Git/bin/git.exe" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view2D.Main" />
+      <module name="git fetch &amp;&amp; git checkout master" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view2D.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="330192d0-49a6-46bd-a229-714edd18f050" name="Default" comment="" />
+      <created>1523903381568</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1523903381568</updated>
+      <workItem from="1523903383474" duration="1754000" />
+      <workItem from="1524059084022" duration="3516000" />
+      <workItem from="1524084592605" duration="28165000" />
+      <workItem from="1524487420286" duration="64000" />
+      <workItem from="1525424513362" duration="171000" />
+      <workItem from="1525433544781" duration="1545000" />
+      <workItem from="1525435855500" duration="194000" />
+      <workItem from="1525565732124" duration="72000" />
+      <workItem from="1525779317998" duration="6087000" />
+      <workItem from="1525930669002" duration="7000" />
+      <workItem from="1525975316956" duration="14743000" />
+      <workItem from="1526089613397" duration="2938000" />
+    </task>
+    <task id="LOCAL-00001" summary="Reworked gameView.fxml">
+      <created>1524158698268</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1524158698268</updated>
+    </task>
+    <task id="LOCAL-00002" summary="More Work">
+      <created>1524214090897</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1524214090897</updated>
+    </task>
+    <task id="LOCAL-00003" summary="More Work">
+      <created>1524217951331</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1524217951331</updated>
+    </task>
+    <task id="LOCAL-00004" summary="More Work">
+      <created>1524217991041</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1524217991041</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fixed death screen, with updated design, fixed healthbar, score and level&#10;correctly placed in same pane.&#10;Also added listener to button &quot;Back to Menu&quot;, so it's not auto selected">
+      <created>1525786088999</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1525786088999</updated>
+    </task>
+    <task id="LOCAL-00006" summary="GUI centered">
+      <created>1526076125532</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1526076125532</updated>
+    </task>
+    <task id="LOCAL-00007" summary="GUI centered - master merge">
+      <created>1526076854753</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1526076854753</updated>
+    </task>
+    <task id="LOCAL-00008" summary="GUI centered - master merge 2 try">
+      <created>1526089971171</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1526089971171</updated>
+    </task>
+    <task id="LOCAL-00009" summary="gameviewV3 commit">
+      <created>1526160690277</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1526160690277</updated>
+    </task>
+    <task id="LOCAL-00010" summary="bloodsplatt.png commit">
+      <created>1526160984460</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1526160984460</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="59256000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Tool Output" order="7" />
+      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.49947917" weight="0.32943678" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50041914" side_tool="true" weight="0.33154505" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947917" weight="0.33156216" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4995809" visible="true" weight="0.32837406" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21041666" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="ANTLR Preview" order="7" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997879" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Reworked gameView.fxml" />
+    <MESSAGE value="More Work" />
+    <MESSAGE value="Fixed death screen, with updated design, fixed healthbar, score and level&#10;correctly placed in same pane.&#10;Also added listener to button &quot;Back to Menu&quot;, so it's not auto selected" />
+    <MESSAGE value="GUI centered" />
+    <MESSAGE value="GUI centered - master merge" />
+    <MESSAGE value="GUI centered - master merge 2 try" />
+    <MESSAGE value="gameviewV3 commit" />
+    <MESSAGE value="bloodsplatt.png commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="bloodsplatt.png commit" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="4" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/engine/world/ConnectUpDown.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="37" column="51" lean-forward="true" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/GameViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="45" column="41" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/StaticFields.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="66" column="47" lean-forward="true" selection-start-line="66" selection-start-column="47" selection-end-line="66" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/GameViewController2D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2074">
+          <caret line="153" column="31" lean-forward="true" selection-start-line="153" selection-start-column="31" selection-end-line="153" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/services/pathfinder/Astar.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/composites/GraphicsComponent.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/composites/IGraphicsComponent.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/composites/InputComponent.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/world/Tile.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/world/World.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/controllers/Direction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/controllers/ActionEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/controllers/EventHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/controllers/Updater.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/canvasStyle.css" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.graphics/javafx/scene/canvas/Canvas.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/beans/property/DoubleProperty.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/beans/property/SimpleDoubleProperty.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/beans/binding/NumberExpressionBase.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/beans/property/ReadOnlyDoubleProperty.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.graphics/javafx/scene/layout/Region.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/beans/property/DoublePropertyBase.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/beans/property/ReadOnlyDoubleWrapper.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/beans/binding/DoubleExpression.java" />
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/beans/property/ReadOnlyDoublePropertyBase.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/composites/HealthComponent.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/composites/AvatarInputComponent.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/PlayerStats.java" />
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/PlayerBuilder.java" />
+    <entry file="file://$PROJECT_DIR$/src/view2D/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="13" column="72" selection-start-line="13" selection-start-column="72" selection-end-line="13" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/canvasPaneStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/btnStyle.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="30" selection-start-line="2" selection-start-column="30" selection-end-line="2" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/StaticFields.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/components/ComponentEvent/AttackEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/controllers/NpcController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/entities/gameobjects/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/world/World.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1830">
+          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/world/ConnectLeftRight.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-280">
+          <caret line="13" column="6" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/world/ConnectUpDown.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="37" column="51" selection-start-line="37" selection-start-column="51" selection-end-line="37" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view/GameViewController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/controllers/GameHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1513">
+          <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/gameviewV2.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/MenuController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="88" column="35" selection-start-line="88" selection-start-column="35" selection-end-line="88" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/gameviewV3.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/GameViewController2D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="95" column="14" selection-start-line="95" selection-start-column="14" selection-end-line="95" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/view/DrawableMatrix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="40" column="64" selection-start-line="40" selection-start-column="64" selection-end-line="40" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/engine/view/DrawableTile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/view2D/Renderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>9</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>git fetch &amp;&amp; git checkout master</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
