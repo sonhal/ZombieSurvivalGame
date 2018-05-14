@@ -118,9 +118,19 @@ public class Pathfinder {
 
 
         }
+        //If we could not find a path we try the best guess
         if(nodes.getNodeByTranslatedCoordinates(convertedTargetX, convertedTargetY).parent == null){
-            Path path = new Path();
             Node target = openList.pollFirst();
+            return createPath(convertedStartX, convertedStartY, target);
+        }
+        //We have found a path to the target location
+        Node target = nodes.getNodeByTranslatedCoordinates(convertedTargetX, convertedTargetY);
+        return createPath(convertedStartX, convertedStartY, target);
+    }
+
+    protected Path createPath(int convertedStartX, int convertedStartY, Node target){
+        if(target != null){
+            Path path = new Path();
             while (target != nodes.getNodeByTranslatedCoordinates(convertedStartX, convertedStartY)){
                 path.addStep(target.x, target.y);
                 target = target.parent;
@@ -128,14 +138,9 @@ public class Pathfinder {
             path.addStep(convertedStartX, convertedStartY);
             return path;
         }
-        Path path = new Path();
-        Node target = nodes.getNodeByTranslatedCoordinates(convertedTargetX, convertedTargetY);
-        while (target != nodes.getNodeByTranslatedCoordinates(convertedStartX, convertedStartY)){
-            path.addStep(target.x, target.y);
-            target = target.parent;
+        else {
+            throw new NullPointerException("Node parameter to method was null");
         }
-        path.addStep(nodes.getNodeByGameWorldCoordinates(startX,startY).x, nodes.getNodeByGameWorldCoordinates(startX,startY).y);
-        return path;
     }
 
     protected Node getFirstInOpen() {

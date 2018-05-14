@@ -33,7 +33,9 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+/**
+ * Controller for the application window during game play
+ */
 public class GameViewController2D implements GameViewController, Initializable, Serializable{
 
     private GameHandler gameHandler;
