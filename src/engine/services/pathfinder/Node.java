@@ -1,5 +1,8 @@
 package engine.services.pathfinder;
 
+/**
+ * Represents one tile in the game World. Used in the Pathfinder to calculate paths.
+ */
 public class Node implements Comparable {
 
 
@@ -23,6 +26,7 @@ public class Node implements Comparable {
         return depth;
     }
 
+    @Override
     public int compareTo(Object other) {
         Node o = (Node) other;
 
@@ -45,5 +49,19 @@ public class Node implements Comparable {
     @Override
     public String toString() {
         return "Node@ x: "+ x + " y: " + y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.valueOf(x +""+ y);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Node)){
+            return false;
+        }
+        Node node = (Node)obj;
+        return ((x == node.x) && (y == node.y));
     }
 }

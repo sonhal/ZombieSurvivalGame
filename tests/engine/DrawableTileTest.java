@@ -6,6 +6,7 @@ import engine.entities.gameobjects.Sprite;
 import engine.entities.items.WeaponPickup;
 import engine.entities.items.weapons.Knife;
 import engine.entities.items.weapons.Knife;
+import engine.entities.items.weapons.WeaponType;
 import engine.view.DrawableTile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,14 +31,14 @@ class DrawableTileTest {
     }
     @Test
     void setGameAndItem() {
-        testTile.setGameAndItem(null, new WeaponPickup(new Sprite(1), new Knife(new SingleAttackComponent(1), updater, 4, 5 )));
+        testTile.setGameAndItem(null, new WeaponPickup(new Sprite(1), new Knife(WeaponType.BASIC_KNIFE, new SingleAttackComponent(1), updater, 4, 5,5 )));
             assertNull(testTile.getGameObject());
             assertNotNull(testTile.getItem());
     }
 
     @Test
     void getItem(){
-        testTile.setItem(new WeaponPickup(new Sprite(1), new Knife(new SingleAttackComponent(1), updater, 4, 5 )));
+        testTile.setItem(new WeaponPickup(new Sprite(1), new Knife(WeaponType.BASIC_KNIFE, new SingleAttackComponent(1), updater, 4, 5 ,5)));
         assertNotNull(testTile.getItem());
     }
 }

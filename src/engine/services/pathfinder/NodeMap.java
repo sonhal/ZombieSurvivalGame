@@ -1,33 +1,34 @@
 package engine.services.pathfinder;
 
-import engine.world.Tile;
 import engine.world.World;
 
-import javax.naming.directory.InvalidAttributeValueException;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
+/**
+ * Translates the Game world into a representation usable by the Pathfinder.
+ * Translates the -/+ coordinates from the game World into only positive coordinates so we can use
+ * an array for optimal query speed while calculating the path.
+ */
 public class NodeMap {
 
-    Node[][] nodes;
+    private Node[][] nodes;
     private int worldWidth;
 
     public NodeMap(World world){
+        //Assumes the world is a square.
         worldWidth = world.getwidth();
 
         nodes = new Node[world.getwidth()][world.getHeight()];
-        world.getWorld().parallelStream().forEach(tile -> nodes[axisTranslator(tile.getCordX())][axisTranslator(tile.getCordY())] = new Node(axisTranslator(tile.getCordX()), axisTranslator(tile.getCordY()),(tile.getGameObject() != null)));
+        world.getWorld().parallelStream().forEach(tile -> nodes[coordinateTranslator(tile.getCordX())][coordinateTranslator(tile.getCordY())] = new Node(coordinateTranslator(tile.getCordX()), coordinateTranslator(tile.getCordY()),(tile.getGameObject() != null)));
     }
 
-    public Node getNode(int x,  int y){
+    public Node getNodeByGameWorldCoordinates(int x, int y){
         if(x > -(worldWidth / 2) && x < (worldWidth / 2) && y > -(worldWidth / 2) && y < (worldWidth / 2)) {
-            return nodes[axisTranslator(x)][axisTranslator(y)];
+            return nodes[coordinateTranslator(x)][coordinateTranslator(y)];
         }
         return null;
     }
 
-    public Node getNodeByInternalPos(int x, int y){
+    public Node getNodeByTranslatedCoordinates(int x, int y){
         if(x > 0 && x < worldWidth && y > 0 && y < worldWidth){
             return nodes[x][y];
         }
@@ -42,7 +43,11 @@ public class NodeMap {
         return 1;
     }
 
-    private int axisTranslator(int postion){
+    private int coordinateTranslator(int position){
+        return position + (worldWidth / 2) ;
+    }
+
+    public int pointConverter(int postion){
         return postion + (worldWidth / 2) ;
     }
 
