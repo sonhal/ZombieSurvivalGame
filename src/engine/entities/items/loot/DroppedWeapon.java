@@ -1,33 +1,22 @@
 package engine.entities.items.loot;
 import engine.entities.gameobjects.Sprite;
 import engine.entities.items.Item;
+import engine.entities.items.weapons.WeaponType;
 
 public class DroppedWeapon extends Item {
 
-    protected double activateDelay;
-    protected int range;
-    protected int damage;
+    protected WeaponType weaponType;
     protected int ammo;
 
-    public DroppedWeapon(Sprite sprite, String name, double activateDelay, int range, int damage, int ammo){
+    public DroppedWeapon(WeaponType weaponType, Sprite sprite, String name, int ammo){
         super(sprite, name);
-        this.activateDelay = activateDelay;
-        this.range = range;
-        this.damage = damage;
+        this.weaponType = weaponType;
         this.ammo = ammo;
     }
 
-    public double getActivateDelay() {
-        return activateDelay;
-    }
-
-    public int getRange() {
-        return range;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
     public int getAmmo() { return ammo;}
+
+    public WeaponType getWeaponType() {
+        return weaponType;
+    }
 }

@@ -15,10 +15,12 @@ import engine.entities.items.loot.HealthPottion;
 import engine.entities.items.weapons.Gun;
 import engine.entities.items.weapons.Knife;
 import engine.entities.items.weapons.Weapon;
+import engine.entities.items.weapons.WeaponType;
 import engine.world.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class InventoryComponent extends ScriptableComponent {
 
@@ -33,7 +35,7 @@ public class InventoryComponent extends ScriptableComponent {
 
     public InventoryComponent(SingleWeaponComponent singleWeaponComponent, Updater updater) {
         this.singleWeaponComponent = singleWeaponComponent;
-        weaponsinventory.add(new Knife(new SingleAttackComponent(1000), updater, 4, 5, -42  ));
+        weaponsinventory.add(new Knife(WeaponType.BASIC_KNIFE, new SingleAttackComponent(40), updater, 4, 5, -42  ));
         singleWeaponComponent.setWeapon(weaponsinventory.get(0));
         this.updater = updater;
     }
@@ -67,7 +69,7 @@ public class InventoryComponent extends ScriptableComponent {
 
     void pickupItem(Item item){
         if (item instanceof DroppedWeapon){
-            weaponsinventory.add(makeWeapon((DroppedWeapon)item));
+            addWeapon((DroppedWeapon)item);
         }else if (item instanceof HealthPottion){
             player.getComponentByType(HealthComponent.class)
                     .ifPresent(scriptableComponent ->
@@ -77,12 +79,26 @@ public class InventoryComponent extends ScriptableComponent {
 
     void addWeapon(DroppedWeapon weapon){
 
+         Optional<Weapon> weaponExsists = weaponsinventory.stream().filter(inventoryWeapon -> inventoryWeapon.getWeaponType() == weapon.getWeaponType()).findFirst();
+
+         if (weaponExsists.isPresent()){
+            weaponExsists.get().setAmmo(weaponExsists.get().getAmmo() + weapon.getAmmo());
+        }else{
+            weaponsinventory.add(makeWeapon(weapon));
+        }
+
 
         
     }
 
-    Weapon makeWeapon(DroppedWeapon item){
-        return new Gun(new SingleAttackComponent(item.getDamage()), updater, item.getActivateDelay(), item.getRange(), item.getAmmo());
+    Weapon makeWeapon(DroppedWeapon droppedWeapon){
+        switch (droppedWeapon.getWeaponType()){
+            case BASIC_GUN: return new Gun(droppedWeapon.getWeaponType(), new SingleAttackComponent(80), updater, 1000, 2, 40);
+            case MACHINE_GUN: return new Gun(droppedWeapon.getWeaponType(), new SingleAttackComponent(80), updater, 10, 4, 40);
+            default: return null;
+        }
+
+
     }
 
 

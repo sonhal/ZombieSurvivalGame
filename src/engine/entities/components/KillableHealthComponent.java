@@ -8,6 +8,7 @@ import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.entities.items.Item;
 import engine.entities.items.loot.DroppedWeapon;
 import engine.entities.items.loot.HealthPottion;
+import engine.entities.items.weapons.WeaponType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,7 @@ public class KillableHealthComponent extends HealthComponent {
         Random random = new Random();
         int i = random.nextInt(100);
         if (i < 50){
-            return new DroppedWeapon(new Sprite(2), "Gun", 4, 20, 20, 100);
+            return new DroppedWeapon(WeaponType.BASIC_GUN ,new Sprite(2), "Gun", 40);
         }
         else {
             return new HealthPottion(new Sprite(36), "HealthPottion", 100);
