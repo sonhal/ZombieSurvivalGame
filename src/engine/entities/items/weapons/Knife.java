@@ -21,10 +21,12 @@ public class Knife extends Weapon {
 
     @Override
     protected void addAttackToUpdateList(Tile startTile, Direction direction, int damage, Updater updater){
-
+        tryAttack(attackComponent, startTile);
+        updater.addToUpdateList(GameObjectFactory.knifeAttackParticleEffect(startTile, direction, 1));
     }
 
     protected void tryAttack(AttackComponent attackComponent, Tile startTile){
+
         attackComponent.tryAttack(startTile);
     }
 }

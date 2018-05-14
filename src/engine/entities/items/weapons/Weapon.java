@@ -53,7 +53,8 @@ public abstract class Weapon implements Serializable{
             Tile startTile = fromTile.getTileInDirection(direction);
             //if adjacent Tile is occupied, hit StaticGameObject on Tile
             if (startTile.getGameObject() != null){
-                tryAttack(attackComponent, startTile);
+                //tryAttack(attackComponent, startTile);
+                addAttackToUpdateList(startTile, direction, attackComponent.getDamage(), updater);
                 ammo--;
             }
             //else instantiate Bullet and add it to the controllers update list
