@@ -14,8 +14,8 @@ import engine.controllers.Direction;
  */
 public class Gun extends Weapon {
 
-    public Gun(SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
-        super(attackComponent, updater, activateDelay, range, ammo);
+    public Gun(WeaponType weaponType, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
+        super(weaponType, attackComponent, updater, activateDelay, range, ammo);
 
     }
 

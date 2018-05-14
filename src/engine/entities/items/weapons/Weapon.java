@@ -17,16 +17,17 @@ import java.io.Serializable;
  */
 public abstract class Weapon implements Serializable{
 
+    protected WeaponType weaponType;
     protected SingleAttackComponent attackComponent;
     protected Updater updater;
     protected double lastActivateTime;
     protected double activateDelay;
     protected int range;
     protected int ammo;
-    protected String name;
     protected Sprite sprite;
 
-    public Weapon(SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo){
+    public Weapon(WeaponType weaponType, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo){
+        this.weaponType = weaponType;
         this.attackComponent  = attackComponent;
         this.updater = updater;
         this.lastActivateTime = System.currentTimeMillis();
@@ -46,7 +47,7 @@ public abstract class Weapon implements Serializable{
     }
 
     public boolean activate(Tile fromTile, Direction direction) {
-         System.out.println("Amunition left on weapon: " + ammo);
+            System.out.println("Amunition left on weapon: " + ammo);
         if(TimeService.canUpdate(activateDelay, lastActivateTime) && (ammo > 0 || ammo < -40)){
             System.out.println("Weapon activated!");
             Tile startTile = fromTile.getTileInDirection(direction);
@@ -86,11 +87,13 @@ public abstract class Weapon implements Serializable{
         return ammo;
     }
 
-    public String getName() {
-        return name;
-    }
+    public void setAmmo(int ammo) { this.ammo = ammo; }
 
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public WeaponType getWeaponType() {
+        return weaponType;
     }
 }
