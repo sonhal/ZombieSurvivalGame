@@ -15,6 +15,6 @@ public enum WeaponType {
         this.displayName = displayName;
     }
 
-    public String displayName() { return displayName; }
+    public String getDisplayName() { return displayName; }
 
 }
