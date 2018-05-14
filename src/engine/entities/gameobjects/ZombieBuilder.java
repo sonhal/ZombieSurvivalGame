@@ -42,7 +42,7 @@ public class ZombieBuilder {
             gc.addSprite(sprite);
         }
 
-        wc.setActiveWeapon(new ZombieAttack());
+        wc.setActiveWeapon(new ZombieAttack(new SoundEffectComponent(500, blueprint.attackSound), new SingleAttackComponent(blueprint.attackDamage), blueprint.moveDelay));
 
         return new UpdatableGameObject.Builder(tc)
                 .addComponent(gc)
@@ -51,7 +51,7 @@ public class ZombieBuilder {
                 .addComponent(hc)
                 .addComponent(ic)
                 .addComponent(new LootDropComponent())
-                .addComponent(new SoundEffectComponent(500, blueprint.attackSound))
+                .addComponent(wc)
                 .build();
     }
 }

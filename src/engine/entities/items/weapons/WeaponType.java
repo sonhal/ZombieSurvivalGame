@@ -7,7 +7,8 @@ public enum WeaponType {
     SHOT_GUN("ShotGun"),
     GRANADE("Grandade"),
     TWO_HANDED_GUN("Two handed Gun"),
-    TWO_HANDED_MACHINEGUN("Two handed Machinegun");
+    TWO_HANDED_MACHINEGUN("Two handed Machinegun"),
+    ZOMBIE_ATTACK("Zombie Attack");
 
     private String displayName;
 
