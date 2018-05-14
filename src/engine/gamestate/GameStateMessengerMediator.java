@@ -4,9 +4,10 @@ import engine.gamestate.messages.GameEventMessage;
 import engine.controllers.interfaces.Messenger;
 import engine.gamestate.interfaces.MessengerMediator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameStateMessengerMediator implements MessengerMediator {
+public class GameStateMessengerMediator implements MessengerMediator, Serializable {
 
     private ArrayList<Messenger> subscribers;
 

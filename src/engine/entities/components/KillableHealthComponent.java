@@ -8,6 +8,10 @@ import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Component representing the health and health related state like damaged status etc. Being killable means it sends
+ * a Death event to the other components and signals the GameObject in the event the health value reaches zero.
+ */
 public class KillableHealthComponent extends HealthComponent {
 
     private int healthAmount;

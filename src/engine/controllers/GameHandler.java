@@ -34,7 +34,7 @@ public class GameHandler extends Updater {
 
 
     public GameHandler(GameViewController gameViewController2D, World gameWorld, GameUpdater gameUpdater,
-                       EventHandler eventHandler, IUpdatableGameObject player, NpcController npcController,
+                       EventHandler eventHandler, IUpdatableGameObject player,
                        GameStateKeeper gameStateKeeper, PathSearchService pathSearchService){
         //Set gameplay components
         System.out.println("GameHandler active");
@@ -44,7 +44,7 @@ public class GameHandler extends Updater {
         this.gameUpdater = gameUpdater;
         this.player = player;
         this.gameStateMessenger = new GameStateMessengerMediator();
-        this.npcController  = npcController;
+        this.npcController  = new NpcController(player, gameStateMessenger, this);
         this.pathSearchService = pathSearchService;
 
 
@@ -53,9 +53,7 @@ public class GameHandler extends Updater {
         //Create GameStateKeeper
         this.gameStateKeeper = gameStateKeeper;
         //Set background music
-        ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
-        backGroundMusic.add(Sound.BACKGROUND_MUSIC_2);
-        AudioPlayer.getInstance().setBackgroundMusic(backGroundMusic);
+        start();
     }
 
     /**
@@ -130,18 +128,43 @@ public class GameHandler extends Updater {
 
     public void saveGame(){
         shutDown();
+        npcController.cleanUp();
         gameViewController = null;
-        SaveGameHandler.saveGame(world.getWorld());
+        pathSearchService = null;
+        //SaveGameHandler.saveGame(world.getWorld());
+        SaveGameHandler.saveGameHandler(this);
         System.out.println("Game saved");
     }
 
     public void shutDown(){
         AudioPlayer.getInstance().stopBackgroundMusic();
         AudioPlayer.getInstance().shutdown();
-        pathSearchService.shutdown();
+        //pathSearchService.shutdown();
+    }
+
+    public void start(){
+        ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
+        backGroundMusic.add(Sound.BACKGROUND_MUSIC_2);
+        AudioPlayer.getInstance().setBackgroundMusic(backGroundMusic);
     }
 
     public GameStateKeeper getGameStateKeeper() {
         return gameStateKeeper;
+    }
+
+    public GameUpdater getGameUpdater() {
+        return gameUpdater;
+    }
+
+    public void setGameViewController(GameViewController gameViewController) {
+        this.gameViewController = gameViewController;
+    }
+
+    public void setPathSearchService(PathSearchService pathSearchService) {
+        this.pathSearchService = pathSearchService;
+    }
+
+    public PathSearchService getPathSearchService() {
+        return pathSearchService;
     }
 }

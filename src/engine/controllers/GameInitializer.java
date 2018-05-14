@@ -1,5 +1,6 @@
 package engine.controllers;
 
+import engine.entities.components.EnemyInputComponent;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.components.interfaces.WeaponComponent;
 import engine.gamestate.GameStateKeeper;
@@ -48,10 +49,9 @@ public class GameInitializer {
 
         PathSearchService pathSearchService = new PathSearchService(world);
 
-        NpcController npcController = new NpcController(player, gamerMediator, pathSearchService);
         GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
         return new GameHandler(gameViewController,world,gameUpdater,
-                eventHandler, player, npcController, gameStateKeeper, pathSearchService);
+                eventHandler, player, gameStateKeeper, pathSearchService);
     }
 
     /**
@@ -59,39 +59,14 @@ public class GameInitializer {
      * @param gameViewController reference to the View rendering the game
      * @return GameHandler handling the big gameplay components and behaviour
      */
-    public static GameHandler loadGame(GameViewController gameViewController) {
-        World world = new World();
-        List<Tile> worldTiles = SaveGameHandler.loadGame();
-        System.out.println("loaded");
-        IUpdatableGameObject player = SaveGameHandler.getPlayerInstance(worldTiles);
-
-        System.out.println("added as event listener");
-        world.loadInGameWorld(worldTiles, player);
-        System.out.println("Game loaded");
-        GameStateMessengerMediator gamerMediator = new GameStateMessengerMediator();
-        PathSearchService pathSearchService = new PathSearchService(world);
-        NpcController npcController = new NpcController(player, gamerMediator, pathSearchService);
-        //Game Updater
-        GameUpdater gameUpdater = new GameUpdater();
-        //Create EventHandler
-        EventHandler eventHandler = new EventHandler();
-        setPlayerEventHandler(player, eventHandler);
-        gameUpdater.addToUpdateList(player);
-        for (IUpdatableGameObject enemy:
-                SaveGameHandler.getEnemyInstances(worldTiles)) {
-            npcController.addToUpdateList(enemy);
-        }
-        if(ComponentService.getComponentByType(player.getComponents(), WeaponComponent.class).isPresent()){
-            SingleWeaponComponent weaponComponent = (SingleWeaponComponent)
-                    ComponentService.getComponentByType(player.getComponents(), WeaponComponent.class).get();
-            if(weaponComponent.getActiveWeapon() instanceof Gun){
-                Gun playerGun = (Gun)weaponComponent.getActiveWeapon();
-                playerGun.setController(gameUpdater);
-            }
-        }
-        GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
-        return new GameHandler(gameViewController, world, gameUpdater,
-                eventHandler, player, npcController, gameStateKeeper, pathSearchService);
+    public static GameHandler loadGameHandler(GameViewController gameViewController){
+        GameHandler gameHandler = SaveGameHandler.loadGameHandler();
+        gameHandler.getWorld().loadInGameWorld(gameHandler.getWorld().getWorld(), gameHandler.getPlayer());
+        PathSearchService pathSearchService = new PathSearchService(gameHandler.getWorld());
+        gameHandler.setGameViewController(gameViewController);
+        gameHandler.setPathSearchService(pathSearchService);
+        gameHandler.start();
+        return gameHandler;
     }
 
     private static void setPlayerEventHandler(IUpdatableGameObject player, EventHandler eventHandler) {

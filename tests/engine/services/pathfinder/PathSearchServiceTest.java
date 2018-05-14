@@ -5,6 +5,7 @@ import engine.world.World;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -25,21 +26,15 @@ class PathSearchServiceTest {
 
     @Test
     void getNewPath() {
-        pathSearchService.getNewPath(3,3,10,15);
+        Optional optional = pathSearchService.getNewPath(3,3,10,15);
+        pathSearchService.update();
         pathSearchService.update();
         pathSearchService.update();
         pathSearchService.update();
         pathSearchService.update();
         pathSearchService.update();
 
-        while (pathFuture == null){
-            try {
-                Thread.sleep(100);
-                pathSearchService.update();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        pathFuture = (Future<Path>) optional.get();
         while (!(pathFuture.isDone())){
             continue;
         }

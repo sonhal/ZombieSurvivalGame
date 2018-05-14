@@ -2,7 +2,9 @@ package engine.gamestate;
 
 import engine.gamestate.interfaces.Level;
 
-public class GameLevel implements Level {
+import java.io.Serializable;
+
+public class GameLevel implements Level, Serializable {
 
     private int enemyPoolValue;
     private double enemySpeedBaseValue;

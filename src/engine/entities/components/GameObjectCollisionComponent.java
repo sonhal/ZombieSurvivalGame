@@ -6,6 +6,9 @@ import engine.entities.components.interfaces.TransformComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.world.Tile;
 
+/**
+ * General collision detection Component. Signals other components if a Collision has occurred with the GameObject.
+ */
 public class GameObjectCollisionComponent extends CollisionComponent {
 
     private Direction inputDirection;

@@ -1,6 +1,7 @@
 package engine.entities.components;
 
 import engine.controllers.Direction;
+import engine.controllers.GameHandler;
 import engine.entities.components.ComponentEvent.*;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.components.interfaces.TransformComponent;
@@ -14,6 +15,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Component used in game enemies, controls the behaviour and actions of the GameObject
+ * Tries to guide the enemy GameObject through the game World to the player and attack.
+ */
 public class EnemyInputComponent extends InputComponent{
 
     private GameObject target;
@@ -23,24 +28,24 @@ public class EnemyInputComponent extends InputComponent{
     private double lastEventSent;
     private double sendEventDelay;
     private double lastPathSearch;
-    private Path enemyPath;
-    private PathSearchService pathSearchService;
-    private Future<Path> currentPath;
     private Future<Path> nextPath;
     private Path path;
     private boolean waitingForPath;
-    private static final double WAIT_TIME = 800;
-    private double timeWaited;
+    private GameHandler gameHandler;
 
 
-    public EnemyInputComponent(GameObject target, PathSearchService pathSearchService, double sendEventDelay){
+
+    public EnemyInputComponent(GameObject target, GameHandler gameHandler, double sendEventDelay){
         this.target = target;
         this.sendEventDelay = sendEventDelay;
-        this.pathSearchService = pathSearchService;
+        this.gameHandler = gameHandler;
     }
 
-
-
+    /**
+     * Gets the next Direction for the entity to move in.
+     * @param gameObject
+     * @return the best possible next Direction towards the player
+     */
     private Direction getNextDirection(GameObject gameObject){
         if(path != null){
             Direction nextStep = path.getNextStepDirection();
@@ -86,21 +91,17 @@ public class EnemyInputComponent extends InputComponent{
             lastPathSearch = System.currentTimeMillis();
 
             Tile currentTile = gameObject.getTransformComponent().getCurrentTile();
-            Optional<Future<Path>> oFuturePath = pathSearchService.getNewPath(currentTile.getCordX(), currentTile.getCordY(),
+            Optional<Future<Path>> oFuturePath = gameHandler.getPathSearchService().getNewPath(currentTile.getCordX(), currentTile.getCordY(),
                     targetTransformComponent.getCurrentTile().getCordX(), targetTransformComponent.getCurrentTile().getCordY());
            if(oFuturePath.isPresent()){
-               System.out.println("Got nextpath");
                waitingForPath = true;
                nextPath = oFuturePath.get();
            }
 
         }
 
-
-
         //If Player is in range, attack Player
         if(isPlayerInRange(gameObject) != null){
-            System.out.println("attack");
             sendMessageToAllComponents(gameObject.getComponents(), new AttackEvent(isPlayerInRange(gameObject)));
         }
         //If not, Move towards Player
@@ -120,11 +121,6 @@ public class EnemyInputComponent extends InputComponent{
         if(event instanceof CollisionEvent){
             this.collisionHasOccurred = ((CollisionEvent) event).collisonDirection();
         }
-        if(event instanceof  DeathEvent){
-            if (currentPath != null){
-                currentPath.cancel(true);
-            }
-        }
 
     }
 
@@ -142,23 +138,19 @@ public class EnemyInputComponent extends InputComponent{
 
     @Override
     public void cleanUp(GameObject gameObject) {
-
+        nextPath = null;
+        waitingForPath = false;
     }
 
-    private Direction getRandomDirection(){
-        Random random = new Random();
-        int dir = random.nextInt(4);
-        switch (dir){
-            case 1: return Direction.UP;
-            case 2: return Direction.DOWN;
-            case 3: return Direction.LEFT;
-            default: return Direction.RIGHT;
-        }
-    }
-
-    private Direction getDirectionAgainstTile(GameObject gameObject, Tile tile){
-        int targetX = tile.getCordX();
-        int targetY = tile.getCordY();
+    /**
+     * Basic low cost Pathfinder for when the Enemy is waiting for the accurate path returned from the PathfinderService
+     * @param gameObject the enemy object
+     * @param targetTile player tile
+     * @return the general Direction against the player
+     */
+    private Direction getDirectionAgainstTile(GameObject gameObject, Tile targetTile){
+        int targetX = targetTile.getCordX();
+        int targetY = targetTile.getCordY();
 
         int thisX = gameObject.getTransformComponent().getCurrentTile().getCordX();
         int thisY = gameObject.getTransformComponent().getCurrentTile().getCordY();
@@ -177,6 +169,6 @@ public class EnemyInputComponent extends InputComponent{
         else {
             return Direction.LEFT;
         }
-
     }
+
 }

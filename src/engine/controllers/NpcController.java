@@ -1,5 +1,7 @@
 package engine.controllers;
 
+import engine.entities.components.EnemyInputComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.gamestate.messages.EnemyKilledMessage;
 import engine.gamestate.messages.GameEventMessage;
 import engine.gamestate.messages.NewLevelMessage;
@@ -23,15 +25,15 @@ public class NpcController extends Updater implements Messenger {
     private IUpdatableGameObject player;
     private MessengerMediator gameStateMessengerMediator;
     private int gameLevel;
-    private PathSearchService pathSearchService;
+    private GameHandler gameHandler;
 
 
-    public NpcController(IUpdatableGameObject player, MessengerMediator gameMessengerMediator, PathSearchService pathSearchService){
+    public NpcController(IUpdatableGameObject player, MessengerMediator gameMessengerMediator, GameHandler gameHandler){
         System.out.println("Npc controller created");
         this.player = player;
         this.gameStateMessengerMediator = gameMessengerMediator;
-        this.pathSearchService = pathSearchService;
         gameStateMessengerMediator.subscribe(this);
+        this.gameHandler = gameHandler;
     }
 
     public void update(World world){
@@ -52,7 +54,7 @@ public class NpcController extends Updater implements Messenger {
             Random rand = new Random();
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
             IUpdatableGameObject enemy = ZombieBuilder.createZombie(player, spawnTile, new BasicEntityBlueprint(
-                    30 + gameLevel, 10 + gameLevel, (500 - (gameLevel * 50) ) - rand.nextInt(50) , Sound.ZOMBIE_ATTACK), pathSearchService);
+                    30 + gameLevel, 10 + gameLevel, (500 - (gameLevel * 50) ) - rand.nextInt(50) , Sound.ZOMBIE_ATTACK), gameHandler);
             addToUpdateList(enemy);
             spawnInterval = 10;
         }
@@ -98,5 +100,9 @@ public class NpcController extends Updater implements Messenger {
         if(gameStateMessengerMediator != null){
             gameStateMessengerMediator.broadcast(this, message);
         }
+    }
+
+    public void cleanUp(){
+        getUpdateObjects().forEach(updatable -> ((GameObject) updatable).getComponentByType(EnemyInputComponent.class).ifPresent(scriptableComponent -> scriptableComponent.cleanUp((GameObject)updatable)));
     }
 }
