@@ -61,7 +61,7 @@ public class KillableHealthComponent extends HealthComponent {
         Random random = new Random();
         int i = random.nextInt(100);
         if (i < 50){
-            return new DroppedWeapon(new Sprite(2), "Gun", 4, 20, 20);
+            return new DroppedWeapon(new Sprite(2), "Gun", 4, 20, 20, 100);
         }
         else {
             return new HealthPottion(new Sprite(36), "HealthPottion", 100);

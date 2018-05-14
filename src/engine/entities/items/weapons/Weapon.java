@@ -22,13 +22,17 @@ public abstract class Weapon implements Serializable{
     protected double lastActivateTime;
     protected double activateDelay;
     protected int range;
+    protected int ammo;
+    protected String name;
+    protected Sprite sprite;
 
-    public Weapon(SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range){
+    public Weapon(SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo){
         this.attackComponent  = attackComponent;
         this.updater = updater;
         this.lastActivateTime = System.currentTimeMillis();
         this.activateDelay = activateDelay;
         this.range = range;
+        this.ammo = ammo;
 
     }
 
@@ -42,16 +46,19 @@ public abstract class Weapon implements Serializable{
     }
 
     public boolean activate(Tile fromTile, Direction direction) {
-        if(TimeService.canUpdate(activateDelay, lastActivateTime)){
+         System.out.println("Amunition left on weapon: " + ammo);
+        if(TimeService.canUpdate(activateDelay, lastActivateTime) && (ammo > 0 || ammo < -40)){
             System.out.println("Weapon activated!");
             Tile startTile = fromTile.getTileInDirection(direction);
             //if adjacent Tile is occupied, hit StaticGameObject on Tile
             if (startTile.getGameObject() != null){
                 tryAttack(attackComponent, startTile);
+                ammo--;
             }
             //else instantiate Bullet and add it to the controllers update list
             else {
                 addAttackToUpdateList(startTile, direction, attackComponent.getDamage(), updater);
+                ammo--;
             }
             System.out.println("Gun fired!");
             lastActivateTime = System.currentTimeMillis();
@@ -73,5 +80,17 @@ public abstract class Weapon implements Serializable{
 
     public void setController(Updater updater) {
         this.updater = updater;
+    }
+
+    public int getAmmo() {
+        return ammo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 }

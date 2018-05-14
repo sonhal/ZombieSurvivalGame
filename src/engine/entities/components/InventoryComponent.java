@@ -33,7 +33,7 @@ public class InventoryComponent extends ScriptableComponent {
 
     public InventoryComponent(SingleWeaponComponent singleWeaponComponent, Updater updater) {
         this.singleWeaponComponent = singleWeaponComponent;
-        weaponsinventory.add(new Knife(new SingleAttackComponent(1000), updater, 4, 5  ));
+        weaponsinventory.add(new Knife(new SingleAttackComponent(1000), updater, 4, 5, -42  ));
         singleWeaponComponent.setWeapon(weaponsinventory.get(0));
         this.updater = updater;
     }
@@ -75,8 +75,14 @@ public class InventoryComponent extends ScriptableComponent {
         }
     }
 
+    void addWeapon(DroppedWeapon weapon){
+
+
+        
+    }
+
     Weapon makeWeapon(DroppedWeapon item){
-        return new Gun(new SingleAttackComponent(item.getDamage()), updater, item.getActivateDelay(), item.getRange());
+        return new Gun(new SingleAttackComponent(item.getDamage()), updater, item.getActivateDelay(), item.getRange(), item.getAmmo());
     }
 
 
@@ -96,5 +102,9 @@ public class InventoryComponent extends ScriptableComponent {
 
     public void setPlayer(IUpdatableGameObject player) {
         this.player = player;
+    }
+
+    public Weapon getCurrentWeapon() {
+        return currentWeapon;
     }
 }
