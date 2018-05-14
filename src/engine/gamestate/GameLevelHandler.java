@@ -6,7 +6,9 @@ import engine.gamestate.messages.GameEventMessage;
 import engine.gamestate.messages.NewLevelMessage;
 import engine.controllers.interfaces.*;
 
-public class GameLevelHandler implements LevelHandler, Messenger {
+import java.io.Serializable;
+
+public class GameLevelHandler implements LevelHandler, Messenger, Serializable {
 
     private int currentLevel;
     private LevelConfig config;

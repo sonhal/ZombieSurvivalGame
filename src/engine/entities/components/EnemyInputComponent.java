@@ -1,6 +1,7 @@
 package engine.entities.components;
 
 import engine.controllers.Direction;
+import engine.controllers.GameHandler;
 import engine.entities.components.ComponentEvent.*;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.components.interfaces.TransformComponent;
@@ -27,17 +28,17 @@ public class EnemyInputComponent extends InputComponent{
     private double lastEventSent;
     private double sendEventDelay;
     private double lastPathSearch;
-    private PathSearchService pathSearchService;
     private Future<Path> nextPath;
     private Path path;
     private boolean waitingForPath;
+    private GameHandler gameHandler;
 
 
 
-    public EnemyInputComponent(GameObject target, PathSearchService pathSearchService, double sendEventDelay){
+    public EnemyInputComponent(GameObject target, GameHandler gameHandler, double sendEventDelay){
         this.target = target;
         this.sendEventDelay = sendEventDelay;
-        this.pathSearchService = pathSearchService;
+        this.gameHandler = gameHandler;
     }
 
     /**
@@ -90,7 +91,7 @@ public class EnemyInputComponent extends InputComponent{
             lastPathSearch = System.currentTimeMillis();
 
             Tile currentTile = gameObject.getTransformComponent().getCurrentTile();
-            Optional<Future<Path>> oFuturePath = pathSearchService.getNewPath(currentTile.getCordX(), currentTile.getCordY(),
+            Optional<Future<Path>> oFuturePath = gameHandler.getPathSearchService().getNewPath(currentTile.getCordX(), currentTile.getCordY(),
                     targetTransformComponent.getCurrentTile().getCordX(), targetTransformComponent.getCurrentTile().getCordY());
            if(oFuturePath.isPresent()){
                waitingForPath = true;
@@ -137,7 +138,7 @@ public class EnemyInputComponent extends InputComponent{
 
     @Override
     public void cleanUp(GameObject gameObject) {
-        pathSearchService = null;
+        nextPath = null;
         waitingForPath = false;
     }
 
@@ -170,16 +171,4 @@ public class EnemyInputComponent extends InputComponent{
         }
     }
 
-    /**
-     * Dependency injection method for setting a new PathSearchService after instantiation.
-     * @param pathSearchService new PathSearchService
-     */
-    public void setPathSearchService(PathSearchService pathSearchService) {
-        if(pathSearchService != null){
-            this.pathSearchService = pathSearchService;
-        }
-        else {
-            throw  new NullPointerException("Passed PathSearchService is null");
-        }
-    }
 }

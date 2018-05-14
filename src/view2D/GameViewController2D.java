@@ -300,7 +300,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     public void startLoadGame(GameViewController gameViewController){
         Platform.runLater(new Runnable() {
             public void run() {
-                gameHandler = GameInitializer.loadGame(gameViewController);
+                gameHandler = GameInitializer.loadGameHandler(gameViewController);
                 startGameloop();
             }
         });

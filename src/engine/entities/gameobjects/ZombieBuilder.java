@@ -1,5 +1,6 @@
 package engine.entities.gameobjects;
 
+import engine.controllers.GameHandler;
 import engine.entities.components.*;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.ZombieAttack;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class ZombieBuilder {
 
     public static UpdatableGameObject createZombie(IUpdatableGameObject player,
-                                                   Tile spawnTile, BasicEntityBlueprint blueprint, PathSearchService pathSearchService){
+                                                   Tile spawnTile, BasicEntityBlueprint blueprint, GameHandler gameHandler){
         ArrayList<Sprite> zombieSprites = new ArrayList<>();
 
         /*
@@ -33,7 +34,7 @@ public class ZombieBuilder {
         SingleWeaponComponent wc = new SingleWeaponComponent();
         KillableHealthComponent hc = new KillableHealthComponent(blueprint.health);
         UpdatableTransformComponent tc = new UpdatableTransformComponent(spawnTile);
-        EnemyInputComponent ic = new EnemyInputComponent(player, pathSearchService, blueprint.moveDelay);
+        EnemyInputComponent ic = new EnemyInputComponent(player, gameHandler, blueprint.moveDelay);
         GameObjectCollisionComponent cc = new GameObjectCollisionComponent();
         UpdatableGraphicsComponent gc = new UpdatableGraphicsComponent(zombieSprites.get(0), blueprint.moveDelay);
 

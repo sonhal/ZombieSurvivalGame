@@ -4,11 +4,13 @@ import engine.gamestate.messages.EnemyKilledMessage;
 import engine.gamestate.messages.GameEventMessage;
 import engine.controllers.interfaces.Messenger;
 
+import java.io.Serializable;
+
 /**
  * Responsible for keeping the track of relevant statistics in the game.
  * [TODO] Move Gamestate out of controllers
  */
-public class GameStateKeeper implements Messenger{
+public class GameStateKeeper implements Messenger, Serializable {
 
     private PlayerGameScore playerGameScore;
     private GameLevelHandler gameLevelHandler;
@@ -49,7 +51,7 @@ public class GameStateKeeper implements Messenger{
     /**
      * Internal helper data class for keeping the data
      */
-    private class GameState {
+    private class GameState implements Serializable{
         private int totalEnemieskilled;
 
     }

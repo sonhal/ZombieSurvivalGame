@@ -2,7 +2,9 @@ package engine.gamestate;
 
 import engine.gamestate.interfaces.GameScore;
 
-public class PlayerGameScore implements GameScore{
+import java.io.Serializable;
+
+public class PlayerGameScore implements GameScore, Serializable {
 
     private int enemiesKilledValue;
     private int score;
