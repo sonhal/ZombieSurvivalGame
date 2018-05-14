@@ -26,6 +26,42 @@
                         <Pane fx:id="canvasPane" layoutY="-4.0" stylesheets="@canvasPaneStyle.css">
                            <children>
                               <Canvas fx:id="gameCanvas" height="786.0" width="997.0" />
+                              <Pane layoutX="31.0" layoutY="595.0" prefHeight="142.0" prefWidth="186.0">
+                                 <children>
+                                    <ImageView fx:id="knife" fitHeight="55.0" fitWidth="71.0" layoutX="19.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@static/knife.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="pistol" fitHeight="55.0" fitWidth="71.0" layoutX="19.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@static/pistol.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="machinegun" fitHeight="46.0" fitWidth="110.0" layoutX="2.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@static/machinegun.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label fx:id="weaponNameLabel" layoutX="42.0" layoutY="27.0" text="Knife" textFill="RED">
+                                       <font>
+                                          <Font name="SansSerif Regular" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="93.0" layoutY="63.0" text="Ammo:" textFill="#00ddff">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="weaponAmmoLabel" layoutX="144.0" layoutY="63.0" textFill="#00eeff" />
+                                    <ImageView fx:id="canongun" fitHeight="55.0" fitWidth="71.0" layoutX="19.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@static/canongun.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <Pane layoutX="41.0" layoutY="605.0" opacity="0.3" prefHeight="142.0" prefWidth="186.0" style="-fx-background-color: #121212;" />
                            </children>
                         </Pane>
                         <Pane fx:id="toolBarUnder" layoutY="1.0" opacity="0.29" prefHeight="33.0" prefWidth="997.0" style="-fx-background-color: #1C1C1C;" />
@@ -47,19 +83,19 @@
                         </Pane>
                         <Pane fx:id="colorBG" layoutY="-5.0" minHeight="750.0" minWidth="997.0" opacity="0.87" prefHeight="763.0" prefWidth="997.0" style="-fx-background-color: #121212;">
                            <children>
-                              <Pane fx:id="btnTab" layoutX="76.0" layoutY="111.0" prefHeight="200.0" prefWidth="200.0">
+                              <Pane fx:id="btnTab" layoutX="14.0" layoutY="111.0" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="gameBtn" layoutX="63.0" layoutY="-3.0" mnemonicParsing="false" onAction="#switchGame" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="GAME" textFill="#91c0ff">
+                                    <Button fx:id="gameBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="-3.0" mnemonicParsing="false" onAction="#switchGame" prefHeight="34.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="GAME" textFill="#91c0ff">
                                        <font>
                                           <Font name="SansSerif Regular" size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="settingsBtn" layoutX="62.0" layoutY="44.0" mnemonicParsing="false" onAction="#switchSettings" prefHeight="33.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="SETTINGS" textFill="#ffe491">
+                                    <Button fx:id="settingsBtn" layoutX="32.0" layoutY="44.0" mnemonicParsing="false" onAction="#switchSettings" prefHeight="33.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="SETTINGS" textFill="#ffe491">
                                        <font>
                                           <Font name="SansSerif Regular" size="18.0" />
                                        </font>
                                     </Button>
-                                    <Button fx:id="highscoreBtn" layoutX="63.0" layoutY="90.0" mnemonicParsing="false" onAction="#switchHighscore" prefHeight="33.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="HIGHSCORE" textFill="#ff4d4d">
+                                    <Button fx:id="highscoreBtn" layoutX="32.0" layoutY="90.0" mnemonicParsing="false" onAction="#switchHighscore" prefHeight="33.0" prefWidth="137.0" style="-fx-background-color: #1C1C1C;" stylesheets="@btnStyle.css" text="HIGHSCORE" textFill="#ff4d4d">
                                        <font>
                                           <Font name="SansSerif Regular" size="18.0" />
                                        </font>
@@ -68,7 +104,7 @@
                               </Pane>
                            </children>
                         </Pane>
-                        <Pane fx:id="settingsSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
+                        <Pane fx:id="settingsSet" layoutX="200.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
                            <children>
                               <Label layoutX="143.0" layoutY="28.0" text="Settings" textFill="#ffe491">
                                  <font>
@@ -77,7 +113,7 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Pane fx:id="gameSet" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
+                        <Pane fx:id="gameSet" layoutX="200.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
                            <children>
                               <Label layoutX="90.0" layoutY="32.0" text="Game paused" textFill="#91acff">
                                  <font>
@@ -96,7 +132,7 @@
                               </Button>
                            </children>
                         </Pane>
-                        <Pane fx:id="gameOver" layoutX="283.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
+                        <Pane fx:id="gameOver" layoutX="200.0" layoutY="136.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
                            <children>
                               <Button layoutX="140.0" layoutY="463.0" mnemonicParsing="false" onAction="#goToMenu" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Back to Menu" textFill="#84ffa9">
                                  <font>
@@ -111,7 +147,7 @@
                               <TextArea layoutX="14.0" layoutY="168.0" prefHeight="281.0" prefWidth="402.0" />
                            </children>
                         </Pane>
-                        <Pane fx:id="gameOver1" layoutX="293.0" layoutY="146.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
+                        <Pane fx:id="gameOver1" layoutX="200.0" layoutY="146.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
                            <children>
                               <ImageView fitHeight="407.0" fitWidth="431.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

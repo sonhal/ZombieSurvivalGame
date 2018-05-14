@@ -56,6 +56,22 @@ public class SpriteTranslationHandler {
         spriteImageFiles.put(34, "view2D/static/explosion_5.png");
         spriteImageFiles.put(35, "view2D/static/explosion_6.png");
         spriteImageFiles.put(36, "view2D/static/healthpottion.png");
+        spriteImageFiles.put(37, "view2D/static/knife-up1.png");
+        spriteImageFiles.put(38, "view2D/static/knife-up2.png");
+        spriteImageFiles.put(39, "view2D/static/knife-up3.png");
+        spriteImageFiles.put(40, "view2D/static/knife-down1.png");
+        spriteImageFiles.put(41, "view2D/static/knife-down2.png");
+        spriteImageFiles.put(42, "view2D/static/knife-down3.png");
+        spriteImageFiles.put(43, "view2D/static/knife-left1.png");
+        spriteImageFiles.put(44, "view2D/static/knife-left2.png");
+        spriteImageFiles.put(45, "view2D/static/knife-left3.png");
+        spriteImageFiles.put(46, "view2D/static/knife-right1.png");
+        spriteImageFiles.put(47, "view2D/static/knife-right2.png");
+        spriteImageFiles.put(48, "view2D/static/knife-right3.png");
+        spriteImageFiles.put(49, "view2D/static/knife.png");
+        spriteImageFiles.put(50, "view2D/static/pistol.png");
+        spriteImageFiles.put(51, "view2D/static/machinegun.png");
+        spriteImageFiles.put(52, "view2D/static/canongun.png");
 
 
         for (Integer key: spriteImageFiles.keySet()

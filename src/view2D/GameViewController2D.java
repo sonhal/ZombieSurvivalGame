@@ -22,6 +22,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -71,6 +73,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @FXML
     private Label weaponAmmoLabel, weaponNameLabel;
 
+    @FXML
+    private ImageView pistol, machinegun, canongun, knife;
+
 
     @Override
     public void updateDrawableState(DrawableTile[][] drawableMatrix) {
@@ -100,10 +105,10 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
 
     public void scaleWidth(){
-        anchor.widthProperty().addListener((ov, oldWidth, newWidth) ->{
+        gameCanvas.widthProperty().addListener((ov, oldWidth, newWidth) ->{
 
-            colorBG.setMinWidth((Double) newWidth);
-            toolBar.setMinWidth((Double) newWidth);
+            colorBG.setMinWidth((Double) newWidth-20);
+            toolBar.setMinWidth((Double) newWidth-20);
             toolBarUnder.setMinWidth((Double) newWidth);
             if(gameCanvas.getHeight() >= 900){
                 System.out.println("max height achieved");
@@ -115,8 +120,8 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
     public void scaleHeight(){
-        anchor.heightProperty().addListener((ov, oldHeight, newHeight) ->{
-            colorBG.setMinHeight((Double) newHeight);
+        gameCanvas.heightProperty().addListener((ov, oldHeight, newHeight) ->{
+            colorBG.setMinHeight((Double) newHeight-20);
             gameCanvas.setHeight((Double) newHeight);
         } );
     }
@@ -218,6 +223,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
         gameOver.setManaged(false);
         gameOver1.setVisible(false);
         gameOver1.setManaged(false);
+        pistol.setVisible(false);
+        machinegun.setVisible(false);
+        canongun.setVisible(false);
     }
 
     @Override
@@ -344,11 +352,11 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
         //The parameters weapon sprite, WeaponName, and Ammo should be displayed on screen.
         //Weapon object can be reached by using the get selected weapon bellow.
-       /* gameHandler.getPlayer().getComponentByType(InventoryComponent.class)
+        gameHandler.getPlayer().getComponentByType(InventoryComponent.class)
                 .ifPresent(scriptableComponent ->
                         setSelectedWeapon(((InventoryComponent)scriptableComponent).getCurrentWeapon() ));
 
-        weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getName());*/
+        weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getWeaponType().displayName());
     }
 
     public Weapon getSelectedWeapon() {
