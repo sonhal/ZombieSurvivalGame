@@ -86,6 +86,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     public void initializeGameEnv() {
         scaleWidth();
         scaleHeight();
+        scaleAllScreens();
         initializeView();
 
 
@@ -104,12 +105,33 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
 
+    public void scaleAllScreens() {
+        gameCanvas.heightProperty().addListener((ov, oldHeight, newHeight) ->{
+            if(gameCanvas.getWidth() <= 721) {
+                gameOver1.setLayoutX(450);
+                gameOver1.setLayoutY(400);
+                gameOver.setLayoutY(400);
+                gameOver.setLayoutX(450);
+                gameSet.setLayoutY(400);
+                gameSet.setLayoutX(450);
+                settingsSet.setLayoutY(400);
+                settingsSet.setLayoutX(450);
+                gameOverLbl.setLayoutY(400);
+                gameOverLbl.setLayoutX(450);
+                btnTab.setLayoutY(350);
+                btnTab.setLayoutX(280);
+                System.out.println("scaleing screens");
+            }
+
+        } );
+    }
+
     public void scaleWidth(){
         gameCanvas.widthProperty().addListener((ov, oldWidth, newWidth) ->{
 
             colorBG.setMinWidth((Double) newWidth-20);
             toolBar.setMinWidth((Double) newWidth-20);
-            toolBarUnder.setMinWidth((Double) newWidth);
+            toolBarUnder.setMinWidth((Double) newWidth-25);
             if(gameCanvas.getHeight() >= 900){
                 System.out.println("max height achieved");
             }else{
@@ -357,15 +379,8 @@ public class GameViewController2D implements GameViewController, Initializable, 
         gameHandler.getPlayer().getComponentByType(InventoryComponent.class)
                 .ifPresent(scriptableComponent ->
                         setSelectedWeapon(((InventoryComponent)scriptableComponent).getCurrentWeapon() ));
-        if(getSelectedWeapon() != null) {
-            weaponNameLabel.setText(getSelectedWeapon().getWeaponType().getDisplayName());
 
-            if (getSelectedWeapon().getAmmo() >= 0) {
-                weaponAmmoLabel.setText(String.valueOf(getSelectedWeapon().getAmmo()));
-            } else {
-                weaponAmmoLabel.setText(String.valueOf('\u221e'));
-            }
-        }
+        //weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getWeaponType().displayName());
     }
 
     public Weapon getSelectedWeapon() {
