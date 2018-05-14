@@ -333,7 +333,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
         gameHandler.getPlayer().getComponentByType(HealthComponent.class)
                 .ifPresent(scriptableComponent ->
-                        healthBar.setWidth(((HealthComponent)scriptableComponent).getHealthAmount()) );
+                        greenBar.setWidth(((HealthComponent)scriptableComponent).getHealthAmount()) );
 
         levelLabel.setText("Level "
                 + String.valueOf(gameHandler.getGameStateKeeper().getGameLevelHandler().getCurrentLevel()));

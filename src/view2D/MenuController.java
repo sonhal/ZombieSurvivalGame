@@ -27,7 +27,6 @@ public class MenuController implements Initializable{
     public Button play;
     public Button load;
     public Label infoText;
-    public ImageView backGroundImage;
     public BorderPane borderPane;
 
     @Override
@@ -72,7 +71,7 @@ public class MenuController implements Initializable{
         //Parent newRoot = FXMLLoader.load(ge45tClass().getResource("gameview.fxml"));
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource(
-                        "gameviewV2.fxml"
+                        "gameviewV3.fxml"
                 )
         );
         stage.setScene(new Scene(loader.load(), StaticFields.WINDOW_WIDTH, StaticFields.WINDOW_HEIGHT));
@@ -86,7 +85,7 @@ public class MenuController implements Initializable{
         Stage stage = (Stage)play.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource(
-                        "gameviewV2.fxml"
+                        "gameviewV3.fxml"
                 )
         );
         stage.setScene(new Scene(loader.load(), StaticFields.WINDOW_WIDTH, StaticFields.WINDOW_HEIGHT));
