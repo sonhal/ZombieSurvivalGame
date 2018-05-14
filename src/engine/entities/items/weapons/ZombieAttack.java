@@ -41,4 +41,9 @@ public class ZombieAttack extends Weapon {
     protected void tryAttack(AttackComponent attackComponent, Tile startTile){
         attackComponent.tryAttack(startTile);
     }
+
+    @Override
+    protected boolean canActivate() {
+        return false;
+    }
 }

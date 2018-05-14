@@ -5,6 +5,7 @@ import engine.controllers.GameHandler;
 import engine.controllers.GameInitializer;
 import engine.entities.components.InventoryComponent;
 import engine.entities.components.interfaces.HealthComponent;
+import engine.entities.components.interfaces.WeaponComponent;
 import engine.entities.items.weapons.Weapon;
 import engine.view.DrawableTile;
 import javafx.animation.KeyFrame;
@@ -186,6 +187,10 @@ public class GameViewController2D implements GameViewController, Initializable, 
         Platform.runLater(new Runnable() {
             public void run() {
                 gameCanvas.getScene().setOnKeyPressed(e -> {
+                    if (e.getCode() == KeyCode.E) {
+                        System.out.println("Up key was pressed");
+                        gameHandler.sendEvent(ActionEvent.CHANGE_WEAPON);
+                    }
                     if (e.getCode() == KeyCode.UP) {
                         System.out.println("Up key was pressed");
                         gameHandler.sendEvent(ActionEvent.MOVE_UP);
@@ -374,11 +379,11 @@ public class GameViewController2D implements GameViewController, Initializable, 
                 + String.valueOf(gameHandler.getGameStateKeeper().getPlayerGameScore().getScore()));
 
 
-        //The parameters weapon sprite, WeaponName, and Ammo should be displayed on screen.
-        //Weapon object can be reached by using the get selected weapon bellow.
-        gameHandler.getPlayer().getComponentByType(InventoryComponent.class)
+        //The parameters activeWeapon sprite, WeaponName, and Ammo should be displayed on screen.
+        //Weapon object can be reached by using the get selected activeWeapon bellow.
+        gameHandler.getPlayer().getComponentByType(WeaponComponent.class)
                 .ifPresent(scriptableComponent ->
-                        setSelectedWeapon(((InventoryComponent)scriptableComponent).getCurrentWeapon() ));
+                        setSelectedWeapon(((WeaponComponent)scriptableComponent).getActiveWeapon() ));
 
         //weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getWeaponType().displayName());
     }

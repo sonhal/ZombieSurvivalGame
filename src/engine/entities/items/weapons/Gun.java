@@ -14,17 +14,46 @@ import engine.controllers.Direction;
  */
 public class Gun extends Weapon {
 
+    protected int range;
+    protected int ammo;
+
     public Gun(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
-        super(weaponType, soundEffectComponent, attackComponent, updater, activateDelay, range, ammo);
+        super(weaponType, soundEffectComponent, attackComponent, updater, activateDelay);
+        this.range = range;
+        this.ammo = ammo;
 
     }
 
     @Override
     protected void addAttackToUpdateList(Tile startTile, Direction direction, int damage, Updater updater){
-        updater.addToUpdateList(GameObjectFactory.explodingBullet(startTile, direction, attackComponent.getDamage(), updater));
+        if (startTile.getGameObject() == null){
+            System.out.println("Amunition left on activeWeapon: " + ammo);
+            updater.addToUpdateList(GameObjectFactory.explodingBullet(startTile, direction, attackComponent.getDamage(), updater));
+            ammo--;
+        }
+        else {
+            tryAttack(attackComponent, startTile);
+        }
+
     }
 
     protected void tryAttack(AttackComponent attackComponent, Tile startTile){
         attackComponent.tryAttack(startTile);
+    }
+
+    @Override
+    protected boolean canActivate() {
+        return TimeService.canUpdate(activateDelay, lastActivateTime) && (ammo > 0 || ammo < -40);
+    }
+
+
+    @Override
+    public int getAmmo() {
+        return ammo;
+    }
+
+    @Override
+    public void setAmmo(int ammo) {
+        if(ammo > 0){ this.ammo = ammo;}
     }
 }

@@ -17,7 +17,7 @@ import engine.controllers.Direction;
 import java.io.Serializable;
 
 /**
-* Represents a weapon a player can pickup and use in the game.
+* Represents a activeWeapon a player can pickup and use in the game.
  */
 public abstract class Weapon implements Serializable{
 
@@ -26,19 +26,15 @@ public abstract class Weapon implements Serializable{
     protected Updater updater;
     protected double lastActivateTime;
     protected double activateDelay;
-    protected int range;
-    protected int ammo;
     protected Sprite sprite;
     protected SoundEffectComponent soundEffect;
 
-    public Weapon(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo){
+    public Weapon(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay){
         this.weaponType = weaponType;
         this.attackComponent  = attackComponent;
         this.updater = updater;
         this.lastActivateTime = System.currentTimeMillis();
         this.activateDelay = activateDelay;
-        this.range = range;
-        this.ammo = ammo;
         this.soundEffect = soundEffectComponent;
 
     }
@@ -53,24 +49,14 @@ public abstract class Weapon implements Serializable{
     }
 
     public boolean activate(Tile fromTile, Direction direction) {
-            System.out.println("Amunition left on weapon: " + ammo);
-        if(TimeService.canUpdate(activateDelay, lastActivateTime) && (ammo > 0 || ammo < -40)){
+
+        if(canActivate()){
             System.out.println("Weapon activated!");
             soundEffect.handle(new AttackCompletedEvent());
             soundEffect.update(null);
+
             Tile startTile = fromTile.getTileInDirection(direction);
-            //if adjacent Tile is occupied, hit StaticGameObject on Tile
-            if (startTile.getGameObject() != null){
-                //tryAttack(attackComponent, startTile);
-                addAttackToUpdateList(startTile, direction, attackComponent.getDamage(), updater);
-                ammo--;
-            }
-            //else instantiate Bullet and add it to the controllers update list
-            else {
-                addAttackToUpdateList(startTile, direction, attackComponent.getDamage(), updater);
-                ammo--;
-            }
-            System.out.println("Gun fired!");
+            addAttackToUpdateList(startTile, direction, attackComponent.getDamage(), updater);
             lastActivateTime = System.currentTimeMillis();
             return true;
         }
@@ -79,10 +65,11 @@ public abstract class Weapon implements Serializable{
 
     protected abstract void addAttackToUpdateList(Tile startTile, Direction direction, int damage, Updater updater);
     protected abstract void tryAttack(AttackComponent attackComponent, Tile startTile);
+    protected abstract boolean canActivate();
 
     /**
-     * Method to get the damage the weapon deals
-     * @return the damage the weapon deals
+     * Method to get the damage the activeWeapon deals
+     * @return the damage the activeWeapon deals
      */
     public SingleAttackComponent getAttackComponent() {
         return attackComponent;
@@ -93,10 +80,10 @@ public abstract class Weapon implements Serializable{
     }
 
     public int getAmmo() {
-        return ammo;
+        return 0;
     }
 
-    public void setAmmo(int ammo) { this.ammo = ammo; }
+    public void setAmmo(int ammo) { };
 
     public Sprite getSprite() {
         return sprite;

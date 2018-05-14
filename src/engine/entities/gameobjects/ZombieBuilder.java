@@ -5,7 +5,6 @@ import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.ZombieAttack;
 import engine.services.pathfinder.PathSearchService;
 import engine.world.Tile;
-import engine.world.World;
 
 import java.util.ArrayList;
 
@@ -43,7 +42,7 @@ public class ZombieBuilder {
             gc.addSprite(sprite);
         }
 
-        wc.setWeapon(new ZombieAttack());
+        wc.setActiveWeapon(new ZombieAttack());
 
         return new UpdatableGameObject.Builder(tc)
                 .addComponent(gc)
@@ -51,6 +50,7 @@ public class ZombieBuilder {
                 .addComponent(cc)
                 .addComponent(hc)
                 .addComponent(ic)
+                .addComponent(new LootDropComponent())
                 .addComponent(new SoundEffectComponent(500, blueprint.attackSound))
                 .build();
     }

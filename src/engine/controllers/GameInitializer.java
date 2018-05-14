@@ -84,8 +84,8 @@ public class GameInitializer {
         if(ComponentService.getComponentByType(player.getComponents(), WeaponComponent.class).isPresent()){
             SingleWeaponComponent weaponComponent = (SingleWeaponComponent)
                     ComponentService.getComponentByType(player.getComponents(), WeaponComponent.class).get();
-            if(weaponComponent.getWeapon() instanceof Gun){
-                Gun playerGun = (Gun)weaponComponent.getWeapon();
+            if(weaponComponent.getActiveWeapon() instanceof Gun){
+                Gun playerGun = (Gun)weaponComponent.getActiveWeapon();
                 playerGun.setController(gameUpdater);
             }
         }

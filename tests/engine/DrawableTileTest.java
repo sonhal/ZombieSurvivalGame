@@ -33,14 +33,14 @@ class DrawableTileTest {
     }
     @Test
     void setGameAndItem() {
-        testTile.setGameAndItem(null, new WeaponPickup(new Sprite(1), new Knife(WeaponType.BASIC_KNIFE, new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(1), updater, 4, 5,5 )));
+        testTile.setGameAndItem(null, new WeaponPickup(new Sprite(1), new Knife(WeaponType.BASIC_KNIFE, new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(1), updater, 4)));
             assertNull(testTile.getGameObject());
             assertNotNull(testTile.getItem());
     }
 
     @Test
     void getItem(){
-        testTile.setItem(new WeaponPickup(new Sprite(1), new Knife(WeaponType.BASIC_KNIFE, new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(1), updater, 4, 5 ,5)));
+        testTile.setItem(new WeaponPickup(new Sprite(1), new Knife(WeaponType.BASIC_KNIFE, new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(1), updater, 4)));
         assertNotNull(testTile.getItem());
     }
 }

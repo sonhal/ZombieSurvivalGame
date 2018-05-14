@@ -9,29 +9,25 @@ import engine.entities.items.weapons.Weapon;
 
 public class SingleWeaponComponent extends WeaponComponent {
 
-    private Weapon weapon;
+    protected Weapon activeWeapon;
     private Direction attackEvent;
 
     public SingleWeaponComponent(){
-        this.weapon = null;
+        this.activeWeapon = null;
     }
 
 
     public void attack(Direction direction, TransformComponent transformComponent, GameObject gameObject){
-        if (weapon != null){
-            if(weapon.activate(transformComponent.getCurrentTile(), direction)){
+        if (activeWeapon != null){
+            if(activeWeapon.activate(transformComponent.getCurrentTile(), direction)){
                 sendMessageToAllComponents(gameObject.getComponents(),
                         new AttackCompletedEvent());
             }
         }
     }
 
-    public void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-    }
-
-    public Weapon getWeapon() {
-        return weapon;
+    public void setActiveWeapon(Weapon weapon) {
+        this.activeWeapon = weapon;
     }
 
 
@@ -51,7 +47,7 @@ public class SingleWeaponComponent extends WeaponComponent {
             attackEvent = ((AttackEvent)event).getAttackDirection();
         }
         if(event instanceof PickUpWeaponEvent){
-            setWeapon(((PickUpWeaponEvent)event).getWeapon());
+            setActiveWeapon(((PickUpWeaponEvent)event).getWeapon());
         }
     }
 
@@ -63,5 +59,10 @@ public class SingleWeaponComponent extends WeaponComponent {
     @Override
     public void cleanUp(GameObject gameObject) {
 
+    }
+
+    @Override
+    public Weapon getActiveWeapon() {
+        return activeWeapon;
     }
 }

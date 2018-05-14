@@ -14,8 +14,8 @@ import engine.controllers.Direction;
  */
 public class Knife extends Weapon {
 
-    public Knife(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
-        super(weaponType, soundEffectComponent, attackComponent, updater, activateDelay, range, ammo);
+    public Knife(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay) {
+        super(weaponType, soundEffectComponent, attackComponent, updater, activateDelay);
 
     }
 
@@ -28,5 +28,10 @@ public class Knife extends Weapon {
     protected void tryAttack(AttackComponent attackComponent, Tile startTile){
 
         attackComponent.tryAttack(startTile);
+    }
+
+    @Override
+    protected boolean canActivate() {
+        return TimeService.canUpdate(activateDelay, lastActivateTime);
     }
 }
