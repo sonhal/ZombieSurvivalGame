@@ -269,6 +269,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
             }
         });
     }
+
     public void startLoadGame(GameViewController gameViewController){
         Platform.runLater(new Runnable() {
             public void run() {
@@ -277,6 +278,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
             }
         });
     }
+
     public void openMenu(){
         gameLoop.pause();
         colorBG.setVisible(true);
