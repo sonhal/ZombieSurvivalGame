@@ -16,13 +16,16 @@ public class LootDropComponent extends ScriptableComponent{
     private boolean isDead;
 
     private Item lootFactory(){
-        Random random = new Random();
-        int i = random.nextInt(100);
-        if (i < 50){
-            return new DroppedWeapon(WeaponType.BASIC_GUN ,new Sprite(2), "Gun", 40);
+        double i = Math.random() * 100;
+        if (i < 10){
+            return new DroppedWeapon(WeaponType.BASIC_GUN ,new Sprite(2), "Gun", 10);
         }
-        else {
+        else if (i > 10 && i< 20){
             return new HealthPotion(new Sprite(36), "HealthPotion", 100);
+        }else if (i > 20) {
+            return new DroppedWeapon(WeaponType.TWO_HANDED_GUN, new Sprite(2), "Two Handed Gun", 80);
+        }else{
+            return null;
         }
 
     }

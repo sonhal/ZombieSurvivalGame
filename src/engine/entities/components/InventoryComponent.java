@@ -9,6 +9,7 @@ import engine.entities.items.Item;
 import engine.entities.items.loot.DroppedWeapon;
 import engine.entities.items.loot.HealthPotion;
 import engine.entities.items.weapons.Gun;
+import engine.entities.items.weapons.TwoHandedGun;
 import engine.entities.items.weapons.Weapon;
 import engine.services.audio.Sound;
 
@@ -76,6 +77,7 @@ public class InventoryComponent extends ScriptableComponent {
     Weapon makeWeapon(DroppedWeapon droppedWeapon){
         switch (droppedWeapon.getWeaponType()){
             case BASIC_GUN: return new Gun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 1000, 2, 40);
+            case TWO_HANDED_GUN: return new TwoHandedGun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 1000, 2, 40);
             case MACHINE_GUN: return new Gun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 10, 4, 40);
             default: return null;
         }
