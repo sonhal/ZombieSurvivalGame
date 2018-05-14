@@ -1,6 +1,7 @@
 package engine.entities.items.weapons;
 
 import engine.controllers.Updater;
+import engine.entities.components.ComponentEvent.AttackCompletedEvent;
 import engine.entities.components.interfaces.AttackComponent;
 import engine.entities.gameobjects.GameObjectFactory;
 import engine.entities.components.*;
@@ -13,33 +14,29 @@ import engine.controllers.Direction;
  * Is meant to be held and activated by a SingleWeaponComponent
  */
 public class ZombieAttack extends Weapon {
-    SingleAttackComponent attackComponent = new SingleAttackComponent(4);
-        double lastActivateTime = System.currentTimeMillis();
-        double activateDelay = 4;
 
-    public ZombieAttack() {
-
-
+    public ZombieAttack(SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent,double activateDelay) {
+        super(WeaponType.ZOMBIE_ATTACK, soundEffectComponent, attackComponent, null, activateDelay);
     }
+
 
     @Override
     public boolean activate(Tile fromTile, Direction direction) {
         if(TimeService.canUpdate(activateDelay, lastActivateTime)){
-            System.out.println("Weapon activated!");
-            attackComponent.tryAttack(fromTile.getTileInDirection(direction));
-            lastActivateTime = System.currentTimeMillis();
+            tryAttack(fromTile, direction, updater);
             return true;
         }
         return false;
     }
 
+
     @Override
-    protected void addAttackToUpdateList(Tile startTile, Direction direction, int damage, Updater updater){
-
-    }
-
-    protected void tryAttack(AttackComponent attackComponent, Tile startTile){
-        attackComponent.tryAttack(startTile);
+    protected void tryAttack(Tile startTile, Direction direction, Updater updater) {
+        System.out.println("Weapon activated!");
+        soundEffect.handle(new AttackCompletedEvent());
+        soundEffect.update(null);
+        attackComponent.tryAttack(startTile.getTileInDirection(direction));
+        lastActivateTime = System.currentTimeMillis();
     }
 
     @Override

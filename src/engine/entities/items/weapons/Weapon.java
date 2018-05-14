@@ -3,14 +3,10 @@ package engine.entities.items.weapons;
 
 import engine.controllers.Updater;
 import engine.entities.components.ComponentEvent.AttackCompletedEvent;
-import engine.entities.components.ComponentEvent.AttackEvent;
 import engine.entities.components.SingleAttackComponent;
 import engine.entities.components.SoundEffectComponent;
 import engine.entities.components.interfaces.AttackComponent;
 import engine.entities.gameobjects.Sprite;
-import engine.entities.items.Item;
-import engine.services.TimeService;
-import engine.services.audio.Sound;
 import engine.world.Tile;
 import engine.controllers.Direction;
 
@@ -45,8 +41,9 @@ public abstract class Weapon implements Serializable{
             this.activateDelay = activateDelay;
     }
 
-    protected Weapon() {
-    }
+    protected abstract void tryAttack(Tile startTile, Direction direction, Updater updater);
+
+    protected abstract boolean canActivate();
 
     public boolean activate(Tile fromTile, Direction direction) {
 
@@ -56,16 +53,16 @@ public abstract class Weapon implements Serializable{
             soundEffect.update(null);
 
             Tile startTile = fromTile.getTileInDirection(direction);
-            addAttackToUpdateList(startTile, direction, attackComponent.getDamage(), updater);
+            tryAttack(startTile, direction, updater);
             lastActivateTime = System.currentTimeMillis();
             return true;
         }
         return false;
     }
 
-    protected abstract void addAttackToUpdateList(Tile startTile, Direction direction, int damage, Updater updater);
-    protected abstract void tryAttack(AttackComponent attackComponent, Tile startTile);
-    protected abstract boolean canActivate();
+    protected void meleeAttack(AttackComponent attackComponent, Tile startTile){
+        attackComponent.tryAttack(startTile);
+    }
 
     /**
      * Method to get the damage the activeWeapon deals

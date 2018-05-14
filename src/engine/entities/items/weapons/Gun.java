@@ -25,21 +25,18 @@ public class Gun extends Weapon {
     }
 
     @Override
-    protected void addAttackToUpdateList(Tile startTile, Direction direction, int damage, Updater updater){
+    protected void tryAttack(Tile startTile, Direction direction, Updater updater){
         if (startTile.getGameObject() == null){
             System.out.println("Amunition left on activeWeapon: " + ammo);
             updater.addToUpdateList(GameObjectFactory.explodingBullet(startTile, direction, attackComponent.getDamage(), updater));
             ammo--;
         }
         else {
-            tryAttack(attackComponent, startTile);
+            meleeAttack(attackComponent, startTile);
         }
 
     }
 
-    protected void tryAttack(AttackComponent attackComponent, Tile startTile){
-        attackComponent.tryAttack(startTile);
-    }
 
     @Override
     protected boolean canActivate() {
