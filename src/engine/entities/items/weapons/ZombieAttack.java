@@ -12,16 +12,30 @@ import engine.controllers.Direction;
  * Weapon subclass that fires Bullets.
  * Is meant to be held and activated by a SingleWeaponComponent
  */
-public class Gun extends Weapon {
+public class ZombieAttack extends Weapon {
+    SingleAttackComponent attackComponent = new SingleAttackComponent(4);
+        double lastActivateTime = System.currentTimeMillis();
+        double activateDelay = 4;
 
-    public Gun(WeaponType weaponType, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
-        super(weaponType, attackComponent, updater, activateDelay, range, ammo);
+    public ZombieAttack() {
+
 
     }
 
     @Override
+    public boolean activate(Tile fromTile, Direction direction) {
+        if(TimeService.canUpdate(activateDelay, lastActivateTime)){
+            System.out.println("Weapon activated!");
+            attackComponent.tryAttack(fromTile.getTileInDirection(direction));
+            lastActivateTime = System.currentTimeMillis();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     protected void addAttackToUpdateList(Tile startTile, Direction direction, int damage, Updater updater){
-        updater.addToUpdateList(GameObjectFactory.explodingBullet(startTile, direction, attackComponent.getDamage(), updater));
+
     }
 
     protected void tryAttack(AttackComponent attackComponent, Tile startTile){

@@ -3,7 +3,9 @@ package view2D;
 import engine.controllers.ActionEvent;
 import engine.controllers.GameHandler;
 import engine.controllers.GameInitializer;
+import engine.entities.components.InventoryComponent;
 import engine.entities.components.interfaces.HealthComponent;
+import engine.entities.items.weapons.Weapon;
 import engine.view.DrawableTile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -42,6 +44,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     private DrawableTile[][] drawableMatrix;
     private Renderer renderer;
     private Timeline gameLoop;
+    private Weapon selectedWeapon;
 
     @FXML
     private
@@ -65,6 +68,8 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @FXML
     private Rectangle healthBar;
 
+    @FXML
+    private Label weaponAmmoLabel, weaponNameLabel;
 
 
     @Override
@@ -173,6 +178,10 @@ public class GameViewController2D implements GameViewController, Initializable, 
                     if (e.getCode() == KeyCode.SPACE) {
                         System.out.println("Space key was pressed");
                         gameHandler.sendEvent(ActionEvent.ATTACK_UP);
+                    }
+                    if (e.getCode() == KeyCode.C) {
+                        System.out.println("C key was pressed");
+                        gameHandler.sendEvent(ActionEvent.CHANGE_WEAPON);
                     }
                     if (e.getCode() == KeyCode.ESCAPE) {
                         System.out.println("Escape key was pressed");
@@ -331,5 +340,22 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
         scoreLabel.setText("Score "
                 + String.valueOf(gameHandler.getGameStateKeeper().getPlayerGameScore().getScore()));
+
+
+        //The parameters weapon sprite, WeaponName, and Ammo should be displayed on screen.
+        //Weapon object can be reached by using the get selected weapon bellow.
+       /* gameHandler.getPlayer().getComponentByType(InventoryComponent.class)
+                .ifPresent(scriptableComponent ->
+                        setSelectedWeapon(((InventoryComponent)scriptableComponent).getCurrentWeapon() ));
+
+        weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getName());*/
+    }
+
+    public Weapon getSelectedWeapon() {
+        return selectedWeapon;
+    }
+
+    public void setSelectedWeapon(Weapon selectedWeapon) {
+        this.selectedWeapon = selectedWeapon;
     }
 }

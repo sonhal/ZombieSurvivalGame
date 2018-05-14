@@ -15,10 +15,5 @@ public class WeaponPickup extends Item {
         super(sprite);
         this.weapon = weapon;
     }
-
-
-    @Override
-    public Weapon pickup() {
-        return this.weapon;
-    }
+    
 }

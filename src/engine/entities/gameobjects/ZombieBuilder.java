@@ -2,7 +2,7 @@ package engine.entities.gameobjects;
 
 import engine.entities.components.*;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
-import engine.entities.items.weapons.MeleeWeapon;
+import engine.entities.items.weapons.ZombieAttack;
 import engine.services.pathfinder.PathSearchService;
 import engine.world.Tile;
 import engine.world.World;
@@ -43,7 +43,7 @@ public class ZombieBuilder {
             gc.addSprite(sprite);
         }
 
-        wc.setWeapon(new MeleeWeapon(500 ,new SingleAttackComponent(blueprint.attackDamage)));
+        wc.setWeapon(new ZombieAttack());
 
         return new UpdatableGameObject.Builder(tc)
                 .addComponent(gc)
