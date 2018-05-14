@@ -41,11 +41,12 @@ class ConnectLeftRight implements Runnable {
         Iterator xIterator = worldToBeConnected.iterator();
         Tile last = null;
         Tile beginning = null;
+        Tile current;
         if (xIterator.hasNext()) {
-            beginning = (Tile) xIterator.next();
+            last = beginning = (Tile) xIterator.next();
         }
         while (xIterator.hasNext()) {
-            Tile current = (Tile) xIterator.next();
+             current = (Tile) xIterator.next();
             if (last != null && current != null && last.getCordX() == current.getCordX() - 1) {
                 current.setLeft(last);
                 last.setRight(current);
