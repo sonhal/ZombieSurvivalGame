@@ -10,12 +10,12 @@ import engine.controllers.Direction;
 
 /**
  * Weapon subclass that fires Bullets.
- * Is meant to be held and activated by a SingleWeaponComponent
+ * Is meant to be held and activated by a WeaponComponent
  */
 public class Gun extends Weapon {
 
-    public Gun(WeaponType weaponType, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
-        super(weaponType, attackComponent, updater, activateDelay, range, ammo);
+    public Gun(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
+        super(weaponType, soundEffectComponent, attackComponent, updater, activateDelay, range, ammo);
 
     }
 

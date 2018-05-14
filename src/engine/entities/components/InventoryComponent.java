@@ -16,6 +16,7 @@ import engine.entities.items.weapons.Gun;
 import engine.entities.items.weapons.Knife;
 import engine.entities.items.weapons.Weapon;
 import engine.entities.items.weapons.WeaponType;
+import engine.services.audio.Sound;
 import engine.world.Tile;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class InventoryComponent extends ScriptableComponent {
 
     public InventoryComponent(SingleWeaponComponent singleWeaponComponent, Updater updater) {
         this.singleWeaponComponent = singleWeaponComponent;
-        weaponsinventory.add(new Knife(WeaponType.BASIC_KNIFE, new SingleAttackComponent(40), updater, 4, 5, -42  ));
+        weaponsinventory.add(new Knife(WeaponType.BASIC_KNIFE, new SoundEffectComponent(100, Sound.KNIFE_ATTACK), new SingleAttackComponent(40), updater, 4, 5, -42  ));
         singleWeaponComponent.setWeapon(weaponsinventory.get(0));
         this.updater = updater;
     }
@@ -93,8 +94,8 @@ public class InventoryComponent extends ScriptableComponent {
 
     Weapon makeWeapon(DroppedWeapon droppedWeapon){
         switch (droppedWeapon.getWeaponType()){
-            case BASIC_GUN: return new Gun(droppedWeapon.getWeaponType(), new SingleAttackComponent(80), updater, 1000, 2, 40);
-            case MACHINE_GUN: return new Gun(droppedWeapon.getWeaponType(), new SingleAttackComponent(80), updater, 10, 4, 40);
+            case BASIC_GUN: return new Gun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 1000, 2, 40);
+            case MACHINE_GUN: return new Gun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 10, 4, 40);
             default: return null;
         }
 
