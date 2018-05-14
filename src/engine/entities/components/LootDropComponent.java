@@ -22,10 +22,13 @@ public class LootDropComponent extends ScriptableComponent{
         }
         else if (i > 10 && i< 20){
             return new HealthPotion(new Sprite(36), "HealthPotion", 100);
-        }else if (i > 20) {
+        }else if (i > 20 && i < 30) {
             return new DroppedWeapon(WeaponType.TWO_HANDED_GUN, new Sprite(2), "Two Handed Gun", 80);
+        }else if (i > 30){
+            return new DroppedWeapon(WeaponType.SHOT_GUN,new Sprite(2),"ShotGun",30);
         }else{
-            return null;
+                return null;
+
         }
 
     }
