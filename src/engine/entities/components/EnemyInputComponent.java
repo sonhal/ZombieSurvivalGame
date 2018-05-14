@@ -57,7 +57,6 @@ public class EnemyInputComponent extends InputComponent{
         else {
             if( nextPath != null && (nextPath.isDone())){
                 try {
-                    System.out.println("got path");
                     waitingForPath = false;
                     path = nextPath.get();
                     return path.getNextStepDirection();
@@ -68,7 +67,6 @@ public class EnemyInputComponent extends InputComponent{
                 }
             }
         }
-        System.out.println("No step");
         return getDirectionAgainstTile(gameObject, target.getTransformComponent().getCurrentTile());
     }
 
