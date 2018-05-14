@@ -39,8 +39,6 @@ public class PlayerBuilder {
                 .addComponent(new KillableHealthComponent(200))
                 .addComponent(gc)
                 .addComponent(wc)
-                .addComponent(new SoundEffectComponent(100, Sound.HIT_1))
-                .addComponent(new SoundEffectComponent(100, Sound.HIT_1))
                 .addComponent(inventoryComponent)
                 .build();
 

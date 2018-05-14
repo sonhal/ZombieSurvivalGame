@@ -27,7 +27,6 @@ public class MenuController implements Initializable{
     public Button play;
     public Button load;
     public Label infoText;
-    public ImageView backGroundImage;
     public BorderPane borderPane;
 
     @Override

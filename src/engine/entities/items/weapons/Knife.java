@@ -14,8 +14,8 @@ import engine.controllers.Direction;
  */
 public class Knife extends Weapon {
 
-    public Knife(WeaponType weaponType, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
-        super(weaponType, attackComponent, updater, activateDelay, range, ammo);
+    public Knife(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
+        super(weaponType, soundEffectComponent, attackComponent, updater, activateDelay, range, ammo);
 
     }
 

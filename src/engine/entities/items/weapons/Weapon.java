@@ -2,11 +2,15 @@ package engine.entities.items.weapons;
 
 
 import engine.controllers.Updater;
+import engine.entities.components.ComponentEvent.AttackCompletedEvent;
+import engine.entities.components.ComponentEvent.AttackEvent;
 import engine.entities.components.SingleAttackComponent;
+import engine.entities.components.SoundEffectComponent;
 import engine.entities.components.interfaces.AttackComponent;
 import engine.entities.gameobjects.Sprite;
 import engine.entities.items.Item;
 import engine.services.TimeService;
+import engine.services.audio.Sound;
 import engine.world.Tile;
 import engine.controllers.Direction;
 
@@ -25,8 +29,9 @@ public abstract class Weapon implements Serializable{
     protected int range;
     protected int ammo;
     protected Sprite sprite;
+    protected SoundEffectComponent soundEffect;
 
-    public Weapon(WeaponType weaponType, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo){
+    public Weapon(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo){
         this.weaponType = weaponType;
         this.attackComponent  = attackComponent;
         this.updater = updater;
@@ -34,6 +39,7 @@ public abstract class Weapon implements Serializable{
         this.activateDelay = activateDelay;
         this.range = range;
         this.ammo = ammo;
+        this.soundEffect = soundEffectComponent;
 
     }
 
@@ -50,6 +56,8 @@ public abstract class Weapon implements Serializable{
             System.out.println("Amunition left on weapon: " + ammo);
         if(TimeService.canUpdate(activateDelay, lastActivateTime) && (ammo > 0 || ammo < -40)){
             System.out.println("Weapon activated!");
+            soundEffect.handle(new AttackCompletedEvent());
+            soundEffect.update(null);
             Tile startTile = fromTile.getTileInDirection(direction);
             //if adjacent Tile is occupied, hit StaticGameObject on Tile
             if (startTile.getGameObject() != null){
