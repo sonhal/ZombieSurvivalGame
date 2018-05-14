@@ -1,5 +1,7 @@
 package engine.controllers;
 
+import engine.entities.components.EnemyInputComponent;
+import engine.entities.gameobjects.interfaces.GameObject;
 import engine.gamestate.messages.EnemyKilledMessage;
 import engine.gamestate.messages.GameEventMessage;
 import engine.gamestate.messages.NewLevelMessage;
@@ -98,5 +100,10 @@ public class NpcController extends Updater implements Messenger {
         if(gameStateMessengerMediator != null){
             gameStateMessengerMediator.broadcast(this, message);
         }
+    }
+
+    public void cleanUp(){
+        getUpdateObjects().forEach(updatable -> ((GameObject) updatable).getComponentByType(EnemyInputComponent.class).ifPresent(scriptableComponent -> scriptableComponent.cleanUp((GameObject)updatable)));
+        pathSearchService = null;
     }
 }

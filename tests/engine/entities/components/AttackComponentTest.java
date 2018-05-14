@@ -43,7 +43,6 @@ class AttackComponentTest {
         testObject = new StaticGameObject.Builder(new StaticTransformComponent(testTile))
                 .addComponent(testComponent)
                 .build();
-
     }
 
     @Test

@@ -1,5 +1,6 @@
 package engine.controllers;
 
+import engine.entities.components.EnemyInputComponent;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.components.interfaces.WeaponComponent;
 import engine.gamestate.GameStateKeeper;
@@ -79,6 +80,7 @@ public class GameInitializer {
         gameUpdater.addToUpdateList(player);
         for (IUpdatableGameObject enemy:
                 SaveGameHandler.getEnemyInstances(worldTiles)) {
+            enemy.getComponentByType(EnemyInputComponent.class).ifPresent(scriptableComponent -> ((EnemyInputComponent)scriptableComponent).setPathSearchService(pathSearchService));
             npcController.addToUpdateList(enemy);
         }
         if(ComponentService.getComponentByType(player.getComponents(), WeaponComponent.class).isPresent()){

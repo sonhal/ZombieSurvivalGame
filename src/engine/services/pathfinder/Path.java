@@ -2,6 +2,7 @@ package engine.services.pathfinder;
 
 import engine.controllers.Direction;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * the GameObject can get the path data as a in[] containing the x, y values of the next Node in the path or
  * as Directions from the last til to the next in the Path.
  */
-public class Path {
+public class Path implements Serializable {
 
     private List<int[]> path;
     private int[] lastPoint;

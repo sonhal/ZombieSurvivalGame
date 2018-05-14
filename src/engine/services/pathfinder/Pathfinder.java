@@ -108,15 +108,9 @@ public class Pathfinder {
                             neighbour.heuristic = getHeuristicCost(xPoint, yPoint, convertedTargetX, convertedTargetY);
                             addToOpen(neighbour);
                         }
-
                     }
-
-
-
                 }
             }
-
-
         }
         //If we could not find a path we try the best guess
         if(nodes.getNodeByTranslatedCoordinates(convertedTargetX, convertedTargetY).parent == null){

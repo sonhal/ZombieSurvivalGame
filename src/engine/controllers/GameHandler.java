@@ -130,7 +130,9 @@ public class GameHandler extends Updater {
 
     public void saveGame(){
         shutDown();
+        npcController.cleanUp();
         gameViewController = null;
+        pathSearchService = null;
         SaveGameHandler.saveGame(world.getWorld());
         System.out.println("Game saved");
     }
@@ -138,7 +140,7 @@ public class GameHandler extends Updater {
     public void shutDown(){
         AudioPlayer.getInstance().stopBackgroundMusic();
         AudioPlayer.getInstance().shutdown();
-        pathSearchService.shutdown();
+        //pathSearchService.shutdown();
     }
 
     public GameStateKeeper getGameStateKeeper() {
