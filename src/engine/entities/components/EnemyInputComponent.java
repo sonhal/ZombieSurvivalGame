@@ -26,8 +26,11 @@ public class EnemyInputComponent extends InputComponent{
     private Path enemyPath;
     private PathSearchService pathSearchService;
     private Future<Path> currentPath;
-    private Optional<Future<Path>> nextPath;
+    private Future<Path> nextPath;
     private Path path;
+    private boolean waitingForPath;
+    private static final double WAIT_TIME = 800;
+    private double timeWaited;
 
 
     public EnemyInputComponent(GameObject target, PathSearchService pathSearchService, double sendEventDelay){
@@ -39,34 +42,33 @@ public class EnemyInputComponent extends InputComponent{
 
 
     private Direction getNextDirection(GameObject gameObject){
-        Direction nextStep = null;
+        if(path != null){
+            Direction nextStep = path.getNextStepDirection();
+            if(nextStep != null){
+                waitingForPath = true;
+                return nextStep;
 
-        if(nextPath != null && nextPath.isPresent()){
-            currentPath = nextPath.get();
-            nextPath = null;
-        }
-
-        if(currentPath !=null && currentPath.isDone()){
-            try {
-                path = currentPath.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
+            }
+            else {
+                path = null;
+                waitingForPath = false;
             }
         }
-
-        if(path != null){
-            nextStep = path.getNextStepDirection();
-        }
         else {
-            System.out.println("NULL path");
+            if( nextPath != null && (nextPath.isDone())){
+                try {
+                    System.out.println("got path");
+                    waitingForPath = false;
+                    path = nextPath.get();
+                    return path.getNextStepDirection();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-
-        if(nextStep != null){
-            return nextStep;
-        }
-        System.out.println("Close step active");
+        System.out.println("No step");
         return getDirectionAgainstTile(gameObject, target.getTransformComponent().getCurrentTile());
     }
 
@@ -81,19 +83,26 @@ public class EnemyInputComponent extends InputComponent{
 
     @Override
     public void update(GameObject gameObject) {
-        Random random = new Random();
 
-
-        if(canActivate(2000 +(random.nextInt(1000)), lastPathSearch)){
-            Tile currentTile = gameObject.getTransformComponent().getCurrentTile();
-            nextPath = pathSearchService.getNewPath(currentTile.getCordX(), currentTile.getCordY(),
-                    targetTransformComponent.getCurrentTile().getCordX(), targetTransformComponent.getCurrentTile().getCordY());
+        if((canActivate(3000, lastPathSearch)) && (!waitingForPath)){
             lastPathSearch = System.currentTimeMillis();
+
+            Tile currentTile = gameObject.getTransformComponent().getCurrentTile();
+            Optional<Future<Path>> oFuturePath = pathSearchService.getNewPath(currentTile.getCordX(), currentTile.getCordY(),
+                    targetTransformComponent.getCurrentTile().getCordX(), targetTransformComponent.getCurrentTile().getCordY());
+           if(oFuturePath.isPresent()){
+               System.out.println("Got nextpath");
+               waitingForPath = true;
+               nextPath = oFuturePath.get();
+           }
+
         }
+
 
 
         //If Player is in range, attack Player
         if(isPlayerInRange(gameObject) != null){
+            System.out.println("attack");
             sendMessageToAllComponents(gameObject.getComponents(), new AttackEvent(isPlayerInRange(gameObject)));
         }
         //If not, Move towards Player
@@ -117,10 +126,6 @@ public class EnemyInputComponent extends InputComponent{
             if (currentPath != null){
                 currentPath.cancel(true);
             }
-            if(nextPath != null){
-                nextPath.ifPresent(pathFuture -> pathFuture.cancel(true));
-            }
-
         }
 
     }
@@ -134,7 +139,7 @@ public class EnemyInputComponent extends InputComponent{
         this.gameObjectTransformComponent = gameObject.getTransformComponent();
 
         lastEventSent = System.currentTimeMillis();
-        lastPathSearch = System.currentTimeMillis();
+
     }
 
     @Override

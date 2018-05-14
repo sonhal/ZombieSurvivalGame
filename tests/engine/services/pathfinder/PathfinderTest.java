@@ -18,26 +18,52 @@ class PathfinderTest {
         world = new World();
         world.createNewGameWorld(50);
         nodeMap = new NodeMap(world);
-        Heuristic heuristic = new Heuristic();
-        pathfinder = new Pathfinder(17, nodeMap, heuristic);
+        ManhattanHeuristic heuristic = new ManhattanHeuristic();
+        pathfinder = new Pathfinder(100, nodeMap, heuristic);
     }
 
     @Test
     void findPath() {
-        Path path = pathfinder.findPath(1,1,2,3);
+        Path path = pathfinder.findPath(1,1,-40,-40);
         assertNotNull(path);
-        int[] step = path.getStep();
-        while (step != null){
-            System.out.println(step[0] + " " + step[1]);
-            step = path.getStep();
+        Direction direction = path.getNextStepDirection();
+        while (direction != null){
+            System.out.println(direction);
+            direction = path.getNextStepDirection();
         }
-        Path path2 = pathfinder.findPath(1,1,2,3);
-        assertNotNull(path2);
-        Direction step2 = path2.getNextStepDirection();
-        while (step2 != null){
-            System.out.println(step2);
-            step2 = path2.getNextStepDirection();
+        pathfinder = new Pathfinder(100, nodeMap, new ManhattanHeuristic());
+        Path path2 = pathfinder.findPath(1,1,-40,-40);
+        int[] point = path2.getNextStepCoordinates();
+        while (point != null){
+            System.out.println(point[0] + " " + point[1]);
+            point = path2.getNextStepCoordinates();
         }
+    }
 
+    @Test
+    void findNegativePath(){
+        Path path = pathfinder.findPath(1,1,-40,-40);
+        assertNotNull(path);
+    }
+
+    @Test
+    void findPositivePath(){
+        Path path = pathfinder.findPath(1,1,40,40);
+        assertNotNull(path);
+    }
+
+    @Test
+    void findPositiveNegativePath(){
+        Path path = pathfinder.findPath(1,1,-40,40);
+        assertNotNull(path);
+        pathfinder = new Pathfinder(100, nodeMap, new ManhattanHeuristic());
+        path = pathfinder.findPath(1,1,40,-40);
+        assertNotNull(path);
+        pathfinder = new Pathfinder(100, nodeMap, new ManhattanHeuristic());
+        path = pathfinder.findPath(1,-1,40,40);
+        assertNotNull(path);
+        pathfinder = new Pathfinder(100, nodeMap, new ManhattanHeuristic());
+        path = pathfinder.findPath(-1,1,40,40);
+        assertNotNull(path);
     }
 }

@@ -15,19 +15,12 @@ class PathSearchServiceTest {
     World world;
     PathSearchService pathSearchService;
     Future<Path> pathFuture;
-    static AsyncPathReceiver receiver;
 
     @BeforeEach
     void setUp() {
         world = new World();
         world.createNewGameWorld(10);
         pathSearchService = new PathSearchService(world);
-        receiver = new AsyncPathReceiver() {
-            @Override
-            public void receiveNewPath(Future<Path> newPath) {
-                pathFuture = newPath;
-            }
-        };
     }
 
     @Test
