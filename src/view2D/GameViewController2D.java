@@ -378,7 +378,15 @@ public class GameViewController2D implements GameViewController, Initializable, 
                 .ifPresent(scriptableComponent ->
                         setSelectedWeapon(((InventoryComponent)scriptableComponent).getCurrentWeapon() ));
 
-        //weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getWeaponType().displayName());
+        if (getSelectedWeapon() != null){
+            if (getSelectedWeapon().getAmmo() >= 0){
+                weaponAmmoLabel.setText(String.valueOf(getSelectedWeapon().getAmmo()));
+            }else{
+                weaponAmmoLabel.setText(Character.toString('\u221E'));
+            }
+
+        weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getWeaponType().getDisplayName());
+        }
     }
 
     public Weapon getSelectedWeapon() {
