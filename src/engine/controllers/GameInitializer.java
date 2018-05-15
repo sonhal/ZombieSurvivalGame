@@ -51,7 +51,7 @@ public class GameInitializer {
 
         GameStateKeeper gameStateKeeper = new GameStateKeeper(gamerMediator);
         return new GameHandler(gameViewController,world,gameUpdater,
-                eventHandler, player, gameStateKeeper, pathSearchService);
+                eventHandler, player, gameStateKeeper, pathSearchService, gamerMediator);
     }
 
     /**

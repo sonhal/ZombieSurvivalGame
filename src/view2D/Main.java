@@ -26,7 +26,6 @@ public class Main extends Application {
     public void stop() throws Exception {
         super.stop();
         //Make sure that the AudioPlayer has properly shutdown
-        //[TODO] make sure pathfinderService is shutdown here as well
         AudioPlayer.getInstance().shutdown();
         Platform.exit();
         System.exit(0);

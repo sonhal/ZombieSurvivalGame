@@ -7,6 +7,8 @@ import engine.entities.components.InventoryComponent;
 import engine.entities.components.interfaces.HealthComponent;
 import engine.entities.components.interfaces.WeaponComponent;
 import engine.entities.items.weapons.Weapon;
+import engine.gamestate.HighScoreData;
+import engine.services.save.SaveGameHandler;
 import engine.view.DrawableTile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -23,6 +25,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -42,6 +45,8 @@ import java.util.ResourceBundle;
  * Controller for the application window during game play
  */
 public class GameViewController2D implements GameViewController, Initializable, Serializable{
+
+
 
     private GameHandler gameHandler;
     private DrawableTile[][] drawableMatrix;
@@ -76,6 +81,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @FXML
     private ImageView pistol, machinegun, canongun, knife;
+
+    @FXML
+    private TextArea highscoreText, highscoreText2;
 
 
     @Override
@@ -238,6 +246,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
     public void initializeView(){
+        highscoreText.setEditable(false);
         colorBG.setManaged(false);
         colorBG.setVisible(false);
         settingsSet.setVisible(false);
@@ -270,8 +279,14 @@ public class GameViewController2D implements GameViewController, Initializable, 
         stage.getScene().setFill(Color.BLACK);
     }
 
-    public void goToDeathScreen() throws IOException {
+    public void goToDeathScreen() {
         final BooleanProperty firstTime = new SimpleBooleanProperty(true);
+        HighScoreData highScoreData = SaveGameHandler.loadHighscore();
+        StringBuilder builder = new StringBuilder();
+        highScoreData.getHighscoreSet().forEach(highScoreEntry -> builder.append(highScoreEntry +"\n"));
+        System.out.println(builder.toString());
+        highscoreText2.setStyle("-fx-text-alignment: center;");
+        highscoreText2.setText(builder.toString());
         stopGameLoop();
         System.out.println("Game ended");
         gameOver1.setVisible(true);

@@ -3,6 +3,7 @@ package engine.gamestate;
 import engine.gamestate.messages.EnemyKilledMessage;
 import engine.gamestate.messages.GameEventMessage;
 import engine.controllers.interfaces.Messenger;
+import engine.services.save.SaveGameHandler;
 
 import java.io.Serializable;
 
@@ -46,6 +47,10 @@ public class GameStateKeeper implements Messenger, Serializable {
     @Override
     public void sendMessage(GameEventMessage message) {
 
+    }
+
+    public void saveScore(){
+        SaveGameHandler.SaveScore(playerGameScore.getScore());
     }
 
     /**

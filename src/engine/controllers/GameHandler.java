@@ -35,7 +35,7 @@ public class GameHandler extends Updater {
 
     public GameHandler(GameViewController gameViewController2D, World gameWorld, GameUpdater gameUpdater,
                        EventHandler eventHandler, IUpdatableGameObject player,
-                       GameStateKeeper gameStateKeeper, PathSearchService pathSearchService){
+                       GameStateKeeper gameStateKeeper, PathSearchService pathSearchService, GameStateMessengerMediator messengerMediator){
         //Set gameplay components
         System.out.println("GameHandler active");
         this.gameViewController = gameViewController2D;
@@ -43,7 +43,7 @@ public class GameHandler extends Updater {
         this.world = gameWorld;
         this.gameUpdater = gameUpdater;
         this.player = player;
-        this.gameStateMessenger = new GameStateMessengerMediator();
+        this.gameStateMessenger = messengerMediator;
         this.npcController  = new NpcController(player, gameStateMessenger, this);
         this.pathSearchService = pathSearchService;
 
@@ -110,6 +110,7 @@ public class GameHandler extends Updater {
     public void handlePlayerDeath(){
         try {
             shutDown();
+            gameStateKeeper.saveScore();
             System.out.println("Game ended");
             gameViewController.goToDeathScreen();
         }catch (IOException err){

@@ -144,7 +144,7 @@
                                     <Font name="SansSerif Regular" size="40.0" />
                                  </font>
                               </Label>
-                              <TextArea layoutX="14.0" layoutY="168.0" prefHeight="281.0" prefWidth="402.0" />
+                              <TextArea fx:id="highscoreText" text="HAAAAAU" editable="false" layoutX="14.0" layoutY="168.0" prefHeight="281.0" prefWidth="402.0" />
                            </children>
                         </Pane>
                         <Pane fx:id="gameOver1" layoutX="200.0" layoutY="146.0" prefHeight="510.0" prefWidth="431.0" style="-fx-background-color: #1C1C1C;">
@@ -175,7 +175,7 @@
                                     <DropShadow />
                                  </effect>
                               </Label>
-                              <TextArea layoutX="14.0" layoutY="168.0" prefHeight="281.0" prefWidth="402.0" />
+                              <TextArea fx:id="highscoreText2" editable="false" layoutX="14.0" layoutY="168.0" prefHeight="281.0" prefWidth="402.0" />
                            </children>
                         </Pane>
                      </children>
