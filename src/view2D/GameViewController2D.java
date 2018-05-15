@@ -28,6 +28,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -43,8 +44,6 @@ import java.util.ResourceBundle;
  * Controller for the application window during game play
  */
 public class GameViewController2D implements GameViewController, Initializable, Serializable{
-
-
 
     private GameHandler gameHandler;
     private DrawableTile[][] drawableMatrix;
@@ -65,14 +64,14 @@ public class GameViewController2D implements GameViewController, Initializable, 
     Canvas gameCanvas;
 
     @FXML
-    private BorderPane TabMenu;
+    private TabPane TabMenu;
 
     @FXML
     private Tab tabGame, tabSettings, tabHighscore;
 
     @FXML
     private
-    Pane  colorBG, gameOver1, toolBar, toolBarUnder, hideBlood;
+    Pane  gameOver1, toolBar, toolBarUnder, hideBlood;
 
     @FXML
     private Rectangle redBar, greenBar;
@@ -86,6 +85,12 @@ public class GameViewController2D implements GameViewController, Initializable, 
     @FXML
     private TextArea highscoreText, highscoreText2;
 
+    @FXML
+    private BorderPane borderPane, menuBorderPane;
+
+    @FXML
+    private StackPane stackPane;
+
 
     @Override
     public void updateDrawableState(DrawableTile[][] drawableMatrix) {
@@ -94,14 +99,37 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @Override
     public void initializeGameEnv() {
-        scaleWidth();
-        scaleHeight();
+        //scaleWidth();
+        //scaleHeight();
         //scaleAllScreens();
         initializeView();
-
-
-
         System.out.println("Game controller active 2");
+
+        menuBorderPane.setMaxWidth(400);
+        menuBorderPane.setMaxHeight(400);
+        if(stackPane.getHeight() < stackPane.getWidth()){
+            gameCanvas.setHeight(stackPane.getHeight());
+            gameCanvas.setWidth(stackPane.getHeight());
+        }
+        else{
+            gameCanvas.setHeight(stackPane.getWidth());
+            gameCanvas.setWidth(stackPane.getWidth());
+        }
+
+        stackPane.heightProperty().addListener((ov, oldHeight, newHeight) -> {
+            if(stackPane.getWidth() > newHeight.doubleValue()){
+                gameCanvas.setHeight(newHeight.doubleValue());
+                gameCanvas.setWidth(newHeight.doubleValue());
+            }
+        });
+
+        stackPane.widthProperty().addListener((ov, oldHeight, newWidth) -> {
+                if(stackPane.getHeight() > newWidth.doubleValue()){
+                    gameCanvas.setHeight(newWidth.doubleValue());
+                    gameCanvas.setWidth(newWidth.doubleValue());
+                }
+        });
+
 
         renderer = new Renderer(gameCanvas);
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
@@ -112,42 +140,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     public void startGameloop(){
         runViewTick();
-    }
-
-
-    public void scaleWidth(){
-        gameCanvas.widthProperty().addListener((ov, oldWidth, newWidth) ->{
-
-            if(gameCanvas.getHeight() >= 900){
-                TabMenu.setLayoutX(500);
-            }else {
-                TabMenu.setLayoutX(newWidth.doubleValue()/2 - (TabMenu.widthProperty().getValue() / 2));
-            }
-
-            colorBG.setMinWidth((Double) newWidth-20);
-            toolBar.setMinWidth((Double) newWidth-20);
-            toolBarUnder.setMinWidth((Double) newWidth-25);
-        } );
-    }
-
-    public void scaleHeight(){
-        gameCanvas.heightProperty().addListener((ov, oldHeight, newHeight) ->{
-            colorBG.setMinHeight((Double) newHeight-20);
-            gameCanvas.setHeight((Double) newHeight);
-            TabMenu.setLayoutY(newHeight.doubleValue()/2 - (TabMenu.heightProperty().getValue() / 2));
-            if(gameCanvas.getHeight() >= 850){
-                toolBar.setLayoutX(200);
-                toolBarUnder.setLayoutX(200);
-                colorBG.setLayoutX(200);
-                gameCanvas.setLayoutX(200);
-            }
-            else {
-                gameCanvas.setLayoutX(0);
-                toolBarUnder.setLayoutX(0);
-                toolBar.setLayoutX(0);
-                colorBG.setLayoutX(0);
-            }
-        } );
     }
 
     @Override
@@ -221,8 +213,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
                         gameLoop.pause();
                         TabMenu.setVisible(true);
                         hideBlood.setVisible(false);
-                        colorBG.setVisible(true);
-                        colorBG.setManaged(true);
                     }
                 });
             }
@@ -237,8 +227,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     public void initializeView(){
         highscoreText.setEditable(false);
-        colorBG.setManaged(false);
-        colorBG.setVisible(false);
         TabMenu.setVisible(false);
         final BooleanProperty firstTime = new SimpleBooleanProperty(true);
         HighScoreData highScoreData = SaveGameHandler.loadHighscore();
@@ -275,8 +263,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
         tabHighscore.setDisable(false);
         hideBlood.setVisible(true);
         tabSettings.setDisable(true);
-        colorBG.setVisible(true);
-        colorBG.setManaged(true);
         highscoreLbl.setText("Game Over");
         gotomenuBtn.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
             if(newValue && firstTime.get()){
@@ -307,9 +293,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
     public void Continue(){
         gameLoop.playFromStart();
         TabMenu.setVisible(false);
-        colorBG.setVisible(false);
-        colorBG.setManaged(false);
-
     }
 
     public void saveGame(){
