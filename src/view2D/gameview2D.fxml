@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.GameViewController2D">
+   <center>
+      <HBox alignment="CENTER" prefHeight="736.0" prefWidth="997.0" style="-fx-background-color: grey; -fx-border-color: black;" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="716.0" prefWidth="1375.0">
+               <children>
+                  <AnchorPane fx:id="anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="757.0" prefWidth="997.0">
+                     <children>
+                        <Pane fx:id="canvasPane" layoutY="-4.0" stylesheets="@canvasPaneStyle.css">
+                           <children>
+                              <Pane fx:id="colorBG" minHeight="750.0" minWidth="997.0" opacity="0.87" prefHeight="763.0" prefWidth="997.0" style="-fx-background-color: #121212;" />
+                              <Canvas fx:id="gameCanvas" height="786.0" width="997.0" />
+                              <BorderPane fx:id="TabMenu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="450.0">
+                                 <center>
+                                    <HBox alignment="CENTER" fillHeight="false" prefHeight="623.0" prefWidth="644.0">
+                                       <children>
+                                          <TabPane prefHeight="750.0" prefWidth="755.0" style="-fx-background-color: grey;" tabClosingPolicy="UNAVAILABLE">
+                                             <tabs>
+                                                <Tab fx:id="tabGame" text="Game">
+                                                   <content>
+                                                      <AnchorPane fx:id="gameOver1" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Label layoutX="100.0" text="Game paused" textFill="#91acff">
+                                                               <font>
+                                                                  <Font name="SansSerif Regular" size="40.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Button fx:id="save" layoutX="150.0" layoutY="150.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Save &amp; Exit" textFill="#91acff">
+                                                               <font>
+                                                                  <Font name="SansSerif Regular" size="18.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Button layoutX="150.0" layoutY="100.0" mnemonicParsing="false" onAction="#Continue" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Continue" textFill="#84ffa9">
+                                                               <font>
+                                                                  <Font name="SansSerif Regular" size="18.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Button fx:id="gotomenuBtn1" layoutX="150.0" layoutY="200.0" mnemonicParsing="false" onAction="#goToMenu" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Back to Menu" textFill="#ffb785">
+                                                               <font>
+                                                                  <Font name="SansSerif Regular" size="18.0" />
+                                                               </font>
+                                                            </Button>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabSettings" text="Settings">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Label layoutX="150.0" text="Settings" textFill="#9e9067">
+                                                               <font>
+                                                                  <Font name="SansSerif Regular" size="40.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                                <Tab fx:id="tabHighscore" text="Highscore">
+                                                   <content>
+                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Button fx:id="gotomenuBtn" layoutX="150.0" layoutY="375.0" mnemonicParsing="false" onAction="#goToMenu" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Back to Menu" textFill="#84ffa9">
+                                                               <font>
+                                                                  <Font name="SansSerif Regular" size="18.0" />
+                                                               </font>
+                                                            </Button>
+                                                            <Pane fx:id="hideBlood">
+                                                               <children>
+                                                                  <ImageView fx:id="bloodsplatt" fitHeight="392.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
+                                                                     <image>
+                                                                        <Image url="@static/bloodsplatt.png" />
+                                                                     </image>
+                                                                  </ImageView>
+                                                               </children>
+                                                            </Pane>
+                                                            <Label fx:id="highscoreLbl" layoutX="130.0" text="HighScore" textFill="#ff4d4d">
+                                                               <font>
+                                                                  <Font name="SansSerif Regular" size="40.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <TextArea fx:id="highscoreText" editable="false" layoutX="25.0" layoutY="86.0" prefHeight="281.0" prefWidth="402.0" text="HAAAAAU" />
+                                                         </children>
+                                                      </AnchorPane>
+                                                   </content>
+                                                </Tab>
+                                             </tabs>
+                                          </TabPane>
+                                       </children>
+                                    </HBox>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="toolBarUnder" layoutY="1.0" opacity="0.29" prefHeight="61.0" prefWidth="997.0" style="-fx-background-color: #1C1C1C;" />
+                        <Pane fx:id="toolBar" layoutX="-1.0" layoutY="-3.0" prefHeight="61.0" prefWidth="990.0">
+                           <children>
+                              <Label fx:id="weaponAmmoLabel" layoutX="540.0" layoutY="30.0" textFill="#00eeff" />
+                              <Label fx:id="weaponNameLabel" layoutX="540.0" layoutY="15.0" text="Knife" textFill="RED">
+                                 <font>
+                                    <Font name="SansSerif Regular" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="knife" fitHeight="55.0" fitWidth="71.0" layoutX="450.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@static/knife.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="pistol" fitHeight="55.0" fitWidth="71.0" layoutX="450.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@static/pistol.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="machinegun" fitHeight="46.0" fitWidth="110.0" layoutX="450.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@static/machinegun.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="canongun" fitHeight="55.0" fitWidth="71.0" layoutX="450.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@static/canongun.png" />
+                                 </image>
+                              </ImageView>
+                              <Rectangle fx:id="redBar" arcHeight="5.0" arcWidth="5.0" fill="RED" height="25.0" layoutX="210.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                              <Rectangle fx:id="greenBar" arcHeight="5.0" arcWidth="5.0" fill="#00ff48" height="25.0" layoutX="210.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                              <Label fx:id="levelLabel" layoutX="40.0" layoutY="15.0" text="Level 0" textFill="#ffe491">
+                                 <font>
+                                    <Font name="SansSerif Regular" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="scoreLabel" layoutX="130" layoutY="15.0" text="Score 0" textFill="#ffe491">
+                                 <font>
+                                    <Font name="SansSerif Regular" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </center>
+</BorderPane>
