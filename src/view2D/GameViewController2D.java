@@ -81,7 +81,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     private Label weaponAmmoLabel, weaponNameLabel;
 
     @FXML
-    private ImageView pistol, machinegun, canongun, knife, bloodsplatt;
+    private ImageView weapon, bloodsplatt;
 
     @FXML
     private TextArea highscoreText, highscoreText2;
@@ -240,9 +240,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
         colorBG.setManaged(false);
         colorBG.setVisible(false);
         TabMenu.setVisible(false);
-        pistol.setVisible(false);
-        machinegun.setVisible(false);
-        canongun.setVisible(false);
         final BooleanProperty firstTime = new SimpleBooleanProperty(true);
         HighScoreData highScoreData = SaveGameHandler.loadHighscore();
         StringBuilder builder = new StringBuilder();
@@ -351,7 +348,8 @@ public class GameViewController2D implements GameViewController, Initializable, 
                 weaponAmmoLabel.setText(Character.toString('\u221E'));
             }
             weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getWeaponType().getDisplayName());
-
+            weapon.setImage(renderer.getSpriteTranslator()
+                    .getSpriteImage(getSelectedWeapon().getWeaponType().getSprite()));
         }
     }
 

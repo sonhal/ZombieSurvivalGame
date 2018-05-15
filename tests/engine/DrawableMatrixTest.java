@@ -36,8 +36,8 @@ class DrawableMatrixTest {
     void generateDrawable() {
         Updater updater = new Updater();
         int diameterSize = 50;
-        testWorld.findTile(0,0).setItem(new WeaponPickup(new Sprite(1), new Knife(WeaponType.BASIC_KNIFE, new SoundEffectComponent(100, Sound.HIT_1),new SingleAttackComponent(1), updater, 4)));
-        testWorld.findTile(5,5).setItem(new WeaponPickup(new Sprite(1), new Knife(WeaponType.BASIC_KNIFE, new SoundEffectComponent(100, Sound.HIT_1),new SingleAttackComponent(1), updater, 4)));
+        testWorld.findTile(0,0).setItem(new WeaponPickup(new Sprite(1), new Knife( new SoundEffectComponent(100, Sound.HIT_1),new SingleAttackComponent(1), updater, 4)));
+        testWorld.findTile(5,5).setItem(new WeaponPickup(new Sprite(1), new Knife(new SoundEffectComponent(100, Sound.HIT_1),new SingleAttackComponent(1), updater, 4)));
         matrix = new DrawableMatrix(testWorld, testWorld.getSeed(), diameterSize,diameterSize);
 
         assertNotNull(matrix.matrix[diameterSize][diameterSize].getItem());

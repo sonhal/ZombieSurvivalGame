@@ -14,7 +14,7 @@ public class StartGameViewStub extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view2D/gameview.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("view2D/gameview2D.fxml"));
         Parent root = fxmlLoader.load();
 
 

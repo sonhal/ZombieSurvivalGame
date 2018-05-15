@@ -33,7 +33,7 @@ public class PlayerBuilder {
 
         InventoryComponent inventoryComponent = new InventoryComponent(updater);
         MultiWeaponComponent multiWeaponComponent = new MultiWeaponComponent();
-        multiWeaponComponent.setActiveWeapon(new Knife(WeaponType.BASIC_KNIFE, new SoundEffectComponent(100, Sound.KNIFE_ATTACK), new SingleAttackComponent(40), updater, 200));
+        multiWeaponComponent.setActiveWeapon(new Knife(new SoundEffectComponent(100, Sound.KNIFE_ATTACK), new SingleAttackComponent(40), updater, 200));
 
         IUpdatableGameObject player = new UpdatableGameObject.Builder(new UpdatableTransformComponent(startTile))
                 .addComponent(new PlayerInputComponent(eventHandler, 0))

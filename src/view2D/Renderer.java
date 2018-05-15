@@ -83,4 +83,8 @@ public class Renderer {
         }
         else entitySize = 0;
     }
+
+    public SpriteTranslationHandler getSpriteTranslator() {
+        return spriteTranslator;
+    }
 }

@@ -120,25 +120,7 @@
                                     <Font name="SansSerif Regular" size="12.0" />
                                  </font>
                               </Label>
-                              <ImageView fx:id="knife" fitHeight="55.0" fitWidth="71.0" layoutX="450.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@static/knife.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="pistol" fitHeight="55.0" fitWidth="71.0" layoutX="450.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@static/pistol.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="machinegun" fitHeight="46.0" fitWidth="110.0" layoutX="450.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@static/machinegun.png" />
-                                 </image>
-                              </ImageView>
-                              <ImageView fx:id="canongun" fitHeight="55.0" fitWidth="71.0" layoutX="450.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@static/canongun.png" />
-                                 </image>
+                              <ImageView fx:id="weapon" fitHeight="55.0" fitWidth="71.0" layoutX="450.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                               </ImageView>
                               <Rectangle fx:id="redBar" arcHeight="5.0" arcWidth="5.0" fill="RED" height="25.0" layoutX="210.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
                               <Rectangle fx:id="greenBar" arcHeight="5.0" arcWidth="5.0" fill="#00ff48" height="25.0" layoutX="210.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
