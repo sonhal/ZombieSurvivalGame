@@ -73,6 +73,19 @@ public class SpriteTranslationHandler {
         spriteImageFiles.put(51, "view2D/static/machinegun.png");
         spriteImageFiles.put(52, "view2D/static/canongun.png");
         spriteImageFiles.put(53, "view2D/static/shotgun.png");
+        spriteImageFiles.put(54, "view2D/static/batSprite-up1");
+        spriteImageFiles.put(55, "view2D/static/batSprite-up2");
+        spriteImageFiles.put(56, "view2D/static/batSprite-up3");
+        spriteImageFiles.put(57, "view2D/static/batSprite-down1");
+        spriteImageFiles.put(58, "view2D/static/batSprite-down2");
+        spriteImageFiles.put(59, "view2D/static/batSprite-down3");
+        spriteImageFiles.put(60, "view2D/static/batSprite-left1");
+        spriteImageFiles.put(61, "view2D/static/batSprite-left2");
+        spriteImageFiles.put(62, "view2D/static/batSprite-left3");
+        spriteImageFiles.put(63, "view2D/static/batSprite-right1");
+        spriteImageFiles.put(64, "view2D/static/batSprite-right2");
+        spriteImageFiles.put(65, "view2D/static/batSprite-right3");
+
 
 
         for (Integer key: spriteImageFiles.keySet()
