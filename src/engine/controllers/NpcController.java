@@ -2,6 +2,7 @@ package engine.controllers;
 
 import engine.entities.components.EnemyInputComponent;
 import engine.entities.gameobjects.EnemyFactory;
+import engine.entities.gameobjects.GameObjectFactory;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.gamestate.messages.EnemyKilledMessage;
 import engine.gamestate.messages.GameEventMessage;
@@ -55,9 +56,10 @@ public class NpcController extends Updater implements Messenger {
             Random rand = new Random();
             System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
             IUpdatableGameObject enemy1 = EnemyFactory.createBatEnemy(player, spawnTile, new BasicEntityBlueprint(
-                    70 + gameLevel, 20 + gameLevel, (500 - (gameLevel * 50) ) - rand.nextInt(50) , Sound.ZOMBIE_ATTACK), gameHandler);
+                    70 + gameLevel, 20 + gameLevel, (500 - (gameLevel * 50) ) - rand.nextInt(20) , Sound.ZOMBIE_ATTACK), gameHandler);
             addToUpdateList(enemy1);
             spawnInterval = 100;
+
             IUpdatableGameObject enemy2 = ZombieBuilder.createZombie(player, spawnTile, new BasicEntityBlueprint(
                     30 + gameLevel, 10 + gameLevel, (500 - (gameLevel * 50) ) - rand.nextInt(50) , Sound.ZOMBIE_ATTACK), gameHandler);
             addToUpdateList(enemy2);

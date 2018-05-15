@@ -59,6 +59,14 @@ public class GameObjectFactory {
                 .build();
     }
 
+    public static IUpdatableGameObject batAnimationParticleEffect(Tile tile, Direction direction, int damage){
+        ArrayList<Sprite> sprites = new ArrayList<>();
+        Collections.addAll(sprites, getBatSpriteByDirection(direction));
+        return new UpdatableGameObject.Builder(new ParticleTransformComponent(tile))
+                .addComponent(new OneUseUpdatableGraphicsComponent(sprites,50))
+                .build();
+    }
+
 
     public static IUpdatableGameObject explosion(Tile tile, Direction direction, int damage){
         ArrayList<Sprite> sprites = new ArrayList<>();
@@ -101,6 +109,21 @@ public class GameObjectFactory {
                 return new Sprite[]{new Sprite(46), new Sprite(47), new Sprite(48)};
             default:
                 return new Sprite[]{new Sprite(37), new Sprite(38), new Sprite(39)};
+        }
+    }
+
+    protected static Sprite[] getBatSpriteByDirection(Direction direction){
+        switch (direction){
+            case UP:
+                return new Sprite[]{new Sprite(54), new Sprite(55), new Sprite(56)};
+            case DOWN:
+                return new Sprite[]{new Sprite(57), new Sprite(58), new Sprite(59)};
+            case LEFT:
+                return new Sprite[]{new Sprite(60), new Sprite(61), new Sprite(62)};
+            case RIGHT:
+                return new Sprite[]{new Sprite(63), new Sprite(64), new Sprite(65)};
+            default:
+                return new Sprite[]{new Sprite(54), new Sprite(55), new Sprite(56)};
         }
     }
 }
