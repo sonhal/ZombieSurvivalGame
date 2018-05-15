@@ -7,6 +7,10 @@ import engine.entities.items.Item;
 
 import java.io.Serializable;
 
+/**
+ * Simplified version of the Tile object which only keeps the property's which is necessary to be drawn on the screen.
+ * Doing it this way decouples the dependency between the tile and view.
+ */
 public class DrawableTile implements Serializable{
     private GameObject gameObject;
     private Item item;

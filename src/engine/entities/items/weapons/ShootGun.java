@@ -5,12 +5,11 @@ import engine.controllers.Updater;
 import engine.entities.components.SingleAttackComponent;
 import engine.entities.components.SoundEffectComponent;
 import engine.entities.gameobjects.GameObjectFactory;
-import engine.entities.gameobjects.Sprite;
-import engine.services.TimeService;
 import engine.world.Tile;
 
 /**
- * Weapon subclass that fires Bullets.
+ * Weapon subclass which fires one bullet, which after having traveled two tiles spawns two new ones at each side causing this shotgun spread effect.
+ * To discover how the spawning of the extra bullets is implemented, see the ShotGunUpdatableTransformComponent.
  * Is meant to be held and activated by a WeaponComponent
  */
 public class ShootGun extends Gun {
