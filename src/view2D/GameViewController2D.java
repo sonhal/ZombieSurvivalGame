@@ -22,13 +22,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -56,7 +54,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @FXML
     private
-    Label gameOverLbl, levelLabel, scoreLabel;
+    Label levelLabel, scoreLabel, highscoreLbl;
 
     @FXML
     public
@@ -67,20 +65,23 @@ public class GameViewController2D implements GameViewController, Initializable, 
     Canvas gameCanvas;
 
     @FXML
+    private BorderPane TabMenu;
+
+    @FXML
+    private Tab tabGame, tabSettings, tabHighscore;
+
+    @FXML
     private
-    Pane settingsSet, gameSet , colorBG, anchor, gameOver, gameOver1, toolBar, toolBarUnder, canvasPane, btnTab;
+    Pane  colorBG, gameOver1, toolBar, toolBarUnder, hideBlood;
 
     @FXML
     private Rectangle redBar, greenBar;
 
     @FXML
-    private Rectangle healthBar;
-
-    @FXML
     private Label weaponAmmoLabel, weaponNameLabel;
 
     @FXML
-    private ImageView pistol, machinegun, canongun, knife;
+    private ImageView pistol, machinegun, canongun, knife, bloodsplatt;
 
     @FXML
     private TextArea highscoreText, highscoreText2;
@@ -95,7 +96,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     public void initializeGameEnv() {
         scaleWidth();
         scaleHeight();
-        scaleAllScreens();
+        //scaleAllScreens();
         initializeView();
 
 
@@ -114,39 +115,18 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
 
-    public void scaleAllScreens() {
-        gameCanvas.heightProperty().addListener((ov, oldHeight, newHeight) ->{
-            if(gameCanvas.getWidth() <= 721) {
-                gameOver1.setLayoutX(450);
-                gameOver1.setLayoutY(400);
-                gameOver.setLayoutY(400);
-                gameOver.setLayoutX(450);
-                gameSet.setLayoutY(400);
-                gameSet.setLayoutX(450);
-                settingsSet.setLayoutY(400);
-                settingsSet.setLayoutX(450);
-                gameOverLbl.setLayoutY(400);
-                gameOverLbl.setLayoutX(450);
-                btnTab.setLayoutY(350);
-                btnTab.setLayoutX(280);
-                System.out.println("scaleing screens");
-            }
-
-        } );
-    }
-
     public void scaleWidth(){
         gameCanvas.widthProperty().addListener((ov, oldWidth, newWidth) ->{
+
+            if(gameCanvas.getHeight() >= 900){
+                TabMenu.setLayoutX(500);
+            }else {
+                TabMenu.setLayoutX(newWidth.doubleValue()/2 - (TabMenu.widthProperty().getValue() / 2));
+            }
 
             colorBG.setMinWidth((Double) newWidth-20);
             toolBar.setMinWidth((Double) newWidth-20);
             toolBarUnder.setMinWidth((Double) newWidth-25);
-            if(gameCanvas.getHeight() >= 900){
-                System.out.println("max height achieved");
-            }else{
-                gameCanvas.setWidth((Double) newWidth);
-
-            }
         } );
     }
 
@@ -154,6 +134,19 @@ public class GameViewController2D implements GameViewController, Initializable, 
         gameCanvas.heightProperty().addListener((ov, oldHeight, newHeight) ->{
             colorBG.setMinHeight((Double) newHeight-20);
             gameCanvas.setHeight((Double) newHeight);
+            TabMenu.setLayoutY(newHeight.doubleValue()/2 - (TabMenu.heightProperty().getValue() / 2));
+            if(gameCanvas.getHeight() >= 900){
+                toolBar.setLayoutX(200);
+                toolBarUnder.setLayoutX(200);
+                colorBG.setLayoutX(200);
+                gameCanvas.setLayoutX(200);
+            }
+            else {
+                gameCanvas.setLayoutX(0);
+                toolBarUnder.setLayoutX(0);
+                toolBar.setLayoutX(0);
+                colorBG.setLayoutX(0);
+            }
         } );
     }
 
@@ -226,13 +219,10 @@ public class GameViewController2D implements GameViewController, Initializable, 
                     if (e.getCode() == KeyCode.ESCAPE) {
                         System.out.println("Escape key was pressed");
                         gameLoop.pause();
-                        gameSet.setManaged(true);
-                        gameSet.setVisible(true);
+                        TabMenu.setVisible(true);
+                        hideBlood.setVisible(false);
                         colorBG.setVisible(true);
                         colorBG.setManaged(true);
-                        gameBtn.setVisible(true);
-                        settingsBtn.setVisible(true);
-                        gameOverLbl.setVisible(false);
                     }
                 });
             }
@@ -249,19 +239,15 @@ public class GameViewController2D implements GameViewController, Initializable, 
         highscoreText.setEditable(false);
         colorBG.setManaged(false);
         colorBG.setVisible(false);
-        settingsSet.setVisible(false);
-        settingsSet.setManaged(false);
-        gameSet.setVisible(false);
-        gameSet.setManaged(false);
-        gameBtn.setVisible(false);
-        settingsBtn.setVisible(false);
-        gameOver.setVisible(false);
-        gameOver.setManaged(false);
-        gameOver1.setVisible(false);
-        gameOver1.setManaged(false);
+        TabMenu.setVisible(false);
         pistol.setVisible(false);
         machinegun.setVisible(false);
         canongun.setVisible(false);
+        final BooleanProperty firstTime = new SimpleBooleanProperty(true);
+        HighScoreData highScoreData = SaveGameHandler.loadHighscore();
+        StringBuilder builder = new StringBuilder();
+        highScoreData.getHighscoreSet().forEach(highScoreEntry -> builder.append(highScoreEntry +"\n\n"));
+        highscoreText.setText(builder.toString());
     }
 
     @Override
@@ -284,15 +270,17 @@ public class GameViewController2D implements GameViewController, Initializable, 
         HighScoreData highScoreData = SaveGameHandler.loadHighscore();
         StringBuilder builder = new StringBuilder();
         highScoreData.getHighscoreSet().forEach(highScoreEntry -> builder.append(highScoreEntry +"\n\n"));
-        highscoreText2.setText(builder.toString());
+        highscoreText.setText(builder.toString());
         stopGameLoop();
         System.out.println("Game ended");
-        gameOver1.setVisible(true);
-        gameOver1.setManaged(true);
+        TabMenu.setVisible(true);
+        tabGame.setDisable(true);
+        tabHighscore.setDisable(false);
+        hideBlood.setVisible(true);
+        tabSettings.setDisable(true);
         colorBG.setVisible(true);
         colorBG.setManaged(true);
-        btnTab.setVisible(false);
-        btnTab.setManaged(false);
+        highscoreLbl.setText("Game Over");
         gotomenuBtn.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
             if(newValue && firstTime.get()){
                 gameOver1.requestFocus(); // Delegate the focus to container
@@ -319,54 +307,12 @@ public class GameViewController2D implements GameViewController, Initializable, 
         });
     }
 
-    public void openMenu(){
-        gameLoop.pause();
-        colorBG.setVisible(true);
-        settingsSet.setVisible(true);
-        colorBG.setManaged(true);
-        settingsSet.setManaged(true);
-    }
-
-    public void switchGame() {
-        gameOver.setVisible(false);
-        gameOver.setManaged(false);
-        gameSet.setVisible(true);
-        gameSet.setManaged(true);
-        settingsSet.setVisible(false);
-        settingsSet.setManaged(false);
-        gameOverLbl.setVisible(false);
-    }
-
-    public void switchSettings() {
-        gameOver.setVisible(false);
-        gameOver.setManaged(false);
-        gameSet.setVisible(false);
-        gameSet.setManaged(false);
-        settingsSet.setVisible(true);
-        settingsSet.setManaged(true);
-        gameOverLbl.setVisible(false);
-    }
-
-    public void switchHighscore(){
-        gameSet.setManaged(false);
-        gameSet.setVisible(false);
-        settingsSet.setVisible(false);
-        settingsSet.setManaged(false);
-        gameOver.setManaged(true);
-        gameOver.setVisible(true);
-        gameOverLbl.setVisible(false);
-    }
-
     public void Continue(){
         gameLoop.playFromStart();
-        settingsSet.setManaged(false);
-        settingsSet.setVisible(false);
-        gameSet.setManaged(false);
-        gameSet.setVisible(false);
+        TabMenu.setVisible(false);
         colorBG.setVisible(false);
         colorBG.setManaged(false);
-        gameBtn.setVisible(false);
-        settingsBtn.setVisible(false);
+
     }
 
     public void saveGame(){

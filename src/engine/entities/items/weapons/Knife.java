@@ -4,6 +4,7 @@ import engine.controllers.Updater;
 import engine.entities.components.interfaces.AttackComponent;
 import engine.entities.gameobjects.GameObjectFactory;
 import engine.entities.components.*;
+import engine.entities.gameobjects.Sprite;
 import engine.services.TimeService;
 import engine.world.Tile;
 import engine.controllers.Direction;
@@ -13,6 +14,8 @@ import engine.controllers.Direction;
  * Is meant to be held and activated by a SingleWeaponComponent
  */
 public class Knife extends Weapon {
+
+    public final static Sprite sprite =  new Sprite(1);
 
     public Knife(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay) {
         super(weaponType, soundEffectComponent, attackComponent, updater, activateDelay);

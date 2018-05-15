@@ -1,13 +1,13 @@
 package engine.entities.items.weapons;
 
 public enum WeaponType {
-    BASIC_KNIFE("Rusty Knife"),
-    BASIC_GUN("Rusty Gun"),
+    BASIC_KNIFE("Knife"),
+    BASIC_GUN("Pistol"),
     MACHINE_GUN("Machine Gun"),
     SHOT_GUN("ShotGun"),
-    GRANADE("Grandade"),
-    TWO_HANDED_GUN("Two handed Gun"),
-    TWO_HANDED_MACHINEGUN("Two handed Machinegun"),
+    GRANADE("Granade"),
+    TWO_HANDED_GUN("Split Gun"),
+    TWO_HANDED_MACHINEGUN("Two handed Machine Gun"),
     ZOMBIE_ATTACK("Zombie Attack");
 
     private String displayName;
