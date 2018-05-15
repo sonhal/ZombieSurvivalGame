@@ -135,7 +135,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
             colorBG.setMinHeight((Double) newHeight-20);
             gameCanvas.setHeight((Double) newHeight);
             TabMenu.setLayoutY(newHeight.doubleValue()/2 - (TabMenu.heightProperty().getValue() / 2));
-            if(gameCanvas.getHeight() >= 900){
+            if(gameCanvas.getHeight() >= 850){
                 toolBar.setLayoutX(200);
                 toolBarUnder.setLayoutX(200);
                 colorBG.setLayoutX(200);
