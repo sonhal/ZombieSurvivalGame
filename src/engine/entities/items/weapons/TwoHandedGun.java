@@ -5,8 +5,11 @@ import engine.controllers.Updater;
 import engine.entities.components.SingleAttackComponent;
 import engine.entities.components.SoundEffectComponent;
 import engine.entities.gameobjects.GameObjectFactory;
+import engine.entities.gameobjects.Sprite;
 import engine.services.TimeService;
 import engine.world.Tile;
+
+import java.nio.channels.spi.SelectorProvider;
 
 /**
  * Weapon subclass that fires Bullets.
@@ -14,14 +17,15 @@ import engine.world.Tile;
  */
 public class TwoHandedGun extends Weapon {
 
+    private static final WeaponType type = WeaponType.TWO_HANDED_GUN;
+
     protected int range;
     protected int ammo;
 
     public TwoHandedGun(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
-        super(weaponType, soundEffectComponent, attackComponent, updater, activateDelay);
+        super(type, soundEffectComponent, attackComponent, updater, activateDelay);
         this.range = range;
         this.ammo = ammo;
-
     }
 
     @Override
@@ -67,4 +71,5 @@ public class TwoHandedGun extends Weapon {
     public void setAmmo(int ammo) {
         if(ammo > 0){ this.ammo = ammo;}
     }
+
 }

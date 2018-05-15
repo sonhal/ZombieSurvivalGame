@@ -5,6 +5,7 @@ import engine.controllers.Updater;
 import engine.entities.components.SingleAttackComponent;
 import engine.entities.components.SoundEffectComponent;
 import engine.entities.gameobjects.GameObjectFactory;
+import engine.entities.gameobjects.Sprite;
 import engine.services.TimeService;
 import engine.world.Tile;
 
@@ -14,12 +15,10 @@ import engine.world.Tile;
  */
 public class ShootGun extends Gun {
 
-
+    private static final WeaponType type = WeaponType.SHOT_GUN;
 
     public ShootGun(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
-        super(weaponType, soundEffectComponent, attackComponent, updater, activateDelay, range, ammo);
-
-
+        super(type, soundEffectComponent, attackComponent, updater, activateDelay, range, ammo);
     }
 
     @Override
@@ -34,4 +33,5 @@ public class ShootGun extends Gun {
         }
 
     }
+
 }

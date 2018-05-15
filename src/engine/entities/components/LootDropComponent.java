@@ -16,18 +16,18 @@ public class LootDropComponent extends ScriptableComponent{
     private Item lootFactory(){
         double i = Math.random() * 100;
         if (i < 10){
-            return new DroppedWeapon(WeaponType.BASIC_GUN ,new Sprite(2), "Gun", 10);
+            return new DroppedWeapon(WeaponType.BASIC_GUN , 10);
         }
         else if (i > 10 && i< 20){
             return new HealthPotion(new Sprite(36), "HealthPotion", 100);
         }else if (i > 20 && i < 30) {
-            return new DroppedWeapon(WeaponType.TWO_HANDED_GUN, new Sprite(2), "Two Handed Gun", 80);
+            return new DroppedWeapon(WeaponType.TWO_HANDED_GUN, 80);
         }else if (i > 30 && i < 40){
-            return new DroppedWeapon(WeaponType.SHOT_GUN,new Sprite(2),"ShotGun",30);
+            return new DroppedWeapon(WeaponType.SHOT_GUN,30);
         }else if (i > 40 && i < 50){
-            return new DroppedWeapon(WeaponType.MACHINE_GUN,new Sprite(2),"MachineGun",60);
+            return new DroppedWeapon(WeaponType.MACHINE_GUN,60);
         }else if (i > 50 && i < 60) {
-            return new DroppedWeapon(WeaponType.TWO_HANDED_MACHINEGUN, new Sprite(2), "Two Handed MachineGun", 80);
+            return new DroppedWeapon(WeaponType.TWO_HANDED_MACHINEGUN,80);
         }else{
                 return null;
 

@@ -23,7 +23,6 @@ public abstract class Weapon implements Serializable{
     protected Updater updater;
     protected double lastActivateTime;
     protected double activateDelay;
-    protected Sprite sprite;
     protected SoundEffectComponent soundEffect;
 
     public Weapon(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay){
@@ -105,7 +104,7 @@ public abstract class Weapon implements Serializable{
      * Method to get the damage the activeWeapon deals
      * @return the damage the activeWeapon deals
      */
-    public SingleAttackComponent getAttackComponent() {
+    public AttackComponent getAttackComponent() {
         return attackComponent;
     }
 
@@ -119,9 +118,6 @@ public abstract class Weapon implements Serializable{
 
     public void setAmmo(int ammo) { };
 
-    public Sprite getSprite() {
-        return sprite;
-    }
 
     public WeaponType getWeaponType() {
         return weaponType;

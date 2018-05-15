@@ -350,8 +350,8 @@ public class GameViewController2D implements GameViewController, Initializable, 
             }else{
                 weaponAmmoLabel.setText(Character.toString('\u221E'));
             }
+            weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getWeaponType().getDisplayName());
 
-        weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getWeaponType().getDisplayName());
         }
     }
 
