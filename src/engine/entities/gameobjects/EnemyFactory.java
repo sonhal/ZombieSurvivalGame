@@ -18,8 +18,17 @@ public class EnemyFactory {
         Setting the sprites for a enemy, the numbering is not intuitive
         */
         batSprites.add(new Sprite(54)); //up1
-        batSprites.add(new Sprite(54)); //up1
-
+        batSprites.add(new Sprite(55)); //up2
+        batSprites.add(new Sprite(56)); //up3
+        batSprites.add(new Sprite(57)); //down1
+        batSprites.add(new Sprite(58)); //down2
+        batSprites.add(new Sprite(59)); //down3
+        batSprites.add(new Sprite(60)); //left1
+        batSprites.add(new Sprite(61)); //left2
+        batSprites.add(new Sprite(62)); //left3
+        batSprites.add(new Sprite(63)); //right1
+        batSprites.add(new Sprite(64)); //right2
+        batSprites.add(new Sprite(65)); //right3
 
 
         SingleWeaponComponent wc = new SingleWeaponComponent();
@@ -28,7 +37,6 @@ public class EnemyFactory {
         EnemyInputComponent ic = new EnemyInputComponent(player, gameHandler, blueprint.moveDelay);
         GameObjectCollisionComponent cc = new GameObjectCollisionComponent();
         UpdatableGraphicsComponent gc = new UpdatableGraphicsComponent(batSprites.get(0), blueprint.moveDelay);
-
 
         for (Sprite sprite :
                 batSprites) {
