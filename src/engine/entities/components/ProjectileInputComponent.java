@@ -7,10 +7,10 @@ import engine.entities.gameobjects.interfaces.GameObject;
 
 public class ProjectileInputComponent extends InputComponent {
 
-    private Direction flyingDirection;
-    private int delay;
-    private double lastMoveTime;
-    private boolean collisionEvent;
+    protected Direction flyingDirection;
+    protected int delay;
+    protected double lastMoveTime;
+    protected boolean collisionEvent;
 
     public ProjectileInputComponent(Direction flyingDirection, int flyingDelay){
         this.flyingDirection = flyingDirection;

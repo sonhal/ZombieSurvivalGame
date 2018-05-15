@@ -40,6 +40,17 @@ public class GameObjectFactory {
                 .build();
     }
 
+    public static IUpdatableGameObject ShootGunBullet(Tile startTile, Direction direction, int damage, Updater updater, boolean haveSpread, int range){
+        return new UpdatableGameObject.Builder(new ShotGunUpdatableTransformComponent(startTile, 3,haveSpread, updater))
+                .addComponent(new StaticGraphicsComponent(getBulletSpriteByDirection(direction)))
+                .addComponent(new SingleAttackComponent(damage))
+                .addComponent(new GameObjectCollisionComponent())
+                .addComponent(new ProjectileInputComponent(direction, 10))
+                .addComponent(new ProjectileHealthComponent(range))
+                .addComponent(new OnDeathComponent(updater))
+                .build();
+    }
+
     public static IUpdatableGameObject knifeAttackParticleEffect(Tile tile, Direction direction, int damage){
         ArrayList<Sprite> sprites = new ArrayList<>();
         Collections.addAll(sprites, getSwordSpriteByDirection(direction));

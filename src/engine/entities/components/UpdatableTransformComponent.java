@@ -9,7 +9,7 @@ import engine.world.Tile;
 
 public class UpdatableTransformComponent extends StaticTransformComponent {
 
-    private Direction collision;
+    protected Direction collision;
 
     public UpdatableTransformComponent(Tile connectedTile) {
         super(connectedTile);
