@@ -283,9 +283,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
         final BooleanProperty firstTime = new SimpleBooleanProperty(true);
         HighScoreData highScoreData = SaveGameHandler.loadHighscore();
         StringBuilder builder = new StringBuilder();
-        highScoreData.getHighscoreSet().forEach(highScoreEntry -> builder.append(highScoreEntry +"\n"));
-        System.out.println(builder.toString());
-        highscoreText2.setStyle("-fx-text-alignment: center;");
+        highScoreData.getHighscoreSet().forEach(highScoreEntry -> builder.append(highScoreEntry +"\n\n"));
         highscoreText2.setText(builder.toString());
         stopGameLoop();
         System.out.println("Game ended");

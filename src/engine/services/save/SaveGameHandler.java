@@ -13,14 +13,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Service handling the saving of game data to file.
+ */
 public class SaveGameHandler {
 
-    private static String SAVE_FILE_PATH = "gamefiles/saves/savefile.ser";
-    private static String SAVE_GAME_HANDLER_PATH = "gamefiles/saves/savegamehandlerfile.ser";
+    private static String SAVE_GAME_HANDLER_PATH = "gamefiles/saves/savegamefile.ser";
     private static String SAVE_HIGHSCORE_PATH = "gamefiles/saves/highscore.ser";
 
     public static boolean isSaveFileValid(){
-            File saveFile = new File(SAVE_FILE_PATH);
+            File saveFile = new File(SAVE_GAME_HANDLER_PATH);
             return saveFile.isFile();
     }
 
