@@ -25,6 +25,10 @@ class ConnectLeftRight implements Runnable {
         t.start();
     }
 
+    /** A compirator for sorting the tiles after each other in the horizontal plane.
+     * Makes the whole process of connecting tiles extremely effective as they are all lined up.
+     */
+
     Comparator<Tile> xDirectionalSorting = new Comparator<Tile>() {
         @Override
         public int compare(Tile t1, Tile t2) {
@@ -36,6 +40,14 @@ class ConnectLeftRight implements Runnable {
         }
     };
 
+    /**
+     * Connecting tile.left and tile.right on each tile object.
+     * This run method is a part of the runnable interface, and will automatically execute after this tread is created.
+     *  1. Sorts the world list using the xDirectional Sorting operator.
+     *  2. Iterates through each element in the sorted list of tiles.
+     *  3. Connects left and right tiles using the last and current variables.
+     *  3. Each time it reaches the end it maps the last tile with the first tile from each row, making this round earth effect.
+     */
     public void run() {
         worldToBeConnected.sort(xDirectionalSorting);
         Iterator xIterator = worldToBeConnected.iterator();
