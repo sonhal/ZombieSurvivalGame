@@ -1,7 +1,6 @@
 package engine.entities.gameobjects;
 
 import engine.controllers.GameHandler;
-import engine.controllers.GameUpdater;
 import engine.controllers.Updater;
 import engine.entities.components.*;
 import engine.entities.gameobjects.interfaces.GameObject;
@@ -30,7 +29,7 @@ public class EnemyFactory {
             gc.addSprite(sprite);
         }
 
-        wc.setActiveWeapon(new ZombieAttack(new SoundEffectComponent(500, blueprint.attackSound), new SingleAttackComponent(blueprint.attackDamage), blueprint.moveDelay));
+        wc.setActiveWeapon(new ZombieAttack(new AttackSoundEffectComponent(500, blueprint.attackSound), new SingleAttackComponent(blueprint.attackDamage), blueprint.moveDelay));
 
         return new UpdatableGameObject.Builder(tc)
                 .addComponent(gc)

@@ -106,11 +106,11 @@ public class InventoryComponent extends ScriptableComponent {
      */
     Weapon makeWeapon(DroppedWeapon droppedWeapon){
         switch (droppedWeapon.getWeaponType()){
-            case BASIC_GUN: return new Gun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 1000, 2, 40);
-            case MACHINE_GUN: return new Gun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(60), updater, 100, 4, 70);
-            case TWO_HANDED_GUN: return new TwoHandedGun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 1000, 2, 40);
-            case TWO_HANDED_MACHINEGUN: return new TwoHandedGun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(50), updater, 200, 2, 40);
-            case SHOT_GUN: return new ShootGun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 500, 4, 12);
+            case BASIC_GUN: return new Gun(droppedWeapon.getWeaponType(), new AttackSoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 1000, 2, 40);
+            case MACHINE_GUN: return new Gun(droppedWeapon.getWeaponType(), new AttackSoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(60), updater, 100, 4, 70);
+            case TWO_HANDED_GUN: return new TwoHandedGun(droppedWeapon.getWeaponType(), new AttackSoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 1000, 2, 40);
+            case TWO_HANDED_MACHINEGUN: return new TwoHandedGun(droppedWeapon.getWeaponType(), new AttackSoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(50), updater, 200, 2, 40);
+            case SHOT_GUN: return new ShootGun(droppedWeapon.getWeaponType(), new AttackSoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 500, 4, 12);
             default: return null;
         }
     }

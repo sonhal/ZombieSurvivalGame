@@ -8,6 +8,10 @@ import engine.controllers.interfaces.*;
 
 import java.io.Serializable;
 
+/**
+ * Handles the logic of Levels in the game.
+ * Notifies listeners to GameStateMessengerMediator in the event of a new Level.
+ */
 public class GameLevelHandler implements LevelHandler, Messenger, Serializable {
 
     private int currentLevel;

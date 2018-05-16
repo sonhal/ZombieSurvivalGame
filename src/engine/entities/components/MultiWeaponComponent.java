@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * WeaponComponent capable of holding several weapons and cycling through them
+ */
 public class MultiWeaponComponent extends SingleWeaponComponent {
 
     private boolean changeWeapon;

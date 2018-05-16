@@ -6,6 +6,10 @@ import engine.entities.gameobjects.UpdatableGameObject;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 
+/**
+ * HealthComponent used by projectiles.
+ * Kills the GameObject when a Collision occurs or the range is expended.
+ */
 public class ProjectileHealthComponent extends HealthComponent {
 
     private int range;

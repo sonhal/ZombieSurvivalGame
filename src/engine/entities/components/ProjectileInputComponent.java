@@ -5,6 +5,10 @@ import engine.entities.components.ComponentEvent.*;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 
+/**
+ * ProjectileInputComponent directs a GameObject in one direction.
+ * Tries to attack a GameObject if it Collides.
+ */
 public class ProjectileInputComponent extends InputComponent {
 
     protected Direction flyingDirection;

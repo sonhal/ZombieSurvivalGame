@@ -39,7 +39,7 @@ public class GameObjectFactory {
                 .addComponent(new GameObjectCollisionComponent())
                 .addComponent(new ProjectileInputComponent(direction, 10))
                 .addComponent(new ProjectileHealthComponent(20))
-                .addComponent(new OnDeathComponent(updater))
+                .addComponent(new ExplodeParticleOnDeathComponent(updater))
                 .build();
     }
 
@@ -50,7 +50,7 @@ public class GameObjectFactory {
                 .addComponent(new GameObjectCollisionComponent())
                 .addComponent(new ProjectileInputComponent(direction, 10))
                 .addComponent(new ProjectileHealthComponent(range))
-                .addComponent(new OnDeathComponent(updater))
+                .addComponent(new ExplodeParticleOnDeathComponent(updater))
                 .build();
     }
 

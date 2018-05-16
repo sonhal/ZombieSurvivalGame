@@ -4,9 +4,11 @@ import engine.gamestate.interfaces.GameScore;
 
 import java.io.Serializable;
 
+/**
+ * Keeps track of and contains logic for calculating the Players score during gameplay.
+ */
 public class PlayerGameScore implements GameScore, Serializable {
 
-    private int enemiesKilledValue;
     private int score;
 
     @Override
@@ -15,7 +17,6 @@ public class PlayerGameScore implements GameScore, Serializable {
     }
 
     public void addToScore(int newEnemyKilledValue){
-        enemiesKilledValue += newEnemyKilledValue;
         score += newEnemyKilledValue;
     }
 

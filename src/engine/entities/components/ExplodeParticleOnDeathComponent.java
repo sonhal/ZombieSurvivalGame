@@ -8,14 +8,14 @@ import engine.entities.components.ComponentEvent.DeathEvent;
 import engine.entities.gameobjects.GameObjectFactory;
 import engine.entities.gameobjects.interfaces.GameObject;
 
-public class OnDeathComponent extends ScriptableComponent {
+public class ExplodeParticleOnDeathComponent extends ScriptableComponent {
 
 
     private boolean isDead;
     private Updater updater;
     private boolean collision;
 
-    public OnDeathComponent(Updater updater) {
+    public ExplodeParticleOnDeathComponent(Updater updater) {
         this.updater = updater;
     }
 
@@ -47,11 +47,11 @@ public class OnDeathComponent extends ScriptableComponent {
 
     @Override
     public void innit(GameObject gameObject) {
-
+        //Do nothing
     }
 
     @Override
     public void cleanUp(GameObject gameObject) {
-
+        //Do nothing
     }
 }

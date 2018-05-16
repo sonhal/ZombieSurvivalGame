@@ -2,10 +2,7 @@ package engine.entities.items.weapons;
 
 import engine.controllers.Updater;
 import engine.entities.components.ComponentEvent.AttackCompletedEvent;
-import engine.entities.components.interfaces.AttackComponent;
-import engine.entities.gameobjects.GameObjectFactory;
 import engine.entities.components.*;
-import engine.entities.gameobjects.Sprite;
 import engine.services.TimeService;
 import engine.world.Tile;
 import engine.controllers.Direction;
@@ -16,7 +13,7 @@ import engine.controllers.Direction;
  */
 public class ZombieAttack extends Weapon {
 
-    public ZombieAttack(SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent,double activateDelay) {
+    public ZombieAttack(AttackSoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, double activateDelay) {
         super(WeaponType.ZOMBIE_ATTACK, soundEffectComponent, attackComponent, null, activateDelay);
     }
 

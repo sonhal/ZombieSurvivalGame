@@ -4,14 +4,12 @@ package engine.entities.items.weapons;
 import engine.controllers.Updater;
 import engine.entities.components.ComponentEvent.AttackCompletedEvent;
 import engine.entities.components.SingleAttackComponent;
-import engine.entities.components.SoundEffectComponent;
+import engine.entities.components.AttackSoundEffectComponent;
 import engine.entities.components.interfaces.AttackComponent;
-import engine.entities.gameobjects.Sprite;
 import engine.world.Tile;
 import engine.controllers.Direction;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 
 /**
 * Represents a activeWeapon a player can pickup and use in the game.
@@ -23,9 +21,9 @@ public abstract class Weapon implements Serializable{
     protected Updater updater;
     protected double lastActivateTime;
     protected double activateDelay;
-    protected SoundEffectComponent soundEffect;
+    protected AttackSoundEffectComponent soundEffect;
 
-    public Weapon(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay){
+    public Weapon(WeaponType weaponType, AttackSoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay){
         this.weaponType = weaponType;
         this.attackComponent  = attackComponent;
         this.updater = updater;

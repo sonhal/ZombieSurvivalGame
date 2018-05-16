@@ -5,7 +5,6 @@ import engine.controllers.Updater;
 import engine.entities.components.*;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.entities.items.weapons.Knife;
-import engine.entities.items.weapons.WeaponType;
 import engine.world.Tile;
 import engine.services.audio.Sound;
 
@@ -36,7 +35,7 @@ public class PlayerBuilder {
 
         InventoryComponent inventoryComponent = new InventoryComponent(updater);
         MultiWeaponComponent multiWeaponComponent = new MultiWeaponComponent();
-        multiWeaponComponent.setActiveWeapon(new Knife(new SoundEffectComponent(100, Sound.KNIFE_ATTACK), new SingleAttackComponent(40), updater, 200));
+        multiWeaponComponent.setActiveWeapon(new Knife(new AttackSoundEffectComponent(100, Sound.KNIFE_ATTACK), new SingleAttackComponent(40), updater, 200));
 
         IUpdatableGameObject player = new UpdatableGameObject.Builder(new UpdatableTransformComponent(startTile))
                 .addComponent(new PlayerInputComponent(eventHandler, 0))

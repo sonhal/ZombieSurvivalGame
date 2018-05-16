@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+/**
+ * StaticGraphicsComponent is to be used when the Graphics does not need to change with updates.
+ */
 public class StaticGraphicsComponent extends GraphicsComponent {
     private Queue<Sprite> activeSprites;
     private ArrayList<Sprite> sprites;

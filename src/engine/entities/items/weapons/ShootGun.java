@@ -3,7 +3,7 @@ package engine.entities.items.weapons;
 import engine.controllers.Direction;
 import engine.controllers.Updater;
 import engine.entities.components.SingleAttackComponent;
-import engine.entities.components.SoundEffectComponent;
+import engine.entities.components.AttackSoundEffectComponent;
 import engine.entities.gameobjects.GameObjectFactory;
 import engine.world.Tile;
 
@@ -16,7 +16,7 @@ public class ShootGun extends Gun {
 
     private static final WeaponType type = WeaponType.SHOT_GUN;
 
-    public ShootGun(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
+    public ShootGun(WeaponType weaponType, AttackSoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
         super(type, soundEffectComponent, attackComponent, updater, activateDelay, range, ammo);
     }
 

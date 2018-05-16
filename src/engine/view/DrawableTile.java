@@ -56,7 +56,4 @@ public class DrawableTile implements Serializable{
         return particleEffect;
     }
 
-    public void setParticleEffect(GameObject particleEffect) {
-        this.particleEffect = particleEffect;
-    }
 }

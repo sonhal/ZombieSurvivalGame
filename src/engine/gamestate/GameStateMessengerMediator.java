@@ -7,6 +7,9 @@ import engine.gamestate.interfaces.MessengerMediator;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * Mediator class that relays messages between otherwise decoupled game domains.
+ */
 public class GameStateMessengerMediator implements MessengerMediator, Serializable {
 
     private ArrayList<Messenger> subscribers;

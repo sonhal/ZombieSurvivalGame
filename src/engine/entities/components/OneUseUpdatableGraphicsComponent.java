@@ -11,6 +11,9 @@ import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Graphical component that runs an animation and then kills the GameObject.
+ */
 public class OneUseUpdatableGraphicsComponent extends GraphicsComponent {
 
     private List<Sprite>  sprites;

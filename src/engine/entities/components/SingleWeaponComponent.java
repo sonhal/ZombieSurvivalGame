@@ -7,6 +7,9 @@ import engine.entities.components.interfaces.WeaponComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.items.weapons.Weapon;
 
+/**
+ * Can hold and manage a single Weapon instance.
+ */
 public class SingleWeaponComponent extends WeaponComponent {
 
     protected Weapon activeWeapon;

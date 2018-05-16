@@ -6,6 +6,9 @@ import engine.world.World;
 
 import java.io.Serializable;
 
+/**
+ * Adapter class for game state in the form of tiles. Converts Tiles to a data structure better suited for rendering
+ */
 public class DrawableMatrix implements Serializable{
     public DrawableTile[][] matrix;
 

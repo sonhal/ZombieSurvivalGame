@@ -4,7 +4,6 @@ import engine.controllers.Updater;
 import engine.entities.components.interfaces.AttackComponent;
 import engine.entities.gameobjects.GameObjectFactory;
 import engine.entities.components.*;
-import engine.entities.gameobjects.Sprite;
 import engine.services.TimeService;
 import engine.world.Tile;
 import engine.controllers.Direction;
@@ -17,7 +16,7 @@ public class Knife extends Weapon {
 
     private static final WeaponType type = WeaponType.BASIC_KNIFE;
 
-    public Knife(SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay) {
+    public Knife(AttackSoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay) {
         super(type, soundEffectComponent, attackComponent, updater, activateDelay);
     }
 

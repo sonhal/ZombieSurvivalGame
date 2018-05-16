@@ -4,6 +4,9 @@ import engine.gamestate.interfaces.Level;
 
 import java.io.Serializable;
 
+/**
+ * Defines a Level in the game. Contains values for tuning difficulty etc as levels go up.
+ */
 public class GameLevel implements Level, Serializable {
 
     private int enemyPoolValue;

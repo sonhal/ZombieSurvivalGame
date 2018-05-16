@@ -6,7 +6,9 @@ import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.world.Tile;
 
-
+/**
+ * UpdatableTransformComponent can can be updated by the gameLoop and change state as a function of time passing.
+ */
 public class UpdatableTransformComponent extends StaticTransformComponent {
 
     protected Direction collision;

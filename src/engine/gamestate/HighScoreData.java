@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.TreeSet;
 
+
+/**
+ * Data container for a HighScore list. Note that it uses a TreeSet to order the scores automatically.
+ */
 public class HighScoreData implements Serializable {
 
     private TreeSet<HighScoreEntry> highscoreSet;
@@ -26,6 +30,7 @@ public class HighScoreData implements Serializable {
     public Set<HighScoreEntry> getHighscoreSet() {
         return highscoreSet.descendingSet();
     }
+
 
     public class HighScoreEntry implements Comparable, Serializable{
         public final String timePoint;

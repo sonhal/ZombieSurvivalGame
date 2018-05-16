@@ -12,6 +12,9 @@ import engine.entities.gameobjects.interfaces.GameObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * UpdatableGraphicsComponent. Can be updated and complete animations as a function of time.
+ */
 public class UpdatableGraphicsComponent extends GraphicsComponent {
     private List<Sprite> sprites;
     private List<Sprite> activeSprites;

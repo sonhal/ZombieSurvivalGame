@@ -9,6 +9,9 @@ import engine.entities.items.loot.DroppedWeapon;
 import engine.entities.items.loot.HealthPotion;
 import engine.entities.items.weapons.WeaponType;
 
+/**
+ * Component that creates a new loot drop in the event the GameObject that contains it dies.
+ */
 public class LootDropComponent extends ScriptableComponent{
 
     private boolean isDead;

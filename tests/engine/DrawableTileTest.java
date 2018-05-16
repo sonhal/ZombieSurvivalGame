@@ -2,12 +2,10 @@ package engine;
 
 import engine.controllers.Updater;
 import engine.entities.components.SingleAttackComponent;
-import engine.entities.components.SoundEffectComponent;
+import engine.entities.components.AttackSoundEffectComponent;
 import engine.entities.gameobjects.Sprite;
 import engine.entities.items.WeaponPickup;
 import engine.entities.items.weapons.Knife;
-import engine.entities.items.weapons.Knife;
-import engine.entities.items.weapons.WeaponType;
 import engine.services.audio.Sound;
 import engine.view.DrawableTile;
 import org.junit.jupiter.api.AfterEach;
@@ -33,14 +31,14 @@ class DrawableTileTest {
     }
     @Test
     void setGameAndItem() {
-        testTile.setGameAndItem(null, new WeaponPickup(new Sprite(1), new Knife(new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(1), updater, 4)));
+        testTile.setGameAndItem(null, new WeaponPickup(new Sprite(1), new Knife(new AttackSoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(1), updater, 4)));
             assertNull(testTile.getGameObject());
             assertNotNull(testTile.getItem());
     }
 
     @Test
     void getItem(){
-        testTile.setItem(new WeaponPickup(new Sprite(1), new Knife(new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(1), updater, 4)));
+        testTile.setItem(new WeaponPickup(new Sprite(1), new Knife(new AttackSoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(1), updater, 4)));
         assertNotNull(testTile.getItem());
     }
 }

@@ -8,6 +8,9 @@ import engine.entities.gameobjects.interfaces.GameObject;
 import engine.services.audio.AudioPlayer;
 import engine.services.audio.Sound;
 
+/**
+ * Creates a sound when a PickUp event occurs in the GameObject
+ */
 public class PickupItemSoundEffectComponent extends AudioComponent {
 
     protected boolean pickupEvent;

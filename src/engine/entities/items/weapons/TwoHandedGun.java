@@ -3,13 +3,10 @@ package engine.entities.items.weapons;
 import engine.controllers.Direction;
 import engine.controllers.Updater;
 import engine.entities.components.SingleAttackComponent;
-import engine.entities.components.SoundEffectComponent;
+import engine.entities.components.AttackSoundEffectComponent;
 import engine.entities.gameobjects.GameObjectFactory;
-import engine.entities.gameobjects.Sprite;
 import engine.services.TimeService;
 import engine.world.Tile;
-
-import java.nio.channels.spi.SelectorProvider;
 
 /**
  * Weapon subclass which fires two bullets, each which travels to the left and the right of the player.
@@ -23,7 +20,7 @@ public class TwoHandedGun extends Weapon {
     protected int range;
     protected int ammo;
 
-    public TwoHandedGun(WeaponType weaponType, SoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
+    public TwoHandedGun(WeaponType weaponType, AttackSoundEffectComponent soundEffectComponent, SingleAttackComponent attackComponent, Updater updater, double activateDelay, int range, int ammo) {
         super(type, soundEffectComponent, attackComponent, updater, activateDelay);
         this.range = range;
         this.ammo = ammo;

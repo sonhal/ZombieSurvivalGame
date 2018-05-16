@@ -7,6 +7,10 @@ import engine.entities.components.ComponentEvent.*;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 
+/**
+ * Component to only be used by GameObjects that should be controlled by Player key presses.
+ * Listen for new events from the EventHandler and relays them through the GameObject.
+ */
 public class PlayerInputComponent extends InputComponent {
 
     private EventHandler eventHandler;

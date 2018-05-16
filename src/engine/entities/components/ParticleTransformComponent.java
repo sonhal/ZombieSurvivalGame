@@ -6,6 +6,9 @@ import engine.entities.components.interfaces.TransformComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.world.Tile;
 
+/**
+ * TransformComponent for GameObjects to be used in the particle field of a Tile
+ */
 public class ParticleTransformComponent extends TransformComponent {
 
     private Tile currentTile;

@@ -8,6 +8,10 @@ import engine.entities.components.interfaces.TransformComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.world.Tile;
 
+/**
+ * StaticTransformComponents are to be used with GameObjects when the transformComponent doeas not need to
+ * be updated by the gameloop. As is the case with StaticGameObjects.
+ */
 public class StaticTransformComponent extends TransformComponent {
 
     private Tile currentTile;

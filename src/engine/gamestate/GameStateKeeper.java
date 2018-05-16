@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * Responsible for keeping the track of relevant statistics in the game.
- * [TODO] Move Gamestate out of controllers
+ * Receives new gameState through the GameStateMessengerMediator and acts accordingly.
  */
 public class GameStateKeeper implements Messenger, Serializable {
 

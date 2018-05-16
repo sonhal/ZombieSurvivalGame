@@ -6,6 +6,9 @@ import engine.entities.components.interfaces.AttackComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.world.Tile;
 
+/**
+ * AttackComponent triggering a single attack attempt against the Tile in the GameObjects facing direction.
+ */
 public class SingleAttackComponent extends AttackComponent {
 
     private Direction attackDirection;

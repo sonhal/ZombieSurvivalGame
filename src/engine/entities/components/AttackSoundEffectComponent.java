@@ -9,14 +9,17 @@ import engine.entities.gameobjects.interfaces.GameObject;
 import engine.services.audio.AudioPlayer;
 import engine.services.audio.Sound;
 
-public class SoundEffectComponent extends AudioComponent {
+/**
+ * Plays a Sound in the event of a AttackCompleted Event.
+ */
+public class AttackSoundEffectComponent extends AudioComponent {
 
     protected boolean attackEvent;
     private int delay;
     private double lastActivationTime;
     private Sound sound;
 
-    public SoundEffectComponent(int delay, Sound sound) {
+    public AttackSoundEffectComponent(int delay, Sound sound) {
         this.delay = delay;
         this.lastActivationTime = System.currentTimeMillis();
         this.sound = sound;
