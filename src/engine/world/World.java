@@ -55,8 +55,8 @@ public class World implements Serializable{
      */
     protected List<Tile> generate(int initSize){
         List<Tile> newWorld = new ArrayList<Tile>();
-        for(int x = -initSize; x <= initSize; x++){
-            for (int y = -initSize; y <= initSize; y++){
+        for(int x = -initSize; x < initSize; x++){
+            for (int y = -initSize; y < initSize; y++){
 
                 Tile newTile = new Tile(x,y, generateRandomSprite());
                 generateWorldObjectOnTile(newTile);

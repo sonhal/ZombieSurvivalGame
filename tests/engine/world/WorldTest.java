@@ -62,19 +62,19 @@ class WorldTest {
             assert (false);
         }
         testWorld.getWorld().stream().forEach(tile -> {
-            if (!(Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(tile.getCordX() + 1)) || Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(-tile.getCordX())))) {
+            if (!(Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(tile.getCordX() + 1)) || Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(-tile.getCordX())-1))) {
                 System.out.println("Right tile connection for cell x: " + tile.getCordX() + " y: " + tile.getCordY() + " is not connected properly");
                 assert (false);
             }
-            if (!(Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(tile.getCordX() - 1)) || Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(-tile.getCordX())))) {
+            if (!(Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(tile.getCordX() - 1)) || Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(-tile.getCordX())-1))) {
                 System.out.println("Left tile connection for cell x: " + tile.getCordX() + " y: " + tile.getCordY() + " is not connected properly");
                 assert (false);
             }
-            if (!(Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(tile.getCordY() - 1)) || Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(-tile.getCordY())))) {
+            if (!(Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(tile.getCordY() - 1)) || Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(-tile.getCordY())-1))) {
                 System.out.println("Up tile connection for cell x: " + tile.getCordX() + " y: " + tile.getCordY() + " is not connected properly");
                 assert (false);
             }
-            if (!(Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(tile.getCordY() + 1)) || Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(-tile.getCordY())))) {
+            if (!(Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(tile.getCordY() + 1)) || Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(-tile.getCordY())-1))) {
                 System.out.println("Down down");
                 assert (false);
             }
