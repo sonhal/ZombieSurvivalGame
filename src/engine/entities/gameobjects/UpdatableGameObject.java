@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
 
+/**
+ * UpdatableGameObject is a GameObject meant to be used with the gameLoop contains implementation of
+ * methods for interacting with the gameLoop.
+ */
 public class UpdatableGameObject implements IUpdatableGameObject {
 
     protected List<ScriptableComponent> components;
@@ -87,6 +91,10 @@ public class UpdatableGameObject implements IUpdatableGameObject {
         return isPlayer;
     }
 
+    /**
+     * Internal builder class for the Object. Makes creating new
+     * UpdatableGameObjects more predictable and less verbose
+     */
     public static class Builder{
 
         private TransformComponent transformComponent;

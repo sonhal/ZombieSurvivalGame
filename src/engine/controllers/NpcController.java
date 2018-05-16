@@ -47,22 +47,21 @@ public class NpcController extends Updater implements Messenger {
             sendMessage(new EnemyKilledMessage(10));
         }});
         super.update();
-        //enemies.stream().forEach((e)->{e.update();});
     }
 
+    /**
+     * Spawns new Enemies into the Game World
+     * @param world the game world
+     */
     protected void spawner(World world){
         Tile spawnTile = locateSpawnTile(world);
         if (spawnTile != null){
             Random rand = new Random();
-            System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
-            IUpdatableGameObject enemy1 = EnemyFactory.createBatEnemy(player, spawnTile, new BasicEntityBlueprint(
-                    70 + gameLevel, 20 + gameLevel, (500 - (gameLevel * 50) ) - rand.nextInt(20) , Sound.ZOMBIE_ATTACK), gameHandler);
-            addToUpdateList(enemy1);
-            spawnInterval = 100;
+            IUpdatableGameObject newEnemy = EnemyFactory.createEnemy(getRandomEnemyType(),gameHandler, spawnTile, new BasicEntityBlueprint(
+                    30 + gameLevel, 10 + gameLevel, (500 - (gameLevel * 50) ) - rand.nextInt(50) , Sound.ZOMBIE_ATTACK));
 
-            IUpdatableGameObject enemy2 = ZombieBuilder.createZombie(player, spawnTile, new BasicEntityBlueprint(
-                    30 + gameLevel, 10 + gameLevel, (500 - (gameLevel * 50) ) - rand.nextInt(50) , Sound.ZOMBIE_ATTACK), gameHandler);
-            addToUpdateList(enemy2);
+            System.out.println("Spawning new monster at: X " + spawnTile.getCordX() + " Y " + spawnTile.getCordY());
+            addToUpdateList(newEnemy);
             spawnInterval = 10;
         }
     }
@@ -109,6 +108,19 @@ public class NpcController extends Updater implements Messenger {
         }
     }
 
+    private EnemyFactory.EnemyType getRandomEnemyType(){
+        Random random = new Random();
+        if(random.nextInt(10) < 5){
+            return EnemyFactory.EnemyType.BAT;
+        }
+        else {
+            return EnemyFactory.EnemyType.ZOMBIE;
+        }
+    }
+
+    /**
+     * Cleans up resources under the Npc Controllers domain that can interfere with normal shutdown of the game
+     */
     public void cleanUp(){
         getUpdateObjects().forEach(updatable -> ((GameObject) updatable).getComponentByType(EnemyInputComponent.class).ifPresent(scriptableComponent -> scriptableComponent.cleanUp((GameObject)updatable)));
     }

@@ -11,6 +11,9 @@ import engine.services.audio.Sound;
 
 import java.util.ArrayList;
 
+/**
+ * Builds the player GameObject. Is usually only called at the start of a new game.
+ */
 public class PlayerBuilder {
 
     public static IUpdatableGameObject create(Updater updater, EventHandler eventHandler, int health, Tile startTile){

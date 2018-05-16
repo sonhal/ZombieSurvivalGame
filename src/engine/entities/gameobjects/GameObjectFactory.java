@@ -10,6 +10,9 @@ import engine.world.Tile;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * GameObject factory for common GameObjects that are instantiated often during game play
+ */
 public class GameObjectFactory {
 
     public static GameObject createStaticGameObject(Sprite sprite, Tile startTile){
