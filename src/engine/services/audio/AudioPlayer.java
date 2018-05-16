@@ -27,6 +27,8 @@ public class AudioPlayer {
     private HashMap<Sound, Media> backgroundMusicCollection;
     private List<MediaPlayer> backGroundSounds;
     private static AudioPlayer instance;
+    private boolean isMute;
+    private List<Sound> backGroundMusicLog;
 
     private AudioPlayer(){
         soundBuffer = new LinkedHashSet<>();
@@ -60,7 +62,7 @@ public class AudioPlayer {
      * Method to call to play sounds queued in the AudioPlayer
      */
     public synchronized void playSounds(){
-        if(soundBuffer.size() > 0) {
+        if(soundBuffer.size() > 0 && !isMute) {
             SoundData soundData = soundBuffer.iterator().next();
             soundPool.execute(new Runnable() {
                 @Override
@@ -88,6 +90,7 @@ public class AudioPlayer {
      * @param sounds Enum identifying the song to be played
      */
     public void setBackgroundMusic(List<Sound> sounds){
+        backGroundMusicLog = sounds;
         sounds.parallelStream().forEach(sound -> {
             Platform.runLater(() -> {
                 MediaPlayer mediaPlayer = new MediaPlayer(backgroundMusicCollection.get(sound));
@@ -101,11 +104,35 @@ public class AudioPlayer {
         backGroundSounds.forEach(mediaPlayer -> mediaPlayer.stop());
     }
 
+    public void startBackGroundMusic(){
+        backGroundSounds.forEach(mediaPlayer -> mediaPlayer.play());
+    }
+
     public void shutdown(){
         soundPool.shutdown();
         backGroundSounds.forEach(mediaPlayer -> mediaPlayer.dispose());
         instance = null;
     }
+
+    public void mute(){
+        isMute = true;
+        stopBackgroundMusic();
+    }
+
+    public void unMute(){
+        isMute = false;
+        startBackGroundMusic();
+    }
+
+    public void toggleSound(){
+        if(isMute){
+            unMute();
+        }
+        else {
+            mute();
+        }
+    }
+
 
     /**
      * Data Object to keep the Audio request sent to the AudioPlayer in a nice structure

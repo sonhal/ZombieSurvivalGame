@@ -30,8 +30,8 @@ public class Renderer {
 
     public void render(DrawableTile[][] drawableMatrix){
         setEntitySize(drawableMatrix);
-//        canvas.setHeight(canvas.getScene().getHeight());
-//        canvas.setWidth(canvas.getScene().getHeight());
+        canvas.setHeight(canvas.getScene().getHeight());
+        canvas.setWidth(canvas.getScene().getHeight());
 
         gc.clearRect(0,0,canvas.getWidth(),canvas.getHeight() );
         int yAxisOffset = 0;

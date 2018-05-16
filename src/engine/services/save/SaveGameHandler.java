@@ -12,6 +12,7 @@ import engine.world.World;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -100,7 +101,7 @@ public class SaveGameHandler {
         }
     }
 
-    public static HighScoreData loadHighscore(){
+    public static Optional<HighScoreData> loadHighscore(){
         HighScoreData highScore = null;
         try {
             FileInputStream fileIn = new FileInputStream(SAVE_HIGHSCORE_PATH);
@@ -113,6 +114,11 @@ public class SaveGameHandler {
         }catch (ClassNotFoundException c) {
             c.printStackTrace();
         }
-        return highScore;
+        if(highScore != null){
+            return Optional.of(highScore);
+        }
+        else {
+            return Optional.empty();
+        }
     }
 }

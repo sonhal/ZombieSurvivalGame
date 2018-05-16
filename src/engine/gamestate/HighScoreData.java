@@ -35,6 +35,14 @@ public class HighScoreData implements Serializable {
             this.timePoint = LocalDateTime.now();
         }
 
+        public String getTimePoint() {
+            return timePoint.toString();
+        }
+
+        public int getScore() {
+            return score;
+        }
+
         @Override
         public String toString() {
             return "date: " + timePoint + " | score: " + score;

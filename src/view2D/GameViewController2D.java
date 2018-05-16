@@ -3,11 +3,11 @@ package view2D;
 import engine.controllers.ActionEvent;
 import engine.controllers.GameHandler;
 import engine.controllers.GameInitializer;
-import engine.entities.components.InventoryComponent;
 import engine.entities.components.interfaces.HealthComponent;
 import engine.entities.components.interfaces.WeaponComponent;
 import engine.entities.items.weapons.Weapon;
 import engine.gamestate.HighScoreData;
+import engine.services.audio.AudioPlayer;
 import engine.services.save.SaveGameHandler;
 import engine.view.DrawableTile;
 import javafx.animation.KeyFrame;
@@ -15,20 +15,19 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -38,6 +37,8 @@ import view.GameViewController;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -53,43 +54,49 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     @FXML
     private
-    Label levelLabel, scoreLabel, highscoreLbl;
+    Label levelLabel, scoreLabel;
 
     @FXML
     public
-    Button save, gameBtn, settingsBtn, gotomenuBtn;
+    Button save, gotomenuBtn;
 
     @FXML
     private
     Canvas gameCanvas;
 
     @FXML
-    private TabPane TabMenu;
-
-    @FXML
-    private Tab tabGame, tabSettings, tabHighscore;
-
-    @FXML
     private
-    Pane  gameOver1, toolBar, toolBarUnder, hideBlood;
+    Pane  toolBarUnder, hideBlood;
 
     @FXML
     private Rectangle redBar, greenBar;
 
     @FXML
-    private Label weaponAmmoLabel, weaponNameLabel;
+    private Label weaponAmmoLabel, weaponNameLabel, gameOverHeader;
 
     @FXML
     private ImageView weapon, bloodsplatt;
 
     @FXML
-    private TextArea highscoreText, highscoreText2;
-
-    @FXML
-    private BorderPane borderPane, menuBorderPane;
+    private BorderPane borderPane, menuBorderPane, deathOverlay, pauseOverlay;
 
     @FXML
     private StackPane stackPane;
+
+    @FXML
+    private HBox mainParent;
+
+    @FXML
+    private GridPane topBarGridPane;
+
+    @FXML
+    private TableView highScoreTable;
+
+    @FXML
+    private TableColumn highScoreDate, highScoreScore;
+
+    @FXML
+    private Pane shaderOverlay;
 
 
     @Override
@@ -105,31 +112,10 @@ public class GameViewController2D implements GameViewController, Initializable, 
         initializeView();
         System.out.println("Game controller active 2");
 
-        menuBorderPane.setMaxWidth(400);
-        menuBorderPane.setMaxHeight(400);
-        if(stackPane.getHeight() < stackPane.getWidth()){
-            gameCanvas.setHeight(stackPane.getHeight());
-            gameCanvas.setWidth(stackPane.getHeight());
-        }
-        else{
-            gameCanvas.setHeight(stackPane.getWidth());
-            gameCanvas.setWidth(stackPane.getWidth());
-        }
-
-        stackPane.heightProperty().addListener((ov, oldHeight, newHeight) -> {
-            if(stackPane.getWidth() > newHeight.doubleValue()){
-                gameCanvas.setHeight(newHeight.doubleValue());
-                gameCanvas.setWidth(newHeight.doubleValue());
-            }
+        gameCanvas.widthProperty().addListener((observable, oldValue, newValue) -> {
+            topBarGridPane.setMaxWidth(newValue.doubleValue());
+            toolBarUnder.setMaxWidth(newValue.doubleValue());
         });
-
-        stackPane.widthProperty().addListener((ov, oldHeight, newWidth) -> {
-                if(stackPane.getHeight() > newWidth.doubleValue()){
-                    gameCanvas.setHeight(newWidth.doubleValue());
-                    gameCanvas.setWidth(newWidth.doubleValue());
-                }
-        });
-
 
         renderer = new Renderer(gameCanvas);
         gameCanvas.getGraphicsContext2D().setFill(Color.BLACK);
@@ -210,9 +196,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
                     }
                     if (e.getCode() == KeyCode.ESCAPE) {
                         System.out.println("Escape key was pressed");
-                        gameLoop.pause();
-                        TabMenu.setVisible(true);
-                        hideBlood.setVisible(false);
+                        goToPauseScreen();
                     }
                 });
             }
@@ -226,13 +210,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
     public void initializeView(){
-        highscoreText.setEditable(false);
-        TabMenu.setVisible(false);
         final BooleanProperty firstTime = new SimpleBooleanProperty(true);
-        HighScoreData highScoreData = SaveGameHandler.loadHighscore();
-        StringBuilder builder = new StringBuilder();
-        highScoreData.getHighscoreSet().forEach(highScoreEntry -> builder.append(highScoreEntry +"\n\n"));
-        highscoreText.setText(builder.toString());
     }
 
     @Override
@@ -251,25 +229,31 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
     public void goToDeathScreen() {
+        toggleShaderOverlay();
         final BooleanProperty firstTime = new SimpleBooleanProperty(true);
-        HighScoreData highScoreData = SaveGameHandler.loadHighscore();
-        StringBuilder builder = new StringBuilder();
-        highScoreData.getHighscoreSet().forEach(highScoreEntry -> builder.append(highScoreEntry +"\n\n"));
-        highscoreText.setText(builder.toString());
+        Optional<HighScoreData> highScoreData = SaveGameHandler.loadHighscore();
+        if(highScoreData.isPresent()){
+            highScoreDate.setCellValueFactory(
+                    new PropertyValueFactory<HighScoreData.HighScoreEntry,String>("timePoint")
+            );
+            highScoreScore.setCellValueFactory(
+                    new PropertyValueFactory<HighScoreData.HighScoreEntry,Integer>("score")
+            );
+
+            StringBuilder builder = new StringBuilder();
+            ObservableList<HighScoreData.HighScoreEntry> obsList = FXCollections.observableArrayList();
+            obsList.addAll( highScoreData.get().getHighscoreSet());
+            highScoreTable.setItems(obsList);
+        }
         stopGameLoop();
         System.out.println("Game ended");
-        TabMenu.setVisible(true);
-        tabGame.setDisable(true);
-        tabHighscore.setDisable(false);
-        hideBlood.setVisible(true);
-        tabSettings.setDisable(true);
-        highscoreLbl.setText("Game Over");
-        gotomenuBtn.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
-            if(newValue && firstTime.get()){
-                gameOver1.requestFocus(); // Delegate the focus to container
-                firstTime.setValue(false); // Variable value changed for future references
-            }
-        });
+        deathOverlay.setVisible(true);
+    }
+
+    public void goToPauseScreen(){
+        gameLoop.pause();
+        toggleShaderOverlay();
+        pauseOverlay.setVisible(true);
     }
 
     public void startNewGame(GameViewController gameViewController){
@@ -291,8 +275,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
     }
 
     public void Continue(){
+        toggleShaderOverlay();
         gameLoop.playFromStart();
-        TabMenu.setVisible(false);
+        pauseOverlay.setVisible(false);
     }
 
     public void saveGame(){
@@ -330,10 +315,23 @@ public class GameViewController2D implements GameViewController, Initializable, 
             }else{
                 weaponAmmoLabel.setText(Character.toString('\u221E'));
             }
-            weaponNameLabel.setText("Weapon: " + getSelectedWeapon().getWeaponType().getDisplayName());
+            weaponNameLabel.setText(getSelectedWeapon().getWeaponType().getDisplayName());
             weapon.setImage(renderer.getSpriteTranslator()
                     .getSpriteImage(getSelectedWeapon().getWeaponType().getSprite()));
         }
+    }
+
+    public void toggleShaderOverlay(){
+        if(shaderOverlay.isVisible()){
+            shaderOverlay.setVisible(false);
+        }
+        else {
+            shaderOverlay.setVisible(true);
+        }
+    }
+
+    public void toggleMute(){
+        AudioPlayer.getInstance().toggleSound();
     }
 
     public Weapon getSelectedWeapon() {
@@ -343,4 +341,5 @@ public class GameViewController2D implements GameViewController, Initializable, 
     public void setSelectedWeapon(Weapon selectedWeapon) {
         this.selectedWeapon = selectedWeapon;
     }
+
 }

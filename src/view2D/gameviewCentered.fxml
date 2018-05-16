@@ -1,131 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="997.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.GameViewController2D">
+<BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.GameViewController2D">
    <center>
          <StackPane fx:id="stackPane">
-            <Canvas fx:id="gameCanvas" />
-             <Pane fx:id="toolBarUnder" layoutY="1.0" opacity="0.29" prefHeight="61.0" prefWidth="997.0" style="-fx-background-color: #1C1C1C;" />
-             <Pane fx:id="toolBar" layoutX="-1.0" layoutY="-3.0" prefHeight="61.0" prefWidth="990.0">
-                 <children>
-                     <Label fx:id="weaponAmmoLabel" layoutX="540.0" layoutY="30.0" textFill="#00eeff" />
-                     <Label fx:id="weaponNameLabel" layoutX="540.0" layoutY="15.0" text="Knife" textFill="RED">
-                         <font>
-                             <Font name="SansSerif Regular" size="12.0" />
-                         </font>
-                     </Label>
-                     <ImageView fx:id="weapon" fitHeight="55.0" fitWidth="71.0" layoutX="450.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
-                     </ImageView>
-                     <Rectangle fx:id="redBar" arcHeight="5.0" arcWidth="5.0" fill="RED" height="25.0" layoutX="210.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                     <Rectangle fx:id="greenBar" arcHeight="5.0" arcWidth="5.0" fill="#00ff48" height="25.0" layoutX="210.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                     <Label fx:id="levelLabel" layoutX="40.0" layoutY="15.0" text="Level 0" textFill="#ffe491">
-                         <font>
-                             <Font name="SansSerif Regular" size="20.0" />
-                         </font>
-                     </Label>
-                     <Label fx:id="scoreLabel" layoutX="130" layoutY="15.0" text="Score 0" textFill="#ffe491">
-                         <font>
-                             <Font name="SansSerif Regular" size="20.0" />
-                         </font>
-                     </Label>
-                 </children>
-             </Pane>
-             <BorderPane fx:id="menuBorderPane">
-                 <center>
-                     <TabPane  fx:id="TabMenu" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: grey;" tabClosingPolicy="UNAVAILABLE">
-                         <tabs>
-                             <Tab fx:id="tabGame" text="Game" >
-                                 <content>
-                                     <HBox fx:id="gameOver1" alignment="CENTER">
-                                         <VBox alignment="CENTER">
-                                             <Label layoutX="100.0" text="Game paused" textFill="#91acff">
-                                                 <font>
-                                                     <Font name="SansSerif Regular" size="40.0" />
-                                                 </font>
-                                             </Label>
-                                             <Button fx:id="save" mnemonicParsing="false" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Save &amp; Exit" textFill="#91acff">
-                                                 <font>
-                                                     <Font name="SansSerif Regular" size="18.0" />
-                                                 </font>
-                                             </Button>
-                                             <Button  mnemonicParsing="false" onAction="#Continue" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Continue" textFill="#84ffa9">
-                                                 <font>
-                                                     <Font name="SansSerif Regular" size="18.0" />
-                                                 </font>
-                                             </Button>
-                                             <Button fx:id="gotomenuBtn1"  mnemonicParsing="false" onAction="#goToMenu" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Back to Menu" textFill="#ffb785">
-                                                 <font>
-                                                     <Font name="SansSerif Regular" size="18.0" />
-                                                 </font>
-                                             </Button>
-                                         </VBox>
-                                     </HBox>
-                                 </content>
-                             </Tab>
-                             <Tab fx:id="tabSettings" text="Settings">
-                                 <content>
-                                     <BorderPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                         <center>
-                                             <Label  text="Settings" textFill="#9e9067">
-                                                 <font>
-                                                     <Font name="SansSerif Regular" size="40.0" />
-                                                 </font>
-                                             </Label>
-                                         </center>
-                                     </BorderPane>
-                                 </content>
-                             </Tab>
-                             <Tab fx:id="tabHighscore" text="Highscore">
-                                 <content>
-                                     <HBox alignment="CENTER">
-                                         <StackPane>
-                                             <Pane fx:id="hideBlood">
-                                                 <children>
-                                                     <ImageView fx:id="bloodsplatt" fitHeight="392.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                             <Image url="@static/bloodsplatt.png" />
-                                                         </image>
-                                                     </ImageView>
-                                                 </children>
-                                             </Pane>
-                                             <VBox alignment="CENTER">
-                                                 <Label fx:id="highscoreLbl" text="HighScore" textFill="#ff4d4d">
-                                                     <font>
-                                                         <Font name="SansSerif Regular" size="40.0" />
-                                                     </font>
-                                                 </Label>
-                                                 <TextArea fx:id="highscoreText" editable="false" text="" />
-                                                 <Button fx:id="gotomenuBtn" mnemonicParsing="false" onAction="#goToMenu" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Back to Menu" textFill="#84ffa9">
-                                                     <font>
-                                                         <Font name="SansSerif Regular" size="18.0" />
-                                                     </font>
-                                                 </Button>
-                                             </VBox>
-                                         </StackPane>
-                                     </HBox>
-                                 </content>
-                             </Tab>
-                         </tabs>
-                     </TabPane>
-                 </center>
-             </BorderPane>
+            <children>
+                <Canvas fx:id="gameCanvas" height="500.0" nodeOrientation="INHERIT" width="500.0" />
+                <Pane fx:id="toolBarUnder" maxHeight="50.0" minHeight="-Infinity" opacity="0.29" prefHeight="50.0" style="-fx-background-color: #1C1C1C;" translateY="1" StackPane.alignment="TOP_CENTER" />
+            <GridPane fx:id="topBarGridPane" maxHeight="50.0" StackPane.alignment="TOP_CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" maxWidth="120.0" minWidth="100.0" prefWidth="120.0" />
+                <ColumnConstraints hgrow="ALWAYS" maxWidth="120.0" minWidth="100.0" prefWidth="120.0" />
+                  <ColumnConstraints hgrow="NEVER" minWidth="200.0" prefWidth="200.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="150.0" prefWidth="150.0" />
+                  <ColumnConstraints hgrow="NEVER" minWidth="100.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <children>
+                        <Label id="weaponNameLabel" fx:id="weaponNameLabel" minWidth="100.0" text="Knife" textFill="RED">
+                           <font>
+                              <Font name="SansSerif Regular" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label id="weaponAmmoLabel" fx:id="weaponAmmoLabel" minWidth="100.0" textFill="#00eeff" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets right="30.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <ImageView id="weapon" fx:id="weapon" fitHeight="55.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin></ImageView>
+                  <StackPane prefHeight="50.0" prefWidth="200.0" GridPane.columnIndex="2">
+                     <children>
+                        <Rectangle id="redBar" fx:id="redBar" arcHeight="5.0" arcWidth="5.0" fill="RED" height="25.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_LEFT" />
+                        <Rectangle id="greenBar" fx:id="greenBar" arcHeight="5.0" arcWidth="5.0" fill="#00ff48" height="25.0" stroke="BLACK" strokeType="INSIDE" width="200.0" StackPane.alignment="CENTER_LEFT" />
+                     </children>
+                  </StackPane>
+                  <Label fx:id="levelLabel" minWidth="100.0" text="Level 0" textFill="#ffe491" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="SansSerif Regular" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="scoreLabel" minWidth="100.0" text="Score 0" textFill="#ffe491">
+                     <font>
+                        <Font name="SansSerif Regular" size="20.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="20.0" right="25.0" />
+                     </GridPane.margin>
+                  </Label>
+               </children>
+            </GridPane>
+            <Pane fx:id="shaderOverlay" opacity="0.62" style="-fx-background-color: black;" visible="false" />
+            <BorderPane id="deathOverlay" fx:id="deathOverlay" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <center>
+                  <VBox alignment="CENTER" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label fx:id="gameOverHeader" text="Game Over" textFill="#ff4d4d">
+                           <font>
+                              <Font name="SansSerif Regular" size="40.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="HighScore">
+                           <font>
+                              <Font size="32.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TableView fx:id="highScoreTable" prefHeight="200.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn fx:id="highScoreDate" editable="false" maxWidth="234.0" minWidth="89.0" prefWidth="198.0" sortType="DESCENDING" sortable="false" text="Date" />
+                            <TableColumn fx:id="highScoreScore" editable="false" maxWidth="310.0" minWidth="0.0" prefWidth="201.0" sortType="DESCENDING" sortable="false" text="Score" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="goToMenu" mnemonicParsing="false" onAction="#goToMenu" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Back to Menu" textFill="#84ffa9">
+                           <font>
+                              <Font name="SansSerif Regular" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </center>
+            </BorderPane>
+            <BorderPane fx:id="pauseOverlay" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <center>
+                  <VBox alignment="CENTER" maxHeight="400.0" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: grey;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label alignment="TOP_CENTER" text="Game paused" textFill="#91acff">
+                           <font>
+                              <Font name="SansSerif Regular" size="40.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="40.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Settings">
+                           <font>
+                              <Font name="SansSerif Regular" size="33.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <RadioButton mnemonicParsing="false" onAction="#toggleMute" text="Mute">
+                           <padding>
+                              <Insets bottom="30.0" />
+                           </padding>
+                        </RadioButton>
+                        <Button mnemonicParsing="false" onAction="#Continue" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Continue" textFill="#84ffa9">
+                           <font>
+                              <Font name="SansSerif Regular" size="18.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="save" mnemonicParsing="false" prefHeight="33.0" prefWidth="151.0" style="-fx-background-color: #474747;" stylesheets="@btnStyle.css" text="Save &amp; Exit" textFill="#91acff">
+                           <font>
+                              <Font name="SansSerif Regular" size="18.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+               </center>
+            </BorderPane>
+            </children>
 
          </StackPane>
    </center>
