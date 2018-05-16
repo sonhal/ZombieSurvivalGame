@@ -19,9 +19,9 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="TOP_CENTER" spacing="150">
+            <VBox alignment="TOP_CENTER" spacing="120.0">
                <children>
-                  <Label fx:id="menuTitle" text="Zombie Survival" textFill="WHITE">
+                  <Label fx:id="menuTitle" alignment="CENTER" contentDisplay="CENTER" text="Zombie Survival" textFill="WHITE">
                      <effect>
                         <DropShadow radius="12.965" spread="0.64" width="32.86" />
                      </effect>
@@ -29,7 +29,7 @@
                         <Font name="Tempus Sans ITC" size="63.0" />
                      </font>
                   </Label>
-                  <VBox alignment="CENTER" minHeight="200" spacing="20" style="-fx-background-color: #454954;">
+                  <VBox alignment="CENTER" minHeight="250.0" spacing="20" style="-fx-background-color: #454954;">
                      <children>
                         <Button fx:id="play" minWidth="150" stylesheets="@css/btnStyle.css" text="Play" textFill="#5aae74">
                            <font>
@@ -67,7 +67,7 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox fx:id="about" alignment="CENTER" maxHeight="300.0" prefHeight="300.0" spacing="10.0" style="-fx-background-color: grey;" visible="false">
+            <VBox fx:id="about" alignment="CENTER" maxHeight="350.0" prefHeight="350.0" spacing="10.0" style="-fx-background-color: grey;" visible="false">
                <children>
                   <TextArea disable="true" editable="false" maxHeight="150.0" maxWidth="400.0" minHeight="150.0" minWidth="300.0" prefHeight="150.0" prefWidth="200.0" stylesheets="@css/aboutTextArea.css" text="Zombie Survial is a story about a innocent pokemon trainer trapped in a hellish zombie apocolypse. With no pokemons to rely on our hero must use what he can find to survive the challenges ahead.&#10;" wrapText="true">
                      <font>
@@ -88,6 +88,11 @@
                      </font>
                   </Label>
                   <Label text="Cycle Weapons: E">
+                     <font>
+                        <Font name="SansSerif Regular" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Pause Game: ESC">
                      <font>
                         <Font name="SansSerif Regular" size="18.0" />
                      </font>

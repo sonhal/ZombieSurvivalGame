@@ -14,7 +14,6 @@ import java.util.Optional;
  */
 public abstract class ScriptableComponent implements Serializable{
 
-    //new method name: delayElapsed?
     /**
      * Method Components can use to evaluate if it can take time dependent actions
      * @param delay, the time between each time the behaviour can happen

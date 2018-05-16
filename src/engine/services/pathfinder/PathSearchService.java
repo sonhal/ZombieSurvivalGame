@@ -23,7 +23,6 @@ public class PathSearchService implements Updatable {
     private World world;
     private List<PathRequest> requestList;
     private int counter;
-    private static PathSearchService instance;
 
     /**
      *

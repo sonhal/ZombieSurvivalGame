@@ -15,9 +15,9 @@ public class NodeMap {
 
     public NodeMap(World world){
         //Assumes the world is a square.
-        worldWidth = world.getwidth();
+        worldWidth = world.getWidth();
 
-        nodes = new Node[world.getwidth()][world.getHeight()];
+        nodes = new Node[world.getWidth()][world.getHeight()];
         world.getWorld().parallelStream().forEach(tile -> nodes[coordinateTranslator(tile.getCordX())][coordinateTranslator(tile.getCordY())] = new Node(coordinateTranslator(tile.getCordX()), coordinateTranslator(tile.getCordY()),(tile.getGameObject() != null)));
     }
 

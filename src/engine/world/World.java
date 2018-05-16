@@ -152,7 +152,7 @@ public class World implements Serializable{
         this.world = world;
     }
 
-    public int getwidth(){
+    public int getWidth(){
         return size;
     }
 
