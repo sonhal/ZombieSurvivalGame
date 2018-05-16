@@ -16,15 +16,26 @@ import engine.services.audio.Sound;
 
 import java.util.Optional;
 
+/**
+ * Class handeling the players inventory and the generation of the items the player is using.
+ */
 public class InventoryComponent extends ScriptableComponent {
 
     private Updater updater;
     private WeaponComponent weaponComponent;
 
+    /**
+     * Constructor assigning variables.
+     * @param updater Refference to the updater which makes us able to add new elements such as bullets to the update loop.
+     */
     public InventoryComponent(Updater updater) {
         this.updater = updater;
     }
 
+    /**
+     * For each game tick checks if there is any game objects on the ground to pick up at the players location.
+     * @param gameObject, StaticGameObject that calls the Component
+     */
     @Override
     public void update(GameObject gameObject) {
         if(gameObject.getTransformComponent().getCurrentTile().getItem() != null){
@@ -52,6 +63,11 @@ public class InventoryComponent extends ScriptableComponent {
 
     }
 
+    /**
+     * Method which is triggered when the player steps on a item.
+     * @param gameObject The refference to the player object
+     * @param item The item which has been picked up from the gound.
+     */
     private void pickupItem(GameObject gameObject, Item item){
         if (item instanceof DroppedWeapon){
             addWeapon((DroppedWeapon)item);
@@ -62,6 +78,10 @@ public class InventoryComponent extends ScriptableComponent {
         }
     }
 
+    /**
+     * Checks if the pickd up weapon exsists, and decides if the player already has the weapon and there is only ammo to be added or a new weapon should be given to the player.
+     * @param weapon Picked up weapon.
+     */
     private void addWeapon(DroppedWeapon weapon){
         if(weaponComponent != null){
             if(weaponComponent instanceof MultiWeaponComponent){
@@ -75,6 +95,11 @@ public class InventoryComponent extends ScriptableComponent {
         }
     }
 
+    /**
+     * Checks the enum type of the picked up weapon, and makes a new weapon object based on the weapon type.
+     * @param droppedWeapon The weaponItem which have been picked up
+     * @return Returns a weaponObject.
+     */
     Weapon makeWeapon(DroppedWeapon droppedWeapon){
         switch (droppedWeapon.getWeaponType()){
             case BASIC_GUN: return new Gun(droppedWeapon.getWeaponType(), new SoundEffectComponent(100, Sound.HIT_1), new SingleAttackComponent(80), updater, 1000, 2, 40);

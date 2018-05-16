@@ -10,13 +10,19 @@ public class ConnectUpDown implements Runnable {
     List<Tile> worldToBeConnected;
     Thread t;
 
+    /**
+     * Constructor spawning the thread
+     * @param worldList Reference to the list of tiles representing the world.
+     */
     ConnectUpDown(List<Tile> worldList) {
         worldToBeConnected = new ArrayList(worldList);
         t = new Thread(this);
         t.start();
     }
 
-
+    /** A compirator for sorting the tiles after each other in the vertical plane.
+     * Makes the whole process of connecting tiles extremely effective as they are all lined up.
+     */
     Comparator<Tile> yDirectionalSorting = new Comparator<Tile>() {
         @Override
         public int compare(Tile t1, Tile t2) {
@@ -28,7 +34,14 @@ public class ConnectUpDown implements Runnable {
         }
     };
 
-
+    /**
+     * Connecting tile.up and tile.down on each tile object.
+     * This run method is a part of the runnable interface, and will automatically execute after this tread is created.
+     *  1. Sorts the world list using the yDirectional Sorting operator.
+     *  2. Iterates through each element in the sorted list of tiles.
+     *  3. Connects up and down tiles using the last and current variables.
+     *  3. Each time it reaches the end it maps the last tile with the first tile from each row, making this round earth effect.
+     */
     public void run() {
         worldToBeConnected.sort(yDirectionalSorting);
         Iterator yIterator = worldToBeConnected.iterator();

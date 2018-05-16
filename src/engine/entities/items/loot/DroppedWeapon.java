@@ -4,6 +4,10 @@ import engine.entities.items.Item;
 import engine.entities.items.weapons.Weapon;
 import engine.entities.items.weapons.WeaponType;
 
+/**
+ * Representing a weapon as a item on the ground.
+ * After picked up there will be created a weapon object based on the stats of this item.
+ */
 public class DroppedWeapon extends Item {
 
     protected WeaponType weaponType;

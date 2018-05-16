@@ -12,7 +12,8 @@ import engine.world.Tile;
 import java.nio.channels.spi.SelectorProvider;
 
 /**
- * Weapon subclass that fires Bullets.
+ * Weapon subclass which fires two bullets, each which travels to the left and the right of the player.
+ * Fireing this bullet is consuming two ammo. If only one bullet in the magazine, only the bullet to right will fire.
  * Is meant to be held and activated by a WeaponComponent
  */
 public class TwoHandedGun extends Weapon {

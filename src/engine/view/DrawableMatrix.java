@@ -15,6 +15,15 @@ public class DrawableMatrix implements Serializable{
         matrix = generateDrawable(world, baseTile, widthRadiX, heightRadiY);
     }
 
+    /**
+     * Copies a simplified version of the tiles within a defined radius arount a tile.
+     * Each time the view asks for a new frame this method is run copying the area around the player to a array so it can be rendered on the screen.
+     * @param world The world object of tiles.
+     * @param baseTile The tile in the center of the area which will be drawn
+     * @param radiX How many tiles to each side of the center the method will include in the array
+     * @param radiY How many tiles to up and down from the center the method will include in the array
+     * @return
+     */
     public DrawableTile[][] generateDrawable(World world, Tile baseTile, int radiX, int radiY){
         Tile currentTile = baseTile;
         DrawableTile[][] drawableWorld = new DrawableTile[radiX*2][radiY*2];
