@@ -103,6 +103,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
         this.drawableMatrix = drawableMatrix;
     }
 
+    /**
+     * initializeGameEnv. methods that are to be initialized, controls listeners
+     */
     @Override
     public void initializeGameEnv() {
         //scaleWidth();
@@ -127,6 +130,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
         runViewTick();
     }
 
+    /**
+     * initialize. initializes game view
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeGameEnv();
@@ -143,6 +149,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
         });
     }
 
+    /**
+     * runViewTick. sets gameticks to gameloop
+     */
     public void runViewTick(){
         gameLoop = new Timeline();
         gameLoop.setCycleCount( Timeline.INDEFINITE );
@@ -161,6 +170,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
         return gameHandler;
     }
 
+    /**
+     * setEventHandlers. Controls player inputs, send messages to gameHandler class
+     */
     private void setEventHandlers(){
         Platform.runLater(new Runnable() {
             public void run() {
@@ -218,6 +230,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
         gameLoop.stop();
     }
 
+    /**
+     * gotToMenu. onAction for "back to menu" button, sends user back to game menu
+     */
     public void goToMenu() throws IOException {
         stopGameLoop();
         System.out.println("Back to main menu");
@@ -227,6 +242,10 @@ public class GameViewController2D implements GameViewController, Initializable, 
         stage.getScene().setFill(Color.BLACK);
     }
 
+
+    /**
+     * goToDeathScreen. initializes highscore data, toggles death screen overlay, stops gameloop
+     */
     public void goToDeathScreen() {
         toggleShaderOverlay();
         Optional<HighScoreData> highScoreData = SaveGameHandler.loadHighScore();
@@ -288,6 +307,9 @@ public class GameViewController2D implements GameViewController, Initializable, 
         }
     }
 
+    /**
+     * updateUI. handels data from gameHandler, connected to java fxml components
+     */
     private void updateUI(){
 
         gameHandler.getPlayer().getComponentByType(HealthComponent.class)

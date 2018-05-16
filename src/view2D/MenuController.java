@@ -37,6 +37,9 @@ public class MenuController implements Initializable{
     public TableColumn highScoreDate;
     public TableColumn highScoreScore;
 
+    /**
+     * initialize. initializes game menu, controls onAction for buttons
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         BackgroundImage myBI= new BackgroundImage(new Image("view2D/static/menuBG.jpg",600,600,false,true),
@@ -72,7 +75,9 @@ public class MenuController implements Initializable{
         }
 
     }
-
+    /**
+     * startGame. method builds scene for gameView
+     */
     private void startGame() throws IOException{
         System.out.println("Game started!");
         Stage stage = (Stage)play.getScene().getWindow();
@@ -88,6 +93,9 @@ public class MenuController implements Initializable{
         controller.startNewGame(controller);
     }
 
+    /**
+     * loadGame. fetches loadsave, builds scene for gameView
+     */
     private void loadGame() throws IOException{
         System.out.println("Game started!");
         Stage stage = (Stage)play.getScene().getWindow();
@@ -110,6 +118,9 @@ public class MenuController implements Initializable{
         //infoText.setText(info);
     }
 
+    /**
+     * toggleShowHighscore. sets highscore visible
+     */
     public void toggleShowHighscore(){
         if(highscore.isVisible()){
             highscore.setVisible(false);
@@ -128,7 +139,10 @@ public class MenuController implements Initializable{
             about.setVisible(true);
         }
     }
-    
+
+    /**
+     * loadInHighscoreData. recievs data to highscore display
+     */
     public void loadInHighscoreData(){
         try {
             Optional<HighScoreData> highScoreData = SaveGameHandler.loadHighScore();
