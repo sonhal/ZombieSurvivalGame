@@ -2,6 +2,7 @@ package engine.entities.gameobjects;
 
 import engine.controllers.GameHandler;
 import engine.controllers.Updater;
+import engine.controllers.interfaces.IGameHandler;
 import engine.entities.components.*;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
@@ -15,7 +16,7 @@ import java.util.List;
 public class EnemyFactory {
 
 
-    private static IUpdatableGameObject createEnemy(List<Sprite> spriteList, Updater gameUpdater, BasicEntityBlueprint blueprint, Tile spawnTile, GameObject player, GameHandler gameHandler){
+    private static IUpdatableGameObject createEnemy(List<Sprite> spriteList, Updater gameUpdater, BasicEntityBlueprint blueprint, Tile spawnTile, GameObject player, IGameHandler gameHandler){
 
         SingleWeaponComponent wc = new SingleWeaponComponent();
         KillableHealthComponent hc = new KillableHealthComponent(blueprint.health);
@@ -42,7 +43,7 @@ public class EnemyFactory {
                 .build();
     }
 
-    public static IUpdatableGameObject createEnemy(EnemyType type, GameHandler gameHandler, Tile spawnTile, BasicEntityBlueprint blueprint){
+    public static IUpdatableGameObject createEnemy(EnemyType type, IGameHandler gameHandler, Tile spawnTile, BasicEntityBlueprint blueprint){
         /*
         Setting the sprites for a enemy, the numbering is not intuitive
         */

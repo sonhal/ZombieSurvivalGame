@@ -15,6 +15,8 @@ import java.util.ArrayList;
  */
 public class PlayerBuilder {
 
+    private static final int PLAYER_HEALTH = 200;
+
     public static IUpdatableGameObject create(Updater updater, EventHandler eventHandler, int health, Tile startTile){
         ArrayList<Sprite> playerSprites = new ArrayList<>();
         /*
@@ -40,7 +42,7 @@ public class PlayerBuilder {
         IUpdatableGameObject player = new UpdatableGameObject.Builder(new UpdatableTransformComponent(startTile))
                 .addComponent(new PlayerInputComponent(eventHandler, 0))
                 .addComponent(new GameObjectCollisionComponent())
-                .addComponent(new KillableHealthComponent(200))
+                .addComponent(new KillableHealthComponent(PLAYER_HEALTH))
                 .addComponent(new PickupItemSoundEffectComponent(100, Sound.PICKUP_WEAPON, Sound.PICKUP_HEALTH))
                 .addComponent(gc)
                 .addComponent(inventoryComponent)

@@ -1,5 +1,6 @@
 package engine.controllers;
 
+import engine.controllers.interfaces.IGameHandler;
 import engine.gamestate.GameStateKeeper;
 import engine.gamestate.GameStateMessengerMediator;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Class controlling the state and changes in the game world.
  */
-public class GameHandler extends Updater {
+public class GameHandler implements IGameHandler {
 
     private World world;
     private GameViewController gameViewController;
@@ -59,6 +60,7 @@ public class GameHandler extends Updater {
     /**
      * Main update method for the game state.
      */
+    @Override
     public void updateWordState(){
         pathSearchService.update();
         npcController.update(world);
@@ -72,6 +74,7 @@ public class GameHandler extends Updater {
      * Method called by the view to get updated game state.
      * @return DrawableTile 2D array
      */
+    @Override
     public DrawableTile[][] getDrawableWorld(){
         Tile viewCenterTile;
         updateWordState();
@@ -91,7 +94,8 @@ public class GameHandler extends Updater {
         }
     }
 
-    private DrawableMatrix getDrawableMatrix( int diameter){
+    @Override
+    public DrawableMatrix getDrawableMatrix(int diameter){
         return new DrawableMatrix(world, world.getSeed(), diameter, diameter);
     }
 
@@ -99,6 +103,7 @@ public class GameHandler extends Updater {
      * Method in taking events form the view and passes it to the eventHandler registered in the GameHandler
      * @param event ActionEvent
      */
+    @Override
     public void sendEvent(ActionEvent event){
         eventHandler.handle(event);
     }
@@ -107,6 +112,7 @@ public class GameHandler extends Updater {
     /**
      * Method called when player dies from the Player object
      */
+    @Override
     public void handlePlayerDeath(){
         try {
             shutDown();
@@ -119,14 +125,17 @@ public class GameHandler extends Updater {
         }
     }
 
+    @Override
     public IUpdatableGameObject getPlayer() {
         return player;
     }
 
+    @Override
     public World getWorld() {
         return world;
     }
 
+    @Override
     public void saveGame(){
         shutDown();
         npcController.cleanUp();
@@ -137,34 +146,41 @@ public class GameHandler extends Updater {
         System.out.println("Game saved");
     }
 
+    @Override
     public void shutDown(){
         AudioPlayer.getInstance().stopBackgroundMusic();
         AudioPlayer.getInstance().shutdown();
         //pathSearchService.shutdown();
     }
 
+    @Override
     public void start(){
         ArrayList<Sound> backGroundMusic = new ArrayList<Sound>();
         backGroundMusic.add(Sound.BACKGROUND_MUSIC_2);
         AudioPlayer.getInstance().setBackgroundMusic(backGroundMusic);
     }
 
+    @Override
     public GameStateKeeper getGameStateKeeper() {
         return gameStateKeeper;
     }
 
+    @Override
     public GameUpdater getGameUpdater() {
         return gameUpdater;
     }
 
+    @Override
     public void setGameViewController(GameViewController gameViewController) {
         this.gameViewController = gameViewController;
     }
 
+    @Override
     public void setPathSearchService(PathSearchService pathSearchService) {
         this.pathSearchService = pathSearchService;
     }
 
+    @Override
     public PathSearchService getPathSearchService() {
         return pathSearchService;
     }

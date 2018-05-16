@@ -2,6 +2,7 @@ package engine.entities.components;
 
 import engine.controllers.Direction;
 import engine.controllers.GameHandler;
+import engine.controllers.interfaces.IGameHandler;
 import engine.entities.components.ComponentEvent.*;
 import engine.entities.components.interfaces.InputComponent;
 import engine.entities.components.interfaces.TransformComponent;
@@ -31,11 +32,11 @@ public class EnemyInputComponent extends InputComponent{
     private Future<Path> nextPath;
     private Path path;
     private boolean waitingForPath;
-    private GameHandler gameHandler;
+    private IGameHandler gameHandler;
 
 
 
-    public EnemyInputComponent(GameObject target, GameHandler gameHandler, double sendEventDelay){
+    public EnemyInputComponent(GameObject target, IGameHandler gameHandler, double sendEventDelay){
         this.target = target;
         this.sendEventDelay = sendEventDelay;
         this.gameHandler = gameHandler;
@@ -126,14 +127,15 @@ public class EnemyInputComponent extends InputComponent{
 
     @Override
     public void innit(GameObject gameObject) {
-        //Gets reference to Players StaticTransformComponent
-        this.targetTransformComponent = target.getTransformComponent();
+        if(target != null){
+            //Gets reference to Players StaticTransformComponent
+            this.targetTransformComponent = target.getTransformComponent();
 
-        //Gets reference to its own StaticTransformComponent
-        this.gameObjectTransformComponent = gameObject.getTransformComponent();
+            //Gets reference to its own StaticTransformComponent
+            this.gameObjectTransformComponent = gameObject.getTransformComponent();
 
+        }
         lastEventSent = System.currentTimeMillis();
-
     }
 
     @Override

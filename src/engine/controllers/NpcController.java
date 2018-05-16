@@ -10,7 +10,6 @@ import engine.gamestate.messages.NewLevelMessage;
 import engine.controllers.interfaces.Messenger;
 import engine.gamestate.interfaces.MessengerMediator;
 import engine.entities.gameobjects.BasicEntityBlueprint;
-import engine.entities.gameobjects.ZombieBuilder;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.services.pathfinder.PathSearchService;
 import engine.world.Tile;
