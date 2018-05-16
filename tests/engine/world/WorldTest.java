@@ -33,7 +33,7 @@ class WorldTest {
         long t1 = System.nanoTime();
         List<Tile> tileList = testWorld.generate(60);
         long t2 = System.nanoTime();
-        if (tileList.size() != 14400) {
+        if (tileList.size() != 14641) {
             System.out.println("The correct amount of tiles are not being generated. The correct number should equal the result of: ((initSize*2)(initSize*2))");
             assert (false);
         }
