@@ -2,16 +2,11 @@ package engine.entities.components;
 
 import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.AttackEvent;
-import engine.entities.components.ComponentEvent.CollisionEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
 import engine.entities.components.ComponentEvent.MoveEvent;
 import engine.entities.components.interfaces.TransformComponent;
-import engine.entities.gameobjects.GameObjectFactory;
-import engine.entities.gameobjects.Sprite;
-import engine.entities.gameobjects.StaticGameObject;
 import engine.entities.gameobjects.UpdatableGameObject;
 import engine.entities.gameobjects.interfaces.GameObject;
-import engine.world.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

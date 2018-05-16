@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class StartGameViewStub extends Application{
+public class    StartGameViewStub extends Application{
 
     public GameHandler gameHandler;
     public GameViewController2D gameView;

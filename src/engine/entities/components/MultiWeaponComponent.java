@@ -2,12 +2,10 @@ package engine.entities.components;
 
 import engine.entities.components.ComponentEvent.ChangeWeaponEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
-import engine.entities.components.interfaces.WeaponComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.entities.items.weapons.Weapon;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**

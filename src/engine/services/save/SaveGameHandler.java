@@ -1,19 +1,12 @@
 package engine.services.save;
 import engine.controllers.GameHandler;
-import engine.entities.gameobjects.UpdatableGameObject;
-import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import engine.gamestate.HighScoreData;
-import engine.gamestate.interfaces.HighScore;
-import engine.gamestate.interfaces.Score;
 import engine.world.Tile;
 import engine.world.World;
 
-
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 
 /**
  * Service handling the saving of game data to file.

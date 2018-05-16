@@ -2,7 +2,6 @@ package engine.controllers;
 
 import engine.entities.components.EnemyInputComponent;
 import engine.entities.gameobjects.EnemyFactory;
-import engine.entities.gameobjects.GameObjectFactory;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.gamestate.messages.EnemyKilledMessage;
 import engine.gamestate.messages.GameEventMessage;
@@ -11,11 +10,9 @@ import engine.controllers.interfaces.Messenger;
 import engine.gamestate.interfaces.MessengerMediator;
 import engine.entities.gameobjects.BasicEntityBlueprint;
 import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
-import engine.services.pathfinder.PathSearchService;
 import engine.world.Tile;
 import engine.world.World;
 import engine.services.audio.Sound;
-
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;

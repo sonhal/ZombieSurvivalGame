@@ -1,5 +1,4 @@
 package engine.entities.items.loot;
-import engine.entities.gameobjects.Sprite;
 import engine.entities.items.Item;
 import engine.entities.items.weapons.Weapon;
 import engine.entities.items.weapons.WeaponType;
