@@ -140,6 +140,7 @@ public class Pathfinder {
     protected Node getFirstInOpen() {
         return openList.pollFirst();
     }
+
     protected void addToOpen(Node node) {
         openList.add(node);
     }
@@ -147,18 +148,23 @@ public class Pathfinder {
     protected boolean inOpenList(Node node) {
         return openList.contains(node);
     }
+
     protected void removeFromOpen(Node node) {
         openList.remove(node);
     }
+
     protected void addToClosed(Node node) {
         closedList.add(node);
     }
+
     protected boolean inClosedList(Node node) {
         return closedList.contains(node);
     }
+
     protected void removeFromClosed(Node node) {
         closedList.remove(node);
     }
+
     protected boolean isValidLocation(int startX, int startY, int searchX, int searchY){
         boolean isInvalid = (nodes.getNodeByTranslatedCoordinates(searchX, searchY) == null);
         if((!isInvalid) && ((startX != searchX) || (startY != searchY))){
@@ -170,6 +176,7 @@ public class Pathfinder {
     public float getMovementCost(int sx, int sy, int tx, int ty) {
         return nodes.getCost(sx, sy, tx, ty);
     }
+
     public float getHeuristicCost(int x, int y, int tx, int ty) {
         return heuristic.getCost(x, y, tx, ty);
     }
