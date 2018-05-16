@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.control.*?>
@@ -9,11 +8,12 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
+<?import view2D.ResizableCanvas?>
 <BorderPane fx:id="borderPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view2D.GameViewController2D">
    <center>
          <StackPane fx:id="stackPane">
             <children>
-                <Canvas fx:id="gameCanvas" height="500.0" nodeOrientation="INHERIT" width="500.0" />
+                <ResizableCanvas fx:id="gameCanvas" height="500.0" nodeOrientation="INHERIT" width="500.0" />
                 <Pane fx:id="toolBarUnder" maxHeight="50.0" minHeight="-Infinity" opacity="0.29" prefHeight="50.0" style="-fx-background-color: #1C1C1C;" translateY="1" StackPane.alignment="TOP_CENTER" />
             <GridPane fx:id="topBarGridPane" maxHeight="50.0" StackPane.alignment="TOP_CENTER">
               <columnConstraints>

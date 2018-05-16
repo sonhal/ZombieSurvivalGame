@@ -10,7 +10,9 @@ import engine.view.DrawableTile;
 import engine.world.World;
 import view.GameViewController;
 
-public interface IGameHandler {
+import java.io.Serializable;
+
+public interface IGameHandler extends Serializable {
     void updateWordState();
 
     DrawableTile[][] getDrawableWorld();

@@ -43,7 +43,7 @@ public class SaveGameHandler {
             in.close();
             fileIn.close();
         } catch (IOException i) {
-            i.printStackTrace();
+            System.out.println("File does not exist");
         } catch (ClassNotFoundException c) {
             c.printStackTrace();
         }
