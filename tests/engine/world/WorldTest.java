@@ -1,4 +1,5 @@
 package engine.world;
+
 import engine.controllers.EventHandler;
 import engine.controllers.Updater;
 import engine.entities.gameobjects.PlayerBuilder;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,16 +33,16 @@ class WorldTest {
         long t1 = System.nanoTime();
         List<Tile> tileList = testWorld.generate(60);
         long t2 = System.nanoTime();
-        if(tileList.size() != 14400){
+        if (tileList.size() != 14400) {
             System.out.println("The correct amount of tiles are not being generated. The correct number should equal the result of: ((initSize*2)(initSize*2))");
-            assert(false);
+            assert (false);
         }
-        if((t2-t1) > 100000000 ){
-            System.out.println(t2-t1);
-            System.out.println("Tile generation is taking to long. Curently taking:" + TimeUnit.NANOSECONDS.toMillis(t2-t1) + "millisecunds");
-            assert(false);
+        if ((t2 - t1) > 100000000) {
+            System.out.println(t2 - t1);
+            System.out.println("Tile generation is taking to long. Curently taking:" + TimeUnit.NANOSECONDS.toMillis(t2 - t1) + "millisecunds");
+            assert (false);
         }
-        assert(true);
+        assert (true);
     }
 
     @Test
@@ -49,52 +51,52 @@ class WorldTest {
         long t1 = System.nanoTime();
         testWorld.connectTiles(testWorld.getWorld());
         long t2 = System.nanoTime();
-        System.out.println(TimeUnit.NANOSECONDS.toMillis(t2-t1) + "millisecunds");
-        System.out.println(t2-t1);
-        if (TimeUnit.NANOSECONDS.toMillis(t2-t1) > 1000){
-            System.out.println("World is spending much time connecting tiles! Time spent: " + TimeUnit.NANOSECONDS.toMillis(t2-t1) + "millisecunds.");
-            assert(false);
+        System.out.println(TimeUnit.NANOSECONDS.toMillis(t2 - t1) + "millisecunds");
+        System.out.println(t2 - t1);
+        if (TimeUnit.NANOSECONDS.toMillis(t2 - t1) > 1000) {
+            System.out.println("World is spending much time connecting tiles! Time spent: " + TimeUnit.NANOSECONDS.toMillis(t2 - t1) + "millisecunds.");
+            assert (false);
         }
-        if (testWorld.findTile(10,10).getLeft().getCordX() != 9){
+        if (testWorld.findTile(10, 10).getLeft().getCordX() != 9) {
             System.out.println("World tiles not mapped correctly");
-            assert(false);
+            assert (false);
         }
         testWorld.getWorld().stream().forEach(tile -> {
-            if (!(Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(tile.getCordX()+1)) || Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(-tile.getCordX())))){
+            if (!(Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(tile.getCordX() + 1)) || Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(-tile.getCordX())))) {
                 System.out.println("Right tile connection for cell x: " + tile.getCordX() + " y: " + tile.getCordY() + " is not connected properly");
-                assert(false);
+                assert (false);
             }
-            if(!(Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(tile.getCordX()-1)) || Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(-tile.getCordX())))){
+            if (!(Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(tile.getCordX() - 1)) || Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(-tile.getCordX())))) {
                 System.out.println("Left tile connection for cell x: " + tile.getCordX() + " y: " + tile.getCordY() + " is not connected properly");
-                assert(false);
+                assert (false);
             }
-            if(!(Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(tile.getCordY()-1)) || Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(-tile.getCordY())))){
+            if (!(Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(tile.getCordY() - 1)) || Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(-tile.getCordY())))) {
                 System.out.println("Up tile connection for cell x: " + tile.getCordX() + " y: " + tile.getCordY() + " is not connected properly");
-                assert(false);
+                assert (false);
             }
-            if (!(Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(tile.getCordY()+1)) || Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(-tile.getCordY())))){
+            if (!(Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(tile.getCordY() + 1)) || Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(-tile.getCordY())))) {
                 System.out.println("Down down");
-                assert(false);
+                assert (false);
             }
         });
 
-        assert(true);
+        assert (true);
     }
 
     @Test
     void findTile() {
-        assertEquals((testWorld.findTile(5,8).getCordX() == 5) && (testWorld.findTile(5,8).getCordY() == 8), true);
+        assertEquals((testWorld.findTile(5, 8).getCordX() == 5) && (testWorld.findTile(5, 8).getCordY() == 8), true);
     }
 
     @Test
     void getSeed() {
         System.out.println(testWorld.getSeed().getCordX());
-        assertEquals(testWorld.getSeed().equals(testWorld.findTile(0,0)), true);
+        assertEquals(testWorld.getSeed().equals(testWorld.findTile(0, 0)), true);
     }
 
     @Test
     void setPlayer() {
-        IUpdatableGameObject player = PlayerBuilder.create(new Updater(), new EventHandler(),10, testWorld.getSeed());
+        IUpdatableGameObject player = PlayerBuilder.create(new Updater(), new EventHandler(), 10, testWorld.getSeed());
         testWorld.setPlayer(player);
         assertEquals(testWorld.getPlayer(), player);
     }
@@ -103,5 +105,14 @@ class WorldTest {
     @Test
     void getWorld() {
         assertNotNull(testWorld.getWorld());
+    }
+
+    @Test
+    void loadInGameWorld() {
+        World world = new World();
+        world.setWorld(new ArrayList<Tile>(5));
+        world.setPlayer(PlayerBuilder.create(new Updater(), new EventHandler(), 10, testWorld.getSeed()));
+        world.loadInGameWorld(testWorld.getWorld(), PlayerBuilder.create(new Updater(), new EventHandler(), 10, testWorld.getSeed()));
+        assert (world.getSeed() != null);
     }
 }

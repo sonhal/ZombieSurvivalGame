@@ -148,6 +148,10 @@ public class World implements Serializable{
         return world;
     }
 
+    public void setWorld(List<Tile> world){
+        this.world = world;
+    }
+
     public int getwidth(){
         return size;
     }
