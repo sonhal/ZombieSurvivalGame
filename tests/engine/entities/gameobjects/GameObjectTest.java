@@ -1,6 +1,5 @@
 package engine.entities.gameobjects;
 
-import engine.entities.components.ScriptableComponent;
 import engine.entities.components.StaticGraphicsComponent;
 import engine.entities.components.StaticTransformComponent;
 import engine.entities.components.interfaces.GraphicsComponent;
@@ -8,8 +7,6 @@ import engine.entities.components.interfaces.TransformComponent;
 import engine.world.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 

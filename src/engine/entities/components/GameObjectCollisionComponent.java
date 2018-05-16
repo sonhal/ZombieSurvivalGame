@@ -1,8 +1,8 @@
 package engine.entities.components;
+
 import engine.controllers.Direction;
 import engine.entities.components.ComponentEvent.*;
 import engine.entities.components.interfaces.CollisionComponent;
-import engine.entities.components.interfaces.TransformComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.world.Tile;
 

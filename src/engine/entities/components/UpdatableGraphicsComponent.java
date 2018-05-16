@@ -8,7 +8,6 @@ import engine.entities.gameobjects.Sprite;
 import engine.entities.components.interfaces.GraphicsComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 
-
 import java.util.ArrayList;
 import java.util.List;
 

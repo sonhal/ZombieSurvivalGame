@@ -9,7 +9,6 @@ import engine.services.ComponentService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 
 /**
  * UpdatableGameObject is a GameObject meant to be used with the gameLoop contains implementation of

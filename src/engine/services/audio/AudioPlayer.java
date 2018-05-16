@@ -6,13 +6,9 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 /**
  * Singleton class that handles all the playing of audio in the game.

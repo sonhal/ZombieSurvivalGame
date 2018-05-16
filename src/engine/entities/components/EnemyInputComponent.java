@@ -10,10 +10,8 @@ import engine.services.pathfinder.*;
 import engine.world.Tile;
 
 import java.util.Optional;
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Component used in game enemies, controls the behaviour and actions of the GameObject

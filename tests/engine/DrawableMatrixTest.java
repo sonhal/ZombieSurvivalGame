@@ -1,6 +1,5 @@
 package engine;
 
-
 import engine.controllers.Updater;
 import engine.entities.components.SingleAttackComponent;
 import engine.entities.components.AttackSoundEffectComponent;

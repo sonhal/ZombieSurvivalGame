@@ -2,8 +2,6 @@ package engine.entities.components;
 
 import engine.entities.components.ComponentEvent.AttackCompletedEvent;
 import engine.entities.components.ComponentEvent.ComponentEvent;
-import engine.entities.components.ComponentEvent.HitEvent;
-import engine.entities.components.ComponentEvent.PickUpWeaponEvent;
 import engine.entities.components.interfaces.AudioComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
 import engine.services.audio.AudioPlayer;
