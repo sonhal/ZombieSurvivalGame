@@ -65,6 +65,7 @@ public class PathSearchService implements Updatable {
     public void update(){
         counter++;
         if(counter == 5){
+            System.out.println(requestList.size());
             if(requestList.size() > 0){
                 PathRequest request = requestList.remove(0);
                 searchPool.submit(new Runnable() {
@@ -72,7 +73,8 @@ public class PathSearchService implements Updatable {
                     public void run(){
                         NodeMap nodeMap = new NodeMap(world);
                         Pathfinder pathfinder = new Pathfinder(10,nodeMap, new ManhattanHeuristic());
-                        request.future.complete(pathfinder.findPath(request.startX,request.startY,request.targetX,request.targetY));
+                        request.future.complete(pathfinder
+                                .findPath(request.startX,request.startY,request.targetX,request.targetY));
                     }
                 });
             }
