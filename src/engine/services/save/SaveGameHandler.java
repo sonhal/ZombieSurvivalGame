@@ -77,7 +77,7 @@ public class SaveGameHandler {
             in.close();
             fileIn.close();
         }catch (IOException i) {
-            i.printStackTrace();
+            System.out.println("No HighScore file found");
         }catch (ClassNotFoundException c) {
             c.printStackTrace();
         }
@@ -110,7 +110,7 @@ public class SaveGameHandler {
             in.close();
             fileIn.close();
         }catch (IOException i) {
-            i.printStackTrace();
+            System.out.println("Highscore filen eksisterer ikke");
         }catch (ClassNotFoundException c) {
             c.printStackTrace();
         }

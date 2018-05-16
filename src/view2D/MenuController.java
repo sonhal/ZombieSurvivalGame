@@ -1,6 +1,9 @@
 package view2D;
 
+import engine.gamestate.HighScoreData;
 import engine.services.save.SaveGameHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -8,6 +11,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -17,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 
@@ -28,6 +35,11 @@ public class MenuController implements Initializable{
     public Button load;
     public Label infoText;
     public BorderPane borderPane;
+    public VBox about;
+    public VBox highscore;
+    public TableView highScoreTable;
+    public TableColumn highScoreDate;
+    public TableColumn highScoreScore;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -35,6 +47,7 @@ public class MenuController implements Initializable{
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
                 BackgroundSize.DEFAULT);
         borderPane.setBackground(new Background(myBI));
+        loadInHighscoreData();
 
         play.setOnAction((event) -> {
             // play game button pressed
@@ -100,5 +113,41 @@ public class MenuController implements Initializable{
 
     private void showInfo(String info){
         //infoText.setText(info);
+    }
+
+    public void toggleShowHighscore(){
+        if(highscore.isVisible()){
+            highscore.setVisible(false);
+        }
+        else {
+            highscore.setVisible(true);
+        }
+
+    }
+
+    public void toggleShowAbout(){
+        if(about.isVisible()){
+            about.setVisible(false);
+        }
+        else {
+            about.setVisible(true);
+        }
+    }
+    
+    public void loadInHighscoreData(){
+        Optional<HighScoreData> highScoreData = SaveGameHandler.loadHighscore();
+        if(highScoreData.isPresent()){
+            highScoreDate.setCellValueFactory(
+                    new PropertyValueFactory<HighScoreData.HighScoreEntry,String>("timePoint")
+            );
+            highScoreScore.setCellValueFactory(
+                    new PropertyValueFactory<HighScoreData.HighScoreEntry,Integer>("score")
+            );
+
+            StringBuilder builder = new StringBuilder();
+            ObservableList<HighScoreData.HighScoreEntry> obsList = FXCollections.observableArrayList();
+            obsList.addAll( highScoreData.get().getHighscoreSet());
+            highScoreTable.setItems(obsList);
+        }
     }
 }

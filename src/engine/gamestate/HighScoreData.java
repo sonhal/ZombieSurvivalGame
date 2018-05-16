@@ -1,6 +1,7 @@
 package engine.gamestate;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -27,16 +28,19 @@ public class HighScoreData implements Serializable {
     }
 
     public class HighScoreEntry implements Comparable, Serializable{
-        public final LocalDateTime timePoint;
+        public final String timePoint;
+        public final LocalDateTime dateTime;
         public final int score;
 
         HighScoreEntry(int score){
             this.score = score;
-            this.timePoint = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            this.dateTime = LocalDateTime.now();
+            this.timePoint= formatter.format(dateTime);
         }
 
         public String getTimePoint() {
-            return timePoint.toString();
+            return timePoint;
         }
 
         public int getScore() {
@@ -55,7 +59,7 @@ public class HighScoreData implements Serializable {
             int score = this.score;
             int oScore = ((HighScoreEntry) other).score;
 
-            int time = this.timePoint.getSecond();
+            int time = this.dateTime.getSecond();
             int oTime = ((HighScoreEntry) other).score;
 
             if (score < oScore) {

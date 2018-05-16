@@ -230,7 +230,6 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     public void goToDeathScreen() {
         toggleShaderOverlay();
-        final BooleanProperty firstTime = new SimpleBooleanProperty(true);
         Optional<HighScoreData> highScoreData = SaveGameHandler.loadHighscore();
         if(highScoreData.isPresent()){
             highScoreDate.setCellValueFactory(
