@@ -1,4 +1,8 @@
 package engine.world;
+import engine.controllers.EventHandler;
+import engine.controllers.Updater;
+import engine.entities.gameobjects.PlayerBuilder;
+import engine.entities.gameobjects.interfaces.IUpdatableGameObject;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -55,6 +59,25 @@ class WorldTest {
             System.out.println("World tiles not mapped correctly");
             assert(false);
         }
+        testWorld.getWorld().stream().forEach(tile -> {
+            if (!(Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(tile.getCordX()+1)) || Integer.valueOf(tile.getRight().getCordX()).equals(Integer.valueOf(-tile.getCordX())))){
+                System.out.println("Right tile connection for cell x: " + tile.getCordX() + " y: " + tile.getCordY() + " is not connected properly");
+                assert(false);
+            }
+            if(!(Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(tile.getCordX()-1)) || Integer.valueOf(tile.getLeft().getCordX()).equals(Integer.valueOf(-tile.getCordX())))){
+                System.out.println("Left tile connection for cell x: " + tile.getCordX() + " y: " + tile.getCordY() + " is not connected properly");
+                assert(false);
+            }
+            if(!(Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(tile.getCordY()-1)) || Integer.valueOf(tile.getUp().getCordY()).equals(Integer.valueOf(-tile.getCordY())))){
+                System.out.println("Up tile connection for cell x: " + tile.getCordX() + " y: " + tile.getCordY() + " is not connected properly");
+                assert(false);
+            }
+            if (!(Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(tile.getCordY()+1)) || Integer.valueOf(tile.getDown().getCordY()).equals(Integer.valueOf(-tile.getCordY())))){
+                System.out.println("Down down");
+                assert(false);
+            }
+        });
+
         assert(true);
     }
 
@@ -71,13 +94,11 @@ class WorldTest {
 
     @Test
     void setPlayer() {
-
+        IUpdatableGameObject player = PlayerBuilder.create(new Updater(), new EventHandler(),10, testWorld.getSeed());
+        testWorld.setPlayer(player);
+        assertEquals(testWorld.getPlayer(), player);
     }
 
-    @Test
-    void getPlayer() {
-
-    }
 
     @Test
     void getWorld() {
