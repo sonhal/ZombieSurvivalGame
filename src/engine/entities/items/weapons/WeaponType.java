@@ -13,7 +13,7 @@ public enum WeaponType {
     SHOT_GUN("ShotGun", new Sprite(53)),
     GRANADE("Granade", new Sprite(1)),
     TWO_HANDED_GUN("Split Gun", new Sprite(51)),
-    TWO_HANDED_MACHINEGUN("Two handed Machine Gun", new Sprite(1)),
+    TWO_HANDED_MACHINEGUN("Two handed Machine Gun", new Sprite(51)),
     ZOMBIE_ATTACK("Zombie Attack", new Sprite(1));
 
     private String displayName;
