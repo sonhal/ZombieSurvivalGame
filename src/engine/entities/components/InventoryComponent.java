@@ -2,6 +2,8 @@ package engine.entities.components;
 
 import engine.controllers.Updater;
 import engine.entities.components.ComponentEvent.ComponentEvent;
+import engine.entities.components.ComponentEvent.PickUpWeaponEvent;
+import engine.entities.components.ComponentEvent.PickupHealthEvent;
 import engine.entities.components.interfaces.HealthComponent;
 import engine.entities.components.interfaces.WeaponComponent;
 import engine.entities.gameobjects.interfaces.GameObject;
@@ -70,8 +72,10 @@ public class InventoryComponent extends ScriptableComponent {
      */
     private void pickupItem(GameObject gameObject, Item item){
         if (item instanceof DroppedWeapon){
+            sendMessageToAllComponents(gameObject.getComponents(), new PickUpWeaponEvent(null));
             addWeapon((DroppedWeapon)item);
         }else if (item instanceof HealthPotion){
+            sendMessageToAllComponents(gameObject.getComponents(), new PickupHealthEvent());
             gameObject.getComponentByType(HealthComponent.class)
                     .ifPresent(scriptableComponent ->
                             ((KillableHealthComponent)scriptableComponent).heal(50)) ;

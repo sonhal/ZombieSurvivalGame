@@ -37,7 +37,6 @@ import view.GameViewController;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -230,7 +229,7 @@ public class GameViewController2D implements GameViewController, Initializable, 
 
     public void goToDeathScreen() {
         toggleShaderOverlay();
-        Optional<HighScoreData> highScoreData = SaveGameHandler.loadHighscore();
+        Optional<HighScoreData> highScoreData = SaveGameHandler.loadHighScore();
         if(highScoreData.isPresent()){
             highScoreDate.setCellValueFactory(
                     new PropertyValueFactory<HighScoreData.HighScoreEntry,String>("timePoint")

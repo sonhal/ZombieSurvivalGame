@@ -47,7 +47,9 @@ public class SingleWeaponComponent extends WeaponComponent {
             attackEvent = ((AttackEvent)event).getAttackDirection();
         }
         if(event instanceof PickUpWeaponEvent){
-            setActiveWeapon(((PickUpWeaponEvent)event).getWeapon());
+            if (((PickUpWeaponEvent)event).getWeapon() != null){
+                setActiveWeapon(((PickUpWeaponEvent)event).getWeapon());
+            }
         }
     }
 

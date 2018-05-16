@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,10 +14,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -135,19 +131,24 @@ public class MenuController implements Initializable{
     }
     
     public void loadInHighscoreData(){
-        Optional<HighScoreData> highScoreData = SaveGameHandler.loadHighscore();
-        if(highScoreData.isPresent()){
-            highScoreDate.setCellValueFactory(
-                    new PropertyValueFactory<HighScoreData.HighScoreEntry,String>("timePoint")
-            );
-            highScoreScore.setCellValueFactory(
-                    new PropertyValueFactory<HighScoreData.HighScoreEntry,Integer>("score")
-            );
+        try {
+            Optional<HighScoreData> highScoreData = SaveGameHandler.loadHighScore();
+            if(highScoreData.isPresent()){
+                highScoreDate.setCellValueFactory(
+                        new PropertyValueFactory<HighScoreData.HighScoreEntry,String>("timePoint")
+                );
+                highScoreScore.setCellValueFactory(
+                        new PropertyValueFactory<HighScoreData.HighScoreEntry,Integer>("score")
+                );
 
-            StringBuilder builder = new StringBuilder();
-            ObservableList<HighScoreData.HighScoreEntry> obsList = FXCollections.observableArrayList();
-            obsList.addAll( highScoreData.get().getHighscoreSet());
-            highScoreTable.setItems(obsList);
+                StringBuilder builder = new StringBuilder();
+                ObservableList<HighScoreData.HighScoreEntry> obsList = FXCollections.observableArrayList();
+                obsList.addAll( highScoreData.get().getHighscoreSet());
+                highScoreTable.setItems(obsList);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 }

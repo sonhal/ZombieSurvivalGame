@@ -56,6 +56,8 @@ public class AudioPlayer {
         audioEffectCollection.put(Sound.ZOMBIE_ATTACK, new AudioClip(new File("gamefiles/zombie_sound.wav").toURI().toString()));
         backgroundMusicCollection.put(Sound.BACKGROUND_MUSIC_2, new Media(new File("gamefiles/dream_raid_p1.mp3").toURI().toString()));
         audioEffectCollection.put(Sound.KNIFE_ATTACK, new AudioClip(new File("gamefiles/knife_attack.wav").toURI().toString()));
+        audioEffectCollection.put(Sound.PICKUP_WEAPON, new AudioClip(new File("gamefiles/pickup_1.wav").toURI().toString()));
+        audioEffectCollection.put(Sound.PICKUP_HEALTH, new AudioClip(new File("gamefiles/health_1.wav").toURI().toString()));
     }
 
     /**

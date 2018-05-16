@@ -39,6 +39,7 @@ public class PlayerBuilder {
                 .addComponent(new PlayerInputComponent(eventHandler, 0))
                 .addComponent(new GameObjectCollisionComponent())
                 .addComponent(new KillableHealthComponent(200))
+                .addComponent(new PickupItemSoundEffectComponent(100, Sound.PICKUP_WEAPON, Sound.PICKUP_HEALTH))
                 .addComponent(gc)
                 .addComponent(inventoryComponent)
                 .addComponent(multiWeaponComponent)
