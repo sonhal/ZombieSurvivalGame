@@ -53,7 +53,6 @@ public class DrawableMatrix implements Serializable{
                     drawableWorld[y][x] = new DrawableTile(null, null, new Sprite(29), null);
                     currentTile = currentTile.getRight();
                 }
-
             }
             if (rowBeggining != rowBeggining.getDown()) {
                 rowBeggining = rowBeggining.getDown();

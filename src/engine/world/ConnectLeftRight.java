@@ -6,7 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Class connecting each of the tiles in the x direction. As the design structure of the game allows us to have hundreds of thousands of tiles, it is important that this connectiong algorytm is as effective as posible.
+ * Class connecting each of the tiles in the x direction. As the design structure of the game allows us to have hundreds of thousands of tiles,
+ * it is important that this connectiong algorithm is as effective as posible.
  * First this process sorts the list of every tile by its x cordinates making a long strip of one dimentional game.
  * Then it iterates through the list of sorted tiles, mapping the tiles which are located at the same row.
  */
