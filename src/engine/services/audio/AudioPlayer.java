@@ -47,13 +47,18 @@ public class AudioPlayer {
      * Instantiate media files to play sounds from
      */
     private void innitAudioCollection(){
-        audioEffectCollection.put(Sound.HIT_1, new AudioClip(new File("gamefiles/8bit_bomb_explosion.wav").toURI().toString()));
-        backgroundMusicCollection.put(Sound.BACKGROUND_MUSIC_1, new Media(new File("gamefiles/happy.mp3").toURI().toString()));
-        audioEffectCollection.put(Sound.ZOMBIE_ATTACK, new AudioClip(new File("gamefiles/zombie_sound.wav").toURI().toString()));
-        backgroundMusicCollection.put(Sound.BACKGROUND_MUSIC_2, new Media(new File("gamefiles/dream_raid_p1.mp3").toURI().toString()));
-        audioEffectCollection.put(Sound.KNIFE_ATTACK, new AudioClip(new File("gamefiles/knife_attack.wav").toURI().toString()));
-        audioEffectCollection.put(Sound.PICKUP_WEAPON, new AudioClip(new File("gamefiles/pickup_1.wav").toURI().toString()));
-        audioEffectCollection.put(Sound.PICKUP_HEALTH, new AudioClip(new File("gamefiles/health_1.wav").toURI().toString()));
+        try {
+            audioEffectCollection.put(Sound.HIT_1, new AudioClip(new File("gamefiles/8bit_bomb_explosion.wav").toURI().toString()));
+            backgroundMusicCollection.put(Sound.BACKGROUND_MUSIC_1, new Media(new File("gamefiles/happy.mp3").toURI().toString()));
+            audioEffectCollection.put(Sound.ZOMBIE_ATTACK, new AudioClip(new File("gamefiles/zombie_sound.wav").toURI().toString()));
+            backgroundMusicCollection.put(Sound.BACKGROUND_MUSIC_2, new Media(new File("gamefiles/dream_raid_p1.mp3").toURI().toString()));
+            audioEffectCollection.put(Sound.KNIFE_ATTACK, new AudioClip(new File("gamefiles/knife_attack.wav").toURI().toString()));
+            audioEffectCollection.put(Sound.PICKUP_WEAPON, new AudioClip(new File("gamefiles/pickup_1.wav").toURI().toString()));
+            audioEffectCollection.put(Sound.PICKUP_HEALTH, new AudioClip(new File("gamefiles/health_1.wav").toURI().toString()));
+        }catch (Exception err){
+            isMute = true;
+        }
+
     }
 
     /**
